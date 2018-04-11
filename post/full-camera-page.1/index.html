@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/Blog">
+<head>
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href='http://thatcsharpguy.com/assets/site/favicon.png'>
+  <title>Full page camera in Xamarin.Forms - That C# guy</title>
+  <meta name="description" content="Learn how to take photos from your Xamarin.Forms app using a custom page renderer to use the camera without leaving your application, with this control, you ...">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.2/pure-min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://thatcsharpguy.com/post/full-camera-page.1/">
+  <link rel="alternate" type="application/rss+xml" title="That C# guy" href="http://thatcsharpguy.com/feed.xml" />
+  <!-- Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-94016385-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+
+  <!-- Twitter cards  -->
+	 
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="http://thatcsharpguy.com/postimages//xamarin-forms/camerapage/featured.jpg">
+	
+	<meta name="twitter:site" content="@io_exception" />
+	<meta name="twitter:title" content="Full page camera in Xamarin.Forms" />
+	<meta name="twitter:description" content="Learn how to take photos from your Xamarin.Forms app using a custom page renderer to use the camera without leaving your application, with this control, you ..." />
+
+
+    <!-- Facebook open graph tags -->  
+    
+    <meta property="og:image" content="http://thatcsharpguy.com/postimages//xamarin-forms/camerapage/featured.jpg" />
+    
+    
+    <meta property="og:title" content="Full page camera in Xamarin.Forms" />
+    <meta property="og:site_name" content="That C# guy"/>
+    <meta property="og:url" content="http://thatcsharpguy.com/post/full-camera-page.1/">
+    <meta property="og:description" content="Learn how to take photos from your Xamarin.Forms app using a custom page renderer to use the camera without leaving your application, with this control, you ..." />
+    <meta property="article:author" content="https://www.facebook.com/antonio.feregrino" />
+    <meta property="article:publisher" content="https://www.facebook.com/antonio.feregrino" />
+    <meta property="fb:app_id" content="942345702508916" />
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>
+
+</head>
+  <body>
+
+    <header class="site-header ui">
+  <div class="wrapper menu">
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+      <div class="trigger">
+        
+        <a class="link page-link" href="/">Home</a>
+        
+        <a class="link page-link" href="/about">About</a>
+        
+        <a class="link page-link" href="/tag">Tags</a>
+        
+        <a class="link page-link" href="/signup">Sign up</a>
+        
+      </div>
+    </nav>
+  </div>
+  <div class="wrapper title">
+    <div class="pure-g">
+      <div class="pure-u-1-24 title-number"><span>1</span></div>
+      <div class="pure-u-13-24 content-window">
+        <a class="site-title" href="/">That C# guy</a>
+      </div>
+      <div class="pure-u-10-24 header-menu">
+        <ul>
+          <li class="youtube"><a href="https://www.youtube.com/c/thatcsharpguy">YouTube</a></li>
+          <li class="csharp"><a href="http://thatcsharpguy.com/tag/AprendeCSharp/">Aprende C#</a></li>
+          <li class="xamarin"><a href="http://thatcsharpguy.com/tag/Xamarin/">Xamarin</a></li>
+        </ul>
+      </div>
+    </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div id="post-meta">
+    <a href="/acerca-de/#citando" rel="author">Antonio Feregrino</a> | 08/11/2016
+ 
+
+| <strong><a href="https://github.com/ThatCSharpGuy/Forms-FullCameraPage" target="_blank"><i class="sp sp-git"></i> Ver código de este post en GitHub</a></strong>
+
+</div>
+<h1 class="post-title">Full page camera in Xamarin.Forms</h1>
+<div class="post-content">
+
+    <article>
+        <p>It has been a while since I coded <a href="..\Aharphat-Android" target="_blank">CharpHat</a>, which is an app that lets you snap a picture of anything and then put a nice C# graduation cap on it. That app was far from perfect, but it helped me to practice the usage of custom page renderers.</p>
+
+<p>Today I decided to retake that project, but this time trying to isolate the code needed to build the interface and funcionality of the page, so that anyone looking forward to implement a full camera page in their apps could reuse the code for their own projects. So be sure to <strong><a href="https://github.com/ThatCSharpGuy/Forms-FullCameraPage" target="_blank">grab the source code</a></strong> for this post.</p>
+
+<h2 id="forms-abstractions">Forms abstractions</h2>
+<p><small><a href="https://github.com/ThatCSharpGuy/Forms-FullCameraPage/blob/master/CameraPage.cs" target="_blank">Here is the source code for this section.</a></small></p>
+
+<p>Let’s start by creating the Xamarin.Forms page that will serve as our point of interaction with the custom code:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">CameraPage</span> <span class="p">:</span> <span class="n">ContentPage</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">delegate</span> <span class="k">void</span> <span class="nf">PhotoResultEventHandler</span><span class="p">(</span><span class="n">PhotoResultEventArgs</span> <span class="n">result</span><span class="p">);</span>
+    <span class="k">public</span> <span class="k">event</span> <span class="n">PhotoResultEventHandler</span> <span class="n">OnPhotoResult</span><span class="p">;</span></code></pre></figure>
+
+<p>Business as usual, create a class deriving from <code>ContentPage</code>. I have added an event handler as I want to access the picture taken by the user. Now let’s throw in some methods to call whenever an user performs an action in our camera page (in this case, the user will be allowed to take a photo or cancel the action):</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">public</span> <span class="k">void</span> <span class="nf">SetPhotoResult</span><span class="p">(</span><span class="kt">byte</span><span class="p">[]</span> <span class="n">image</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span> <span class="p">=</span> <span class="p">-</span><span class="m">1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span> <span class="p">=</span> <span class="p">-</span><span class="m">1</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">OnPhotoResult</span><span class="p">?.</span><span class="n">Invoke</span><span class="p">(</span><span class="k">new</span> <span class="n">PhotoResultEventArgs</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">void</span> <span class="nf">Cancel</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">OnPhotoResult</span><span class="p">?.</span><span class="n">Invoke</span><span class="p">(</span><span class="k">new</span> <span class="n">PhotoResultEventArgs</span><span class="p">());</span>
+<span class="p">}</span> </code></pre></figure>
+
+<p>For reference, see the properties inside the <code>PhotoResultEventArgs</code> class:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">public</span> <span class="kt">bool</span> <span class="n">Success</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="k">public</span> <span class="kt">int</span> <span class="n">Width</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="k">public</span> <span class="kt">int</span> <span class="n">Height</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="k">public</span> <span class="kt">byte</span><span class="p">[]</span> <span class="n">Image</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span></code></pre></figure>
+
+<p>Now, time to move on to the platform specifics.</p>
+
+<h2 id="in-xamarinios">In Xamarin.iOS</h2>
+<p><small><a href="https://github.com/ThatCSharpGuy/Forms-FullCameraPage/blob/master/iOS/CameraPageRenderer.cs" target="_blank">Here is the source code for this section.</a></small></p>
+
+<p>To be honest, this implementation is the easiest by far. Start off by creating a class that inherits from <code>PageRenderer</code>, and to add the <code>ExportRenderer</code> attribute:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="na">[assembly: ExportRenderer(typeof(CameraPage), typeof(CameraPageRenderer))]</span>
+<span class="k">namespace</span> <span class="nn">FullCameraPage.iOS</span>
+<span class="p">{</span>
+	<span class="k">public</span> <span class="k">class</span> <span class="nc">CameraPageRenderer</span> <span class="p">:</span> <span class="n">PageRenderer</span></code></pre></figure>
+
+<p>Now, an this is very important, you need to override the <code>ViewDidLoad</code> method, since it gets called as soon as our page is loaded by the iOS mechanisms. For the sake of organisation let’s split the code in several other methods:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">public</span> <span class="k">override</span> <span class="k">async</span> <span class="k">void</span> <span class="nf">ViewDidLoad</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">base</span><span class="p">.</span><span class="n">ViewDidLoad</span><span class="p">();</span>
+    <span class="n">SetupUserInterface</span><span class="p">();</span>
+    <span class="n">SetupEventHandlers</span><span class="p">();</span>
+    <span class="n">AuthorizeCameraUse</span><span class="p">();</span>
+    <span class="n">SetupLiveCameraStream</span><span class="p">();</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="setupuserinterface">SetupUserInterface</h3>
+<p>As the name states, here is where you need to build the UI. As you may have guessed, it is all done by code, but don’t worry, it is very easy… as long as your UI isn’t so complex, but you can do whatever you need here.</p>
+
+<p>For this sample the UI will consist of a couple of buttons and a surface where the live preview from the camera is going to be shown, so you need to declare them on a class-level scope:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="n">VectorButton</span> <span class="n">takePhotoButton</span><span class="p">;</span>
+<span class="n">VectorButton</span> <span class="n">cancelPhotoButton</span><span class="p">;</span>
+<span class="n">UIView</span> <span class="n">liveCameraStream</span><span class="p">;</span></code></pre></figure>
+
+<p>To set the items in place you need to think as if you were working with a relative layout, meaning that you need to set the position of each item within the screen. For example, look at how the live camera preview view is positioned:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">private</span> <span class="k">void</span> <span class="nf">SetupUserInterface</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// Code ommited ...</span>
+    <span class="n">liveCameraStream</span> <span class="p">=</span> <span class="k">new</span> <span class="n">UIView</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">Frame</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CGRect</span><span class="p">(</span><span class="m">0f</span><span class="p">,</span> <span class="m">0f</span><span class="p">,</span> <span class="n">View</span><span class="p">.</span><span class="n">Bounds</span><span class="p">.</span><span class="n">Width</span><span class="p">,</span> <span class="n">View</span><span class="p">.</span><span class="n">Bounds</span><span class="p">.</span><span class="n">Height</span><span class="p">)</span>
+    <span class="p">};</span>
+    <span class="c1">// Code ommited ...</span>
+    <span class="n">View</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">liveCameraStream</span><span class="p">);</span>
+    <span class="c1">// Code ommited ...</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="setupeventhandlers">SetupEventHandlers</h3>
+<p>Now that the UI has been built, let’s hook up the event handlers to each control, luckly for this sample there are only two buttons on screen: one to take the picture and the other to cancel the whole thing.</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="n">cancelPhotoButton</span><span class="p">.</span><span class="n">TouchUpInside</span> <span class="p">+=</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="p">=&gt;</span>
+<span class="p">{</span>
+    <span class="p">(</span><span class="n">Element</span> <span class="k">as</span> <span class="n">CameraPage</span><span class="p">).</span><span class="n">Cancel</span><span class="p">();</span>
+<span class="p">};</span>
+
+<span class="n">takePhotoButton</span><span class="p">.</span><span class="n">TouchUpInside</span> <span class="p">+=</span> <span class="k">async</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="p">=&gt;</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">data</span> <span class="p">=</span> <span class="k">await</span> <span class="n">CapturePhoto</span><span class="p">();</span>
+    <span class="n">UIImage</span> <span class="n">imageInfo</span> <span class="p">=</span> <span class="k">new</span> <span class="n">UIImage</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+
+    <span class="p">(</span><span class="n">Element</span> <span class="k">as</span> <span class="n">CameraPage</span><span class="p">).</span><span class="n">SetPhotoResult</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">ToArray</span><span class="p">(),</span>
+                                           <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">imageInfo</span><span class="p">.</span><span class="n">Size</span><span class="p">.</span><span class="n">Width</span><span class="p">,</span>
+                                           <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">imageInfo</span><span class="p">.</span><span class="n">Size</span><span class="p">.</span><span class="n">Height</span><span class="p">);</span>
+<span class="p">};</span></code></pre></figure>
+
+<p>The property <code>Element</code> contains a reference to the page associated to the renderer, and is our way to interact with our Forms project. As for the method <code>CapturePhoto</code>… we’ll see it later.</p>
+
+<h2 id="authorizecamerause">AuthorizeCameraUse</h2>
+<p>Now it’s time to ask the user for its permission to access the camera:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="kt">var</span> <span class="n">authorizationStatus</span> <span class="p">=</span> <span class="n">AVCaptureDevice</span><span class="p">.</span><span class="n">GetAuthorizationStatus</span><span class="p">(</span><span class="n">AVMediaType</span><span class="p">.</span><span class="n">Video</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">authorizationStatus</span> <span class="p">!=</span> <span class="n">AVAuthorizationStatus</span><span class="p">.</span><span class="n">Authorized</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">await</span> <span class="n">AVCaptureDevice</span><span class="p">.</span><span class="n">RequestAccessForMediaTypeAsync</span><span class="p">(</span><span class="n">AVMediaType</span><span class="p">.</span><span class="n">Video</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>But wait a minute, before executing the code above, make sure you have added the key <code>Privacy - Camera Usage Description</code> to the Info.plist in your project.</p>
+
+<h3 id="setuplivecamerastream">SetupLiveCameraStream</h3>
+<p>Now the “heavy” stuff.</p>
+
+<p>Start by declaring at class-level scope an <code>AVCaptureSession</code>, <code>AVCaptureDeviceInput</code> and <code>AVCaptureStillImageOutput</code>, as they will hel us access the camera, display the live feed and capture the photo.</p>
+
+<p>Then, inside the <code>SetupLiveCameraStream</code> method, initialize the capture session, create a preview layer with the same size as our <code>liveCameraStream</code>, and add it as a sublayer of it:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span>    <span class="n">captureSession</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AVCaptureSession</span><span class="p">();</span>
+    <span class="kt">var</span> <span class="n">videoPreviewLayer</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AVCaptureVideoPreviewLayer</span><span class="p">(</span><span class="n">captureSession</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Frame</span> <span class="p">=</span> <span class="n">liveCameraStream</span><span class="p">.</span><span class="n">Bounds</span>
+    <span class="p">};</span>
+    <span class="n">liveCameraStream</span><span class="p">.</span><span class="n">Layer</span><span class="p">.</span><span class="n">AddSublayer</span><span class="p">(</span><span class="n">videoPreviewLayer</span><span class="p">);</span></code></pre></figure>
+
+<p>Next, “create” a capture device (you can configure it to work according to your needs). And then, from it create the an input source for the capture session:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span>    <span class="kt">var</span> <span class="n">captureDevice</span> <span class="p">=</span> <span class="n">AVCaptureDevice</span><span class="p">.</span><span class="n">DefaultDeviceWithMediaType</span><span class="p">(</span><span class="n">AVMediaType</span><span class="p">.</span><span class="n">Video</span><span class="p">);</span>
+    <span class="n">ConfigureCameraForDevice</span><span class="p">(</span><span class="n">captureDevice</span><span class="p">);</span>
+    <span class="n">captureDeviceInput</span> <span class="p">=</span> <span class="n">AVCaptureDeviceInput</span><span class="p">.</span><span class="n">FromDevice</span><span class="p">(</span><span class="n">captureDevice</span><span class="p">);</span></code></pre></figure>
+
+<p>We have an input (the camera of the device), now we need an output which is going to be a jpeg photograph:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span>    <span class="kt">var</span> <span class="n">dictionary</span> <span class="p">=</span> <span class="k">new</span> <span class="n">NSMutableDictionary</span><span class="p">();</span>
+    <span class="n">dictionary</span><span class="p">[</span><span class="n">AVVideo</span><span class="p">.</span><span class="n">CodecKey</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">NSNumber</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">AVVideoCodec</span><span class="p">.</span><span class="n">JPEG</span><span class="p">);</span>
+    <span class="n">stillImageOutput</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AVCaptureStillImageOutput</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">OutputSettings</span> <span class="p">=</span> <span class="k">new</span> <span class="n">NSDictionary</span><span class="p">()</span>
+    <span class="p">};</span></code></pre></figure>
+
+<p>Finalize by setting the input and output of the capture session and starting it:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span>    <span class="n">captureSession</span><span class="p">.</span><span class="n">AddOutput</span><span class="p">(</span><span class="n">stillImageOutput</span><span class="p">);</span>
+    <span class="n">captureSession</span><span class="p">.</span><span class="n">AddInput</span><span class="p">(</span><span class="n">captureDeviceInput</span><span class="p">);</span>
+    <span class="n">captureSession</span><span class="p">.</span><span class="n">StartRunning</span><span class="p">();</span></code></pre></figure>
+
+<h3 id="capturephoto">CapturePhoto</h3>
+<p>At last, the icing on the cake, the code to capture the photo. The code is pretty simple: Take the output and capture a still image from it, as we only need the bytes we get an <code>NSData</code> containing the taken photo.</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">public</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">NSData</span><span class="p">&gt;</span> <span class="n">CapturePhoto</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">videoConnection</span> <span class="p">=</span> <span class="n">stillImageOutput</span><span class="p">.</span><span class="n">ConnectionFromMediaType</span><span class="p">(</span><span class="n">AVMediaType</span><span class="p">.</span><span class="n">Video</span><span class="p">);</span>
+    <span class="kt">var</span> <span class="n">sampleBuffer</span> <span class="p">=</span> <span class="k">await</span> <span class="n">stillImageOutput</span><span class="p">.</span><span class="n">CaptureStillImageTaskAsync</span><span class="p">(</span><span class="n">videoConnection</span><span class="p">);</span>
+    <span class="kt">var</span> <span class="n">jpegImageAsNsData</span> <span class="p">=</span> <span class="n">AVCaptureStillImageOutput</span><span class="p">.</span><span class="n">JpegStillToNSData</span><span class="p">(</span><span class="n">sampleBuffer</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">jpegImageAsNsData</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<h2 id="in-xamarinandroid">In Xamarin.Android</h2>
+<p><small><a href="https://github.com/ThatCSharpGuy/Forms-FullCameraPage/blob/master/Droid/CameraPageRenderer.cs" target="_blank">Here is the source code for this section.</a></small>  <br />
+This implementation isn’t as clean as it is in iOS. Mainly because Android puts a lot of ephasis in the use of listeners, rather than in event handlers. However, that is not a problem for us.</p>
+
+<p>As with the iOS implementation, start by creating a new class and make it derive from <code>PageRenderer</code> and also make it implement the <code>TextureView.ISurfaceTextureListener</code> interface. Don’t forget the <code>ExportRender</code> attribute:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="na">[assembly: Xamarin.Forms.ExportRenderer(typeof(CameraPage), typeof(CameraPageRenderer))]</span>
+<span class="k">namespace</span> <span class="nn">FullCameraPage.Droid</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">CameraPageRenderer</span> <span class="p">:</span> <span class="n">PageRenderer</span><span class="p">,</span> <span class="n">TextureView</span><span class="p">.</span><span class="n">ISurfaceTextureListener</span></code></pre></figure>
+
+<p>Then, override the <code>OnElementChanged</code> method (if you have creaated custom renderers before this method may be familar to you), this method is going to be called everytime the a <code>CamerPage</code> is shown on screen:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnElementChanged</span><span class="p">(</span><span class="n">ElementChangedEventArgs</span><span class="p">&lt;</span><span class="n">Xamarin</span><span class="p">.</span><span class="n">Forms</span><span class="p">.</span><span class="n">Page</span><span class="p">&gt;</span> <span class="n">e</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">base</span><span class="p">.</span><span class="n">OnElementChanged</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+    <span class="n">SetupUserInterface</span><span class="p">();</span>
+    <span class="n">SetupEventHandlers</span><span class="p">();</span></code></pre></figure>
+
+<h3 id="setupuserinterface-1">SetupUserInterface</h3>
+<p>In this method we are supposed to create the camera page itself, you can do it by creating an <em>axml</em> file and calling all the Android inflating stuff… Or, like in this sample, you can create it by code.</p>
+
+<p>For this sample, we’ll need a <code>RelativeLayout</code> to work as a container, a <code>TextureView</code> to display the live feed from the camera, and a <code>Button</code> (a <code>PaintCodeButton</code> actually) to snap the photograph. Declare all them at class-level scope:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="n">RelativeLayout</span> <span class="n">mainLayout</span><span class="p">;</span>
+<span class="n">TextureView</span> <span class="n">liveView</span><span class="p">;</span>
+<span class="n">PaintCodeButton</span> <span class="n">capturePhotoButton</span><span class="p">;</span></code></pre></figure>
+
+<p>Now, proceed to create them and add them to the screen, for example, see how we can create the container layout and add the <code>TextureView</code> to it:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">void</span> <span class="nf">SetupUserInterface</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">mainLayout</span> <span class="p">=</span> <span class="k">new</span> <span class="n">RelativeLayout</span><span class="p">(</span><span class="n">Context</span><span class="p">);</span>
+    <span class="n">RelativeLayout</span><span class="p">.</span><span class="n">LayoutParams</span> <span class="n">mainLayoutParams</span> <span class="p">=</span> <span class="k">new</span> <span class="n">RelativeLayout</span><span class="p">.</span><span class="n">LayoutParams</span><span class="p">(</span>
+        <span class="n">RelativeLayout</span><span class="p">.</span><span class="n">LayoutParams</span><span class="p">.</span><span class="n">MatchParent</span><span class="p">,</span>
+        <span class="n">RelativeLayout</span><span class="p">.</span><span class="n">LayoutParams</span><span class="p">.</span><span class="n">MatchParent</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="p">.</span><span class="n">LayoutParameters</span> <span class="p">=</span> <span class="n">mainLayoutParams</span><span class="p">;</span>
+
+    <span class="n">liveView</span> <span class="p">=</span> <span class="k">new</span> <span class="n">TextureView</span><span class="p">(</span><span class="n">Context</span><span class="p">);</span>
+    <span class="n">RelativeLayout</span><span class="p">.</span><span class="n">LayoutParams</span> <span class="n">liveViewParams</span> <span class="p">=</span> <span class="k">new</span> <span class="n">RelativeLayout</span><span class="p">.</span><span class="n">LayoutParams</span><span class="p">(</span>
+        <span class="n">RelativeLayout</span><span class="p">.</span><span class="n">LayoutParams</span><span class="p">.</span><span class="n">MatchParent</span><span class="p">,</span> 
+        <span class="n">RelativeLayout</span><span class="p">.</span><span class="n">LayoutParams</span><span class="p">.</span><span class="n">MatchParent</span><span class="p">);</span>
+    <span class="n">liveView</span><span class="p">.</span><span class="n">LayoutParameters</span> <span class="p">=</span> <span class="n">liveViewParams</span><span class="p">;</span>
+    <span class="n">mainLayout</span><span class="p">.</span><span class="n">AddView</span><span class="p">(</span><span class="n">liveView</span><span class="p">);</span>
+    
+    <span class="c1">// Code ommited...</span>
+
+    <span class="n">AddView</span><span class="p">(</span><span class="n">mainLayout</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Before continuing, there is another method (<code>OnLayout</code>) we need to override to give our main layout it’s size (and acommodate the UI accordingly):</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnLayout</span><span class="p">(</span><span class="kt">bool</span> <span class="n">changed</span><span class="p">,</span> <span class="kt">int</span> <span class="n">l</span><span class="p">,</span> <span class="kt">int</span> <span class="n">t</span><span class="p">,</span> <span class="kt">int</span> <span class="n">r</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">base</span><span class="p">.</span><span class="n">OnLayout</span><span class="p">(</span><span class="n">changed</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(!</span><span class="n">changed</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="kt">var</span> <span class="n">msw</span> <span class="p">=</span> <span class="n">MeasureSpec</span><span class="p">.</span><span class="n">MakeMeasureSpec</span><span class="p">(</span><span class="n">r</span> <span class="p">-</span> <span class="n">l</span><span class="p">,</span> <span class="n">MeasureSpecMode</span><span class="p">.</span><span class="n">Exactly</span><span class="p">);</span>
+    <span class="kt">var</span> <span class="n">msh</span> <span class="p">=</span> <span class="n">MeasureSpec</span><span class="p">.</span><span class="n">MakeMeasureSpec</span><span class="p">(</span><span class="n">b</span> <span class="p">-</span> <span class="n">t</span><span class="p">,</span> <span class="n">MeasureSpecMode</span><span class="p">.</span><span class="n">Exactly</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="p">.</span><span class="n">Measure</span><span class="p">(</span><span class="n">msw</span><span class="p">,</span> <span class="n">msh</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="p">.</span><span class="n">Layout</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">r</span> <span class="p">-</span> <span class="n">l</span><span class="p">,</span> <span class="n">b</span> <span class="p">-</span> <span class="n">t</span><span class="p">);</span>
+
+    <span class="n">capturePhotoButton</span><span class="p">.</span><span class="n">SetX</span><span class="p">(</span> <span class="n">mainLayout</span><span class="p">.</span><span class="n">Width</span> <span class="p">/</span> <span class="m">2</span> <span class="p">-</span> <span class="m">60</span><span class="p">);</span>
+    <span class="n">capturePhotoButton</span><span class="p">.</span><span class="n">SetY</span><span class="p">(</span><span class="n">mainLayout</span><span class="p">.</span><span class="n">Height</span> <span class="p">-</span> <span class="m">200</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="setupeventhandlers-1">SetupEventHandlers</h3>
+<p>As I said, Android relies mostly on event listeners rather than handlers, so the code for this method is pretty simple. We need to set an event handler for the “sutter” button and assign the listener that will be aware of the <code>SurfaceTexture</code> status (remember that our page render implements an interface?):</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="n">capturePhotoButton</span><span class="p">.</span><span class="n">Click</span> <span class="p">+=</span> <span class="k">async</span> <span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="p">=&gt;</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">bytes</span> <span class="p">=</span> <span class="k">await</span> <span class="n">TakePhoto</span><span class="p">();</span>
+    <span class="p">(</span><span class="n">Element</span> <span class="k">as</span> <span class="n">CameraPage</span><span class="p">).</span><span class="n">SetPhotoResult</span><span class="p">(</span><span class="n">bytes</span><span class="p">,</span> <span class="n">liveView</span><span class="p">.</span><span class="n">Bitmap</span><span class="p">.</span><span class="n">Width</span><span class="p">,</span> <span class="n">liveView</span><span class="p">.</span><span class="n">Bitmap</span><span class="p">.</span><span class="n">Height</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="n">liveView</span><span class="p">.</span><span class="n">SurfaceTextureListener</span> <span class="p">=</span> <span class="k">this</span><span class="p">;</span></code></pre></figure>
+
+<p>And one more thing, let’s to override the default behavior of the “back” button, so that it acts as a cancel button for the camera:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">public</span> <span class="k">override</span> <span class="kt">bool</span> <span class="nf">OnKeyDown</span><span class="p">(</span><span class="n">Keycode</span> <span class="n">keyCode</span><span class="p">,</span> <span class="n">KeyEvent</span> <span class="n">e</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">keyCode</span> <span class="p">==</span> <span class="n">Keycode</span><span class="p">.</span><span class="n">Back</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="p">(</span><span class="n">Element</span> <span class="k">as</span> <span class="n">CameraPage</span><span class="p">).</span><span class="n">Cancel</span><span class="p">();</span>
+        <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="k">base</span><span class="p">.</span><span class="n">OnKeyDown</span><span class="p">(</span><span class="n">keyCode</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="textureviewisurfacetexturelistener-implementation">TextureView.ISurfaceTextureListener implementation</h3>
+<p>Now is time to implement the core of our page. Start by writing the code for the <code>OnSurfaceTextureAvailable</code> where we will prepare the output for the camera, but first we’ll need a camera, right?</p>
+
+<p>At class-level scope declare a <code>Camera</code>:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="n">Android</span><span class="p">.</span><span class="n">Hardware</span><span class="p">.</span><span class="n">Camera</span> <span class="n">camera</span><span class="p">;</span></code></pre></figure>
+
+<p>Inside the method, open the camera (by default it’ll try to open the back camera of the device) and get its parameters. We need them to select the right preview size, because we want things to look great in our app:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="n">camera</span> <span class="p">=</span> <span class="n">Android</span><span class="p">.</span><span class="n">Hardware</span><span class="p">.</span><span class="n">Camera</span><span class="p">.</span><span class="n">Open</span><span class="p">();</span>
+<span class="kt">var</span> <span class="n">parameters</span> <span class="p">=</span> <span class="n">camera</span><span class="p">.</span><span class="n">GetParameters</span><span class="p">();</span></code></pre></figure>
+
+<p>Once we have the parameters at hand, we can get the avaliable <code>PreviewSizes</code> and get the one that fits our preview surface. In this case I’m using a simple <a href="#">linq expression</a> to get the best preview size based on aspect ratio:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="kt">var</span> <span class="n">aspect</span> <span class="p">=</span> <span class="p">((</span><span class="kt">decimal</span><span class="p">)</span><span class="n">height</span><span class="p">)</span> <span class="p">/</span> <span class="p">((</span><span class="kt">decimal</span><span class="p">)</span><span class="n">width</span><span class="p">);</span>
+
+<span class="kt">var</span> <span class="n">previewSize</span> <span class="p">=</span> <span class="n">parameters</span><span class="p">.</span><span class="n">SupportedPreviewSizes</span>
+                            <span class="p">.</span><span class="n">OrderBy</span><span class="p">(</span><span class="n">s</span> <span class="p">=&gt;</span> <span class="n">Math</span><span class="p">.</span><span class="n">Abs</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">Width</span> <span class="p">/</span> <span class="p">(</span><span class="kt">decimal</span><span class="p">)</span><span class="n">s</span><span class="p">.</span><span class="n">Height</span> <span class="p">-</span> <span class="n">aspect</span><span class="p">))</span>
+                            <span class="p">.</span><span class="n">First</span><span class="p">();</span>
+
+<span class="n">parameters</span><span class="p">.</span><span class="n">SetPreviewSize</span><span class="p">(</span><span class="n">previewSize</span><span class="p">.</span><span class="n">Width</span><span class="p">,</span> <span class="n">previewSize</span><span class="p">.</span><span class="n">Height</span><span class="p">);</span>
+<span class="n">camera</span><span class="p">.</span><span class="n">SetParameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">);</span></code></pre></figure>
+
+<p>Finish by setting our surface as the preview texture, at this point the only thing left to do is to start the camera:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="n">camera</span><span class="p">.</span><span class="n">SetPreviewTexture</span><span class="p">(</span><span class="n">surface</span><span class="p">);</span>
+<span class="n">StartCamera</span><span class="p">();</span></code></pre></figure>
+
+<p>The other method we need to write code into is <code>OnSurfaceTextureDestroyed</code> in order to stop the camera, so just write the following inside and it’ll be all:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="n">StopCamera</span><span class="p">();</span>
+<span class="k">return</span> <span class="k">true</span><span class="p">;</span></code></pre></figure>
+
+<h3 id="startcamera-and-stopcamera">StartCamera and StopCamera</h3>
+<p>These two methods are quite simple too, for <code>StartCamera</code> we only need to rotate the preview to make it look right in the screen (in this case I’m setting it to be viewed vertically), and then finally, start the camera:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="n">camera</span><span class="p">.</span><span class="n">SetDisplayOrientation</span><span class="p">(</span><span class="m">90</span><span class="p">);</span>
+<span class="n">camera</span><span class="p">.</span><span class="n">StartPreview</span><span class="p">();</span></code></pre></figure>
+
+<p>The <code>StopCamera</code> method stops the preview and releases the camera, so that other apps can access to it:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="n">camera</span><span class="p">.</span><span class="n">StopPreview</span><span class="p">();</span>
+<span class="n">camera</span><span class="p">.</span><span class="n">Release</span><span class="p">();</span></code></pre></figure>
+
+<h3 id="takephoto">TakePhoto</h3>
+
+<p>In order to get a photo, the only thing we need to do is get an sitll image from the live feed presented in the <code>TextureView</code>, here is the code to do so and then return the image in bytes:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="n">camera</span><span class="p">.</span><span class="n">StopPreview</span><span class="p">();</span>
+<span class="kt">var</span> <span class="n">ratio</span> <span class="p">=</span> <span class="p">((</span><span class="kt">decimal</span><span class="p">)</span><span class="n">Height</span><span class="p">)</span> <span class="p">/</span> <span class="n">Width</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">image</span> <span class="p">=</span> <span class="n">Bitmap</span><span class="p">.</span><span class="n">CreateBitmap</span><span class="p">(</span><span class="n">liveView</span><span class="p">.</span><span class="n">Bitmap</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">liveView</span><span class="p">.</span><span class="n">Bitmap</span><span class="p">.</span><span class="n">Width</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">liveView</span><span class="p">.</span><span class="n">Bitmap</span><span class="p">.</span><span class="n">Width</span> <span class="p">*</span> <span class="n">ratio</span><span class="p">));</span>
+<span class="kt">byte</span><span class="p">[]</span> <span class="n">imageBytes</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+<span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">imageStream</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">MemoryStream</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="k">await</span> <span class="n">image</span><span class="p">.</span><span class="n">CompressAsync</span><span class="p">(</span><span class="n">Bitmap</span><span class="p">.</span><span class="n">CompressFormat</span><span class="p">.</span><span class="n">Jpeg</span><span class="p">,</span> <span class="m">50</span><span class="p">,</span> <span class="n">imageStream</span><span class="p">);</span>
+    <span class="n">image</span><span class="p">.</span><span class="n">Recycle</span><span class="p">();</span>
+    <span class="n">imageBytes</span> <span class="p">=</span> <span class="n">imageStream</span><span class="p">.</span><span class="n">ToArray</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="n">camera</span><span class="p">.</span><span class="n">StartPreview</span><span class="p">();</span>
+<span class="k">return</span> <span class="n">imageBytes</span><span class="p">;</span></code></pre></figure>
+
+<p>And that’s it, after all that code, you can now make use of this camera page. Keep reading to find a sample usage code:</p>
+
+<h2 id="usage-in-forms">Usage in Forms</h2>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="kt">var</span> <span class="n">cameraPage</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CameraPage</span><span class="p">();</span>
+<span class="n">cameraPage</span><span class="p">.</span><span class="n">OnPhotoResult</span> <span class="p">+=</span> <span class="n">CameraPage_OnPhotoResult</span><span class="p">;</span>
+<span class="n">Navigation</span><span class="p">.</span><span class="n">PushModalAsync</span><span class="p">(</span><span class="n">cameraPage</span><span class="p">);</span>  
+<span class="c1">// ...</span>
+<span class="k">async</span> <span class="k">void</span> <span class="nf">CameraPage_OnPhotoResult</span><span class="p">(</span><span class="n">Pages</span><span class="p">.</span><span class="n">PhotoResultEventArgs</span> <span class="n">result</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">await</span> <span class="n">Navigation</span><span class="p">.</span><span class="n">PopModalAsync</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(!</span><span class="n">result</span><span class="p">.</span><span class="n">Success</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="n">Image</span><span class="p">.</span><span class="n">Source</span> <span class="p">=</span> <span class="n">ImageSource</span><span class="p">.</span><span class="n">FromStream</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="n">MemoryStream</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">Image</span><span class="p">));</span></code></pre></figure>
+
+<p>If you <strong><a href="https://github.com/ThatCSharpGuy/Forms-FullCameraPage" target="_blank">download the source code</a></strong> and run it, you will see something like this:</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/DgFEK9tPKs0" frameborder="0" allowfullscreen=""></iframe>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+<p>The code for this post was entirely based on the code from the <a href="..\Aharphat-Android" target="_blank">CharpHat</a>, which at the same time was based on the <a href="https://blog.xamarin.com/build-your-own-snapchat-clone-with-xamarin-forms-and-azure/" target="_blank">Moments app</a> by <a href="https://github.com/pierceboggan" target="_blank">Pierce Boggan</a>.</p>
+
+    </article>
+    <div class="post-contact">
+        <div class="pure-g">
+    <div class="pure-u-1 pure-u-md-7-24">
+        Having doubts? comments?
+        <ul class="post-contact-list">
+            <li><a title="feregrino@thatcsharpguy.com" href="mailto:feregrino@thatcsharpguy.com?subject=Full+page+camera+in+Xamarin.Forms"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 11.815v13.292q0 1.105-.787 1.892-.787.78-1.892.78H3.68q-1.106 0-1.893-.79Q1 26.21 1 25.102v-13.29q.737.82 1.69 1.46 6.06 4.12 8.32 5.78.955.705 1.55 1.1.594.392 1.582.802.987.41 1.84.41h.035q.854 0 1.84-.41.99-.41 1.583-.804.595-.393 1.55-1.096 2.845-2.06 8.336-5.778.954-.652 1.674-1.455zm0-4.922q0 1.322-.82 2.528t-2.043 2.06l-7.835 5.44-.71.51q-.545.4-.905.64t-.87.55q-.51.3-.963.45-.452.15-.837.15h-.034q-.385 0-.837-.15-.452-.15-.962-.45-.51-.302-.87-.544-.36-.243-.905-.637l-.72-.51q-1.525-1.07-4.388-3.055-2.86-1.984-3.43-2.386-1.04-.704-1.96-1.935Q1 8.315 1 7.26q0-1.305.695-2.175.695-.87 1.984-.87h24.64q1.09 0 1.88.786.792.79.792 1.9z"/></svg></a></li>
+            <li><a title="@io_exception" href="https://twitter.com/intent/tweet?text=@io_exception about Full+page+camera+in+Xamarin.Forms"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 6.7q-1.28 1.88-3.08 3.2.02.26.02.8 0 2.46-.73 4.93-.7 2.46-2.2 4.73-1.46 2.26-3.5 4-2.04 1.75-4.9 2.8-2.88 1.02-6.16 1.02-5.16 0-9.44-2.76.67.08 1.48.08 4.3 0 7.64-2.63-2-.04-3.58-1.23-1.58-1.2-2.17-3.03.63.1 1.16.1.82 0 1.62-.2-2.13-.44-3.53-2.13-1.4-1.68-1.4-3.9v-.1q1.3.74 2.78.8-1.26-.84-2-2.2-.74-1.35-.74-2.93 0-1.67.83-3.1 2.3 2.84 5.6 4.54 3.3 1.7 7.07 1.9-.15-.73-.15-1.4 0-2.57 1.8-4.36 1.8-1.8 4.35-1.8 2.66 0 4.5 1.94 2.07-.4 3.9-1.5-.7 2.2-2.7 3.4 1.76-.2 3.53-.95z"/></svg></a></li>
+            <li><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M31 31H1V1h30v30z"/><path d="M31 2.88v16.87h-5.63v7.68l-4-2.95v2.74l-9.38.02L7.86 31H4.74v-3.7H1V12.36h5.63V2.88H31z" fill="#F6F6F6"/><path d="M19.75 23.27v2.1H12.1L6.62 29v-3.63H2.88V14.13h3.75V16H4.75v7.5H8.5v2.03l2.8-2.03h6.57v-1.62l1.88 1.4z" fill="#424242"/><path d="M17.88 6.63h9.37V16h-5.63v4.09l-3.54-3.55-.55-.55h-7.17V6.62h7.5zM8.5 4.75v13.13h8.26l6.74 5.57v-5.57h5.63V4.74H8.5z" fill="#424242"/><path d="M25.38 10.38H12.24V8.5h13.13v1.88zM21.63 14.13h-9.38v-1.88h9.38v1.88z" fill="#424242"/><path d="M8.5 25.53V23.5" fill="#F6F6F6"/><g fill="#F0EFF1"><path d="M17.88 21.88v1.62H11.3l-2.8 2.03V23.5H4.75V16h1.88v3.75h8.36l2.88 2.13zM17.88 6.63h-7.5V16h7.15l.55.55 3.55 3.54V16h5.62V6.62h-9.38zm3.75 7.5h-9.38v-1.88h9.38v1.88zm3.75-3.76H12.24V8.5h13.13v1.88z"/></g></g></svg> <a id="post-count" href="http://thatcsharpguy.com/post/full-camera-page.1/#disqus_thread" data-disqus-identifier="/post/full-camera-page.1/"></a></li>
+        </ul>
+    </div>  
+    <div class="pure-u-1 pure-u-md-10-24">
+        
+            
+        
+    </div>
+    <div class="pure-u-1 pure-u-md-7-24">
+        Share this
+        <ul class="post-contact-list">
+            <li><a href="mailto:?subject=Full page camera in Xamarin.Forms&amp;body=http://thatcsharpguy.com/post/full-camera-page.1/" title="email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 11.815v13.292q0 1.105-.787 1.892-.787.78-1.892.78H3.68q-1.106 0-1.893-.79Q1 26.21 1 25.102v-13.29q.737.82 1.69 1.46 6.06 4.12 8.32 5.78.955.705 1.55 1.1.594.392 1.582.802.987.41 1.84.41h.035q.854 0 1.84-.41.99-.41 1.583-.804.595-.393 1.55-1.096 2.845-2.06 8.336-5.778.954-.652 1.674-1.455zm0-4.922q0 1.322-.82 2.528t-2.043 2.06l-7.835 5.44-.71.51q-.545.4-.905.64t-.87.55q-.51.3-.963.45-.452.15-.837.15h-.034q-.385 0-.837-.15-.452-.15-.962-.45-.51-.302-.87-.544-.36-.243-.905-.637l-.72-.51q-1.525-1.07-4.388-3.055-2.86-1.984-3.43-2.386-1.04-.704-1.96-1.935Q1 8.315 1 7.26q0-1.305.695-2.175.695-.87 1.984-.87h24.64q1.09 0 1.88.786.792.79.792 1.9z"/></svg></a></li>
+            <li><a href="https://twitter.com/intent/tweet?text=Full+page+camera+in+Xamarin.Forms http://thatcsharpguy.com/post/full-camera-page.1/&hashtags=XamarinForms" title="Tweet"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 6.7q-1.28 1.88-3.08 3.2.02.26.02.8 0 2.46-.73 4.93-.7 2.46-2.2 4.73-1.46 2.26-3.5 4-2.04 1.75-4.9 2.8-2.88 1.02-6.16 1.02-5.16 0-9.44-2.76.67.08 1.48.08 4.3 0 7.64-2.63-2-.04-3.58-1.23-1.58-1.2-2.17-3.03.63.1 1.16.1.82 0 1.62-.2-2.13-.44-3.53-2.13-1.4-1.68-1.4-3.9v-.1q1.3.74 2.78.8-1.26-.84-2-2.2-.74-1.35-.74-2.93 0-1.67.83-3.1 2.3 2.84 5.6 4.54 3.3 1.7 7.07 1.9-.15-.73-.15-1.4 0-2.57 1.8-4.36 1.8-1.8 4.35-1.8 2.66 0 4.5 1.94 2.07-.4 3.9-1.5-.7 2.2-2.7 3.4 1.76-.2 3.53-.95z"/></svg></a></li>
+            
+            <li><a href="javascript:sharePostFacebook();" title="share" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.512 1.488c.325.326.488.716.488 1.172v26.68c0 .456-.163.846-.488 1.172-.326.325-.716.488-1.172.488h-7.637V19.38h3.887l.586-4.532h-4.473v-2.89c0-.73.153-1.277.46-1.642.305-.364.9-.546 1.786-.546l2.382-.02V5.707c-.82-.117-1.98-.176-3.477-.176-1.77 0-3.186.522-4.248 1.564-1.06 1.04-1.59 2.513-1.59 4.414v3.34h-3.908v4.53h3.906V31H2.66c-.456 0-.846-.163-1.172-.488C1.163 30.186 1 29.796 1 29.34V2.66c0-.456.163-.846.488-1.172C1.814 1.163 2.204 1 2.66 1h26.68c.456 0 .846.163 1.172.488z"/></svg></a> </li>
+            <li><a class="kindleWidget" href="#" title="send to kindle"> <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 32 32">
+  <path fill-rule="evenodd" d="M1 3c0-1.1.9-2 2-2h26c1.1 0 2 .9 2 2v26c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3zm8.4-.3V29h3.2v-8.72h.07L19.54 29h3.8l-8.07-10.06 7.34-7.5h-3.7l-6.2 6.36h-.08V2.7H9.4z"/>
+</svg> </a> </li>
+        </ul>
+    </div>
+</div>
+<script>
+    function sharePostFacebook() {
+        FB.ui({
+  method: 'share',
+  href: 'http://thatcsharpguy.com/post/full-camera-page.1/',
+}, function(response){});
+    }
+</script>
+<script type="text/javascript" src="https://d1xnn692s7u6t6.cloudfront.net/widget.js"></script>
+<script type="text/javascript">(function k(){window.$SendToKindle&&window.$SendToKindle.Widget?$SendToKindle.Widget.init({}):setTimeout(k,500);})();</script>
+    </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script id="dsq-count-scr" src="//thatcharpguy.disqus.com/count.js" async></script>
+<script>
+    var noCommentsText = "leave a comment";
+    var commentText = " comment";
+    
+//var disqus_developer = 1; // this would set it to developer mode
+
+    var disqus_config = function () {
+        this.page.url = "http://thatcsharpguy.com/post/full-camera-page.1/"; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "/post/full-camera-page.1/"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.title ="Full page camera in Xamarin.Forms";
+    };
+</script>
+<script src="/js/comments.js"></script>
+
+      </div>
+    </div>
+
+    <footer class="site-footer ui">
+  <div class="wrapper pure-g">
+      <div class="pure-u-1 pure-u-md-8-24">
+          <div class="footer-content">
+              <ul class="icon-list">
+    <li id="em">
+        <a href="mailto:feregrino@thatcsharpguy.com" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 11.815v13.292q0 1.105-.787 1.892-.787.78-1.892.78H3.68q-1.106 0-1.893-.79Q1 26.21 1 25.102v-13.29q.737.82 1.69 1.46 6.06 4.12 8.32 5.78.955.705 1.55 1.1.594.392 1.582.802.987.41 1.84.41h.035q.854 0 1.84-.41.99-.41 1.583-.804.595-.393 1.55-1.096 2.845-2.06 8.336-5.778.954-.652 1.674-1.455zm0-4.922q0 1.322-.82 2.528t-2.043 2.06l-7.835 5.44-.71.51q-.545.4-.905.64t-.87.55q-.51.3-.963.45-.452.15-.837.15h-.034q-.385 0-.837-.15-.452-.15-.962-.45-.51-.302-.87-.544-.36-.243-.905-.637l-.72-.51q-1.525-1.07-4.388-3.055-2.86-1.984-3.43-2.386-1.04-.704-1.96-1.935Q1 8.315 1 7.26q0-1.305.695-2.175.695-.87 1.984-.87h24.64q1.09 0 1.88.786.792.79.792 1.9z"/></svg>
+        </a>
+    </li>
+    <li id="gh">
+        <a href="https://github.com/ThatCSharpGuy" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 16.37q0 4.9-2.86 8.8-2.86 3.93-7.4 5.43-.52.1-.77-.13-.24-.24-.24-.6v-4.1q0-1.9-1.02-2.78 1.2-.2 2.1-.4.9-.3 1.87-.8.95-.5 1.58-1.3.65-.8 1.05-2.1.4-1.27.4-2.93 0-2.38-1.54-4.04.7-1.78-.16-3.98-.57-.2-1.6.2t-1.8.85l-.75.47q-1.83-.5-3.76-.5t-3.76.5l-.8-.54Q11 8.16 9.9 7.7q-1.13-.4-1.7-.23-.86 2.2-.14 3.97-1.54 1.68-1.54 4.05 0 1.6.4 2.9.4 1.23 1.02 2.02.63.8 1.58 1.3.94.53 1.83.77.9.25 2 .37-.77.7-.94 2-.4.2-.82.3-.47.1-1.1.1-.66 0-1.3-.44-.63-.4-1.08-1.2-.38-.63-.95-1-.52-.4-.9-.5l-.4-.03q-.4 0-.57.1-.15.1-.1.24.06.13.18.26t.26.2l.15.1q.44.2.86.73t.63 1l.2.43q.23.75.84 1.2.6.47 1.3.6.7.13 1.34.14.65 0 1.08-.04l.46-.08v2.74q0 .35-.26.6-.25.22-.8.12-4.5-1.5-7.37-5.42-3-3.74-3-8.64 0-4.1 2-7.54 2-3.44 5.45-5.46 3.45-2 7.53-2t7.6 2q3.4 2 5.4 5.46 2 3.44 2 7.53z"/></svg>
+        </a>
+    </li>
+    <li id="yt">
+        <a href="https://www.youtube.com/c/thatcsharpguy" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M22.43 15.714c0-.413-.17-.714-.504-.904l-8.57-5.357c-.347-.223-.71-.234-1.09-.033-.368.2-.552.513-.552.937V21.07c0 .426.184.738.553.94.178.088.35.133.52.133.222 0 .412-.056.568-.168l8.57-5.357c.336-.19.504-.49.504-.904zm8.57 0c0 1.072-.006 1.91-.017 2.51-.01.604-.058 1.366-.142 2.287-.083.92-.208 1.744-.376 2.47-.178.815-.563 1.5-1.155 2.06-.592.557-1.284.88-2.077.97-2.477.28-6.222.42-11.233.42-5.01 0-8.756-.14-11.233-.42-.793-.09-1.487-.413-2.085-.97-.597-.56-.984-1.245-1.163-2.06-.157-.726-.277-1.55-.36-2.47-.085-.92-.132-1.682-.143-2.285-.01-.602-.017-1.44-.017-2.51 0-1.072.006-1.91.017-2.512.01-.603.058-1.364.142-2.285.083-.92.208-1.744.376-2.47.178-.814.563-1.5 1.155-2.058.592-.56 1.284-.882 2.077-.97C7.244 5.14 10.99 5 16 5c5.01 0 8.756.14 11.233.42.793.088 1.487.41 2.085.97.597.558.984 1.244 1.163 2.06.157.724.277 1.547.36 2.468.085.92.132 1.682.143 2.285.01.603.017 1.44.017 2.51z"/></svg>
+        </a>
+    </li>
+    <li id="tw">
+        <a href="https://twitter.com/io_exception" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 6.7q-1.28 1.88-3.08 3.2.02.26.02.8 0 2.46-.73 4.93-.7 2.46-2.2 4.73-1.46 2.26-3.5 4-2.04 1.75-4.9 2.8-2.88 1.02-6.16 1.02-5.16 0-9.44-2.76.67.08 1.48.08 4.3 0 7.64-2.63-2-.04-3.58-1.23-1.58-1.2-2.17-3.03.63.1 1.16.1.82 0 1.62-.2-2.13-.44-3.53-2.13-1.4-1.68-1.4-3.9v-.1q1.3.74 2.78.8-1.26-.84-2-2.2-.74-1.35-.74-2.93 0-1.67.83-3.1 2.3 2.84 5.6 4.54 3.3 1.7 7.07 1.9-.15-.73-.15-1.4 0-2.57 1.8-4.36 1.8-1.8 4.35-1.8 2.66 0 4.5 1.94 2.07-.4 3.9-1.5-.7 2.2-2.7 3.4 1.76-.2 3.53-.95z"/></svg>
+        </a>
+    </li>    
+    <li id="fb">
+        <a href="https://www.facebook.com/thatcsharpguy" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.512 1.488c.325.326.488.716.488 1.172v26.68c0 .456-.163.846-.488 1.172-.326.325-.716.488-1.172.488h-7.637V19.38h3.887l.586-4.532h-4.473v-2.89c0-.73.153-1.277.46-1.642.305-.364.9-.546 1.786-.546l2.382-.02V5.707c-.82-.117-1.98-.176-3.477-.176-1.77 0-3.186.522-4.248 1.564-1.06 1.04-1.59 2.513-1.59 4.414v3.34h-3.908v4.53h3.906V31H2.66c-.456 0-.846-.163-1.172-.488C1.163 30.186 1 29.796 1 29.34V2.66c0-.456.163-.846.488-1.172C1.814 1.163 2.204 1 2.66 1h26.68c.456 0 .846.163 1.172.488z"/></svg>
+        </a>
+    </li>
+    <li id="gp">
+        <a href="https://www.google.com/+Thatcsharpguy" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.9 14.25h-2.7v-2.72h-2.73v2.72h-2.7v2.72h2.7v2.7h2.72v-2.7h2.7v-2.72M10.5 17.5h5.4c-.22 1.4-1.64 4.12-5.4 4.12-3.25 0-5.9-2.7-5.9-6 0-3.33 2.65-6.02 5.9-6.02 1.85 0 3.08.78 3.8 1.46l2.58-2.48c-1.66-1.55-3.8-2.5-6.38-2.5C5.26 6.1 1 10.35 1 15.62s4.26 9.52 9.52 9.52c5.5 0 9.14-3.86 9.14-9.3 0-.62-.07-1.1-.15-1.57h-8.96"/></svg>
+        </a>
+    </li>
+</ul>
+<ul class="icon-list">
+    <li>
+        <a href="/about">
+            <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M7 18.89v-5.88H1.15v-6H7V1.1h6v5.91h6V1.1h6v5.91h5.85v6H25v5.88h5.85v6H25v5.912h-6v-5.91h-6v5.91H7v-5.91H1.15v-6H7zm6 0v-5.88h6v5.88h-6z" fill="#3C8A3F" fill-rule="evenodd"/></svg>
+        </a>
+    </li>
+</ul>
+          </div>
+      </div>
+      <div class="pure-u-1 pure-u-md-6-24">
+      </div>
+      <div class="pure-u-1 pure-u-md-10-24">
+          <div class="footer-content">
+              <div class="panel active" id="footer-signup">
+    <div class="panel-title">
+        <span class="title">Signup</span>
+    </div>
+    <div class="panel-content">
+    Get a weekly (spanish language) email of what's going on in That C# guy
+    <form class="pure-form-stacked" action="//thatcsharpguy.us11.list-manage.com/subscribe/post?u=ebfe25f4824d7335380cf1ffd&amp;id=eca72e1174" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    
+                <div class="response" id="mce-error-response" style="display:none"></div>
+                <div class="response" id="mce-success-response" style="display:none"></div>
+                
+                <input type="email" value="" placeholder="dirección de email" name="EMAIL" class="required email" id="mce-EMAIL">
+                
+                <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="button">
+                    <span style="text-decoration:underline;">E</span>nviar
+                </button>
+                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                    <input type="text" name="b_ebfe25f4824d7335380cf1ffd_eca72e1174" tabindex="-1" value="">
+                </div>
+    </form>
+    </div>
+</div>
+          </div>
+      </div>
+  </div>
+</footer>
+   
+  </body>
+
+</html>

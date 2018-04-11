@@ -1,0 +1,1762 @@
+[   
+    { 
+        "id" : "/tv/expresiones-lambda/",
+        "tv" : true,
+        "title": "Las expresiones lambda", 
+        "date": "2017-12-18 18:00:00 +0000",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/lambdas/featured.png",
+        "summary": "Las expresiones lambda son bloques de código que NO están asociados con un identificador."
+    },
+    { 
+        "id" : "/tv/jupyter-notebooks/",
+        "tv" : true,
+        "title": "Los Jupyter Notebooks", 
+        "date": "2017-12-11 18:00:00 +0000",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/jupyter/featured.png",
+        "summary": "Los Jupyter Notebooks son una herramienta bastate útil para documentar el código antes de llevarlo a producción. ¡Y no son solo para Python!"
+    },
+    { 
+        "id" : "/tv/memoizacion/",
+        "tv" : true,
+        "title": "Memoización", 
+        "date": "2017-11-27 18:00:00 +0000",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/memoization/featured.png",
+        "summary": "La memoización es una técnica de optimización de algoritmos que permite acelerar la ejecución de una función."
+    },
+    { 
+        "id" : "/tv/escuela/",
+        "tv" : true,
+        "title": "La escuela | #meta", 
+        "date": "2017-09-06 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/meta/escuela1.png",
+        "summary": "Vuelvo a la escuela y me tomeré 4 semanas para adaptarme nuevamente a la vida de estudiante (y encontrar un buen lugar para grabar)."
+    },
+    { 
+        "id" : "/tv/funcional/",
+        "tv" : true,
+        "title": "La programación funcional", 
+        "date": "2017-08-29 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/functional/featured.png",
+        "summary": "Como su nombre lo indica, está centrada en funciones, las cuales son tratadas como ciudadanos de primera clase."
+    },
+    { 
+        "id" : "/tv/reactiva/",
+        "tv" : true,
+        "title": "La programación reactiva", 
+        "date": "2017-08-22 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/rx/featured.png",
+        "summary": "La programación reactiva es otro paradigma de programación que facilita el trabajo con flujos asíncronos de datos, además de ser compatible con otros paradigmas que magnifican sus características."
+    },
+    { 
+        "id" : "/post/reactive-extensions-2/",
+        "tv" : false,
+        "title": "Programación reactiva y Rx, parte 2", 
+        "date": "2017-08-15 20:00:01 +0100",
+        "featured_tag": "Rx",
+        "tags": ["Rx","ReactiveExtensions"],
+        "featured_image": "http://thatcsharpguy.com/postimages//rx/fishing.png",
+        "summary": "La programación reactiva es una de las formas de implementar el patrón del observador en nuestro código, y las Reactive Extensions hacen esta tarea mucho más sencilla."
+    },
+    { 
+        "id" : "/post/reactive-extensions-1/",
+        "tv" : false,
+        "title": "Programación reactiva y Rx, parte 1", 
+        "date": "2017-08-15 20:00:01 +0100",
+        "featured_tag": "Rx",
+        "tags": ["Rx","ReactiveExtensions"],
+        "featured_image": "http://thatcsharpguy.com/postimages//rx/plain.png",
+        "summary": "La programación reactiva es una de las formas de implementar el patrón del observador en nuestro código, y las Reactive Extensions hacen esta tarea mucho más sencilla."
+    },
+    { 
+        "id" : "/tv/mis-libros/",
+        "tv" : true,
+        "title": "Mis libros (meta)", 
+        "date": "2017-08-15 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/meta/libros.png",
+        "summary": "El canal llegó a 5̶0̶0̶ 534 suscriptores y decidí hacer este video en el que no hablo de nada sobre el desarrollo. La programación habitual regresa la siguiente semana."
+    },
+    { 
+        "id" : "/tv/ciencia-datos/",
+        "tv" : true,
+        "title": "Ciencia de datos", 
+        "date": "2017-08-08 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/ciencia-datos/featured.png",
+        "summary": "La ciencia de datos se encarga de transformar los datos en información, y hace lo posible por que esta información se transforme en conocimiento."
+    },
+    { 
+        "id" : "/post/menu-hamburguesa-xamarin-forms-es/",
+        "tv" : false,
+        "title": "Otro tutorial sobre menú de hamburguesa", 
+        "date": "2017-08-01 20:00:01 +0100",
+        "featured_tag": "XamarinForms",
+        "tags": ["Xamarin","XamarinForms"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-forms/hamburger/featured.png",
+        "summary": "Aprende una forma (sí, otra) de implementar un menú de hamburguesa en Xamarin.Forms para organizar mejor al información dentro de tu aplicación."
+    },
+    { 
+        "id" : "/tv/regex/",
+        "tv" : true,
+        "title": "Expresiones regulares", 
+        "date": "2017-08-01 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/regex/featured.png",
+        "summary": "El término expresiones regulares surgió a mediados de los 50's y fue creado por el matemático Stephen Cole Kleene, y se refiere a secuencias de caracteres que definen patrones de búsqueda."
+    },
+    { 
+        "id" : "/post/new-virtual-override/",
+        "tv" : false,
+        "title": "virtual, override y new", 
+        "date": "2017-07-25 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/new/featured.png",
+        "summary": "Las palabras new, virtual y override nos ayudan a especificar el comportamiento de los miembros de clases y sus subclases."
+    },
+    { 
+        "id" : "/tv/package-manager/",
+        "tv" : true,
+        "title": "Gestores de paquetes", 
+        "date": "2017-07-25 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/package/package.jpg",
+        "summary": "Los gestores de paquete le otorgan a los desarrolladores una manera más sencilla de reutilizar el código creado por otros, al manejar la instalación, actualización y remoción de bibliotecas de software."
+    },
+    { 
+        "id" : "/tv/patrones-diseno/",
+        "tv" : true,
+        "title": "Patrones de diseño", 
+        "date": "2017-07-18 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/design/youtube.jpg",
+        "summary": "Los patrones de diseño son soluciones reusables a problemas comunes que ocurren en el diseño de software."
+    },
+    { 
+        "id" : "/tv/orm/",
+        "tv" : true,
+        "title": "ORM (Mapeo Objeto Relacional)", 
+        "date": "2017-07-11 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/orm/youtube.jpg",
+        "summary": "El Mapeo Objeto-Relacional es una técnica de programación que facilita el acceso a los datos desde una aplicación a una base de datos, tiene muchas ventajas, pero tampoco es la solución a todos nuestros problemas."
+    },
+    { 
+        "id" : "/tv/implementacion-orm/",
+        "tv" : true,
+        "title": "El ORM Entity Framework", 
+        "date": "2017-07-11 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/orm/overlay-code.png",
+        "summary": "Este es un ejemplo de ORM, el framework Entity Framework, inicialmante desarrollado por Microsoft."
+    },
+    { 
+        "id" : "/post/polly/",
+        "tv" : false,
+        "title": "Polly-ticas para el manejo de excepciones", 
+        "date": "2017-07-04 20:00:01 +0100",
+        "featured_tag": "NuGetRecomendado",
+        "tags": ["NuGetRecomendado"],
+        "featured_image": "http://thatcsharpguy.com/postimages//nugets/polly/featured.jpg",
+        "summary": "Con Polly implementa políticas complejas para lidiar con las excepciones en tu código, especialmente útil si estás trabajando con servicios web que pueden variar de disponibilidad de un momento a otro."
+    },
+    { 
+        "id" : "/tv/semver/",
+        "tv" : true,
+        "title": "SemVer", 
+        "date": "2017-07-04 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/semver/featured.jpg",
+        "summary": "SemVer o el versionamiento semántico es una herramienta que facilita la vida de los desarrolladores de software al otorgarles una manera sencilla de organizar y mantener las referencias de sus proyectos."
+    },
+    { 
+        "id" : "/post/metodos-try/",
+        "tv" : false,
+        "title": "Métodos Try...", 
+        "date": "2017-06-27 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/try.png",
+        "summary": "Las excepciones son eso. Excepciones, así que debes procurar evitarlas en tu código; los métodos Try... te ayudan a hacerlo, conócelos aquí."
+    },
+    { 
+        "id" : "/tv/mvc/",
+        "tv" : true,
+        "title": "MVC", 
+        "date": "2017-06-27 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/mvc/featured.jpg",
+        "summary": "Conoce este patrón arquitectónico para el desarrollo de aplicaciones. MVC es comúnmente usado para el desarrollo de aplicaciones web."
+    },
+    { 
+        "id" : "/tv/implementacion-mvc/",
+        "tv" : true,
+        "title": "Una implementación de MVC", 
+        "date": "2017-06-27 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/mvc/implementacion.jpg",
+        "summary": "Así es como aplico el patrón MVC en algunos de los proyectos que desarrollo."
+    },
+    { 
+        "id" : "/post/custom-cells-xamarin/",
+        "tv" : false,
+        "title": "Custom cells en Xamarin.Forms", 
+        "date": "2017-06-20 20:00:01 +0100",
+        "featured_tag": "XamarinForms",
+        "tags": ["Xamarin","XamarinForms"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-forms/customcell/featured.jpg",
+        "summary": "Celdas personalizadas para tus aplicaciones de Xamarin.Forms, seguramente ya sabías que podías modificar el comportamiento de tus apps dependiendo de la plataforma... pero probablemente nunca lo habías intentado con una celda de un ListView o TableView"
+    },
+    { 
+        "id" : "/tv/licencias-oss/",
+        "tv" : true,
+        "title": "Licencias de software libre", 
+        "date": "2017-06-20 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/licencias/featured.jpg",
+        "summary": "Las licencias de código libre son lo que en realidad hace al código libre, ya que establecen las condiciones y lineamientos bajo los cuales el código que protegen puede ser compartido."
+    },
+    { 
+        "id" : "/post/excepciones-c-sharp/",
+        "tv" : false,
+        "title": "Excepciones en C#", 
+        "date": "2017-06-13 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/ex/featured.png",
+        "summary": "Las excepciones son un mecanismo que podemos usar en C# para reportar errores en nuestros programas y poder manejarlos apropiadamente."
+    },
+    { 
+        "id" : "/tv/programacion-competitiva/",
+        "tv" : true,
+        "title": "Programación competitiva", 
+        "date": "2017-06-13 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/competitive/featured.png",
+        "summary": "La programación competitiva enfrenta a programadores que tienen que resolver problemas empleando conocimientos de ciencias computacionales, matemáticas y lógica. Todo esto mediante una sencilla aplicación para computadora."
+    },
+    { 
+        "id" : "/post/custom-renderer-paint-code-es/",
+        "tv" : false,
+        "title": "Xamarin.Forms y PaintCode", 
+        "date": "2017-06-06 20:00:01 +0100",
+        "featured_tag": "XamarinForms",
+        "tags": ["Xamarin","XamarinForms"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-forms/paintcode/featured.png",
+        "summary": "Lleva tus dibujos vectoriales a tu app móvil usando PaintCode y los custom renderers de Xamarin.Forms"
+    },
+    { 
+        "id" : "/post/custom-renderer-paint-code-en/",
+        "tv" : false,
+        "title": "Xamarin.Forms & PaintCode", 
+        "date": "2017-06-06 20:00:01 +0100",
+        "featured_tag": "XamarinForms",
+        "tags": ["Xamarin","XamarinForms"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-forms/paintcode/featured.png",
+        "summary": "Turn your vector drawings into controls for your mobile apps using PaintCode and Xamarin.Forms' custom renderers."
+    },
+    { 
+        "id" : "/tv/recursion-iteracion/",
+        "tv" : true,
+        "title": "Recursión e iteración", 
+        "date": "2017-06-06 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/recursividad/featured.jpg",
+        "summary": "La recursión e iteración son técnicas de programación que nos ayudan a resolver los mismos problemas mediante la repetición de operaciones pero atacándolos desde enfoques distintos."
+    },
+    { 
+        "id" : "/post/casting-c-sharp/",
+        "tv" : false,
+        "title": "Casting: implicit y explicit en C#", 
+        "date": "2017-05-30 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/casting.jpg",
+        "summary": "Crea conversiones personalizadas entre tipos de dato, una técnica parecida a la sobrecarga de operadores... que debe usarse con moderación."
+    },
+    { 
+        "id" : "/tv/https/",
+        "tv" : true,
+        "title": "El protocolo HTTPS", 
+        "date": "2017-05-30 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/https/maxresdefault.jpg",
+        "summary": "El HTTPS no es otra cosa que el mismo protocolo de transferencia de hipertexto pero seguro, protegido por el protocolo criptográfico TLS."
+    },
+    { 
+        "id" : "/post/ffimageloading-xamarin-forms/",
+        "tv" : false,
+        "title": "Mejores imágenes en Xamarin.Forms", 
+        "date": "2017-05-23 20:00:01 +0100",
+        "featured_tag": "XamarinForms",
+        "tags": ["Xamarin","XamarinForms"],
+        "featured_image": "http://thatcsharpguy.com/postimages//nugets/ffimage/featured.png",
+        "summary": "Ahorra recursos al cargar imágenes en tus aplicaciones hechas con Xamarin.Forms con este control... que probablemente no tenías idea que necesitabas."
+    },
+    { 
+        "id" : "/tv/two-factor-authentication/",
+        "tv" : true,
+        "title": "Autenticación de dos factores", 
+        "date": "2017-05-23 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/2fa/featured.jpg",
+        "summary": "La autenticación de dos factores da más seguridad a los usuarios al establecer una segunda barrera de autenticación en sus cuentas."
+    },
+    { 
+        "id" : "/tv/two-factor-authentication-asp-net/",
+        "tv" : true,
+        "title": "Autenticación de dos factores (ejemplo en ASP.NET Core)", 
+        "date": "2017-05-23 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/2fa/code-featured.png",
+        "summary": "Aprende a implementar la autenticación de dos factores con ASP.NET Core y Goolge Authenticator."
+    },
+    { 
+        "id" : "/post/cortocircuito-c-sharp/",
+        "tv" : false,
+        "title": "Operadores lógicos corto-circuitados", 
+        "date": "2017-05-16 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/cortocircuito/featured.png",
+        "summary": "Los operadores lógicos más usados tienen una peculiaridad que ayuda a mejorar su desempeño, pero a veces podría ser un comportamiento indeseado. Por suerte, C# cuenta con otros operadores que evitan este comportamiento.."
+    },
+    { 
+        "id" : "/tv/autorizacion-autenticacion/",
+        "tv" : true,
+        "title": "Identidad, autenticación y autorización", 
+        "date": "2017-05-16 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/auth/featured.jpg",
+        "summary": "Identidad, Autenticación y Autorización son conceptos distintos, pero que juntos forman una parte importantísima de la seguridad en una aplicación."
+    },
+    { 
+        "id" : "/post/imprime-xamarin-forms/",
+        "tv" : false,
+        "title": "¿Imprimir desde Xamarin.Forms?", 
+        "date": "2017-05-09 20:00:01 +0100",
+        "featured_tag": "XamarinForms",
+        "tags": ["Xamarin","XamarinForms"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-forms/print/featured.png",
+        "summary": "Imprime desde tu app hecha con Xamarin.Forms, ofrece a tus usuarios la posibilidad de generar reportes, tickets y facturas desde su teléfono celular y listas para imprimir."
+    },
+    { 
+        "id" : "/post/morelinq/",
+        "tv" : false,
+        "title": "Aún más LINQ con MoreLinq", 
+        "date": "2017-05-02 20:00:01 +0100",
+        "featured_tag": "NuGetRecomendado",
+        "tags": ["NuGetRecomendado","AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//linq-en-c-sharp/more-linq.png",
+        "summary": "Por si LINQ no es suficiente para ti, morelinq brinda aún más herramientas para manipular tus colecciones y es tan solo un paquete de NuGet."
+    },
+    { 
+        "id" : "/tv/internationalization-localization/",
+        "tv" : true,
+        "title": "Internacionalización y localización", 
+        "date": "2017-05-02 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/i18nl10n/featured.jpg",
+        "summary": "La internacionalización y localización son un par de procesos que nos ayudarán a llevar nuestras aplicaciones a más lugares del mundo."
+    },
+    { 
+        "id" : "/post/xamarin-forms-mac/",
+        "tv" : false,
+        "title": "Xamarin.Forms para macOS", 
+        "date": "2017-04-18 20:00:01 +0100",
+        "featured_tag": "XamarinForms",
+        "tags": ["Xamarin","XamarinForms"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-forms/mac/featured.jpg",
+        "summary": "Por fin, Xamarin.Forms llega a macOS. Reusa tu código al máximo y haz que tus apps lleguen a todo el mundo."
+    },
+    { 
+        "id" : "/post/expression-trees-c-sharp/",
+        "tv" : false,
+        "title": "Árboles de expresiones en C#", 
+        "date": "2017-04-18 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/expressions/featured.jpg",
+        "summary": "Un árbol de expresiones permite examinar el código de un delegado en tiempo de ejecución, permitiéndote así aprovechar al máximo los recursos de tu sistema."
+    },
+    { 
+        "id" : "/tv/rest/",
+        "tv" : true,
+        "title": "La arquitectura REST", 
+        "date": "2017-04-18 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/rest/featured.jpg",
+        "summary": "REST es una arquitectura para crear aplicaciones web, esta propone cinco principios que hacen que una aplicación sea fácil de usar y que tenga un alto grado de compatibilidad con otros sistemas."
+    },
+    { 
+        "id" : "/post/xamarin-forms-versioning/",
+        "tv" : false,
+        "title": "Conoce la versión de tu app con Xamarin.Forms", 
+        "date": "2017-04-11 20:00:01 +0100",
+        "featured_tag": "NuGetRecomendado",
+        "tags": ["NuGetRecomendado","XamarinForms","Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimages//nugets/versioning/featured.jpg",
+        "summary": "El asignarle un código de versión a cada una de las actualizaciones de tu app es de vital importancia, te ayudará a tener un punto de referencia cuando tengas que resolver algún bug o recolectar información para analizar el desempeño de tus apps."
+    },
+    { 
+        "id" : "/post/c-sharp-siete/",
+        "tv" : false,
+        "title": "¿Qué hay en C# 7?", 
+        "date": "2017-04-04 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/siete/featured.jpg",
+        "summary": "Conoce algunas de las nuevas características incluídas en la versión 7 de C#;, tuplas, deconstructores, literales binarios y más."
+    },
+    { 
+        "id" : "/post/httplogger-es/",
+        "tv" : false,
+        "title": "Inspeciona tus peticiones http con HttpLogger", 
+        "date": "2017-03-28 20:00:01 +0100",
+        "featured_tag": "NuGetRecomendado",
+        "tags": ["NuGetRecomendado","AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//nugets/httplogger/featured.jpg",
+        "summary": "Inspecciona el request y response de las conexiones que tu app hace a servicios web. Haz con ellas lo que quieras, desde guardarlas en un archivo hasta ponerlas en pantalla."
+    },
+    { 
+        "id" : "/post/httplogger-en/",
+        "tv" : false,
+        "title": "Inspect your http requests with HttpLogger", 
+        "date": "2017-03-28 20:00:01 +0100",
+        "featured_tag": "NuGetRecomendado",
+        "tags": ["NuGetRecomendado","AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//nugets/httplogger/featured.jpg",
+        "summary": "Inspect the request and response of all the connection your app makes to any webservice. Do whatever you want with them, from saving them to a file to put them on screen!"
+    },
+    { 
+        "id" : "/tv/solid/",
+        "tv" : true,
+        "title": "Los principios SOLID", 
+        "date": "2017-03-28 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/solid/solid.jpg",
+        "summary": "El objetivo de aplicar estos cinco principios es crear un código limpio y altamente mantenible, y es que el código mantenible no solo depende de programar con estilo siguiendo una guía, o de probar el código escrito, sino de la estructura con la que lo escribimos."
+    },
+    { 
+        "id" : "/post/fluent-assertions/",
+        "tv" : false,
+        "title": "Mejores pruebas unitarias con FluentAssertions", 
+        "date": "2017-03-21 19:00:01 +0000",
+        "featured_tag": "NuGetRecomendado",
+        "tags": ["NuGetRecomendado","AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//nugets/fluentassertions/featured.jpg",
+        "summary": "Mejora tus pruebas unitarias con mensajes más claros, al momento de escribirlos y cuando tus tests fallan."
+    },
+    { 
+        "id" : "/tv/pruebas-unitarias-vs/",
+        "tv" : true,
+        "title": "Pruebas unitarias en Visual Studio", 
+        "date": "2017-03-14 19:00:00 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp","VisualStudio","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/unit-test/featured.jpg",
+        "summary": "Aprende a crear pruebas unitarias usando C#"
+    },
+    { 
+        "id" : "/tv/pruebas-unitarias/",
+        "tv" : true,
+        "title": "Las pruebas unitarias", 
+        "date": "2017-03-14 18:00:00 +0000",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/unit-test/featured-yt.jpg",
+        "summary": "Estas pruebas es donde componentes individuales del software se someten a pruebas. El propósito de estas es asegurar que cada unidad de trabajo funciona individualmente como debería. Es decir, funciona cuando se supone que debe funcionar, responde con lo que se supone que tiene que responder, falla como y cuando se supone que debe fallar."
+    },
+    { 
+        "id" : "/post/popups-avanzados-xamarin-forms/",
+        "tv" : false,
+        "title": "Popups avanzados en Xamarin.Forms", 
+        "date": "2017-03-07 19:00:01 +0000",
+        "featured_tag": "NuGetRecomendado",
+        "tags": ["NuGetRecomendado","XamarinForms","Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-forms/popups/featured.jpg",
+        "summary": "Añade popups más avanzados a tus apps hechas con Xamarin.Forms usando este NuGet, tan sencillo como crear una pagina nueva y agregarle los controles que quieres mostrar."
+    },
+    { 
+        "id" : "/post/async-await-3/",
+        "tv" : false,
+        "title": "async y await (cancelando tareas)", 
+        "date": "2017-02-28 19:00:01 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp","XamarinForms","Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/asyncawait/featured.png",
+        "summary": "Aprende la forma &quot;correcta&quot; para proveer a tus Task de un mecanismo de cancelación, además aprende cómo reportar el progreso de una tarea al usuario mediante una interfaz definida por el Framework."
+    },
+    { 
+        "id" : "/post/async-await-2/",
+        "tv" : false,
+        "title": "async y await (tareas paralelas)", 
+        "date": "2017-02-21 19:00:01 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp","XamarinForms","Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/asyncawait/featured.png",
+        "summary": "Trabaja con tareas asíncronas y paralelas en tus aplicaciones móviles, de escritorio y hasta en el servidor."
+    },
+    { 
+        "id" : "/post/async-await/",
+        "tv" : false,
+        "title": "async y await", 
+        "date": "2017-02-14 19:00:01 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp","XamarinForms","Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/asyncawait/featured.png",
+        "summary": "En este post voy a hablar acerca de uno de los mejores tipos de azúcar sintáctica que existen en el lenguaje de programación C#. Y con ello me refiero a las palabras async y await."
+    },
+    { 
+        "id" : "/tv/apis/",
+        "tv" : true,
+        "title": "API", 
+        "date": "2017-02-14 18:00:00 +0000",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/api/api_thumb.png",
+        "summary": "Las interfaces de programación de aplicaciones, son un elemento vital del desarrollo de sistemas de software, y aunque desde casi siempre han existido entre nosotros, no es sino hasta últimamente que la &quot;popularidad&quot; de esta palabra ha aumentado gracias a los servicios web y las aplicaciones móviles."
+    },
+    { 
+        "id" : "/post/nodatime/",
+        "tv" : false,
+        "title": "Maneja el tiempo con NodaTime", 
+        "date": "2017-02-07 19:00:01 +0000",
+        "featured_tag": "NuGetRecomendado",
+        "tags": ["NuGetRecomendado"],
+        "featured_image": "http://thatcsharpguy.com/postimages//nodatime/featured.jpg",
+        "summary": "Mejora el manejo de las fechas y el tiempo en tu aplicación con NodaTime, muévelas a través de zonas horarias, horarios de verano y en los relojes de todo el mundo sin complicaciones."
+    },
+    { 
+        "id" : "/post/platformtabbedpage-xamarin-forms-en/",
+        "tv" : false,
+        "title": "More familiar tabs for your users in Xamarin.Forms", 
+        "date": "2017-02-02 19:00:01 +0000",
+        "featured_tag": "XamarinForms",
+        "tags": ["Xamarin","XamarinForms","NuGetRecomendado"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-forms/tabbed-page/featured.jpg",
+        "summary": "Stilize yout Xamarin.Forms tabbed pages, make them more familliar to your users without losing the look and feel of your brand. As a bonus, practice creating custom renderers."
+    },
+    { 
+        "id" : "/post/platformtabbedpage-xamarin-forms/",
+        "tv" : false,
+        "title": "Tabs más familiares a tus usuarios en Xamarin.Forms", 
+        "date": "2017-01-31 19:00:01 +0000",
+        "featured_tag": "XamarinForms",
+        "tags": ["Xamarin","XamarinForms","NuGetRecomendado"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-forms/tabbed-page/featured.jpg",
+        "summary": "Dale más estilo a tus páginas de tabs en Xamarin.Forms, haz que se vean más familiares a tus usuarios sin que pierdan el estilo y los colores de tu marca y como bonus practica haciendo un custom renderer."
+    },
+    { 
+        "id" : "/post/espacios-nombres-c-sharp/",
+        "tv" : false,
+        "title": "Espacios de nombres en C#", 
+        "date": "2017-01-24 19:00:01 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/namespaces.png",
+        "summary": "Los nombres de espacio son de esas cosas en el dasrrollo a los que casi no les prestamos mucha atención, pero que bien usados nos resuelven muchos problemas y nos ayudan a organizar nuestro código."
+    },
+    { 
+        "id" : "/post/xamarin-userdialogs/",
+        "tv" : false,
+        "title": "UserDialogs en Xamarin Forms", 
+        "date": "2017-01-17 19:00:01 +0000",
+        "featured_tag": "XamarinForms",
+        "tags": ["Xamarin","XamarinForms","NuGetRecomendado"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-forms/userdialogs/featured.jpg",
+        "summary": "Usa esta librería de NuGet para interactuar con el usuario de tu aplicación de una forma más intuitiva, con mensajes de alerta, de error y de éxito. Consigue información a través de controles nativos como calendarios y selectores de tiempo."
+    },
+    { 
+        "id" : "/post/correcto-colecciones/",
+        "tv" : false,
+        "title": "Colecciones en C#, ¿cuál elegir?", 
+        "date": "2017-01-10 19:00:02 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages/aprende-c-sharp/colecciones/featured.jpg",
+        "summary": "La colección List&lt;T&gt; puede no siempre ser la adecuada para el trabajo que estás intentando hacer con tu aplicación, en este post te cuento sobre las otras colecciones que .NET nos ofrece."
+    },
+    { 
+        "id" : "/tv/o-grande/",
+        "tv" : true,
+        "title": "Notación O grande", 
+        "date": "2017-01-10 18:00:00 +0000",
+        "featured_tag": "Tv",
+        "tags": ["Git","GitHub","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/bigo/featured.jpg",
+        "summary": "La O mayúscula es una notación matemática también conocida Bachmann–Landau notation, asymptotic notation, notación o grande. Y esta nos ayuda a describir el comportamiento de una función \"al límite\"."
+    },
+    { 
+        "id" : "/post/metas-blog-2017/",
+        "tv" : false,
+        "title": "Metas de That C# guy en 2017", 
+        "date": "2017-01-02 18:31:38 +0000",
+        "featured_tag": "Meta",
+        "tags": ["Meta"],
+        "featured_image": "http://thatcsharpguy.com/postimages//meta/2017.png",
+        "summary": "Nuevo año, nuevas metas para That C&#35; guy, conócleas."
+    },
+    { 
+        "id" : "/post/indizadores-c-sharp/",
+        "tv" : false,
+        "title": "Sobrecarga de indizadores en C#", 
+        "date": "2016-12-27 19:00:02 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages/aprende-c-sharp/indexers.jpg",
+        "summary": "Los indizadores en C# permiten dotar a tus tipos de dato de una forma más simple y expresiva para acceder a sus propiedades, además de ser una sintaxis con la que muchos desarrolladores ya están acostumbrados."
+    },
+    { 
+        "id" : "/post/learning-xamarin-ios-stanford-cs193p/",
+        "tv" : false,
+        "title": "Learning Xamarin.iOS at Stanford", 
+        "date": "2016-12-27 08:00:00 +0000",
+        "featured_tag": "Xamarin",
+        "tags": ["Xamarin","XamariniOS"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-ios/stanford.jpg",
+        "summary": "Here is my experience learning Xamarin.iOS by taking the Stanford's CS193P course online which is given for Swift language."
+    },
+    { 
+        "id" : "/post/sobrecarga-operadores/",
+        "tv" : false,
+        "title": "Sobrecarga de operadores", 
+        "date": "2016-12-20 19:00:02 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages/aprende-c-sharp/sobrecarga.jpg",
+        "summary": "Suma, resta, divide, multiplica, compara... todos los tipos de dato que crees para tus aplicaciones, todo gracias a la sobrecarga de operadores que ofrece C&#35;"
+    },
+    { 
+        "id" : "/post/linq-en-c-sharp-4/",
+        "tv" : false,
+        "title": "Más Linq en C#", 
+        "date": "2016-12-13 19:00:02 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages/linq-en-c-sharp/featured.png",
+        "summary": "Conoce más de linq, métodos para unir, intersectar y filtrar conjuntos."
+    },
+    { 
+        "id" : "/post/dynamic-expandoobject/",
+        "tv" : false,
+        "title": "Dynamic y ExpandoObject", 
+        "date": "2016-12-06 19:00:02 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/dynamic.jpg",
+        "summary": "Con dynamic convierte a C# en un lenguaje dinámico y fuertemente tipado (consulte restricciones)."
+    },
+    { 
+        "id" : "/tv/subiendo-github/",
+        "tv" : true,
+        "title": "Subiéndo código a GitHub", 
+        "date": "2016-12-06 18:00:00 +0000",
+        "featured_tag": "Tv",
+        "tags": ["Git","GitHub","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/github.jpg",
+        "summary": "Un tutorial de cómo empezar con GitHub desde cero."
+    },
+    { 
+        "id" : "/post/xamarin-workbooks/",
+        "tv" : false,
+        "title": "Bienvenido a los Xamarin Workbooks", 
+        "date": "2016-11-29 19:00:01 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp","Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin/workbooks/featured.jpg",
+        "summary": "Los Workbooks son una especie de documentos &quot;vivos&quot; con los que puedes compilar y ejecutar código en C#."
+    },
+    { 
+        "id" : "/post/yield-c-sharp/",
+        "tv" : false,
+        "title": "La palabra yield en C#", 
+        "date": "2016-11-22 19:00:01 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/yield/featured.jpg",
+        "summary": "La palabra yield en C# tiene un uso bastante peculiar pero sencillo de entender cuando se explica de la manera adecuada, básicamente te ayudará a mejorar la eficiencia de tus aplicaciones. En este post trato de explicar qué es y cómo funciona eso a través de ejemplos de código."
+    },
+    { 
+        "id" : "/post/extension-methods-es/",
+        "tv" : false,
+        "title": "Métodos de extensión en C#", 
+        "date": "2016-11-15 19:00:01 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/extension.png",
+        "summary": "Los métodos de extensión nos permiten ampliar la funcionalidad de cualquier tipo de dato sin necesidad de tener el código fuente de este. A pesar de ser azúcar sintáctica, son muy útiles."
+    },
+    { 
+        "id" : "/tv/ci/",
+        "tv" : true,
+        "title": "Integración continua", 
+        "date": "2016-11-15 18:00:00 +0000",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/ci/thumb.jpg",
+        "summary": "La integración continua es una práctica muy comun en el desarrollo de software que consiste en que los desarrolladores compilen su código continuamente para detectar errores tempranamente."
+    },
+    { 
+        "id" : "/post/full-camera-page-es/",
+        "tv" : false,
+        "title": "Cámara a página completa en Xamarin.Forms", 
+        "date": "2016-11-08 08:00:00 +0000",
+        "featured_tag": "XamarinForms",
+        "tags": ["XamarinForms","Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-forms/camerapage/featured.jpg",
+        "summary": "Aprende cómo tomar fotos desde tu aplicación de Xamarin.Forms usando un custom renderer para acceder a la cámar aisn dejar tu aplicación. Con este control puedes personalizar la interfaz de usuario para que coincida con tu app."
+    },
+    { 
+        "id" : "/post/full-camera-page.1/",
+        "tv" : false,
+        "title": "Full page camera in Xamarin.Forms", 
+        "date": "2016-11-08 08:00:00 +0000",
+        "featured_tag": "XamarinForms",
+        "tags": ["XamarinForms","Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-forms/camerapage/featured.jpg",
+        "summary": "Learn how to take photos from your Xamarin.Forms app using a custom page renderer to use the camera without leaving your application, with this control, you can create your own camera user interface to match the design of your app."
+    },
+    { 
+        "id" : "/post/debugging-1/",
+        "tv" : false,
+        "title": "Debugging parte 1", 
+        "date": "2016-10-31 19:00:01 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/debugging/f.png",
+        "summary": "En este post te voy a dar algunos tips para que depures tu código en C# y tu IDE de confianza."
+    },
+    { 
+        "id" : "/post/string-format/",
+        "tv" : false,
+        "title": "String.Format", 
+        "date": "2016-10-24 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/format.jpg",
+        "summary": "Olvídate de concatenar una interminable cantidad de cadenas para presentar la información en tus aplicaciones. Con este método de la clase String tienes (casi) todo resuelto, únicamente necesitas una cadena con marcadores y listo."
+    },
+    { 
+        "id" : "/post/xamarin-auth-es/",
+        "tv" : false,
+        "title": "OAuth en Forms con Xamarin.Auth", 
+        "date": "2016-10-17 20:00:01 +0100",
+        "featured_tag": "XamarinForms",
+        "tags": ["Xamarin","XamarinForms","NuGetRecomendado"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin/auth/featured.jpg",
+        "summary": "Con Xamarin.Auth, el incorporar servicios de terceros como Twitter y Facebook nunca había sido tan fácil, en este post, aprende a hacerlo desde Xamarin.Forms."
+    },
+    { 
+        "id" : "/post/reflexion-c-sharp-es/",
+        "tv" : false,
+        "title": "Reflexión en C#", 
+        "date": "2016-10-10 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/reflexion.jpg",
+        "summary": "La reflexión nos permite acceder a la información de un tipo en tiempo de ejecución. Cuando estamos escribiendo el código, somos nosotros quienes tenemos una idea general del sistema&#58; sabemos los tipos de dato de las variables, los métodos que contienen las clases, los atributos de los miembros de estas y un sin fin de cosas más."
+    },
+    { 
+        "id" : "/post/localisation-resx/",
+        "tv" : false,
+        "title": "Archivos de recursos y apps multilenguaje en C#", 
+        "date": "2016-10-03 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/resx/featured.jpg",
+        "summary": "Como desarrolladores, tendemos a pensar en nuestras aplicaciones como funcionales para una región o lenguaje específicos, sin preocuparnos sobre traducir e internacionalizarlas, preparándolas así para ser accesibles aun número mayor de usuarios."
+    },
+    { 
+        "id" : "/tv/martillo-dorado/",
+        "tv" : true,
+        "title": "El martillo dorado", 
+        "date": "2016-09-26 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/golden-hammer/featured.jpg",
+        "summary": "La falacia del martillo de oro es una de las falacias en las cuales los desarrolladores caemos con mayor facilidad, esta implica el propner una única solución para distintos tipos de problemas. Estas \"soluciones\" pueden ser un IDE, un patrón de diseño o hasta un lenguaje de programación."
+    },
+    { 
+        "id" : "/post/null-coalescing/",
+        "tv" : false,
+        "title": "Operador null coalescing en C#", 
+        "date": "2016-09-19 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/null-c.png",
+        "summary": "Este operador te ayudará a escribir con mayor claridad el código, al tiempo que te ahorras escribir algunos cuantos ifs en tu código."
+    },
+    { 
+        "id" : "/post/atributos-c-sharp/",
+        "tv" : false,
+        "title": "Xamarin.Auth", 
+        "date": "2016-09-12 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/attrs/featured.png",
+        "summary": "Los atributos nos ofrecen otra manera de interactuar con el código que escribimos, ya sea dándole información al compilador o extendiendo las definiciones de nuestros métodos, propiedades o clases en tiempo de ejecución."
+    },
+    { 
+        "id" : "/post/commonmark/",
+        "tv" : false,
+        "title": "CommonMark.NET", 
+        "date": "2016-09-05 20:00:01 +0100",
+        "featured_tag": "NuGetRecomendado",
+        "tags": ["NuGetRecomendado"],
+        "featured_image": "http://thatcsharpguy.com/postimages//commonmark/featured.png",
+        "summary": "Convertir de un documento escrito con el lenguaje Markdown a uno escrito en HTML con este paquete de NuGet es muy intuitivo, además de que su API permite una personalización de la salida bastante intuitiva."
+    },
+    { 
+        "id" : "/tv/inyeccion-dependencias/",
+        "tv" : true,
+        "title": "La inyección de dependencias", 
+        "date": "2016-09-05 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/di/featured.jpg",
+        "summary": "La inyección de dependencias es un patrón de diseño que nos permite implementar en nuestras aplicaciones el principio de inversión de control. Consiste en evitar la instanciación de unos objetos dentro de otros, evitando así el acoplamiento fuerte."
+    },
+    { 
+        "id" : "/post/revisando-github/",
+        "tv" : false,
+        "title": "Revisando mis repos en GitHub", 
+        "date": "2016-08-29 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//mis-repos-github/featured.png",
+        "summary": "Un post un poco diferente, en este no hablaré sobre alguna característica de C# o un paquete de NuGet, sino de proyectos, pruebas y aplicaciones en los que lo he usado. Conoce algunas de las cosas que he hecho y subido a GitHub."
+    },
+    { 
+        "id" : "/post/c-sharp-events/",
+        "tv" : false,
+        "title": "Events en C#", 
+        "date": "2016-08-22 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/events.png",
+        "summary": "Un evento no es más que un mensaje que se envía de un objeto (el emisor) a otros (los receptores) cada vez que se cumple cierta condición o un cambio ocurre en él."
+    },
+    { 
+        "id" : "/post/servicios-web-movil-xamarin/",
+        "tv" : false,
+        "title": "Servicios web resistentes en aplicaciones móviles", 
+        "date": "2016-08-15 20:00:01 +0100",
+        "featured_tag": "Xamarin",
+        "tags": ["Xamarin","XamarinForms","NuGetRecomendado"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-forms/resilient/featured.jpg",
+        "summary": "Llevamos nuestros dispositivos con nosotros a donde sea. Los tenemos en casa, en el trabajo y durante las vacaciones. Están con nosotros sin importar si estamos conectados a internet wifi de 1 gigabit o en una red 4g."
+    },
+    { 
+        "id" : "/tv/programar-con-estilo/",
+        "tv" : true,
+        "title": "Programando con estilo", 
+        "date": "2016-08-10 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/estilo/featured.jpg",
+        "summary": "Programar con estilo es escribir nuestros programas fáciles de entender, bien documentados y siguiendo convenciones de escritura previamente adoptadas."
+    },
+    { 
+        "id" : "/post/akavache/",
+        "tv" : false,
+        "title": "Persistencia de datos con Akavache", 
+        "date": "2016-08-08 20:00:01 +0100",
+        "featured_tag": "NuGetRecomendado",
+        "tags": ["NuGetRecomendado"],
+        "featured_image": "http://thatcsharpguy.com/postimages//akavache/featured.jpg",
+        "summary": "Dale memoria a tus aplicaciones con este paquete de NuGet, con Akavache almacena información en el dispositivo del usuario para dar una impresión de fluidez y rapidez en tu app."
+    },
+    { 
+        "id" : "/post/c-sharp-enums/",
+        "tv" : false,
+        "title": "Enums en C#", 
+        "date": "2016-08-01 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/enums.png",
+        "summary": "Los enum son un tipo de dato que nos permite expresar valores constantes, con la particularidad de poderlos agrupar lógicamente de acuerdo a la relación que tienen unos con otros."
+    },
+    { 
+        "id" : "/post/formatted-number-entry/",
+        "tv" : false,
+        "title": "Formatted number entry", 
+        "date": "2016-08-01 09:00:00 +0100",
+        "featured_tag": "XamarinForms",
+        "tags": ["XamarinForms","Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-forms/formattednumberentry/featured.png",
+        "summary": "I faced with the necessity of having a &quot;formatted textbox&quot; where the user could enter a given integer number and have it formatted instantly to a comma separated number."
+    },
+    { 
+        "id" : "/post/map-filter-reduce-f-sharp/",
+        "tv" : false,
+        "title": "Map, reduce y filter en F#", 
+        "date": "2016-07-25 20:00:00 +0100",
+        "featured_tag": "AprendeFSharp",
+        "tags": ["AprendeFSharp","ProgramaciónFuncional"],
+        "featured_image": "http://thatcsharpguy.com/postimages//map-reduce-filter/featured.png",
+        "summary": "F# es un gran lenguaje, y unas de las cosas que me gusta de él es que está orientado completamente a la programación funcional. Comparte varias características con lenguajes como Elixir y otras pocas con lenguajes como Swift."
+    },
+    { 
+        "id" : "/post/map-filter-reduce-c-sharp/",
+        "tv" : false,
+        "title": "Map, reduce y filter en C#", 
+        "date": "2016-07-25 20:00:00 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp","ProgramaciónFuncional"],
+        "featured_image": "http://thatcsharpguy.com/postimages//map-reduce-filter/featured.png",
+        "summary": "C# es un gran lenguaje, y unas de las cosas que me gusta de él, es que puedes programar funcionalmente aún si el lenguaje no es 100% funcional. Comparte algunas de sus características con lenguajes como Swift y F#."
+    },
+    { 
+        "id" : "/tv/first-class-citizens/",
+        "tv" : true,
+        "title": "Ciudadanos de primera clase", 
+        "date": "2016-07-20 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/first-class-citizens/fcc.jpg",
+        "summary": "En programación, cuando se habla de ciudadanos de primera clase es para hacer referencia a un elemento del lenguaje que posee la mayor cantidad de privilegios."
+    },
+    { 
+        "id" : "/post/usos-using-2/",
+        "tv" : false,
+        "title": "Uso de using", 
+        "date": "2016-07-18 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/using-2.png",
+        "summary": "En C#, también podemos emplear using para especificar un bloque de código asociado a una o varias instancias de una clase que implemente IDisposable."
+    },
+    { 
+        "id" : "/tv/sal-sintactica/",
+        "tv" : true,
+        "title": "Sal sintáctica", 
+        "date": "2016-07-13 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/sal-sintactica/featured.jpg",
+        "summary": "La sal sintáctica, cuyo objetivo es supuestamente ser lo totalmente opuesto a la azúcar, hacen difícil escribir mal código y, en teoría, hacen más difícil de usar un lenguaje."
+    },
+    { 
+        "id" : "/post/imageprocessor/",
+        "tv" : false,
+        "title": "Trabajando con imágenes e ImageProcessor", 
+        "date": "2016-07-11 20:00:01 +0100",
+        "featured_tag": "NuGetRecomendado",
+        "tags": ["NuGetRecomendado"],
+        "featured_image": "http://thatcsharpguy.com/postimages//imageprocessor/featured.jpg",
+        "summary": "Es muy probable que ya te hayas enfrentado o que tengas que enfrentarte con el trabajo procesar imágenes en un sistema, puede ser algo tan simple como cargar y recortar las imagenes de perfil de usuarios a un sistema o..."
+    },
+    { 
+        "id" : "/post/anatomia-app-xamarin-forms/",
+        "tv" : false,
+        "title": "Xamarin.Forms, anatomía de una app", 
+        "date": "2016-07-04 22:00:00 +0100",
+        "featured_tag": "XamarinForms",
+        "tags": ["Xamarin","Events","XamarinForms"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-forms/arch/featured.jpg",
+        "summary": "Las partes que componen una aplicación hecha con Forms son dos&ellip; el núcleo o shared code y los proyectos clientes móviles que consumen dicho núcleo."
+    },
+    { 
+        "id" : "/tv/mvvm/",
+        "tv" : true,
+        "title": "MVVM", 
+        "date": "2016-06-28 23:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv","MVVM"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/mvvm/mvvm.png",
+        "summary": "Conoce este patrón arquitectónico para el desarrollo de aplicaciones. MVVM es comunmente usado para el desarrollo de apps móviles."
+    },
+    { 
+        "id" : "/post/mvvm-xamarin-forms/",
+        "tv" : false,
+        "title": "MVVM en Xamarin.Forms, caso práctico", 
+        "date": "2016-06-26 22:00:00 +0100",
+        "featured_tag": "XamarinForms",
+        "tags": ["Xamarin","XamarinForms","Mvvm"],
+        "featured_image": "http://thatcsharpguy.com/postimages//mvvm/mvvm-featured.png",
+        "summary": "Hice una pequeña app con MVVM y en este post te explico algunas de sus partes escenciales de ella, ah... ¡la app es de Pokémon!"
+    },
+    { 
+        "id" : "/post/genericos-c-sharp-metodos/",
+        "tv" : false,
+        "title": "Métodos genéricos en C#", 
+        "date": "2016-06-19 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/generics-es.png",
+        "summary": "Los métodos genéricos proveen una funcionalidad similar a los tipos genéricos pero aplicada a métodos, también permiten la reutilización de código y reducen el impacto al desempeño en nuestras aplicaciones."
+    },
+    { 
+        "id" : "/post/genericos-c-sharp-clases/",
+        "tv" : false,
+        "title": "Clases genéricas en C#", 
+        "date": "2016-06-12 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/generics-es.png",
+        "summary": "Los tipos genéricos son un mecanismo de C# que nos ayuda a maximizar la reutilización de código. La reutilización de código se logra a través de el uso de plantillas de código en las cuales se insertan marcadores que representarán los tipos de dato que usaremos en nuestra plantilla."
+    },
+    { 
+        "id" : "/post/clases-partial-c-sharp/",
+        "tv" : false,
+        "title": "Clases parciales en C#", 
+        "date": "2016-06-06 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/partial-featured.png",
+        "summary": "Tal vez alguna vez te hayas encontrado con que en la declaración de una clase, la palabra partial está antepuesta a la palabra class. Pero, ¿qué significa esto?"
+    },
+    { 
+        "id" : "/post/meetup-1-junio-2016/",
+        "tv" : false,
+        "title": "Primer Meetup Xamarin Students México", 
+        "date": "2016-06-03 23:00:00 +0100",
+        "featured_tag": "Xamarin",
+        "tags": ["Xamarin","XamarinForms","Events"],
+        "featured_image": "http://thatcsharpguy.com/postimages/events/1-jun-2016.jpg",
+        "summary": "Parte de las presentaciones que hubo en el Meetup Xamarin Students México del 1 de junio de 2016 en Urban Station. Una demo de Custom Renderers."
+    },
+    { 
+        "id" : "/post/mobile-c-sharp-workshop-17-oct-2016/",
+        "tv" : false,
+        "title": "Primer Meetup Xamarin Students México", 
+        "date": "2016-06-02 23:00:00 +0100",
+        "featured_tag": "Xamarin",
+        "tags": ["Xamarin","XamarinForms","Events"],
+        "featured_image": "http://thatcsharpguy.com/postimages/commons/event.png",
+        "summary": "Este es un post de recapitulación del evento Meetup Xamarin Students México del 1 de junio de 2016 en Urban Station"
+    },
+    { 
+        "id" : "/post/tips-xamarin-forms/",
+        "tv" : false,
+        "title": "Tips de desempeño en Xamarin Forms", 
+        "date": "2016-05-30 09:00:00 +0100",
+        "featured_tag": "XamarinForms",
+        "tags": ["XamarinForms","Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-forms/tips.png",
+        "summary": "Jason Smith, ingeniero a cargo de Xamarin Forms, hizo una fantástica presentación en la conferencia Evolve de este año. En ella, él repasó una larga lista de tips de desempeño, así como una sesión de preguntas y respuestas sobre Xamarin Forms."
+    },
+    { 
+        "id" : "/tv/xamarin-forms/",
+        "tv" : true,
+        "title": "Xamarin.Forms", 
+        "date": "2016-05-26 23:00:00 +0100",
+        "featured_tag": "Xamarin",
+        "tags": ["Meta","Tv","Xamarin","XamarinForms"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/xamarinforms/featured.jpg",
+        "summary": "Con Xamarin.Forms munca había sido tan fácil crear aplicaciones multiplataforma compartiendo la mayoría del código entre ellas, incluyendo la interfaz gráfica. En este video te explico de qué se trata."
+    },
+    { 
+        "id" : "/post/jirapi/",
+        "tv" : false,
+        "title": "Jirapi", 
+        "date": "2016-05-26 20:00:01 +0100",
+        "featured_tag": "NuGetRecomendado",
+        "tags": ["NuGetRecomendado"],
+        "featured_image": "http://thatcsharpguy.com/postimages//jirapi/featured.png",
+        "summary": "Cree un cliente para la Pokéapi... por... razones. Espero te sea útil so realizas presentaciones, demos o cursos."
+    },
+    { 
+        "id" : "/post/tuples-c-sharp/",
+        "tv" : false,
+        "title": "Tuples en C#", 
+        "date": "2016-05-16 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/tuples.png",
+        "summary": "Seguramente te ha pasado, alguna vez has pensado &quot;Ojalá pudiera devolver dos cosas desde este método&quot; y si bien recuerdas que los métodos en C# únicamente pueden tener un solo tipo de retorno, es posible devolver más de dos valores haciendo uso de la clase genérica Tuple."
+    },
+    { 
+        "id" : "/tv/xamarin/",
+        "tv" : true,
+        "title": "Xamarin", 
+        "date": "2016-05-09 23:00:00 +0100",
+        "featured_tag": "Xamarin",
+        "tags": ["Meta","Tv","Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/xamarin/featured.png",
+        "summary": "Pero la principal y en la que se centra este video es la Xamarin Platform que se es un framework, un set de compiladores y en algun sentido un traductor de código..."
+    },
+    { 
+        "id" : "/post/xamarin-android-vs-traditional-java/",
+        "tv" : false,
+        "title": "Xamarin.Android vs Android tradicional (con Java)", 
+        "date": "2016-05-09 22:00:00 +0100",
+        "featured_tag": "Xamarin",
+        "tags": ["VisualStudio","Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-android/java-c-sharp.png",
+        "summary": "En cuanto a la famosa clase R, en Xamarin.Android se llama Resource y su contenido es similar al que contiene en la tradicional, como podrás ver en el código más adelante."
+    },
+    { 
+        "id" : "/tv/azucar-sintactica/",
+        "tv" : true,
+        "title": "Azúcar Sintáctica", 
+        "date": "2016-05-04 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/azucar-sintactica/featured.png",
+        "summary": "El azúcar sintáctico no es más que eso, un endulzante que en teoría debe mejorar nuestra experiencia cuando escribimos código."
+    },
+    { 
+        "id" : "/post/xamarin-ios-vs-traditional/",
+        "tv" : false,
+        "title": "Xamarin.iOS vs iOS tradicional (con Swift)", 
+        "date": "2016-05-02 22:00:00 +0100",
+        "featured_tag": "Xamarin",
+        "tags": ["VisualStudio","Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-ios/swift-c-sharp.png",
+        "summary": "Una de las diferencias más notorias es la asignación de manejadores de evento, fuera de eso la transición entre un lenguaje y otro es sencilla."
+    },
+    { 
+        "id" : "/post/flurl/",
+        "tv" : false,
+        "title": "La web es tuya con Flurl", 
+        "date": "2016-04-25 20:00:00 +0100",
+        "featured_tag": "NuGetRecomendado",
+        "tags": ["NuGetRecomendado"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "En este post te voy a hablar de Flurl y Flurl.Http, que son librerías con una api fluida que facilitan la escritura y ejecución de peticiones HTTP."
+    },
+    { 
+        "id" : "/tv/control-versiones/",
+        "tv" : true,
+        "title": "Control de versiones", 
+        "date": "2016-04-25 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/control-versiones/featured.png",
+        "summary": "El control de versiones es una forma de organizar los elementos de una *cosa* cuyo contenido es modificado con el paso del tiempo."
+    },
+    { 
+        "id" : "/post/params-c-sharp/",
+        "tv" : false,
+        "title": "params en C#", 
+        "date": "2016-04-18 20:00:00 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/params.png",
+        "summary": "La palabra reservada params se usa en la declaración de los parámetros de un método, se antepone al tipo de dato que vamos a declarar y tiene una peculiaridad, solamente se puede anteponer a parámetros que sean arreglos."
+    },
+    { 
+        "id" : "/tv/ideone/",
+        "tv" : true,
+        "title": "Ideone", 
+        "date": "2016-04-18 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/ideone/featured.png",
+        "summary": "Ideone es una colección de compiladores en línea, que permite escribir, compilar y ejecutar código fuente escrito en más de 60 lenguajes de programación."
+    },
+    { 
+        "id" : "/tv/hola-mundo/",
+        "tv" : true,
+        "title": "¡Hola mundo!", 
+        "date": "2016-04-18 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/hola-mundo/featured.png",
+        "summary": "Video de presentación de este nuevo canal de YouTube en donde, a pesar del nombre, no solamente hablaré de C#, si no de varias muchas otras cosas relacionadas con la programación."
+    },
+    { 
+        "id" : "/post/out-ref-c-sharp/",
+        "tv" : false,
+        "title": "out y ref en C#", 
+        "date": "2016-04-11 20:00:01 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/ref-out.png",
+        "summary": "Seguramente si en alguna vez de tu carrera has usado código C o C++ te has encontrado con estos operadores&#58; &#42; y &amp; que, en pocas palabras, nos sirven para trabajar con punteros y también sabrás que estos nos permitían pasar como referencia una variable."
+    },
+    { 
+        "id" : "/post/metodos-c-sharp/",
+        "tv" : false,
+        "title": "Métodos en C#", 
+        "date": "2016-04-11 20:00:00 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/metodos.png",
+        "summary": "Un método no es más que un procedimiento o acción asociado con una clase y se compone de datos y un comportamiento. Esta es la manera de definir un método en C#."
+    },
+    { 
+        "id" : "/post/c-sharp-obj-c/",
+        "tv" : false,
+        "title": "Xamarin.iOS, C# y Objective-C", 
+        "date": "2016-04-04 20:00:00 +0100",
+        "featured_tag": "Xamarin",
+        "tags": ["Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-ios/featured_obj.png",
+        "summary": "Un post en el que se compara la sintaxis de Objective-C con la de C# con Xamarin.iOS."
+    },
+    { 
+        "id" : "/post/automapper/",
+        "tv" : false,
+        "title": "AutoMapper", 
+        "date": "2016-03-28 20:00:00 +0100",
+        "featured_tag": "NuGetRecomendado",
+        "tags": ["NuGetRecomendado"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "AutoMapper es un mapeador objeto-objeto que &quot;convierte&quot; un objeto de un tipo a otro, sin embargo lo que hace realmente útil a esta herramienta es que facilita la tarea mediante el uso de convenciones de código."
+    },
+    { 
+        "id" : "/post/multiselect-listview-mvvm/",
+        "tv" : false,
+        "title": "Multi-select ListView y MVVM", 
+        "date": "2016-03-23 08:00:00 +0000",
+        "featured_tag": "XamarinForms",
+        "tags": ["XamarinForms","Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-forms/multiselect-featured.png",
+        "summary": "Aprende cómo permitir al usuario selecionar más de un item en una lista y a hacerlo todo desde MVVM con Xamarin.Forms."
+    },
+    { 
+        "id" : "/post/multiselect-listview-mvvm-en/",
+        "tv" : false,
+        "title": "Multi-select ListView and MVVM", 
+        "date": "2016-03-23 08:00:00 +0000",
+        "featured_tag": "XamarinForms",
+        "tags": ["XamarinForms","Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xamarin-forms/multiselect-featured.png",
+        "summary": "Learn how to allow the user to select more than one item in a ListView, everything from MVVM with Xamarin.Forms."
+    },
+    { 
+        "id" : "/post/inicializadores-c-sharp/",
+        "tv" : false,
+        "title": "Inicializadores en C#", 
+        "date": "2016-03-14 19:00:00 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages//aprende-c-sharp/inicializadores.png",
+        "summary": "Lo que permite la inicialización de objetos es hacer uso de los constructores y además de asignar &quot;al mismo tiempo&quot; las propiedades o campos públicos que contiene el objeto."
+    },
+    { 
+        "id" : "/post/xlsx-c-sharp/",
+        "tv" : false,
+        "title": "Trabajando con XslX en C#", 
+        "date": "2016-03-07 19:00:00 +0000",
+        "featured_tag": "NuGetRecomendado",
+        "tags": ["NuGetRecomendado"],
+        "featured_image": "http://thatcsharpguy.com/postimages//xlsx-c-sharp/featured.png",
+        "summary": "¿Quieres trabajar con documentos de Word sin tener que depender de Office? DocX es la librería para ti. Con ella tienes un montón de opciones disponibles para desarrollar. Conócela aquí."
+    },
+    { 
+        "id" : "/post/directivas-preprocesador-c-sharp/",
+        "tv" : false,
+        "title": "Directivas de preprocesamiento en C#", 
+        "date": "2016-02-29 10:00:00 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimages/directives/featured.png",
+        "summary": "Las directivas nos pueden ayudar a personalizar nuestro código a partir de condiciones dictadas antes de la compilación del mismo, o a forzar que ciertas condiciones se cumplan para que siquiera compile."
+    },
+    { 
+        "id" : "/post/unit-testing/",
+        "tv" : false,
+        "title": "Unit testing", 
+        "date": "2016-02-22 21:00:00 +0000",
+        "featured_tag": "Meta",
+        "tags": ["Meta","XamarinForms"],
+        "featured_image": "http://thatcsharpguy.com/postimages/unit-testing/featured.png",
+        "summary": "Is a level of the software testing process where individual components of a software are tested. The purpose is to validate that each unit of the software performs as designed."
+    },
+    { 
+        "id" : "/post/code-snippets-visual-studio/",
+        "tv" : false,
+        "title": "Code Snippets en Visual Studio", 
+        "date": "2016-02-22 10:00:00 +0000",
+        "featured_tag": "VisualStudio",
+        "tags": ["VisualStudio"],
+        "featured_image": "http://thatcsharpguy.com/postimages/code-snippets/featured.png",
+        "summary": "Agiliza el proceso de desarrollo en Visual Studio mediante el uso de fragmentos de código, que no solo te ahorraran unas cuantas tecleadas, sino te librarán de tareas repetitivas."
+    },
+    { 
+        "id" : "/post/docx-c-sharp/",
+        "tv" : false,
+        "title": "Trabajando con DocX en C#", 
+        "date": "2016-02-15 19:00:00 +0000",
+        "featured_tag": "NuGetRecomendado",
+        "tags": ["NuGetRecomendado"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "¿Quieres trabajar con documentos de Word sin tener que depender de Office? DocX es la librería para ti. Con ella tienes un montón de opciones disponibles para desarrollar. Conócela aquí."
+    },
+    { 
+        "id" : "/post/linq-en-c-sharp-3/",
+        "tv" : false,
+        "title": "Linq en C# - tercera parte", 
+        "date": "2016-02-08 20:00:00 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp","LINQ"],
+        "featured_image": "http://thatcsharpguy.com/postimages/linq-en-c-sharp/featured.png",
+        "summary": "Esta es la tercera parte de la serie sobre LINQ en donde hablaré sobre cómo trabajar con dos conjuntos de datos diferentes, con ellos se pueden realizar uniones y agrupaciones para obtener más conocimiento de la información que tenemos."
+    },
+    { 
+        "id" : "/post/markdownview-xamarin-forms-control/",
+        "tv" : false,
+        "title": "MarkdownView control for Xamarin.Forms", 
+        "date": "2016-02-01 21:00:00 +0000",
+        "featured_tag": "XamarinForms",
+        "tags": ["Xamarin","XamarinForms"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "Taking advantage of the vast number of implementations of Md converters out in the wild, I decided to create a MarkdownView control, one that could display Md documents without much hassle from the developer's point of view."
+    },
+    { 
+        "id" : "/post/linq-en-c-sharp-2/",
+        "tv" : false,
+        "title": "Linq en C# - segunda parte", 
+        "date": "2016-02-01 20:00:00 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp","LINQ"],
+        "featured_image": "http://thatcsharpguy.com/postimages/linq-en-c-sharp/featured.png",
+        "summary": "Conoce un poco más sobre el poder de Linq a través de ejemplos sencillos. Promedios, sumas, filtrados, ordenamientos y más."
+    },
+    { 
+        "id" : "/post/c-sharp-netmf-iot/",
+        "tv" : false,
+        "title": "Cosas para hacer en C#: IoT", 
+        "date": "2016-01-25 19:00:00 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["Netduino","AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.jpg",
+        "summary": "A lo largo de los años se ha avanzado en la creación de un ambiente más amigable para las personas que están interesadas en la programación de microcontroladores para construir sistemas a la medida o a veces solo jugar con ellos."
+    },
+    { 
+        "id" : "/post/humaniza-tus-apps/",
+        "tv" : false,
+        "title": "Humaniza tus apps", 
+        "date": "2016-01-18 19:00:00 +0000",
+        "featured_tag": "NuGetRecomendado",
+        "tags": ["NuGetRecomendado"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured_es.png",
+        "summary": "Dale un toque más humano a tus aplicaciones con esta pequeña pero útil librería de clases que te ayuda a presentar en un lenguaje más fluído los datos dentro de tu app al usuario final."
+    },
+    { 
+        "id" : "/post/sentencias-expresiones-operadores/",
+        "tv" : false,
+        "title": "Sentencias, expresiones y operadores", 
+        "date": "2016-01-11 19:00:00 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "Hace tiempo yo pensaba que sabía programar más o menos bien en C#, pero había ocasiones en las que leyendo documentación me encontraba con ciertas palabras que no lograba comprender, entre ellas estaba las palabras \"sentencia\" y \"expresión\"."
+    },
+    { 
+        "id" : "/post/opening-files-xamarin-forms/",
+        "tv" : false,
+        "title": "Opening files in Xamarin.Forms", 
+        "date": "2016-01-08 21:00:00 +0000",
+        "featured_tag": "XamarinForms",
+        "tags": ["Xamarin","XamarinForms"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "Learn how to enable your application to receive files from other apps in the same device."
+    },
+    { 
+        "id" : "/post/c-sharp-seis/",
+        "tv" : false,
+        "title": "Seis características de C# 6", 
+        "date": "2016-01-04 22:00:00 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "La mayoría de las características nuevas de C# 6 tienen como objeto agilizar la escritura de código y mejorar la comprensión de este cuando es revisado. Pero además acercan al lenguaje a la programación funcional."
+    },
+    { 
+        "id" : "/post/fiestas-desarrolladoras-accesorios/",
+        "tv" : false,
+        "title": "Accesorios para un desarrollador", 
+        "date": "2015-12-27 23:00:00 +0000",
+        "featured_tag": "Meta",
+        "tags": ["Meta"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "Con algo se tiene que escribir el código y seamos honestos ¿por qué no hacerlo de forma cómoda y eficiente? de eso se trata este post."
+    },
+    { 
+        "id" : "/post/fiestas-desarrolladoras-libros/",
+        "tv" : false,
+        "title": "Libros para un desarrollador", 
+        "date": "2015-12-22 22:00:00 +0000",
+        "featured_tag": "Meta",
+        "tags": ["Meta"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "En este post no habrá nada de código... al menos escrito por mi. Aprovechando la época, mi intención es presentar algunos de los regalos que harán de un desarrollador alguien más feliz, más cómodo o más completo profesionalmente."
+    },
+    { 
+        "id" : "/post/ser-xamarin-student-partner/",
+        "tv" : false,
+        "title": "Ser un Xamarin Student Partner", 
+        "date": "2015-12-16 18:31:38 +0000",
+        "featured_tag": "Meta",
+        "tags": ["Meta"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "Que yo les hable tanto de Xamarin en este blog no es obra de la casualidad, y es que formo parte de los primeros Xamarin Student Partners, un grupo formado a principios de 2015 formado por estudiantes interesadoes en difundir el desarrollo móvil."
+    },
+    { 
+        "id" : "/post/introduction-xamarin-forms-sharpuladora/",
+        "tv" : false,
+        "title": "Introduction to Xamarin.Forms (Sharpuladora app)", 
+        "date": "2015-12-16 18:00:00 +0000",
+        "featured_tag": "XamarinForms",
+        "tags": ["Xamarin","XamarinForms","Guia"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "This guide will take you step by step to create your first Xamarin.Forms app."
+    },
+    { 
+        "id" : "/post/c-sharp-juegos/",
+        "tv" : false,
+        "title": "Cosas para hacer en C#: Juegos", 
+        "date": "2015-12-09 21:00:00 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.jpg",
+        "summary": "C# no es solo trabajo de oficina de 9 a 5, también se pueden hacer algunas otras cosas bastante divertidas pero sobre todo interesantes, como videojuegos."
+    },
+    { 
+        "id" : "/post/xamarin-forms-uwp/",
+        "tv" : false,
+        "title": "Xamarin.Forms 2 and UWP", 
+        "date": "2015-12-06 21:00:00 +0000",
+        "featured_tag": "XamarinForms",
+        "tags": ["Xamarin","XamarinForms"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "Xamarin 4 has everything you need to create great mobile apps. Check out Universal Windows Platform Apps, my favorite feature."
+    },
+    { 
+        "id" : "/post/introduccion-xamarin-forms-sharpuladora/",
+        "tv" : false,
+        "title": "Introducción a Xamarin.Forms (app Sharpuladora)", 
+        "date": "2015-11-26 21:00:00 +0000",
+        "featured_tag": "XamarinForms",
+        "tags": ["Xamarin","XamarinForms","Guia"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "Esta es una guía que te llevará paso a paso a crear tu primera aplicación en Xamarin.Forms."
+    },
+    { 
+        "id" : "/post/anonimos-en-c-sharp/",
+        "tv" : false,
+        "title": "Tipos anónimos en C#", 
+        "date": "2015-11-26 21:00:00 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "Para cada tipo anónimo que usamos, el compilador crea una definición de clase para dicho tipo por nosotros, ahórrandonos así la tarea de tener que hacerlo."
+    },
+    { 
+        "id" : "/post/organizacion-codigo-visual-studio/",
+        "tv" : false,
+        "title": "¿Cómo organiza mi código Visual Studio?", 
+        "date": "2015-11-18 21:00:00 +0000",
+        "featured_tag": "VisualStudio",
+        "tags": ["VisualStudio","Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.jpg",
+        "summary": "Si alguna vez has usado un IDE para desarrollar alguna aplicación tal vez te hayas preguntado cómo es que ese tipo de programas saben en dónde están los componentes para cada una de las cosas que hacen que tu app compile o funcione."
+    },
+    { 
+        "id" : "/post/xamarin-android-vs-traditional/",
+        "tv" : false,
+        "title": "Xamarin.Android vs traditional Android", 
+        "date": "2015-11-16 21:00:00 +0000",
+        "featured_tag": "Xamarin",
+        "tags": ["VisualStudio","Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.jpg",
+        "summary": "There are no significant differences between traditional Android development and Xamarin.Android, meaning that if you have previous knowledge you can apply it without concerns but instead of writing Java you will be writing awesome C# code that can potentially be shared along any other platform."
+    },
+    { 
+        "id" : "/post/code-organization-visual-studio/",
+        "tv" : false,
+        "title": "How is my code organized in Visual Studio?", 
+        "date": "2015-11-16 21:00:00 +0000",
+        "featured_tag": "VisualStudio",
+        "tags": ["VisualStudio","Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.jpg",
+        "summary": "If you have ever used an IDE to develop any application you might have wondered how do these kind of programs know where are the components for each one of the things that make your app compile or run. In this post I'll try to explain how Xamarin Studio and Visual Studio keeps that control."
+    },
+    { 
+        "id" : "/post/linq-en-c-sharp/",
+        "tv" : false,
+        "title": "Linq en C#", 
+        "date": "2015-11-11 20:00:00 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp","LINQ"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "Linq nos otorga la posibilidad de usar un lenguaje bastante similar al SQL dentro de nuestro código C# para consultar un origen de datos."
+    },
+    { 
+        "id" : "/post/xamarin-forms-mvvm-21-nov-2015/",
+        "tv" : false,
+        "title": "Xamarin.Forms y MVVM en la ESCOM (21 de noviembre de 2015)", 
+        "date": "2015-11-02 22:00:00 +0000",
+        "featured_tag": "Xamarin",
+        "tags": ["Xamarin","Events"],
+        "featured_image": "http://thatcsharpguy.com/postimages/commons/event.png",
+        "summary": "En el evento haremos juntos una app utilizando estas tecnologías mientras platicamos un poco acerca de MVVM y cómo implementarlo junto con Xamarin.Forms."
+    },
+    { 
+        "id" : "/post/que-son-portable-class-library/",
+        "tv" : false,
+        "title": "¿Qué es una Portable Class Library?", 
+        "date": "2015-11-02 10:00:00 +0000",
+        "featured_tag": "VisualStudio",
+        "tags": ["VisualStudio"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "Las bibliotecas de clases portables nos permiten compartir código entre distintas plataformas de .NET"
+    },
+    { 
+        "id" : "/post/var-en-c-sharp/",
+        "tv" : false,
+        "title": "¿Qué es var en C#?", 
+        "date": "2015-10-29 20:00:00 +0000",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.jpg",
+        "summary": "Usar la palabra var significa que estamos dejándole al compilador la tarea de asignar un tipo a nuestras variables."
+    },
+    { 
+        "id" : "/post/arreglos-en-c-sharp-parte-3/",
+        "tv" : false,
+        "title": "Arreglos en C# (multidimensionales rectangulares)", 
+        "date": "2015-10-23 23:00:00 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "A diferencia de los arreglos escalonados, los rectangulares son lo más parecido a matrices que podemos encontrar en C#."
+    },
+    { 
+        "id" : "/post/arreglos-en-c-sharp-parte-2/",
+        "tv" : false,
+        "title": "Arreglos en C# (multidimensionales escalonados)", 
+        "date": "2015-10-22 22:00:00 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "Los arreglos escalonados (o jagged arrays) son los tipos de arreglos multidimensionales más conocidos, y es que también son compunes en otros lenguajes de programación. Un arreglo escalonado no es más que un arreglo de arreglos."
+    },
+    { 
+        "id" : "/post/arreglos-en-c-sharp-parte-1/",
+        "tv" : false,
+        "title": "Arreglos en C# (unidimensionales)", 
+        "date": "2015-10-22 22:00:00 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "En C# llamamos arreglo a una colección de objetos, dicha colección tiene longitud definida y esta no puede cambiar con el flujo del programa, esto podrá sonar limitante, pero al trabajar con arreglos se obtiene un mejor desempeño que con cualquier otra colección. Usando el lenguaje podemos crear, recorrer y manipular arreglos de cualquier tipo de objeto."
+    },
+    { 
+        "id" : "/post/mobile-c-sharp-workshop-17-oct-2015/",
+        "tv" : false,
+        "title": "Mobile C# developer kick-off (17-oct-2015)", 
+        "date": "2015-10-19 23:00:00 +0100",
+        "featured_tag": "Xamarin",
+        "tags": ["Xamarin","Events"],
+        "featured_image": "http://thatcsharpguy.com/postimages/commons/event.png",
+        "summary": "Este es un post de recapitulación del evento Mobile C# developer kick-off del 17 de octubre en la ESCOM"
+    },
+    { 
+        "id" : "/post/tipos-nullables-en-c-sharp/",
+        "tv" : false,
+        "title": "Tipos nullables en C#", 
+        "date": "2015-10-14 21:30:00 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "Los tipos por referencia son nullables por definición. ¿Qué implica que sean nullables? pues nada más y nada menos que puedan tener un valor null o en términos prácticos, nungún valor."
+    },
+    { 
+        "id" : "/post/xamarin-como-empiezo/",
+        "tv" : false,
+        "title": "¿Cómo empiezo con Xamarin?", 
+        "date": "2015-10-08 22:00:00 +0100",
+        "featured_tag": "Xamarin",
+        "tags": ["Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured_true.jpg",
+        "summary": "¿Quieres iniciar a desarrollar con Xamarin y no sabes por donde empezar? Acá te digo."
+    },
+    { 
+        "id" : "/post/tipos-dato-c-sharp/",
+        "tv" : false,
+        "title": "Tipos de dato en C#", 
+        "date": "2015-10-05 23:00:00 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.jpg",
+        "summary": "Para la mayoría de sus aplicaciones, C# es un lenguaje fuertemente tipado, en este post presento dos categorías de tipos que nos podemos encontrar cuando trabajamos con este lenguaje."
+    },
+    { 
+        "id" : "/post/tesseract-ocr-xamarin/",
+        "tv" : false,
+        "title": "Tesseract OCR in Xamarin", 
+        "date": "2015-09-23 20:00:00 +0100",
+        "featured_tag": "XamarinForms",
+        "tags": ["XamarinForms","Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "While surfing the web for a free / open source solution to a certain OCR problem that I came across I found this pretty cool library named Tesseract OCR which, in its own words, is \"probably the most accurate open source OCR engine available\"."
+    },
+    { 
+        "id" : "/post/creando-propios-alias/",
+        "tv" : false,
+        "title": "Creando nuestros propios alias", 
+        "date": "2015-09-16 14:00:00 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.jpg",
+        "summary": "Hace poco vimos que existen alias en C# para los tipos predefinidos de datos, y hasta ahí todo claro. Pero nosotros como programadores también podemos beneficiarnos de crear nuestros propios alias."
+    },
+    { 
+        "id" : "/post/charphat-android/",
+        "tv" : false,
+        "title": "CharpHat para Android", 
+        "date": "2015-09-10 18:00:00 +0100",
+        "featured_tag": "XamarinForms",
+        "tags": ["Xamarin","XamarinForms"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "Con CharpHat toma una foto y muéstrale al mundo que te gusta C#, CharpHat te permite colocarte un birrete con mucho estilo."
+    },
+    { 
+        "id" : "/post/pushing-from-netduino-to-mobile/",
+        "tv" : false,
+        "title": "Pushing with Parse from Netduino to Xamarin.Forms", 
+        "date": "2015-08-31 22:00:00 +0100",
+        "featured_tag": "Xamarin",
+        "tags": ["Xamarin","Netduino"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.jpg",
+        "summary": "It's been a while since I took my Netduino out of its box and I did something with it, back then I promised to do a slightly more complex system using a push notification service."
+    },
+    { 
+        "id" : "/post/string-vs-system-string-es/",
+        "tv" : false,
+        "title": "Un post sobre alias, ¿string vs. System.String?", 
+        "date": "2015-08-21 14:00:00 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.jpg",
+        "summary": "He de aceptarlo, una de las cosas que más dudas me causaba cuando inicié a programar usando C# era sobre cuál era la diferencia entre usar string o System.String, la idea que yo tenía al respecto que estaba totalmente equivocada."
+    },
+    { 
+        "id" : "/post/importancia-de-programar-con-estilo/",
+        "tv" : false,
+        "title": "La importancia de programar con estilo", 
+        "date": "2015-08-15 18:00:00 +0100",
+        "featured_tag": "Meta",
+        "tags": ["Meta"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.jpg",
+        "summary": "Y al decir \"programar con estilo\" no me refiero a que estén todo el tiempo con los meñiques levantados, o sólo hacerlo las tardes a las 5 p.m. No."
+    },
+    { 
+        "id" : "/post/importance-of-coding-with-style/",
+        "tv" : false,
+        "title": "The importance of coding with style", 
+        "date": "2015-08-15 18:00:00 +0100",
+        "featured_tag": "Meta",
+        "tags": ["Meta"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.jpg",
+        "summary": "And with \"coding with style\" I don't mean to keep your pinkies up while doing it or just write code every evening at 5:00 pm. No."
+    },
+    { 
+        "id" : "/post/of-xamarin-netduino-iot/",
+        "tv" : false,
+        "title": "Of Xamarin, Netduino and IoT", 
+        "date": "2015-08-07 19:31:38 +0100",
+        "featured_tag": "Xamarin",
+        "tags": ["Xamarin","Netduino"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.jpg",
+        "summary": "I decided to create an app to easily turn on or off my bedroom's light not only from my Windows Phone but from my iPod or any other device in my house. I'll try to explain how I did it."
+    },
+    { 
+        "id" : "/post/lambdas-en-c-sharp/",
+        "tv" : false,
+        "title": "Lambdas en C#", 
+        "date": "2015-08-03 19:00:00 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "Una vez que conocemos lo que es un delegado, y lo que son Func y Action, es momento de llegar a un tema que se convierte en algo muy sencillo, además es de mis cosas favoritas en C#: Las expresiones lambda."
+    },
+    { 
+        "id" : "/post/func-y-action-en-c-sharp/",
+        "tv" : false,
+        "title": "Func y Action en C#", 
+        "date": "2015-07-29 19:00:00 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.jpg",
+        "summary": "Func y Action son moldes para crear delegados, podemos usarlos para evitarnos la fatiga de declarar un delegado para cada ocasión que sea necesario."
+    },
+    { 
+        "id" : "/post/from-console-to-mobile/",
+        "tv" : false,
+        "title": "From console to mobile", 
+        "date": "2015-07-26 19:00:00 +0100",
+        "featured_tag": "Xamairn",
+        "tags": ["Xamarin"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "What happens when we face real people/world problems? for sure, there are still console apps out in the wild, but nowadays all the successful applications have a mobile version, why yours shouldn't have one?"
+    },
+    { 
+        "id" : "/post/delegados-en-c-sharp/",
+        "tv" : false,
+        "title": "Delegados en C#", 
+        "date": "2015-07-24 11:00:00 +0100",
+        "featured_tag": "AprendeCSharp",
+        "tags": ["AprendeCSharp"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "Podemos ver un delegado en C# como un tipo de dato que apunta a un método permitiéndonos así extender las capacidades de nuestro código o permitir que otros lo hagan."
+    },
+    { 
+        "id" : "/post/hello-world/",
+        "tv" : false,
+        "title": "Hello World", 
+        "date": "2015-07-18 19:31:38 +0100",
+        "featured_tag": "Meta",
+        "tags": ["Meta"],
+        "featured_image": "http://thatcsharpguy.com/postimages",
+        "summary": "I've decided to kill my old blog, if you ever visit [blog.fferegrino.org] again you'll find that it isn't what it used to be. I decided to divide the content and if you came here looking for technical stuff, this is the right place."
+    },
+    { 
+        "id" : "/post/bubble-display-netduino-plus-2/",
+        "tv" : false,
+        "title": "Conectando un Bubble Display a un Netduino Plus 2", 
+        "date": "2015-07-17 19:31:38 +0100",
+        "featured_tag": "Netduino",
+        "tags": ["Netduino"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "Para un proyecto Instrumentación en la escuela decidí desempolvar mi Netduino Plus 2, en el proyecto decesitábamos mostrar las mediciones de tres distintos sensores en un par de displays de 7 segmentos."
+    },
+    { 
+        "id" : "/post/hola-mundo/",
+        "tv" : false,
+        "title": "¡Hola mundo!", 
+        "date": "2015-07-11 19:31:38 +0100",
+        "featured_tag": "Meta",
+        "tags": ["Meta"],
+        "featured_image": "http://thatcsharpguy.com/postimages",
+        "summary": "He decididio \"matar\" el blog anterior, si por casualidad llegan a blog.fferegrino.org, encontrarán que ya no es lo que era antes. He decidido dividir el contenido y si llegaron acá buscando cosas técnicas este es el lugar indicado."
+    }
+]

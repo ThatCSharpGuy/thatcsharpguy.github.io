@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/Blog">
+<head>
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href='http://thatcsharpguy.com/assets/site/favicon.png'>
+  <title>Xamarin.Forms & PaintCode - That C# guy</title>
+  <meta name="description" content="Turn your vector drawings into controls for your mobile apps using PaintCode and Xamarin.Forms' custom renderers.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.2/pure-min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://thatcsharpguy.com/post/custom-renderer-paint-code-en/">
+  <link rel="alternate" type="application/rss+xml" title="That C# guy" href="http://thatcsharpguy.com/feed.xml" />
+  <!-- Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-94016385-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+
+  <!-- Twitter cards  -->
+	 
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="http://thatcsharpguy.com/postimages//xamarin-forms/paintcode/featured.png">
+	
+	<meta name="twitter:site" content="@io_exception" />
+	<meta name="twitter:title" content="Xamarin.Forms & PaintCode" />
+	<meta name="twitter:description" content="Turn your vector drawings into controls for your mobile apps using PaintCode and Xamarin.Forms' custom renderers." />
+
+
+    <!-- Facebook open graph tags -->  
+    
+    <meta property="og:image" content="http://thatcsharpguy.com/postimages//xamarin-forms/paintcode/featured.png" />
+    
+    
+    <meta property="og:title" content="Xamarin.Forms & PaintCode" />
+    <meta property="og:site_name" content="That C# guy"/>
+    <meta property="og:url" content="http://thatcsharpguy.com/post/custom-renderer-paint-code-en/">
+    <meta property="og:description" content="Turn your vector drawings into controls for your mobile apps using PaintCode and Xamarin.Forms' custom renderers." />
+    <meta property="article:author" content="https://www.facebook.com/antonio.feregrino" />
+    <meta property="article:publisher" content="https://www.facebook.com/antonio.feregrino" />
+    <meta property="fb:app_id" content="942345702508916" />
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>
+
+</head>
+  <body>
+
+    <header class="site-header ui">
+  <div class="wrapper menu">
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+      <div class="trigger">
+        
+        <a class="link page-link" href="/">Home</a>
+        
+        <a class="link page-link" href="/about">About</a>
+        
+        <a class="link page-link" href="/tag">Tags</a>
+        
+        <a class="link page-link" href="/signup">Sign up</a>
+        
+      </div>
+    </nav>
+  </div>
+  <div class="wrapper title">
+    <div class="pure-g">
+      <div class="pure-u-1-24 title-number"><span>1</span></div>
+      <div class="pure-u-13-24 content-window">
+        <a class="site-title" href="/">That C# guy</a>
+      </div>
+      <div class="pure-u-10-24 header-menu">
+        <ul>
+          <li class="youtube"><a href="https://www.youtube.com/c/thatcsharpguy">YouTube</a></li>
+          <li class="csharp"><a href="http://thatcsharpguy.com/tag/AprendeCSharp/">Aprende C#</a></li>
+          <li class="xamarin"><a href="http://thatcsharpguy.com/tag/Xamarin/">Xamarin</a></li>
+        </ul>
+      </div>
+    </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div id="post-meta">
+    <a href="/acerca-de/#citando" rel="author">Antonio Feregrino</a> | 06/06/2017
+ 
+
+| <strong><a href="https://github.com/ThatCSharpGuy/sharp-paintcode" target="_blank"><i class="sp sp-git"></i> Ver código de este post en GitHub</a></strong>
+
+</div>
+<h1 class="post-title">Xamarin.Forms & PaintCode</h1>
+<div class="post-content">
+
+    <article>
+        <p>Last week, <a href="https://www.paintcodeapp.com/" target="_blank">PaintCode 3</a> was 20% off. And that gave me an idea for a post. In this post, I’ll explain how to create a custom control using PaintCode and Xamarin.Forms’ <em>custom renderers</em>, starting from the drawing itself, this post may be a little bit too long but I’m sure it is worth it.</p>
+
+<h2 id="paintcode-drawing">PaintCode drawing</h2>
+<p>If you have previously created and exported graphics using PaintCode, you probably want to skip this section. But if you haven’t you must start by adding a new canvas, in this case I’ll name it <em>SharpCanvas</em> and its dimensions are 100 by 100, or a 1:1 ratio, which is the same as the drawing I’ll be creating:</p>
+
+<figure><img src="/postimages//xamarin-forms/paintcode/1sharpCanvas.png" alt="&quot;Blank SharpCanvaso&quot; images_set" /></figure>
+
+<p>Then, add a <em>Frame</em>, I’ll be calling it <em>SharpFrame</em>:</p>
+
+<figure><img src="/postimages//xamarin-forms/paintcode/2frame.png" alt="&quot;Blank SharpFrame&quot; images_set" /></figure>
+
+<p>On the left panel, we need to add a color called <em>FillColor</em>, and have it set as a <em>Parameter</em>:</p>
+
+<figure><img src="/postimages//xamarin-forms/paintcode/3fillColor.png" alt="&quot;SharpFrame en blanco&quot; images_set" /></figure>
+
+<p>Now lets add a couple of variables: <em>Width</em> y <em>Height</em> and make their values the same as our <em>frame</em> size, add them also as <em>Parameters</em>:</p>
+
+<figure><img src="/postimages//xamarin-forms/paintcode/4variables.png" alt="&quot;Agregar variables&quot; images_set" /></figure>
+
+<p>Then, with the <em>frame</em> selected, we’re going to drag from the variable panel up to the <em>frame</em>’s properties. So that the Frame’s <em>Width</em> is bound to the <em>Width</em> value from the variables panel, then do the same for <em>Height</em>:</p>
+
+<figure><img src="/postimages//xamarin-forms/paintcode/5setProperties.png" alt="&quot;Linking variables&quot; images_set" /></figure>
+
+<p>And now we’re ready to create our drawing:</p>
+
+<figure><img src="/postimages//xamarin-forms/paintcode/6drawing.png" alt="&quot;Drawing&quot; images_set" /></figure>
+
+<p>Our next task is to link the color we created before (<em>FillColor</em>) with the fill color of our recently created drawing. If you made it right, the color of our drawing will change to the one we set before:</p>
+
+<figure><img src="/postimages//xamarin-forms/paintcode/7linkColor.png" alt="&quot;Drawing&quot; images_set" /></figure>
+
+<p>Pay attention to this next step as it is very important if we want our drawing to adjust whenever the <em>frame</em> changes its size. If the drawing you made is a bézier curve (as it is in this case), double click it until some dots appear its path:</p>
+
+<figure><img src="/postimages//xamarin-forms/paintcode/8waypoints.png" alt="&quot;Waypoints&quot; images_set" /></figure>
+
+<p>Once they show up, select them all and on the right panel, just below the <em>Transforms</em> menu click on the small “I” on the square, so that the four lines that join the central dot with the square become zigzagging lines:</p>
+
+<figure><img src="/postimages//xamarin-forms/paintcode/9selectWaypoints.png" alt="&quot;Select waypoints&quot; images_set" /></figure>
+
+<figure><img src="/postimages//xamarin-forms/paintcode/10shrinkBehavior.png" alt="&quot;Zigzag&quot; images_set" /></figure>
+
+<p>By this point you’ll be able to verify that everything is working properly if you change the values of the variables <em>Height</em> y <em>Width</em> on the left panel.</p>
+
+<p>Before we’re done for a minute with PaintCode, select the tab at the top that has <em>“StyleKit”</em> as its name, and then on the right panel modify the properties so they somewhat match your project:</p>
+
+<figure><img src="/postimages//xamarin-forms/paintcode/11styleKit.png" alt="&quot;Zigzag&quot; images_set" /></figure>
+
+<h2 id="xamarinforms-code">Xamarin.Forms code</h2>
+
+<p>First thing we’re going to do with the code, is create a class that will be the reference for our control. In this case, I called it <code>SharpView</code> but no matter what name you chose, it must inherit from <code>View</code>:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">SharpView</span> <span class="p">:</span> <span class="n">View</span>
+<span class="p">{</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>To it you need to add all the properties you wish, in this case we’ll be adding just one (<code>FillColor</code>) as it’ll be a reference to the fill color of our drawing.</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span>    <span class="k">public</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">BindableProperty</span> <span class="n">FillColorProperty</span> <span class="p">=</span>
+        <span class="n">BindableProperty</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">nameof</span><span class="p">(</span><span class="n">FillColor</span><span class="p">),</span> <span class="k">typeof</span><span class="p">(</span><span class="n">Color</span><span class="p">),</span> <span class="k">typeof</span><span class="p">(</span><span class="n">SharpView</span><span class="p">),</span> <span class="k">default</span><span class="p">(</span><span class="n">Color</span><span class="p">));</span>
+
+    <span class="k">public</span> <span class="n">Color</span> <span class="n">FillColor</span>
+    <span class="p">{</span>
+        <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="p">(</span><span class="n">Color</span><span class="p">)</span><span class="n">GetValue</span><span class="p">(</span><span class="n">FillColorProperty</span><span class="p">);</span> <span class="p">}</span>
+        <span class="k">set</span> <span class="p">{</span> <span class="n">SetValue</span><span class="p">(</span><span class="n">FillColorProperty</span><span class="p">,</span> <span class="k">value</span><span class="p">);</span> <span class="p">}</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>Lastly, we must set a few default properties, these will improve our control appearance and they can always be overridden if we want to:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span>    <span class="k">public</span> <span class="nf">SharpView</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">BackgroundColor</span> <span class="p">=</span> <span class="n">Color</span><span class="p">.</span><span class="n">Transparent</span><span class="p">;</span>
+        <span class="n">HorizontalOptions</span> <span class="p">=</span> <span class="n">LayoutOptions</span><span class="p">.</span><span class="n">Center</span><span class="p">;</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>And we’re don with the Forms project.</p>
+
+<h2 id="xamarinios-code">Xamarin.iOS code</h2>
+
+<p>In the iOS project, we’ll be creating two new classes: the “native” control and a <em>custom renderer</em>:</p>
+
+<h3 id="native-control">Native control</h3>
+
+<p>Lets start with the native control. Create a new class that inherits from <code>UIView</code>, we’re going to call it <code>UISharpView</code>:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">UISharpView</span> <span class="p">:</span> <span class="n">UIView</span>
+<span class="p">{</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>We need to add at least one constructor that takes a <code>CGRect</code> as an argument, this argument will be passed on to the base class and our control will take its size from it:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span>    <span class="k">public</span> <span class="nf">UISharpView</span><span class="p">(</span><span class="n">CGRect</span> <span class="n">rect</span><span class="p">)</span> 
+        <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span></code></pre></figure>
+
+<p>We must add a property that corresponds to the <code>FillColor</code> property in our Forms control, the name can be different, but to keep some consistency, lets name it <code>FillColor</code> too. If you see, inside this property there is a call to the <code>SetNeedsDisplay</code> method, it will force the control to be redrawn every time the property’s value changes:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span>    <span class="n">UIColor</span> <span class="n">_fillColor</span> <span class="p">=</span> <span class="n">UIColor</span><span class="p">.</span><span class="n">FromRGB</span><span class="p">(</span><span class="m">60</span><span class="p">,</span> <span class="m">138</span><span class="p">,</span> <span class="m">63</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="n">UIColor</span> <span class="n">FillColor</span>
+    <span class="p">{</span>
+        <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_fillColor</span><span class="p">;</span> <span class="p">}</span>
+        <span class="k">set</span> <span class="p">{</span> <span class="n">_fillColor</span> <span class="p">=</span> <span class="k">value</span><span class="p">;</span> <span class="n">SetNeedsDisplay</span><span class="p">();</span> <span class="p">}</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>Now, lets go back to PaintCode for a second, we need to retrieve the drawing’s code. In the export panel make sure that “iOS &gt; C# Xamarin” is selected:</p>
+
+<figure><img src="/postimages//xamarin-forms/paintcode/12codeSelection.png" alt="&quot;Selección de código C# Xamarin&quot; images_set" /></figure>
+
+<p>Once selected, copy all lines of code to this newly created class. You may need to add a couple of <code>using</code> sentences for it to compile. To finish, override the <code>OnDraw</code> method, in it call the method you’ve just copied from PaintCode (in this case it is called <code>DrawSharpCanvas</code>), and pass the fill color and the frame dimensions to it as parameters:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span>    <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">Draw</span><span class="p">(</span><span class="n">CGRect</span> <span class="n">rect</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">DrawSharpCanvas</span><span class="p">(</span><span class="n">FillColor</span><span class="p">,</span> <span class="n">rect</span><span class="p">.</span><span class="n">Width</span><span class="p">,</span> <span class="n">rect</span><span class="p">.</span><span class="n">Height</span><span class="p">);</span>
+    <span class="p">}</span></code></pre></figure>
+
+<h3 id="custom-renderer"><em>Custom renderer</em></h3>
+
+<p>Now it’s the time to implement the <em>custom renderer</em>. First off, lets create a new class that inherits from <code>ViewRenderer&lt;TAbstraction, TNative&gt;</code>, I’ll be calling it <code>SharpViewRenderer</code> and it’ll have the Forms class as <code>TAbstraction</code> and <code>UISharpView</code> as <code>TNative</code>. Don’t forget the <code>ExportRenderer</code> attribute:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="na">[assembly: ExportRenderer(typeof(SharpView), typeof(SharpViewRenderer))]</span>
+<span class="k">namespace</span> <span class="nn">SharpPaintCode.iOS.Controls</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">SharpViewRenderer</span> <span class="p">:</span> <span class="n">ViewRenderer</span><span class="p">&lt;</span><span class="n">SharpView</span><span class="p">,</span> <span class="n">UISharpView</span><span class="p">&gt;</span>
+    <span class="p">{</span></code></pre></figure>
+
+<p>Inside it, lets create an instance of <code>UISharpView</code> and set it as the element that is to be shown on screen, this is done by overriding the <code>OnElementChanged</code> method. We’ll take the size from the <code>WidthRequest</code> and <code>HeightRequest</code> <code>Element</code>s properties. For the fill color, we’ll also use the <code>FillColor</code>:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span>    <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnElementChanged</span><span class="p">(</span><span class="n">ElementChangedEventArgs</span><span class="p">&lt;</span><span class="n">SharpView</span><span class="p">&gt;</span> <span class="n">e</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">base</span><span class="p">.</span><span class="n">OnElementChanged</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">NewElement</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">Control</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="kt">var</span> <span class="n">sharpFrame</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CGRect</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">Element</span><span class="p">.</span><span class="n">WidthRequest</span><span class="p">,</span> <span class="n">Element</span><span class="p">.</span><span class="n">HeightRequest</span><span class="p">);</span>
+                <span class="kt">var</span> <span class="n">native</span> <span class="p">=</span> <span class="k">new</span> <span class="n">UISharpView</span><span class="p">(</span><span class="n">sharpFrame</span><span class="p">);</span>
+                <span class="n">native</span><span class="p">.</span><span class="n">FillColor</span> <span class="p">=</span> <span class="n">Element</span><span class="p">.</span><span class="n">FillColor</span><span class="p">.</span><span class="n">ToUIColor</span><span class="p">();</span>
+                <span class="n">SetNativeControl</span><span class="p">(</span><span class="n">native</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>Finally, we need to add a way to modify the <code>FillColor</code> of the native control when we modify it from the Forms project. To do that, inside the <em>renderer</em> we must override the <code>OnElementPropertyChanged</code> and inside it we we’ll change the native fill color property:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span>    <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnElementPropertyChanged</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">PropertyChangedEventArgs</span> <span class="n">e</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">PropertyName</span><span class="p">.</span><span class="n">Equals</span><span class="p">(</span><span class="n">nameof</span><span class="p">(</span><span class="n">SharpView</span><span class="p">.</span><span class="n">FillColor</span><span class="p">)))</span>
+            <span class="n">Control</span><span class="p">.</span><span class="n">FillColor</span> <span class="p">=</span> <span class="n">Element</span><span class="p">.</span><span class="n">FillColor</span><span class="p">.</span><span class="n">ToUIColor</span><span class="p">();</span>
+        <span class="k">else</span>
+            <span class="k">base</span><span class="p">.</span><span class="n">OnElementPropertyChanged</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>And that’s all about the iOS project.</p>
+
+<h2 id="xamarinandroid-code">Xamarin.Android code</h2>
+
+<p>Similarly, in this project we’ll have to create a “native” view and a *renderer. We’re going to start with the native control:</p>
+
+<h3 id="native-control-1">Native control</h3>
+
+<p>In Android we’ll create our native control class, following the good practices of the Android platform, we’ll call it <code>SharpView</code>, in this case it has to inherit from <code>View</code>, just make sure it inherits from <code>Android.Views.View</code> and not from <code>Xamarin.Forms.View</code>:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">SharpView</span> <span class="p">:</span> <span class="n">View</span>
+<span class="p">{</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>This class must have at least one constructor that takes a <code>Context</code> instance, this instance will be passed on to the base class:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span>    <span class="k">public</span> <span class="nf">SharpView</span><span class="p">(</span><span class="n">Context</span> <span class="n">context</span><span class="p">)</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>Now, in this case we need to add a new property, <code>FillColor</code> so that we can set the drawing’s fill color, you should note that inside this property the method <code>Invalidate</code> gets called, this method will force our control to be redrawn:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span>    <span class="k">public</span> <span class="n">Color</span> <span class="n">_fillColor</span> <span class="p">=</span> <span class="n">Color</span><span class="p">.</span><span class="n">Argb</span><span class="p">(</span><span class="m">255</span><span class="p">,</span> <span class="m">60</span><span class="p">,</span> <span class="m">138</span><span class="p">,</span> <span class="m">63</span><span class="p">);</span>
+    <span class="k">public</span> <span class="n">Color</span> <span class="n">FillColor</span>
+    <span class="p">{</span>
+        <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_fillColor</span><span class="p">;</span> <span class="p">}</span>
+        <span class="k">set</span>
+        <span class="p">{</span>
+            <span class="n">_fillColor</span> <span class="p">=</span> <span class="k">value</span><span class="p">;</span>
+            <span class="n">Invalidate</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>Now, again, pay attention to this following step: PaintCode doesn’t support Xamarin.Android yet, but for us it makes no difference as Java and Xamarin’s C# are similar enough to translate it ourselves. To star, open again PaintCode and make sure “Android &gt; Java” is selected in the export code panel:</p>
+
+<figure><img src="/postimages//xamarin-forms/paintcode/13androidJava.png" alt="&quot;Selección de código C# Xamarin&quot; images_set" /></figure>
+
+<p>Now, inside the Android project, create a new class called <code>SharpKit</code>, wipe all the boilerplate code and paste in it the code from PaintCode, there should be a ton of errors, but don’t worry, all you have to do is remove the <code>package</code> declaration, erase all the <code>import</code> lines and, if you feel like, put the remaining clas into a C# <em>namespace</em>.</p>
+
+<p>Then, add the following <code>using</code> statements at the top of the file:</p>
+
+<pre>
+using System;
+using Android.Graphics;
+</pre>
+
+<p>The following step is to convert <em>all</em> the Java methods to C#. In Java it is normal for methods and properties to start with a lowercase letter, so, for most of the code it should be enough to make all the methods and properties start with an uppercase letter to save you some time, search and replace the following strings: <code>.save(</code> for <code>.Save(</code>, <code>.set(</code> for <code>.Set(</code>, <code>.reset(</code> for <code>.Reset(</code>, <code>.moveTo(</code> for <code>.MoveTo(</code>, <code>.cubicTo(</code> for <code>.CubicTo(</code>, <code>.width(</code> for <code>.Width(</code>, <code>.height(</code> for <code>.Height(</code>, <code>.top</code>  for <code>.Top</code>, <code>.left</code> for <code>.Left</code>.</p>
+
+<p>There are some difficult translations, most of them related to <code>enum</code> datatypes. But don’t worry, take into consideration the following table:</p>
+
+<pre>
+paint.setFlags(Paint.ANTI_ALIAS_FLAG);      →   paint.Flags = PaintFlags.AntiAlias;
+paint.setStyle(Paint.Style.FILL);           →   paint.SetStyle(Paint.Style.Fill);
+paint.setColor(fillColor);                  →   paint.Color = new Color(fillColor);
+canvas.drawPath(sharpSymbolPath, paint);    →   canvas.DrawPath(sharpSymbolPath, paint);
+</pre>
+
+<p>Once the code compiles again, inside the native control, we need to override the <code>OnDraw</code> method to set it to use the <code>DrawSharpCanvas</code> we added inside the <code>SharpKit</code> class, pass the color and dimensions of your control to it:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span>    <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnDraw</span><span class="p">(</span><span class="n">Canvas</span> <span class="n">canvas</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">SharpKit</span><span class="p">.</span><span class="n">DrawSharpCanvas</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="n">_fillColor</span><span class="p">.</span><span class="n">ToArgb</span><span class="p">(),</span> <span class="n">Width</span><span class="p">,</span> <span class="n">Height</span><span class="p">);</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>Now, lets add the <em>custom renderer</em>.</p>
+
+<h3 id="custom-renderer-1"><em>Custom renderer</em></h3>
+
+<p>Again, inside the Android project we need to add a new class that inherits from <code>ViewRenderer&lt;TAbstraction, TNative&gt;</code>, lets get creative and name it <code>SharpViewRenderer</code>, it’ll have <code>SharpView</code> (from the central project) as <code>TAbstraction</code> and <code>SharpView</code> (from the Android project) as <code>TNative</code>, for this singular case, we’ll use aliases to not confuse the controls:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">using</span> <span class="nn">FormsSharpView</span> <span class="p">=</span> <span class="n">SharpPaintCode</span><span class="p">.</span><span class="n">Controls</span><span class="p">.</span><span class="n">SharpView</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">NativeSharpView</span> <span class="p">=</span> <span class="n">SharpPaintCode</span><span class="p">.</span><span class="n">Droid</span><span class="p">.</span><span class="n">Controls</span><span class="p">.</span><span class="n">Native</span><span class="p">.</span><span class="n">SharpView</span><span class="p">;</span>
+
+<span class="na">[assembly: ExportRenderer(typeof(FormsSharpView), typeof(SharpViewRenderer))]</span>
+<span class="k">namespace</span> <span class="nn">SharpPaintCode.Droid.Controls</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">SharpViewRenderer</span> <span class="p">:</span> <span class="n">ViewRenderer</span><span class="p">&lt;</span><span class="n">FormsSharpView</span><span class="p">,</span> <span class="n">NativeSharpView</span><span class="p">&gt;</span>
+    <span class="p">{</span></code></pre></figure>
+
+<p>The next step is to create an instance of <code>NativeSharpView</code> and set it as the on-screen control for our custom control. For it to happen, override the <code>OnElementChanged</code> and create such instance, pass to it the <code>Context</code> property and set the <code>FillColor</code> from the beginning:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span>    <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnElementChanged</span><span class="p">(</span><span class="n">ElementChangedEventArgs</span><span class="p">&lt;</span><span class="n">FormsSharpView</span><span class="p">&gt;</span> <span class="n">e</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">base</span><span class="p">.</span><span class="n">OnElementChanged</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">NewElement</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">Control</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="kt">var</span> <span class="n">native</span> <span class="p">=</span> <span class="k">new</span> <span class="n">NativeSharpView</span><span class="p">(</span><span class="n">Context</span><span class="p">);</span>
+                <span class="n">native</span><span class="p">.</span><span class="n">FillColor</span> <span class="p">=</span> <span class="n">Element</span><span class="p">.</span><span class="n">FillColor</span><span class="p">.</span><span class="n">ToAndroid</span><span class="p">();</span>
+                <span class="n">SetNativeControl</span><span class="p">(</span><span class="n">native</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>We need also a way to modify the native’s <code>FillColor</code> from our Forms control, and to do it, override the <code>OnElementPropertyChanged</code>, inside it, change the property if the property being changed is called <code>FillColor</code>:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span>    <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnElementPropertyChanged</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">PropertyChangedEventArgs</span> <span class="n">e</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">PropertyName</span><span class="p">.</span><span class="n">Equals</span><span class="p">(</span><span class="n">nameof</span><span class="p">(</span><span class="n">FormsSharpView</span><span class="p">.</span><span class="n">FillColor</span><span class="p">)))</span>
+        <span class="p">{</span>
+            <span class="n">Control</span><span class="p">.</span><span class="n">FillColor</span> <span class="p">=</span> <span class="n">Element</span><span class="p">.</span><span class="n">FillColor</span><span class="p">.</span><span class="n">ToAndroid</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="k">base</span><span class="p">.</span><span class="n">OnElementPropertyChanged</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>And, that’s it for our custom control.</p>
+
+<h2 id="demo">Demo</h2>
+<p><strong><a href="https://github.com/ThatCSharpGuy/sharp-paintcode" target="_blank">Remember: you can download a full version of this project</a></strong> in GitHub so you can play and learn with it.</p>
+
+<p>In order to test the control, I created a simple app that lets you change the color of two <code>SharpViews</code>, it looks like this while running on iOS (it looks the same in Android):</p>
+
+<p><img src="https://media.giphy.com/media/3oKIPrccIwjWhlrBNS/giphy.gif" /></p>
+
+<p>And with a little more imagination and patience, you can make even more interactive controls:</p>
+
+<p><img src="https://media.giphy.com/media/3oKIPifbi3CJj1g2Dm/giphy.gif" /></p>
+
+
+    </article>
+    <div class="post-contact">
+        <div class="pure-g">
+    <div class="pure-u-1 pure-u-md-7-24">
+        Having doubts? comments?
+        <ul class="post-contact-list">
+            <li><a title="feregrino@thatcsharpguy.com" href="mailto:feregrino@thatcsharpguy.com?subject=Xamarin.Forms+%26+PaintCode"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 11.815v13.292q0 1.105-.787 1.892-.787.78-1.892.78H3.68q-1.106 0-1.893-.79Q1 26.21 1 25.102v-13.29q.737.82 1.69 1.46 6.06 4.12 8.32 5.78.955.705 1.55 1.1.594.392 1.582.802.987.41 1.84.41h.035q.854 0 1.84-.41.99-.41 1.583-.804.595-.393 1.55-1.096 2.845-2.06 8.336-5.778.954-.652 1.674-1.455zm0-4.922q0 1.322-.82 2.528t-2.043 2.06l-7.835 5.44-.71.51q-.545.4-.905.64t-.87.55q-.51.3-.963.45-.452.15-.837.15h-.034q-.385 0-.837-.15-.452-.15-.962-.45-.51-.302-.87-.544-.36-.243-.905-.637l-.72-.51q-1.525-1.07-4.388-3.055-2.86-1.984-3.43-2.386-1.04-.704-1.96-1.935Q1 8.315 1 7.26q0-1.305.695-2.175.695-.87 1.984-.87h24.64q1.09 0 1.88.786.792.79.792 1.9z"/></svg></a></li>
+            <li><a title="@io_exception" href="https://twitter.com/intent/tweet?text=@io_exception about Xamarin.Forms+%26+PaintCode"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 6.7q-1.28 1.88-3.08 3.2.02.26.02.8 0 2.46-.73 4.93-.7 2.46-2.2 4.73-1.46 2.26-3.5 4-2.04 1.75-4.9 2.8-2.88 1.02-6.16 1.02-5.16 0-9.44-2.76.67.08 1.48.08 4.3 0 7.64-2.63-2-.04-3.58-1.23-1.58-1.2-2.17-3.03.63.1 1.16.1.82 0 1.62-.2-2.13-.44-3.53-2.13-1.4-1.68-1.4-3.9v-.1q1.3.74 2.78.8-1.26-.84-2-2.2-.74-1.35-.74-2.93 0-1.67.83-3.1 2.3 2.84 5.6 4.54 3.3 1.7 7.07 1.9-.15-.73-.15-1.4 0-2.57 1.8-4.36 1.8-1.8 4.35-1.8 2.66 0 4.5 1.94 2.07-.4 3.9-1.5-.7 2.2-2.7 3.4 1.76-.2 3.53-.95z"/></svg></a></li>
+            <li><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M31 31H1V1h30v30z"/><path d="M31 2.88v16.87h-5.63v7.68l-4-2.95v2.74l-9.38.02L7.86 31H4.74v-3.7H1V12.36h5.63V2.88H31z" fill="#F6F6F6"/><path d="M19.75 23.27v2.1H12.1L6.62 29v-3.63H2.88V14.13h3.75V16H4.75v7.5H8.5v2.03l2.8-2.03h6.57v-1.62l1.88 1.4z" fill="#424242"/><path d="M17.88 6.63h9.37V16h-5.63v4.09l-3.54-3.55-.55-.55h-7.17V6.62h7.5zM8.5 4.75v13.13h8.26l6.74 5.57v-5.57h5.63V4.74H8.5z" fill="#424242"/><path d="M25.38 10.38H12.24V8.5h13.13v1.88zM21.63 14.13h-9.38v-1.88h9.38v1.88z" fill="#424242"/><path d="M8.5 25.53V23.5" fill="#F6F6F6"/><g fill="#F0EFF1"><path d="M17.88 21.88v1.62H11.3l-2.8 2.03V23.5H4.75V16h1.88v3.75h8.36l2.88 2.13zM17.88 6.63h-7.5V16h7.15l.55.55 3.55 3.54V16h5.62V6.62h-9.38zm3.75 7.5h-9.38v-1.88h9.38v1.88zm3.75-3.76H12.24V8.5h13.13v1.88z"/></g></g></svg> <a id="post-count" href="http://thatcsharpguy.com/post/custom-renderer-paint-code-en/#disqus_thread" data-disqus-identifier="/post/custom-renderer-paint-code-en/"></a></li>
+        </ul>
+    </div>  
+    <div class="pure-u-1 pure-u-md-10-24">
+        
+            
+        
+    </div>
+    <div class="pure-u-1 pure-u-md-7-24">
+        Share this
+        <ul class="post-contact-list">
+            <li><a href="mailto:?subject=Xamarin.Forms & PaintCode&amp;body=http://thatcsharpguy.com/post/custom-renderer-paint-code-en/" title="email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 11.815v13.292q0 1.105-.787 1.892-.787.78-1.892.78H3.68q-1.106 0-1.893-.79Q1 26.21 1 25.102v-13.29q.737.82 1.69 1.46 6.06 4.12 8.32 5.78.955.705 1.55 1.1.594.392 1.582.802.987.41 1.84.41h.035q.854 0 1.84-.41.99-.41 1.583-.804.595-.393 1.55-1.096 2.845-2.06 8.336-5.778.954-.652 1.674-1.455zm0-4.922q0 1.322-.82 2.528t-2.043 2.06l-7.835 5.44-.71.51q-.545.4-.905.64t-.87.55q-.51.3-.963.45-.452.15-.837.15h-.034q-.385 0-.837-.15-.452-.15-.962-.45-.51-.302-.87-.544-.36-.243-.905-.637l-.72-.51q-1.525-1.07-4.388-3.055-2.86-1.984-3.43-2.386-1.04-.704-1.96-1.935Q1 8.315 1 7.26q0-1.305.695-2.175.695-.87 1.984-.87h24.64q1.09 0 1.88.786.792.79.792 1.9z"/></svg></a></li>
+            <li><a href="https://twitter.com/intent/tweet?text=Xamarin.Forms+%26+PaintCode http://thatcsharpguy.com/post/custom-renderer-paint-code-en/&hashtags=XamarinForms" title="Tweet"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 6.7q-1.28 1.88-3.08 3.2.02.26.02.8 0 2.46-.73 4.93-.7 2.46-2.2 4.73-1.46 2.26-3.5 4-2.04 1.75-4.9 2.8-2.88 1.02-6.16 1.02-5.16 0-9.44-2.76.67.08 1.48.08 4.3 0 7.64-2.63-2-.04-3.58-1.23-1.58-1.2-2.17-3.03.63.1 1.16.1.82 0 1.62-.2-2.13-.44-3.53-2.13-1.4-1.68-1.4-3.9v-.1q1.3.74 2.78.8-1.26-.84-2-2.2-.74-1.35-.74-2.93 0-1.67.83-3.1 2.3 2.84 5.6 4.54 3.3 1.7 7.07 1.9-.15-.73-.15-1.4 0-2.57 1.8-4.36 1.8-1.8 4.35-1.8 2.66 0 4.5 1.94 2.07-.4 3.9-1.5-.7 2.2-2.7 3.4 1.76-.2 3.53-.95z"/></svg></a></li>
+            
+            <li><a href="javascript:sharePostFacebook();" title="share" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.512 1.488c.325.326.488.716.488 1.172v26.68c0 .456-.163.846-.488 1.172-.326.325-.716.488-1.172.488h-7.637V19.38h3.887l.586-4.532h-4.473v-2.89c0-.73.153-1.277.46-1.642.305-.364.9-.546 1.786-.546l2.382-.02V5.707c-.82-.117-1.98-.176-3.477-.176-1.77 0-3.186.522-4.248 1.564-1.06 1.04-1.59 2.513-1.59 4.414v3.34h-3.908v4.53h3.906V31H2.66c-.456 0-.846-.163-1.172-.488C1.163 30.186 1 29.796 1 29.34V2.66c0-.456.163-.846.488-1.172C1.814 1.163 2.204 1 2.66 1h26.68c.456 0 .846.163 1.172.488z"/></svg></a> </li>
+            <li><a class="kindleWidget" href="#" title="send to kindle"> <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 32 32">
+  <path fill-rule="evenodd" d="M1 3c0-1.1.9-2 2-2h26c1.1 0 2 .9 2 2v26c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3zm8.4-.3V29h3.2v-8.72h.07L19.54 29h3.8l-8.07-10.06 7.34-7.5h-3.7l-6.2 6.36h-.08V2.7H9.4z"/>
+</svg> </a> </li>
+        </ul>
+    </div>
+</div>
+<script>
+    function sharePostFacebook() {
+        FB.ui({
+  method: 'share',
+  href: 'http://thatcsharpguy.com/post/custom-renderer-paint-code-en/',
+}, function(response){});
+    }
+</script>
+<script type="text/javascript" src="https://d1xnn692s7u6t6.cloudfront.net/widget.js"></script>
+<script type="text/javascript">(function k(){window.$SendToKindle&&window.$SendToKindle.Widget?$SendToKindle.Widget.init({}):setTimeout(k,500);})();</script>
+    </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script id="dsq-count-scr" src="//thatcharpguy.disqus.com/count.js" async></script>
+<script>
+    var noCommentsText = "leave a comment";
+    var commentText = " comment";
+    
+//var disqus_developer = 1; // this would set it to developer mode
+
+    var disqus_config = function () {
+        this.page.url = "http://thatcsharpguy.com/post/custom-renderer-paint-code-en/"; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "/post/custom-renderer-paint-code-en/"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.title ="Xamarin.Forms & PaintCode";
+    };
+</script>
+<script src="/js/comments.js"></script>
+
+      </div>
+    </div>
+
+    <footer class="site-footer ui">
+  <div class="wrapper pure-g">
+      <div class="pure-u-1 pure-u-md-8-24">
+          <div class="footer-content">
+              <ul class="icon-list">
+    <li id="em">
+        <a href="mailto:feregrino@thatcsharpguy.com" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 11.815v13.292q0 1.105-.787 1.892-.787.78-1.892.78H3.68q-1.106 0-1.893-.79Q1 26.21 1 25.102v-13.29q.737.82 1.69 1.46 6.06 4.12 8.32 5.78.955.705 1.55 1.1.594.392 1.582.802.987.41 1.84.41h.035q.854 0 1.84-.41.99-.41 1.583-.804.595-.393 1.55-1.096 2.845-2.06 8.336-5.778.954-.652 1.674-1.455zm0-4.922q0 1.322-.82 2.528t-2.043 2.06l-7.835 5.44-.71.51q-.545.4-.905.64t-.87.55q-.51.3-.963.45-.452.15-.837.15h-.034q-.385 0-.837-.15-.452-.15-.962-.45-.51-.302-.87-.544-.36-.243-.905-.637l-.72-.51q-1.525-1.07-4.388-3.055-2.86-1.984-3.43-2.386-1.04-.704-1.96-1.935Q1 8.315 1 7.26q0-1.305.695-2.175.695-.87 1.984-.87h24.64q1.09 0 1.88.786.792.79.792 1.9z"/></svg>
+        </a>
+    </li>
+    <li id="gh">
+        <a href="https://github.com/ThatCSharpGuy" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 16.37q0 4.9-2.86 8.8-2.86 3.93-7.4 5.43-.52.1-.77-.13-.24-.24-.24-.6v-4.1q0-1.9-1.02-2.78 1.2-.2 2.1-.4.9-.3 1.87-.8.95-.5 1.58-1.3.65-.8 1.05-2.1.4-1.27.4-2.93 0-2.38-1.54-4.04.7-1.78-.16-3.98-.57-.2-1.6.2t-1.8.85l-.75.47q-1.83-.5-3.76-.5t-3.76.5l-.8-.54Q11 8.16 9.9 7.7q-1.13-.4-1.7-.23-.86 2.2-.14 3.97-1.54 1.68-1.54 4.05 0 1.6.4 2.9.4 1.23 1.02 2.02.63.8 1.58 1.3.94.53 1.83.77.9.25 2 .37-.77.7-.94 2-.4.2-.82.3-.47.1-1.1.1-.66 0-1.3-.44-.63-.4-1.08-1.2-.38-.63-.95-1-.52-.4-.9-.5l-.4-.03q-.4 0-.57.1-.15.1-.1.24.06.13.18.26t.26.2l.15.1q.44.2.86.73t.63 1l.2.43q.23.75.84 1.2.6.47 1.3.6.7.13 1.34.14.65 0 1.08-.04l.46-.08v2.74q0 .35-.26.6-.25.22-.8.12-4.5-1.5-7.37-5.42-3-3.74-3-8.64 0-4.1 2-7.54 2-3.44 5.45-5.46 3.45-2 7.53-2t7.6 2q3.4 2 5.4 5.46 2 3.44 2 7.53z"/></svg>
+        </a>
+    </li>
+    <li id="yt">
+        <a href="https://www.youtube.com/c/thatcsharpguy" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M22.43 15.714c0-.413-.17-.714-.504-.904l-8.57-5.357c-.347-.223-.71-.234-1.09-.033-.368.2-.552.513-.552.937V21.07c0 .426.184.738.553.94.178.088.35.133.52.133.222 0 .412-.056.568-.168l8.57-5.357c.336-.19.504-.49.504-.904zm8.57 0c0 1.072-.006 1.91-.017 2.51-.01.604-.058 1.366-.142 2.287-.083.92-.208 1.744-.376 2.47-.178.815-.563 1.5-1.155 2.06-.592.557-1.284.88-2.077.97-2.477.28-6.222.42-11.233.42-5.01 0-8.756-.14-11.233-.42-.793-.09-1.487-.413-2.085-.97-.597-.56-.984-1.245-1.163-2.06-.157-.726-.277-1.55-.36-2.47-.085-.92-.132-1.682-.143-2.285-.01-.602-.017-1.44-.017-2.51 0-1.072.006-1.91.017-2.512.01-.603.058-1.364.142-2.285.083-.92.208-1.744.376-2.47.178-.814.563-1.5 1.155-2.058.592-.56 1.284-.882 2.077-.97C7.244 5.14 10.99 5 16 5c5.01 0 8.756.14 11.233.42.793.088 1.487.41 2.085.97.597.558.984 1.244 1.163 2.06.157.724.277 1.547.36 2.468.085.92.132 1.682.143 2.285.01.603.017 1.44.017 2.51z"/></svg>
+        </a>
+    </li>
+    <li id="tw">
+        <a href="https://twitter.com/io_exception" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 6.7q-1.28 1.88-3.08 3.2.02.26.02.8 0 2.46-.73 4.93-.7 2.46-2.2 4.73-1.46 2.26-3.5 4-2.04 1.75-4.9 2.8-2.88 1.02-6.16 1.02-5.16 0-9.44-2.76.67.08 1.48.08 4.3 0 7.64-2.63-2-.04-3.58-1.23-1.58-1.2-2.17-3.03.63.1 1.16.1.82 0 1.62-.2-2.13-.44-3.53-2.13-1.4-1.68-1.4-3.9v-.1q1.3.74 2.78.8-1.26-.84-2-2.2-.74-1.35-.74-2.93 0-1.67.83-3.1 2.3 2.84 5.6 4.54 3.3 1.7 7.07 1.9-.15-.73-.15-1.4 0-2.57 1.8-4.36 1.8-1.8 4.35-1.8 2.66 0 4.5 1.94 2.07-.4 3.9-1.5-.7 2.2-2.7 3.4 1.76-.2 3.53-.95z"/></svg>
+        </a>
+    </li>    
+    <li id="fb">
+        <a href="https://www.facebook.com/thatcsharpguy" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.512 1.488c.325.326.488.716.488 1.172v26.68c0 .456-.163.846-.488 1.172-.326.325-.716.488-1.172.488h-7.637V19.38h3.887l.586-4.532h-4.473v-2.89c0-.73.153-1.277.46-1.642.305-.364.9-.546 1.786-.546l2.382-.02V5.707c-.82-.117-1.98-.176-3.477-.176-1.77 0-3.186.522-4.248 1.564-1.06 1.04-1.59 2.513-1.59 4.414v3.34h-3.908v4.53h3.906V31H2.66c-.456 0-.846-.163-1.172-.488C1.163 30.186 1 29.796 1 29.34V2.66c0-.456.163-.846.488-1.172C1.814 1.163 2.204 1 2.66 1h26.68c.456 0 .846.163 1.172.488z"/></svg>
+        </a>
+    </li>
+    <li id="gp">
+        <a href="https://www.google.com/+Thatcsharpguy" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.9 14.25h-2.7v-2.72h-2.73v2.72h-2.7v2.72h2.7v2.7h2.72v-2.7h2.7v-2.72M10.5 17.5h5.4c-.22 1.4-1.64 4.12-5.4 4.12-3.25 0-5.9-2.7-5.9-6 0-3.33 2.65-6.02 5.9-6.02 1.85 0 3.08.78 3.8 1.46l2.58-2.48c-1.66-1.55-3.8-2.5-6.38-2.5C5.26 6.1 1 10.35 1 15.62s4.26 9.52 9.52 9.52c5.5 0 9.14-3.86 9.14-9.3 0-.62-.07-1.1-.15-1.57h-8.96"/></svg>
+        </a>
+    </li>
+</ul>
+<ul class="icon-list">
+    <li>
+        <a href="/about">
+            <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M7 18.89v-5.88H1.15v-6H7V1.1h6v5.91h6V1.1h6v5.91h5.85v6H25v5.88h5.85v6H25v5.912h-6v-5.91h-6v5.91H7v-5.91H1.15v-6H7zm6 0v-5.88h6v5.88h-6z" fill="#3C8A3F" fill-rule="evenodd"/></svg>
+        </a>
+    </li>
+</ul>
+          </div>
+      </div>
+      <div class="pure-u-1 pure-u-md-6-24">
+      </div>
+      <div class="pure-u-1 pure-u-md-10-24">
+          <div class="footer-content">
+              <div class="panel active" id="footer-signup">
+    <div class="panel-title">
+        <span class="title">Signup</span>
+    </div>
+    <div class="panel-content">
+    Get a weekly (spanish language) email of what's going on in That C# guy
+    <form class="pure-form-stacked" action="//thatcsharpguy.us11.list-manage.com/subscribe/post?u=ebfe25f4824d7335380cf1ffd&amp;id=eca72e1174" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    
+                <div class="response" id="mce-error-response" style="display:none"></div>
+                <div class="response" id="mce-success-response" style="display:none"></div>
+                
+                <input type="email" value="" placeholder="dirección de email" name="EMAIL" class="required email" id="mce-EMAIL">
+                
+                <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="button">
+                    <span style="text-decoration:underline;">E</span>nviar
+                </button>
+                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                    <input type="text" name="b_ebfe25f4824d7335380cf1ffd_eca72e1174" tabindex="-1" value="">
+                </div>
+    </form>
+    </div>
+</div>
+          </div>
+      </div>
+  </div>
+</footer>
+   
+  </body>
+
+</html>

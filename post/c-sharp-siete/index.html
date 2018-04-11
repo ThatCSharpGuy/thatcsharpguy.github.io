@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/Blog">
+<head>
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href='http://thatcsharpguy.com/assets/site/favicon.png'>
+  <title>¿Qué hay en C# 7? - That C# guy</title>
+  <meta name="description" content="Conoce algunas de las nuevas características incluídas en la versión 7 de C#;, tuplas, deconstructores, literales binarios y más.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.2/pure-min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://thatcsharpguy.com/post/c-sharp-siete/">
+  <link rel="alternate" type="application/rss+xml" title="That C# guy" href="http://thatcsharpguy.com/feed.xml" />
+  <!-- Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-94016385-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+
+  <!-- Twitter cards  -->
+	 
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="http://thatcsharpguy.com/postimages//aprende-c-sharp/siete/featured.jpg">
+	
+	<meta name="twitter:site" content="@io_exception" />
+	<meta name="twitter:title" content="¿Qué hay en C# 7?" />
+	<meta name="twitter:description" content="Conoce algunas de las nuevas características incluídas en la versión 7 de C#;, tuplas, deconstructores, literales binarios y más." />
+
+
+    <!-- Facebook open graph tags -->  
+    
+    <meta property="og:image" content="http://thatcsharpguy.com/postimages//aprende-c-sharp/siete/featured.jpg" />
+    
+    
+    <meta property="og:title" content="¿Qué hay en C# 7?" />
+    <meta property="og:site_name" content="That C# guy"/>
+    <meta property="og:url" content="http://thatcsharpguy.com/post/c-sharp-siete/">
+    <meta property="og:description" content="Conoce algunas de las nuevas características incluídas en la versión 7 de C#;, tuplas, deconstructores, literales binarios y más." />
+    <meta property="article:author" content="https://www.facebook.com/antonio.feregrino" />
+    <meta property="article:publisher" content="https://www.facebook.com/antonio.feregrino" />
+    <meta property="fb:app_id" content="942345702508916" />
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>
+
+</head>
+  <body>
+
+    <header class="site-header ui">
+  <div class="wrapper menu">
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+      <div class="trigger">
+        
+        <a class="link page-link" href="/">Inicio</a>
+        
+        <a class="link page-link" href="/tv">TV</a>
+        
+        <a class="link page-link" href="/acerca-de">Acerca de</a>
+        
+        <a class="link page-link" href="/tag">Tags</a>
+        
+        <a class="link page-link" href="/busqueda">Buscar</a>
+        
+        <a class="link page-link" href="/suscribete">Suscríbete</a>
+        
+        <a class="link page-link" href="/herramientas">Herramientas</a>
+        
+        <a class="link page-link" href="/libros">Libros</a>
+        
+      </div>
+    </nav>
+  </div>
+  <div class="wrapper title">
+    <div class="pure-g">
+      <div class="pure-u-1-24 title-number"><span>1</span></div>
+      <div class="pure-u-13-24 content-window">
+        <a class="site-title" href="/">That C# guy</a>
+      </div>
+      <div class="pure-u-10-24 header-menu">
+        <ul>
+          <li class="youtube"><a href="https://www.youtube.com/c/thatcsharpguy">YouTube</a></li>
+          <li class="csharp"><a href="http://thatcsharpguy.com/tag/AprendeCSharp/">Aprende C#</a></li>
+          <li class="xamarin"><a href="http://thatcsharpguy.com/tag/Xamarin/">Xamarin</a></li>
+        </ul>
+      </div>
+    </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div id="post-meta">
+    <a href="/acerca-de/#citando" rel="author">Antonio Feregrino</a> | 04/04/2017
+ 
+
+| <strong><a href="https://github.com/ThatCSharpGuy/ElEspacio" target="_blank"><i class="sp sp-git"></i> Ver código de este post en GitHub</a></strong>
+
+</div>
+<h1 class="post-title">¿Qué hay en C# 7?</h1>
+<div class="post-content">
+
+    <article>
+        <p>Hace ya más de un año que les hablé de las <a href="..\c-sharp-seis">características de C# 6</a>, pues bien, mientras esa versión del lenguaje era liberada para su uso, la versión 7 ya estaba en construcción. Ahora, ya tiempo después es posible para nosotros probar de manera segura esta nueva versión, lo único que necesitamos es tener Visual Studio 2017.</p>
+
+<p>En este post voy a mostrar algunas de las nuevas característias de este lenguaje, pero para comenzar a usarlas, hay que configurar el proyecto para que el compilador sepa que estamos trabajando con la nueva versión del lenguaje:</p>
+
+<h4 id="damos-click-derecho-sobre-el-proyecto-y-abrimos-las-propiedades">Damos click derecho sobre el proyecto y abrimos las propiedades</h4>
+
+<figure><img src="/postimages//aprende-c-sharp/siete/1properties.png" alt="&quot;Click derecho, propiedades&quot; images_set" /></figure>
+
+<h4 id="en-la-sección-de-build-o-compilación-abrimos-avanzadas">En la sección de “Build” o “Compilación” abrimos “Avanzadas”</h4>
+
+<figure><img src="/postimages//aprende-c-sharp/siete/2advanced.png" alt="&quot;Avanzadas&quot; images_set" /></figure>
+
+<h4 id="elegimos-c-7-como-versión-del-lenguaje">Elegimos C# 7 como versión del lenguaje</h4>
+
+<figure><img src="/postimages//aprende-c-sharp/siete/3selectlang.png" alt="&quot;Seleccionar lenguaje&quot; images_set" /></figure>
+
+<h2 id="literales-numéricos">Literales numéricos</h2>
+<p>Una de las características más simples pero con un gran impacto es la inclusión del caracter <code>_</code> como separador de dígitos al momento de declarar literales numéricos. La idea detrás de esta característica es mejorar la legibilidad del código.</p>
+
+<p>Y otra gran característica es la posibilidad de agregar de usar literales binarios, añadiéndole el sufijo: <code>0b</code>, con los cualest también podemos hacer uso de el separador de digitos:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">private</span> <span class="k">const</span> <span class="kt">double</span> <span class="n">EarthDiameterInKms</span> <span class="p">=</span> <span class="m">12</span><span class="n">_756</span><span class="p">;</span>
+<span class="k">private</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">PaleBlueDotColor</span> <span class="p">=</span> <span class="m">0</span><span class="n">xA0_DF_E6</span><span class="p">;</span>
+<span class="k">private</span> <span class="k">const</span> <span class="kt">long</span> <span class="n">Earth</span> <span class="p">=</span> <span class="m">0</span><span class="n">b01000101_01100001_01110010_01110100_01101000</span><span class="p">;</span></code></pre></figure>
+
+<p>La alternativa es… bueno, no hay alternativa. En C# 6 no podemos usar el separador ni los literales binarios:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">private</span> <span class="k">const</span> <span class="kt">double</span> <span class="n">EarthDiameterInKms</span> <span class="p">=</span> <span class="m">12756</span><span class="p">;</span>
+<span class="k">private</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">PaleBlueDotColor</span> <span class="p">=</span> <span class="m">0</span><span class="n">xA0DFE6</span><span class="p">;</span>
+<span class="c1">//const long Earth = 0b01000101_01100001_01110010_01110100_01101000;</span></code></pre></figure>
+
+<h2 id="tuples"><em>Tuples</em></h2>
+<p>Mientras que la versión anterior de C# ya daba soporte para <em>Tuplas</em>, este era un tanto limitado y hasta antinatural para el lenguaje. Usando C# 6 era necesario emplear directamente una <a href="..\genericos-c-sharp-clases">clase genérica</a>, sin embargo, ahora ya no es necesario. Ahora solo basta con usar paréntesis para agrupar un conjunto de posibles valores de retorno. Como en este caso, que se devuelven tres instancias de la clase <code>Coordenada</code> de un <a href="..\extension-methods-es">método de extensión</a>:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="c1">// CoordenadaExtensions.cs</span>
+<span class="k">public</span> <span class="nf">static</span> <span class="p">(</span><span class="n">Coordenada</span> <span class="n">antipoda</span><span class="p">,</span> 
+    <span class="n">Coordenada</span> <span class="n">antipodaLongitud</span><span class="p">,</span> 
+    <span class="n">Coordenada</span> <span class="n">antipodaLatitud</span><span class="p">)</span> <span class="n">GetInterestingPoints</span><span class="p">(</span><span class="k">this</span> <span class="n">Coordenada</span> <span class="n">coordenada</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">coordenada</span><span class="p">.</span><span class="n">Antipoda</span><span class="p">(),</span>
+        <span class="n">coordenada</span><span class="p">.</span><span class="n">AntipodaLongitud</span><span class="p">(),</span>
+        <span class="n">coordenada</span><span class="p">.</span><span class="n">AntipodaLatitud</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="c1">// Program.cs</span>
+<span class="kt">var</span> <span class="n">interesingPoints</span> <span class="p">=</span> <span class="n">everest</span><span class="p">.</span><span class="n">GetInterestingPoints</span><span class="p">();</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span>
+    <span class="err">$</span><span class="s">&quot;Puntos interesantes del Everest:&quot;</span> <span class="p">+</span>
+    <span class="err">$</span><span class="s">&quot;\n\t{interesingPoints.antipoda.Descripcion}&quot;</span> <span class="p">+</span>
+    <span class="err">$</span><span class="s">&quot;\n\t{interesingPoints.antipodaLatitud.Descripcion}&quot;</span> <span class="p">+</span>
+    <span class="err">$</span><span class="s">&quot;\n\t{interesingPoints.antipodaLongitud.Descripcion}&quot;</span><span class="p">);</span></code></pre></figure>
+
+<p>En este caso cada una de las “propiedades” de nuestra tupla tiene un nombre asignado desde la declaración del método, aunque bien pudimos haberlos dejado sin uno, al declarar el valor de retorno como <code>(Coordenada, Coordenada, Coordenada)</code>.</p>
+
+<p>La alternativa en la versión anterior de C# es usar la clase <code>Tuple</code> y aprovechar el beneficio de los genéricos:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="c1">// CoordenadaExtensions.cs</span>
+<span class="k">public</span> <span class="k">static</span> <span class="n">Tuple</span><span class="p">&lt;</span><span class="n">Coordenada</span><span class="p">,</span> <span class="n">Coordenada</span><span class="p">,</span> <span class="n">Coordenada</span><span class="p">&gt;</span> 
+    <span class="n">GetInterestingPoints</span><span class="p">(</span><span class="k">this</span> <span class="n">Coordenada</span> <span class="n">coordenada</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">Tuple</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">coordenada</span><span class="p">.</span><span class="n">Antipoda</span><span class="p">(),</span>
+        <span class="n">coordenada</span><span class="p">.</span><span class="n">AntipodaLongitud</span><span class="p">(),</span>
+        <span class="n">coordenada</span><span class="p">.</span><span class="n">AntipodaLatitud</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="c1">// Program.cs</span>
+<span class="kt">var</span> <span class="n">interesingPoints</span> <span class="p">=</span> <span class="n">everest</span><span class="p">.</span><span class="n">GetInterestingPoints</span><span class="p">();</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span>
+    <span class="err">$</span><span class="s">&quot;Puntos interesantes del Everest:&quot;</span> <span class="p">+</span>
+    <span class="err">$</span><span class="s">&quot;\n\t{interesingPoints.Item1.Descripcion}&quot;</span> <span class="p">+</span>
+    <span class="err">$</span><span class="s">&quot;\n\t{interesingPoints.Item2.Descripcion}&quot;</span> <span class="p">+</span>
+    <span class="err">$</span><span class="s">&quot;\n\t{interesingPoints.Item3.Descripcion}&quot;</span><span class="p">);</span></code></pre></figure>
+
+<h4 id="importante">Importante</h4>
+<p>Para usar las tuplas en C# 7 es necesario agregar el paquete de NuGet <code>System.ValueTuple</code></p>
+
+<h2 id="out-parameters">Out parameters</h2>
+<p>Los parámetros de tipo <code>out</code> llevan ya algo de tiempo entre nosotros, sin embargo, el escribirlos en nuestro código parece ser un poco redundante: primero los declaras (usualmente sin inicializarlos) y después los usas. Pero no más, en esta nueva versión del lenguaje se pueden declaran y usar en una misma instrucción, basta con especificar dos cosas en la llamada del método:</p>
+
+<ul>
+  <li>Que es de tipo <code>out</code></li>
+  <li>El tipo de dato al que corresponde</li>
+</ul>
+
+<p>Mira por ejemplo este método llamado <code>Deconstruct</code></p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="c1">// Coordenada.cs</span>
+<span class="k">public</span> <span class="k">void</span> <span class="nf">Deconstruct</span><span class="p">(</span><span class="k">out</span> <span class="kt">decimal</span> <span class="n">latitud</span><span class="p">,</span> <span class="k">out</span> <span class="kt">decimal</span> <span class="n">longitud</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">latitud</span> <span class="p">=</span> <span class="n">Latitud</span><span class="p">;</span>
+    <span class="n">longitud</span> <span class="p">=</span> <span class="n">Longitud</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Para llamarlo en C# 7, basta con escribir el siguiente código:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="c1">// Program.cs</span>
+<span class="n">everest</span><span class="p">.</span><span class="n">Deconstruct</span><span class="p">(</span><span class="k">out</span> <span class="kt">decimal</span> <span class="n">evLat</span><span class="p">,</span> <span class="k">out</span> <span class="kt">decimal</span> <span class="n">evLong</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;Latitud y longitud del Everest: {evLat} y {evLong}&quot;</span><span class="p">);</span></code></pre></figure>
+
+<p>Mientras que la alternativa es la de antes, declarar las variables y usarlas después:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="c1">// Program.cs</span>
+<span class="kt">decimal</span> <span class="n">evLat</span><span class="p">,</span> <span class="n">evLong</span><span class="p">;</span>
+<span class="n">everest</span><span class="p">.</span><span class="n">Deconstruct</span><span class="p">(</span><span class="k">out</span> <span class="n">evLat</span><span class="p">,</span> <span class="k">out</span> <span class="n">evLong</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;Latitud y longitud del Everest: {evLat} y {evLong}&quot;</span><span class="p">);</span></code></pre></figure>
+
+<h2 id="deconstructor">Deconstructor</h2>
+<p>Seguramente recuerdas el método <code>Deconstruct</code> de la sección anterior. Pues bien, los métodos llamados <code>Deconstruct</code> con parámetros de tipo <code>out</code> pueden ser usados de otra manera a través de una sintaxis parecida a las tuplas:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="p">(</span><span class="kt">decimal</span> <span class="n">evLat1</span><span class="p">,</span> <span class="kt">decimal</span> <span class="n">evLong1</span><span class="p">)</span> <span class="p">=</span> <span class="n">everestCoordinates</span><span class="p">;</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;Latitud y longitud del Everest: {evLat1} y {evLong1}&quot;</span><span class="p">);</span></code></pre></figure>
+
+<p>Como puedes ver, estamos realizando una asignación múltiple desde un solo objeto. Las claves para que esto funcione son dos:</p>
+
+<ul>
+  <li>La clase de dicho objeto tiene un método (o existe un método de extensión para dicha clase) llamado <code>Deconstruct</code> cuyos argumentos son del tipo <code>out</code></li>
+  <li>Los argumentos de el método <code>Deconstruct</code> coinciden en número y tipos de dato coinciden con los de un constructor de la clase</li>
+</ul>
+
+<p>En el código anterior la clase <code>Coordenada</code> tiene dos constructores:</p>
+
+<ul>
+  <li><code>public Coordenada(decimal latitud, decimal longitud)</code></li>
+  <li><code>public Coordenada(decimal latitud, decimal longitud, decimal altitud)</code></li>
+</ul>
+
+<p>Y tiene dos <em>“desconstructores”</em>:</p>
+
+<ul>
+  <li><code>public void Deconstruct(out decimal latitud, out decimal longitud)</code></li>
+  <li><code>public static void Deconstruct(this Coordenada coordenada, out decimal latitud, out decimal longitud, out decimal altitude)</code> (método de extensión)</li>
+</ul>
+
+<h2 id="expression-bodied-everything-y-throw-expressions"><em>Expression bodied everything</em> y <em>throw expressions</em></h2>
+<p>Junto a la versión anterior llegaron los <em>expression bodied members</em>, pero solo llegaron a unas cuantos miembros de una clase. Ahora los tenemos disponibles en más lugares, como en constructores de clase, finalizadores y, como en el siguiente ejemplo, en los <em>accessors</em> para propiedades calculadas:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">private</span> <span class="kt">string</span> <span class="n">_name</span><span class="p">;</span>
+<span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span>
+<span class="p">{</span>
+    <span class="k">get</span> <span class="p">=&gt;</span> <span class="n">_name</span><span class="p">;</span>
+    <span class="k">set</span> <span class="p">=&gt;</span> <span class="n">_name</span> <span class="p">=</span> <span class="k">value</span> <span class="p">??</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">ArgumentException</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;{nameof(value)} cannot be null&quot;</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Espera, pero aún hay más, ¿ves la expresión que está después del <a href="..\null-coalescing">operador null coalescing</a>? sí, estamos lanzando una excepción dentro de una expresión. Esto en C# 6 no está permitido, ya que el lanzamiento de una excepción no podía ser tratado como una expresión.</p>
+
+<p>La alternativa es hacer uso de los <em>accessors</em> tradicionales, y de lanzar la excepción como convencionalmente se hace:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">private</span> <span class="kt">string</span> <span class="n">_name</span><span class="p">;</span>
+<span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span>
+<span class="p">{</span>
+    <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_name</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">set</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">_name</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">ArgumentException</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;{nameof(value)} cannot be null&quot;</span><span class="p">);</span>
+        <span class="n">_name</span> <span class="p">=</span> <span class="k">value</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<h2 id="local-methods">Local methods</h2>
+<p>Otra de las nuevas adiciones al lenguaje es la posibilidad de crear métodos que existan solo dentro de otros. Lo interesante de poder hacer esto es que estos métodos locales se comportan como métodos tradicionales y en ellos podemos hacer uso de <em>generics</em>, params y los argumentos del tipo <code>out</code> y <code>ref</code>. Un método local se puede declarar en cualquier lugar del código de otro, y se usa como usarías cualquier otro método:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">public</span> <span class="k">static</span> <span class="n">Coordenada</span> <span class="nf">AntipodaLongitud</span><span class="p">(</span><span class="k">this</span> <span class="n">Coordenada</span> <span class="n">actual</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">newLongitud</span> <span class="p">=</span> <span class="n">GetNewLongitud</span><span class="p">(</span><span class="n">actual</span><span class="p">.</span><span class="n">Longitud</span><span class="p">);</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nf">Coordenada</span><span class="p">(</span><span class="n">actual</span><span class="p">.</span><span class="n">Longitud</span><span class="p">,</span> <span class="n">newLongitud</span><span class="p">);</span>
+    <span class="kt">decimal</span> <span class="nf">GetNewLongitud</span><span class="p">(</span><span class="kt">decimal</span> <span class="n">longitud</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">longitud</span> <span class="p">&lt;</span> <span class="m">0</span> <span class="p">?</span> <span class="m">1</span> <span class="p">:</span> <span class="p">-</span><span class="m">1</span><span class="p">)</span> <span class="p">*</span> <span class="n">Math</span><span class="p">.</span><span class="n">Abs</span><span class="p">(</span><span class="m">180</span> <span class="p">-</span> <span class="n">Math</span><span class="p">.</span><span class="n">Abs</span><span class="p">(</span><span class="n">longitud</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Hay un par de alternativas en C#, siendo la más obvia la de crear un método privado y hacer uso de este:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">public</span> <span class="k">static</span> <span class="n">Coordenada</span> <span class="nf">AntipodaLatitud</span><span class="p">(</span><span class="k">this</span> <span class="n">Coordenada</span> <span class="n">actual</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">newLatitud</span> <span class="p">=</span> <span class="p">-</span><span class="n">actual</span><span class="p">.</span><span class="n">Latitud</span><span class="p">;</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nf">Coordenada</span><span class="p">(</span><span class="n">newLatitud</span><span class="p">,</span> <span class="n">actual</span><span class="p">.</span><span class="n">Longitud</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">static</span> <span class="kt">decimal</span> <span class="nf">GetNewLongitud</span><span class="p">(</span><span class="kt">decimal</span> <span class="n">longitud</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">longitud</span> <span class="p">&lt;</span> <span class="m">0</span> <span class="p">?</span> <span class="m">1</span> <span class="p">:</span> <span class="p">-</span><span class="m">1</span><span class="p">)</span> <span class="p">*</span> <span class="n">Math</span><span class="p">.</span><span class="n">Abs</span><span class="p">(</span><span class="m">180</span> <span class="p">-</span> <span class="n">Math</span><span class="p">.</span><span class="n">Abs</span><span class="p">(</span><span class="n">longitud</span><span class="p">));</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Otra de las alternativas es hacer uso de <a href="..\func-y-action-en-c-sharp" target="_blank">Func y Action</a>, pero estos no te servirían para aprovechar los genéricos, ni los <code>params</code>… sí, es un poco limitante.</p>
+
+<h2 id="más-características">Más características</h2>
+<p>C# 7 viene cargado con otras características que no mencioné en este post, pero que podrías ir revisando para que te prepares para cuando la “tecnología te alcance”. Si quieres descargar el código para jugar con él, lo puedes encontrar en <a href="https://github.com/ThatCSharpGuy/ElEspacio" target="_blank">GitHub</a>.</p>
+
+<p>Si alguna vez has programado en lenguajes funcionales (F# por ejemplo), te darás cuenta de que C# está tomando muchas de sus características, haciéndolo así un lenguaje que tiene mayor rango de aplicaciones, lo que resulta en un beneficio para quienes desarrollamos con él. <strong>¿Tú qué le añadirías o quitarías al lenguaje?</strong></p>
+
+    </article>
+    <div class="post-contact">
+        <div class="pure-g">
+    <div class="pure-u-1 pure-u-md-7-24">
+        ¿Dudas? ¿comentarios?
+        <ul class="post-contact-list">
+            <li><a title="feregrino@thatcsharpguy.com" href="mailto:feregrino@thatcsharpguy.com?subject=%C2%BFQu%C3%A9+hay+en+C%23+7%3F"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 11.815v13.292q0 1.105-.787 1.892-.787.78-1.892.78H3.68q-1.106 0-1.893-.79Q1 26.21 1 25.102v-13.29q.737.82 1.69 1.46 6.06 4.12 8.32 5.78.955.705 1.55 1.1.594.392 1.582.802.987.41 1.84.41h.035q.854 0 1.84-.41.99-.41 1.583-.804.595-.393 1.55-1.096 2.845-2.06 8.336-5.778.954-.652 1.674-1.455zm0-4.922q0 1.322-.82 2.528t-2.043 2.06l-7.835 5.44-.71.51q-.545.4-.905.64t-.87.55q-.51.3-.963.45-.452.15-.837.15h-.034q-.385 0-.837-.15-.452-.15-.962-.45-.51-.302-.87-.544-.36-.243-.905-.637l-.72-.51q-1.525-1.07-4.388-3.055-2.86-1.984-3.43-2.386-1.04-.704-1.96-1.935Q1 8.315 1 7.26q0-1.305.695-2.175.695-.87 1.984-.87h24.64q1.09 0 1.88.786.792.79.792 1.9z"/></svg></a></li>
+            <li><a title="@io_exception" href="https://twitter.com/intent/tweet?text=@io_exception about %C2%BFQu%C3%A9+hay+en+C%23+7%3F"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 6.7q-1.28 1.88-3.08 3.2.02.26.02.8 0 2.46-.73 4.93-.7 2.46-2.2 4.73-1.46 2.26-3.5 4-2.04 1.75-4.9 2.8-2.88 1.02-6.16 1.02-5.16 0-9.44-2.76.67.08 1.48.08 4.3 0 7.64-2.63-2-.04-3.58-1.23-1.58-1.2-2.17-3.03.63.1 1.16.1.82 0 1.62-.2-2.13-.44-3.53-2.13-1.4-1.68-1.4-3.9v-.1q1.3.74 2.78.8-1.26-.84-2-2.2-.74-1.35-.74-2.93 0-1.67.83-3.1 2.3 2.84 5.6 4.54 3.3 1.7 7.07 1.9-.15-.73-.15-1.4 0-2.57 1.8-4.36 1.8-1.8 4.35-1.8 2.66 0 4.5 1.94 2.07-.4 3.9-1.5-.7 2.2-2.7 3.4 1.76-.2 3.53-.95z"/></svg></a></li>
+            <li><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M31 31H1V1h30v30z"/><path d="M31 2.88v16.87h-5.63v7.68l-4-2.95v2.74l-9.38.02L7.86 31H4.74v-3.7H1V12.36h5.63V2.88H31z" fill="#F6F6F6"/><path d="M19.75 23.27v2.1H12.1L6.62 29v-3.63H2.88V14.13h3.75V16H4.75v7.5H8.5v2.03l2.8-2.03h6.57v-1.62l1.88 1.4z" fill="#424242"/><path d="M17.88 6.63h9.37V16h-5.63v4.09l-3.54-3.55-.55-.55h-7.17V6.62h7.5zM8.5 4.75v13.13h8.26l6.74 5.57v-5.57h5.63V4.74H8.5z" fill="#424242"/><path d="M25.38 10.38H12.24V8.5h13.13v1.88zM21.63 14.13h-9.38v-1.88h9.38v1.88z" fill="#424242"/><path d="M8.5 25.53V23.5" fill="#F6F6F6"/><g fill="#F0EFF1"><path d="M17.88 21.88v1.62H11.3l-2.8 2.03V23.5H4.75V16h1.88v3.75h8.36l2.88 2.13zM17.88 6.63h-7.5V16h7.15l.55.55 3.55 3.54V16h5.62V6.62h-9.38zm3.75 7.5h-9.38v-1.88h9.38v1.88zm3.75-3.76H12.24V8.5h13.13v1.88z"/></g></g></svg> <a id="post-count" href="http://thatcsharpguy.com/post/c-sharp-siete/#disqus_thread" data-disqus-identifier="/post/c-sharp-siete/"></a></li>
+        </ul>
+    </div>  
+    <div class="pure-u-1 pure-u-md-10-24">
+        
+            ¿Quieres ver más como esto? revisa la etiqueta  <a class="tag" href="/tag/AprendeCSharp">#AprendeCSharp</a>.
+        
+    </div>
+    <div class="pure-u-1 pure-u-md-7-24">
+        Comparte esto
+        <ul class="post-contact-list">
+            <li><a href="mailto:?subject=¿Qué hay en C# 7?&amp;body=http://thatcsharpguy.com/post/c-sharp-siete/" title="email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 11.815v13.292q0 1.105-.787 1.892-.787.78-1.892.78H3.68q-1.106 0-1.893-.79Q1 26.21 1 25.102v-13.29q.737.82 1.69 1.46 6.06 4.12 8.32 5.78.955.705 1.55 1.1.594.392 1.582.802.987.41 1.84.41h.035q.854 0 1.84-.41.99-.41 1.583-.804.595-.393 1.55-1.096 2.845-2.06 8.336-5.778.954-.652 1.674-1.455zm0-4.922q0 1.322-.82 2.528t-2.043 2.06l-7.835 5.44-.71.51q-.545.4-.905.64t-.87.55q-.51.3-.963.45-.452.15-.837.15h-.034q-.385 0-.837-.15-.452-.15-.962-.45-.51-.302-.87-.544-.36-.243-.905-.637l-.72-.51q-1.525-1.07-4.388-3.055-2.86-1.984-3.43-2.386-1.04-.704-1.96-1.935Q1 8.315 1 7.26q0-1.305.695-2.175.695-.87 1.984-.87h24.64q1.09 0 1.88.786.792.79.792 1.9z"/></svg></a></li>
+            <li><a href="https://twitter.com/intent/tweet?text=%C2%BFQu%C3%A9+hay+en+C%23+7%3F http://thatcsharpguy.com/post/c-sharp-siete/&hashtags=AprendeCSharp" title="Tweet"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 6.7q-1.28 1.88-3.08 3.2.02.26.02.8 0 2.46-.73 4.93-.7 2.46-2.2 4.73-1.46 2.26-3.5 4-2.04 1.75-4.9 2.8-2.88 1.02-6.16 1.02-5.16 0-9.44-2.76.67.08 1.48.08 4.3 0 7.64-2.63-2-.04-3.58-1.23-1.58-1.2-2.17-3.03.63.1 1.16.1.82 0 1.62-.2-2.13-.44-3.53-2.13-1.4-1.68-1.4-3.9v-.1q1.3.74 2.78.8-1.26-.84-2-2.2-.74-1.35-.74-2.93 0-1.67.83-3.1 2.3 2.84 5.6 4.54 3.3 1.7 7.07 1.9-.15-.73-.15-1.4 0-2.57 1.8-4.36 1.8-1.8 4.35-1.8 2.66 0 4.5 1.94 2.07-.4 3.9-1.5-.7 2.2-2.7 3.4 1.76-.2 3.53-.95z"/></svg></a></li>
+            
+            <li><a href="javascript:sharePostFacebook();" title="share" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.512 1.488c.325.326.488.716.488 1.172v26.68c0 .456-.163.846-.488 1.172-.326.325-.716.488-1.172.488h-7.637V19.38h3.887l.586-4.532h-4.473v-2.89c0-.73.153-1.277.46-1.642.305-.364.9-.546 1.786-.546l2.382-.02V5.707c-.82-.117-1.98-.176-3.477-.176-1.77 0-3.186.522-4.248 1.564-1.06 1.04-1.59 2.513-1.59 4.414v3.34h-3.908v4.53h3.906V31H2.66c-.456 0-.846-.163-1.172-.488C1.163 30.186 1 29.796 1 29.34V2.66c0-.456.163-.846.488-1.172C1.814 1.163 2.204 1 2.66 1h26.68c.456 0 .846.163 1.172.488z"/></svg></a> </li>
+            <li><a class="kindleWidget" href="#" title="send to kindle"> <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 32 32">
+  <path fill-rule="evenodd" d="M1 3c0-1.1.9-2 2-2h26c1.1 0 2 .9 2 2v26c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3zm8.4-.3V29h3.2v-8.72h.07L19.54 29h3.8l-8.07-10.06 7.34-7.5h-3.7l-6.2 6.36h-.08V2.7H9.4z"/>
+</svg> </a> </li>
+        </ul>
+    </div>
+</div>
+<script>
+    function sharePostFacebook() {
+        FB.ui({
+  method: 'share',
+  href: 'http://thatcsharpguy.com/post/c-sharp-siete/',
+}, function(response){});
+    }
+</script>
+<script type="text/javascript" src="https://d1xnn692s7u6t6.cloudfront.net/widget.js"></script>
+<script type="text/javascript">(function k(){window.$SendToKindle&&window.$SendToKindle.Widget?$SendToKindle.Widget.init({}):setTimeout(k,500);})();</script>
+    </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script id="dsq-count-scr" src="//thatcharpguy.disqus.com/count.js" async></script>
+<script>
+    var noCommentsText = "deja un comentario";
+    var commentText = " comentario";
+    
+//var disqus_developer = 1; // this would set it to developer mode
+
+    var disqus_config = function () {
+        this.page.url = "http://thatcsharpguy.com/post/c-sharp-siete/"; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "/post/c-sharp-siete/"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.title ="¿Qué hay en C# 7?";
+    };
+</script>
+<script src="/js/comments.js"></script>
+
+      </div>
+    </div>
+
+    <footer class="site-footer ui">
+  <div class="wrapper pure-g">
+      <div class="pure-u-1 pure-u-md-8-24">
+          <div class="footer-content">
+              <ul class="icon-list">
+    <li id="em">
+        <a href="mailto:feregrino@thatcsharpguy.com" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 11.815v13.292q0 1.105-.787 1.892-.787.78-1.892.78H3.68q-1.106 0-1.893-.79Q1 26.21 1 25.102v-13.29q.737.82 1.69 1.46 6.06 4.12 8.32 5.78.955.705 1.55 1.1.594.392 1.582.802.987.41 1.84.41h.035q.854 0 1.84-.41.99-.41 1.583-.804.595-.393 1.55-1.096 2.845-2.06 8.336-5.778.954-.652 1.674-1.455zm0-4.922q0 1.322-.82 2.528t-2.043 2.06l-7.835 5.44-.71.51q-.545.4-.905.64t-.87.55q-.51.3-.963.45-.452.15-.837.15h-.034q-.385 0-.837-.15-.452-.15-.962-.45-.51-.302-.87-.544-.36-.243-.905-.637l-.72-.51q-1.525-1.07-4.388-3.055-2.86-1.984-3.43-2.386-1.04-.704-1.96-1.935Q1 8.315 1 7.26q0-1.305.695-2.175.695-.87 1.984-.87h24.64q1.09 0 1.88.786.792.79.792 1.9z"/></svg>
+        </a>
+    </li>
+    <li id="gh">
+        <a href="https://github.com/ThatCSharpGuy" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 16.37q0 4.9-2.86 8.8-2.86 3.93-7.4 5.43-.52.1-.77-.13-.24-.24-.24-.6v-4.1q0-1.9-1.02-2.78 1.2-.2 2.1-.4.9-.3 1.87-.8.95-.5 1.58-1.3.65-.8 1.05-2.1.4-1.27.4-2.93 0-2.38-1.54-4.04.7-1.78-.16-3.98-.57-.2-1.6.2t-1.8.85l-.75.47q-1.83-.5-3.76-.5t-3.76.5l-.8-.54Q11 8.16 9.9 7.7q-1.13-.4-1.7-.23-.86 2.2-.14 3.97-1.54 1.68-1.54 4.05 0 1.6.4 2.9.4 1.23 1.02 2.02.63.8 1.58 1.3.94.53 1.83.77.9.25 2 .37-.77.7-.94 2-.4.2-.82.3-.47.1-1.1.1-.66 0-1.3-.44-.63-.4-1.08-1.2-.38-.63-.95-1-.52-.4-.9-.5l-.4-.03q-.4 0-.57.1-.15.1-.1.24.06.13.18.26t.26.2l.15.1q.44.2.86.73t.63 1l.2.43q.23.75.84 1.2.6.47 1.3.6.7.13 1.34.14.65 0 1.08-.04l.46-.08v2.74q0 .35-.26.6-.25.22-.8.12-4.5-1.5-7.37-5.42-3-3.74-3-8.64 0-4.1 2-7.54 2-3.44 5.45-5.46 3.45-2 7.53-2t7.6 2q3.4 2 5.4 5.46 2 3.44 2 7.53z"/></svg>
+        </a>
+    </li>
+    <li id="yt">
+        <a href="https://www.youtube.com/c/thatcsharpguy" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M22.43 15.714c0-.413-.17-.714-.504-.904l-8.57-5.357c-.347-.223-.71-.234-1.09-.033-.368.2-.552.513-.552.937V21.07c0 .426.184.738.553.94.178.088.35.133.52.133.222 0 .412-.056.568-.168l8.57-5.357c.336-.19.504-.49.504-.904zm8.57 0c0 1.072-.006 1.91-.017 2.51-.01.604-.058 1.366-.142 2.287-.083.92-.208 1.744-.376 2.47-.178.815-.563 1.5-1.155 2.06-.592.557-1.284.88-2.077.97-2.477.28-6.222.42-11.233.42-5.01 0-8.756-.14-11.233-.42-.793-.09-1.487-.413-2.085-.97-.597-.56-.984-1.245-1.163-2.06-.157-.726-.277-1.55-.36-2.47-.085-.92-.132-1.682-.143-2.285-.01-.602-.017-1.44-.017-2.51 0-1.072.006-1.91.017-2.512.01-.603.058-1.364.142-2.285.083-.92.208-1.744.376-2.47.178-.814.563-1.5 1.155-2.058.592-.56 1.284-.882 2.077-.97C7.244 5.14 10.99 5 16 5c5.01 0 8.756.14 11.233.42.793.088 1.487.41 2.085.97.597.558.984 1.244 1.163 2.06.157.724.277 1.547.36 2.468.085.92.132 1.682.143 2.285.01.603.017 1.44.017 2.51z"/></svg>
+        </a>
+    </li>
+    <li id="tw">
+        <a href="https://twitter.com/io_exception" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 6.7q-1.28 1.88-3.08 3.2.02.26.02.8 0 2.46-.73 4.93-.7 2.46-2.2 4.73-1.46 2.26-3.5 4-2.04 1.75-4.9 2.8-2.88 1.02-6.16 1.02-5.16 0-9.44-2.76.67.08 1.48.08 4.3 0 7.64-2.63-2-.04-3.58-1.23-1.58-1.2-2.17-3.03.63.1 1.16.1.82 0 1.62-.2-2.13-.44-3.53-2.13-1.4-1.68-1.4-3.9v-.1q1.3.74 2.78.8-1.26-.84-2-2.2-.74-1.35-.74-2.93 0-1.67.83-3.1 2.3 2.84 5.6 4.54 3.3 1.7 7.07 1.9-.15-.73-.15-1.4 0-2.57 1.8-4.36 1.8-1.8 4.35-1.8 2.66 0 4.5 1.94 2.07-.4 3.9-1.5-.7 2.2-2.7 3.4 1.76-.2 3.53-.95z"/></svg>
+        </a>
+    </li>    
+    <li id="fb">
+        <a href="https://www.facebook.com/thatcsharpguy" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.512 1.488c.325.326.488.716.488 1.172v26.68c0 .456-.163.846-.488 1.172-.326.325-.716.488-1.172.488h-7.637V19.38h3.887l.586-4.532h-4.473v-2.89c0-.73.153-1.277.46-1.642.305-.364.9-.546 1.786-.546l2.382-.02V5.707c-.82-.117-1.98-.176-3.477-.176-1.77 0-3.186.522-4.248 1.564-1.06 1.04-1.59 2.513-1.59 4.414v3.34h-3.908v4.53h3.906V31H2.66c-.456 0-.846-.163-1.172-.488C1.163 30.186 1 29.796 1 29.34V2.66c0-.456.163-.846.488-1.172C1.814 1.163 2.204 1 2.66 1h26.68c.456 0 .846.163 1.172.488z"/></svg>
+        </a>
+    </li>
+    <li id="gp">
+        <a href="https://www.google.com/+Thatcsharpguy" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.9 14.25h-2.7v-2.72h-2.73v2.72h-2.7v2.72h2.7v2.7h2.72v-2.7h2.7v-2.72M10.5 17.5h5.4c-.22 1.4-1.64 4.12-5.4 4.12-3.25 0-5.9-2.7-5.9-6 0-3.33 2.65-6.02 5.9-6.02 1.85 0 3.08.78 3.8 1.46l2.58-2.48c-1.66-1.55-3.8-2.5-6.38-2.5C5.26 6.1 1 10.35 1 15.62s4.26 9.52 9.52 9.52c5.5 0 9.14-3.86 9.14-9.3 0-.62-.07-1.1-.15-1.57h-8.96"/></svg>
+        </a>
+    </li>
+</ul>
+<ul class="icon-list">
+    <li>
+        <a href="/acerca-de">
+            <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M7 18.89v-5.88H1.15v-6H7V1.1h6v5.91h6V1.1h6v5.91h5.85v6H25v5.88h5.85v6H25v5.912h-6v-5.91h-6v5.91H7v-5.91H1.15v-6H7zm6 0v-5.88h6v5.88h-6z" fill="#3C8A3F" fill-rule="evenodd"/></svg>
+        </a>
+    </li>
+</ul>
+          </div>
+      </div>
+      <div class="pure-u-1 pure-u-md-6-24">
+      </div>
+      <div class="pure-u-1 pure-u-md-10-24">
+          <div class="footer-content">
+              <div class="panel active" id="footer-signup">
+    <div class="panel-title">
+        <span class="title">Suscríbete</span>
+    </div>
+    <div class="panel-content">
+    Recibe semanalmente lo nuevo en That C# guy
+    <form class="pure-form-stacked" action="//thatcsharpguy.us11.list-manage.com/subscribe/post?u=ebfe25f4824d7335380cf1ffd&amp;id=eca72e1174" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    
+                <div class="response" id="mce-error-response" style="display:none"></div>
+                <div class="response" id="mce-success-response" style="display:none"></div>
+                
+                <input type="email" value="" placeholder="dirección de email" name="EMAIL" class="required email" id="mce-EMAIL">
+                
+                <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="button">
+                    <span style="text-decoration:underline;">E</span>nviar
+                </button>
+                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                    <input type="text" name="b_ebfe25f4824d7335380cf1ffd_eca72e1174" tabindex="-1" value="">
+                </div>
+    </form>
+    </div>
+</div>
+          </div>
+      </div>
+  </div>
+</footer>
+   
+  </body>
+
+</html>

@@ -1,0 +1,41 @@
+
+#full-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+#giphy-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+div.grid-item a.giphy-element img.still{
+    display: block ;
+}
+div.grid-item a.giphy-element img.moving{
+    display: none;
+}
+div.grid-item:hover a.giphy-element img.moving{
+    display: block;
+}
+div.grid-item:hover a.giphy-element img.still{
+    display: none;
+}
+.grid-item {
+        width: 200px;
+}
+
+input {
+    width: 100%;
+    max-width: 800px;
+    font-size: 3em;
+    font-weight: bold;
+    display: block;
+    line-height: 1.2;
+    margin: auto;
+    color: #000;
+    border: none;
+    border-bottom: 5px solid #000;
+    background: none;
+    outline: none;
+    webkit-tap-highlight-color: rgba(0,0,0,0);
+
+}

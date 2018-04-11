@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/Blog">
+<head>
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href='http://thatcsharpguy.com/assets/site/favicon.png'>
+  <title>Programación reactiva y Rx, parte 2 - That C# guy</title>
+  <meta name="description" content="La programación reactiva es una de las formas de implementar el patrón del observador en nuestro código, y las Reactive Extensions hacen esta tarea mucho más...">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.2/pure-min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://thatcsharpguy.com/post/reactive-extensions-2/">
+  <link rel="alternate" type="application/rss+xml" title="That C# guy" href="http://thatcsharpguy.com/feed.xml" />
+  <!-- Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-94016385-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+
+  <!-- Twitter cards  -->
+	 
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="http://thatcsharpguy.com/postimages//rx/fishing.png">
+	
+	<meta name="twitter:site" content="@io_exception" />
+	<meta name="twitter:title" content="Programación reactiva y Rx, parte 2" />
+	<meta name="twitter:description" content="La programación reactiva es una de las formas de implementar el patrón del observador en nuestro código, y las Reactive Extensions hacen esta tarea mucho más..." />
+
+
+    <!-- Facebook open graph tags -->  
+    
+    <meta property="og:image" content="http://thatcsharpguy.com/postimages//rx/fishing.png" />
+    
+    
+    <meta property="og:title" content="Programación reactiva y Rx, parte 2" />
+    <meta property="og:site_name" content="That C# guy"/>
+    <meta property="og:url" content="http://thatcsharpguy.com/post/reactive-extensions-2/">
+    <meta property="og:description" content="La programación reactiva es una de las formas de implementar el patrón del observador en nuestro código, y las Reactive Extensions hacen esta tarea mucho más..." />
+    <meta property="article:author" content="https://www.facebook.com/antonio.feregrino" />
+    <meta property="article:publisher" content="https://www.facebook.com/antonio.feregrino" />
+    <meta property="fb:app_id" content="942345702508916" />
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>
+
+</head>
+  <body>
+
+    <header class="site-header ui">
+  <div class="wrapper menu">
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+      <div class="trigger">
+        
+        <a class="link page-link" href="/">Inicio</a>
+        
+        <a class="link page-link" href="/tv">TV</a>
+        
+        <a class="link page-link" href="/acerca-de">Acerca de</a>
+        
+        <a class="link page-link" href="/tag">Tags</a>
+        
+        <a class="link page-link" href="/busqueda">Buscar</a>
+        
+        <a class="link page-link" href="/suscribete">Suscríbete</a>
+        
+        <a class="link page-link" href="/herramientas">Herramientas</a>
+        
+        <a class="link page-link" href="/libros">Libros</a>
+        
+      </div>
+    </nav>
+  </div>
+  <div class="wrapper title">
+    <div class="pure-g">
+      <div class="pure-u-1-24 title-number"><span>1</span></div>
+      <div class="pure-u-13-24 content-window">
+        <a class="site-title" href="/">That C# guy</a>
+      </div>
+      <div class="pure-u-10-24 header-menu">
+        <ul>
+          <li class="youtube"><a href="https://www.youtube.com/c/thatcsharpguy">YouTube</a></li>
+          <li class="csharp"><a href="http://thatcsharpguy.com/tag/AprendeCSharp/">Aprende C#</a></li>
+          <li class="xamarin"><a href="http://thatcsharpguy.com/tag/Xamarin/">Xamarin</a></li>
+        </ul>
+      </div>
+    </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div id="post-meta">
+    <a href="/acerca-de/#citando" rel="author">Antonio Feregrino</a> | 15/08/2017
+ 
+
+| <strong><a href="https://github.com/ThatCSharpGuy/rx" target="_blank"><i class="sp sp-git"></i> Ver código de este post en GitHub</a></strong>
+
+</div>
+<h1 class="post-title">Programación reactiva y Rx, parte 2</h1>
+<div class="post-content">
+
+    <article>
+        <p><a href="..\reactive-extensions-1" target="_blank">En el post pasado</a> les comencé a hablar de las <em>Reactive Extensions</em> y cómo es que introducían un paradigma de programación distinto. Ahí mostré un ejemplo muy sencillo de la programación reactiva… pero sé que no siempre todo el código que escribiremos será así de sencillo, así que en este post crearé y mostraré un caso más complejo en el que podemos utilizar <em>Rx</em>.</p>
+
+<h2 id="el-río">El río</h2>
+<p>Piensa en un río en el cual hay un conjunto de peces que viajan a través de él, es por eso que los pescadores se acercan al río para tratar de conseguir un poco de alimento. El río produce una cantidad <code>x</code> de peces que pasan por él uno a uno cada <code>y</code> milisegundos, además de que hay ocasiones en que el agua del río hace muy peligroso pescar en él.</p>
+
+<h3 id="river"><code>River</code></h3>
+
+<p>Para recrear las condiciones anteriores, crea una clase llamada <code>River</code> que reciba y almacene las especificaciones de la cantidad de peces, el tiempo entre ellos y si es o no peligroso:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">River</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="kt">int</span> <span class="n">_fishAmount</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="kt">int</span> <span class="n">_waitTime</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="kt">bool</span> <span class="n">_dangerousRiver</span><span class="p">;</span>
+
+
+    <span class="k">public</span> <span class="nf">River</span><span class="p">(</span><span class="kt">int</span> <span class="n">fishAmount</span><span class="p">,</span> <span class="kt">int</span> <span class="n">waitTime</span> <span class="p">=</span> <span class="m">500</span><span class="p">,</span>  <span class="kt">bool</span> <span class="n">dangerousRiver</span> <span class="p">=</span> <span class="k">false</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_fishAmount</span> <span class="p">=</span> <span class="n">fishAmount</span><span class="p">;</span>
+        <span class="n">_waitTime</span> <span class="p">=</span> <span class="n">waitTime</span><span class="p">;</span>
+        <span class="n">_dangerousRiver</span> <span class="p">=</span> <span class="n">dangerousRiver</span><span class="p">;</span>
+    <span class="p">}</span></code></pre></figure>
+
+<h3 id="fish"><code>Fish</code></h3>
+
+<p>Pero aguarda, no te olvides de los peces: estos tendrán una especie (<code>FishSpecies</code>), un color (<code>Color</code>) y un peso (<code>Weight</code>), todo representado dentro de una clase:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span>    <span class="k">public</span> <span class="k">class</span> <span class="nc">Fish</span>
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="kt">double</span> <span class="n">Weight</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+        <span class="k">public</span> <span class="n">Color</span> <span class="n">Color</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+        <span class="k">public</span> <span class="n">FishSpecies</span> <span class="n">Species</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+        <span class="cp">#region Random fish</span>
+
+        <span class="k">private</span> <span class="k">static</span> <span class="k">readonly</span> <span class="n">Random</span> <span class="n">R</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Random</span><span class="p">();</span>
+        <span class="k">private</span> <span class="k">const</span> <span class="kt">double</span> <span class="n">MinWeight</span> <span class="p">=</span> <span class="m">500</span><span class="p">;</span> <span class="c1">// Gramos</span>
+        <span class="k">private</span> <span class="k">const</span> <span class="kt">double</span> <span class="n">MaxWeight</span> <span class="p">=</span> <span class="m">5000</span><span class="p">;</span> <span class="c1">// Gramos</span>
+
+        <span class="k">public</span> <span class="k">static</span> <span class="n">Fish</span> <span class="nf">RandomFish</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">fish</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Fish</span>
+            <span class="p">{</span>
+                <span class="n">Weight</span> <span class="p">=</span> <span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">NextDouble</span><span class="p">()</span> <span class="p">*</span> <span class="p">(</span><span class="n">MaxWeight</span> <span class="p">-</span> <span class="n">MinWeight</span><span class="p">))</span> <span class="p">+</span> <span class="n">MinWeight</span><span class="p">,</span>
+                <span class="n">Species</span> <span class="p">=</span> <span class="p">(</span><span class="n">FishSpecies</span><span class="p">)</span> <span class="n">R</span><span class="p">.</span><span class="n">Next</span><span class="p">(</span><span class="m">4</span><span class="p">),</span> <span class="c1">// There are four species</span>
+                <span class="n">Color</span> <span class="p">=</span> <span class="p">(</span><span class="n">Color</span><span class="p">)</span> <span class="n">R</span><span class="p">.</span><span class="n">Next</span><span class="p">(</span><span class="m">4</span><span class="p">)</span> <span class="c1">// There are four colors</span>
+            <span class="p">};</span>
+
+            <span class="k">return</span> <span class="n">fish</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="cp">#endregion</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>Oh, además en esta clase introduje un método para crear peces aleatoriamente.</p>
+
+<h3 id="river-cont"><code>River</code> (cont)</h3>
+
+<p>Bueno, volviendo al diseño del río. Ahora toca escribir la forma en que representaremos el paso de los peces a través de él. ¿Estás de acuerdo en que es un <strong>flujo</strong>? sí, un flujo de peces.  Y al ser un flujo es el un buen candidato para convertirse en un <code>IObservable</code>de <code>Fish</code>.</p>
+
+<p>Para acceder al flujo de peces usaremos un método que retorne un <code>IOBservable&lt;Fish&gt;</code>. Acá es una buena oportunidad para decir que no es recomendable que tu mismo implementes la interfaz, lo mejor en muchos casos es hacer uso de las <em>Reactive Extensions</em> para crear un objeto de ese tipo:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span>    <span class="k">public</span> <span class="n">IObservable</span><span class="p">&lt;</span><span class="n">Fish</span><span class="p">&gt;</span> <span class="n">Stream</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">Observable</span><span class="p">.</span><span class="n">Create</span><span class="p">&lt;</span><span class="n">Fish</span><span class="p">&gt;(</span><span class="n">observer</span> <span class="p">=&gt;</span>
+        <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">_fishAmount</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
+            <span class="p">{</span>
+                <span class="kt">var</span> <span class="n">fish</span> <span class="p">=</span> <span class="n">Fish</span><span class="p">.</span><span class="n">RandomFish</span><span class="p">();</span>
+                <span class="n">observer</span><span class="p">.</span><span class="n">OnNext</span><span class="p">(</span><span class="n">fish</span><span class="p">);</span>
+                <span class="n">Thread</span><span class="p">.</span><span class="n">Sleep</span><span class="p">(</span><span class="n">_waitTime</span><span class="p">);</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="n">_dangerousRiver</span> <span class="p">&amp;&amp;</span> <span class="n">i</span> <span class="p">==</span> <span class="n">_fishAmount</span> <span class="p">/</span> <span class="m">3</span><span class="p">)</span>
+                    <span class="k">throw</span> <span class="k">new</span> <span class="nf">Exception</span><span class="p">(</span><span class="s">&quot;Uh, hubo un derrame en el río&quot;</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">observer</span><span class="p">.</span><span class="n">OnCompleted</span><span class="p">();</span>
+            <span class="k">return</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="p">};</span>
+        <span class="p">});</span>
+    <span class="p">}</span></code></pre></figure>
+
+<p>Vamos a revisar qué es lo que está ocurriendo en ese método:</p>
+
+<dl>
+   <dt>1.</dt>
+    <dd>Lo primero que nos damos cuenta es el tipo de retorno: <code>IObservable&lt;Fish&gt;</code></dd>
+   <dt>2.</dt>
+    <dd>Inmediatamente después tenemos la creación de nuestro observable mediante el método estático <code>Observable.Create</code>, este método recibe un `Func&lt;IObserver&lt;Fish&gt;, Action&gt;`. El parámetro de entrada (<code>IObserver&lt;Fish&gt;</code>) es una referencia al suscriptor que está al tanto de lo que publiquemos. El valor de retorno (<code>Action</code>) es un delegado que en teoría deberíamos usar para limpiar los recursos que usamos en el flujo. </dd>
+   <dt>3.</dt>
+    <dd>Vamos a generar tantos peces como sean necesarios, en este caso creándolos de forma aleatoria, después, publicaremos cada uno de los peces a nuestro <code>Observer</code> mediante su método <code>OnNext</code>.  
+    Esperarémos después el tiempo indicado entre cada pez.
+    Antes de repetir el ciclo comprobaremos que el río es seguro, y si no lo es, lanzaremos una excepción. </dd>
+   <dt>4.</dt>
+    <dd>Apenas terminar el ciclo enviaremos el mensaje <code>OnCompleted</code> al <code>observer</code></dd>
+   <dt>5.</dt>
+    <dd>Regresaremos una <code>Action</code> vacía, recuerda que deberíamos usar este para liberar los recursos que usó nuestro flujo de datos. En este caso, no debemos liberar nada.</dd>
+</dl>
+
+<p>Usar el método <code>Observable.Create&lt;T&gt;</code> es solo una de las muchas maneras en las que podemos crear un flujo, <a href="https://weblogs.asp.net/sweinstein/16-ways-to-create-iobservables-without-implementing-iobservable" target="_blank">en este sitio web</a> puedes ver 16 formas de crearlos sin necesidad de heredar tú mismo de <code>IObservable</code>.</p>
+
+<h2 id="usando-el-río">Usando el río</h2>
+<p>Vamos a crear un par de ríos para después poder suscribirnos a ellos:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="kt">var</span> <span class="n">rioNormal</span> <span class="p">=</span> <span class="k">new</span> <span class="n">River</span><span class="p">(</span><span class="m">10</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">rioRapido</span> <span class="p">=</span> <span class="k">new</span> <span class="n">River</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="n">waitTime</span><span class="p">:</span> <span class="m">10</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">dangerousRiver</span> <span class="p">=</span> <span class="k">new</span> <span class="n">River</span><span class="p">(</span><span class="n">fishAmount</span><span class="p">:</span> <span class="m">10</span><span class="p">,</span> <span class="n">dangerousRiver</span><span class="p">:</span> <span class="k">true</span><span class="p">);</span></code></pre></figure>
+
+<p>Entonces ahora podemos suscribirnos y estar al tanto de qué peces pasan por el río:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="n">rioNormal</span><span class="p">.</span><span class="n">Stream</span><span class="p">()</span>
+    <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span>
+        <span class="n">onNext</span><span class="p">:</span> <span class="n">fish</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;{DateTime.Now:HH:mm:ss.ffff}: {fish}&quot;</span><span class="p">),</span>
+        <span class="n">onCompleted</span><span class="p">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;¡Terminé de pescar!&quot;</span><span class="p">)</span>
+    <span class="p">);</span></code></pre></figure>
+
+<pre>
+13:35:40.3923: Anglerfish, Green, 3,787.68
+13:35:40.9770: Anglerfish, Green, 1,462.02
+13:35:41.4831: ClownFish, Black, 1,469.41
+13:35:41.9871: Blowfish, Red, 1,539.82
+13:35:42.4926: Tuna, Black, 2,540.65
+13:35:42.9931: Blowfish, Green, 2,905.58
+13:35:43.4939: Blowfish, Red, 3,611.61
+13:35:43.9994: Tuna, Black, 2,029.88
+13:35:44.5048: Tuna, Yellow, 1,672.38
+13:35:45.0102: Anglerfish, Black, 4,194.68
+¡Terminé de pescar!
+</pre>
+
+<p>Como vimos anteriormente, también podemos filtrar los elementos:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="n">rioNormal</span><span class="p">.</span><span class="n">Stream</span><span class="p">()</span>
+    <span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">fish</span> <span class="p">=&gt;</span> <span class="n">fish</span><span class="p">.</span><span class="n">Color</span> <span class="p">==</span> <span class="n">Color</span><span class="p">.</span><span class="n">Green</span> <span class="p">&amp;&amp;</span> <span class="n">fish</span><span class="p">.</span><span class="n">Weight</span> <span class="p">&gt;</span> <span class="m">3000</span><span class="p">)</span> <span class="c1">// Filtramos los elementos</span>
+    <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span>
+        <span class="n">onNext</span><span class="p">:</span> <span class="n">fish</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;{DateTime.Now:HH:mm:ss.ffff}: {fish}&quot;</span><span class="p">),</span>
+        <span class="n">onCompleted</span><span class="p">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;¡Terminé de pescar!&quot;</span><span class="p">)</span>
+    <span class="p">);</span></code></pre></figure>
+
+<pre>
+13:35:48.5546: Blowfish, Green, 3,420.28
+13:35:50.0690: Anglerfish, Green, 3,974.44
+¡Terminé de pescar!
+</pre>
+
+<p>Podemos agrupar los elementos con el método <code>Buffer</code>, que permitirá agrupar los elementos del flujo. Por ejemplo, imagina que el pescador está usando una red para 3 peces:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="n">rioNormal</span><span class="p">.</span><span class="n">Stream</span><span class="p">()</span>
+    <span class="p">.</span><span class="n">Buffer</span><span class="p">(</span><span class="m">3</span><span class="p">)</span> <span class="c1">// Agrupamos 3 elementos</span>
+    <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span>
+        <span class="n">onNext</span><span class="p">:</span> <span class="n">fishCollection</span> <span class="p">=&gt;</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">f</span> <span class="p">=</span> <span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span> <span class="n">fishCollection</span><span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">fi</span> <span class="p">=&gt;</span> <span class="n">fi</span><span class="p">.</span><span class="n">Species</span><span class="p">));</span>
+            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;Atrapé {fishCollection.Count} peces ({f})&quot;</span><span class="p">);</span>
+        <span class="p">},</span>
+        <span class="n">onCompleted</span><span class="p">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;¡Terminé de pescar usando una red para 3 peces!&quot;</span><span class="p">)</span>
+    <span class="p">);</span></code></pre></figure>
+
+<pre>
+Atrapé 3 peces (Tuna, Blowfish, Tuna)
+Atrapé 3 peces (Tuna, Tuna, Blowfish)
+Atrapé 3 peces (Tuna, Blowfish, Blowfish)
+Atrapé 1 peces (Anglerfish)
+¡Terminé de pescar usando una red para 3 peces!
+</pre>
+
+<p>Y no olvides que podemos especificarle al código que hacer en caso de que ocurra un error en el flujo, esto mediante el método (o lambda en este caso) <code>OnError</code>:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="n">dangerousRiver</span><span class="p">.</span><span class="n">Stream</span><span class="p">()</span>
+    <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span>
+        <span class="n">onNext</span><span class="p">:</span> <span class="n">fish</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;{DateTime.Now:HH:mm:ss.ffff}: {fish}&quot;</span><span class="p">),</span>
+        <span class="n">onError</span><span class="p">:</span> <span class="n">ex</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;Ocurrió un problema en el río: {ex.Message}&quot;</span><span class="p">),</span>
+        <span class="n">onCompleted</span><span class="p">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;¡Terminé de pescar en el río peligroso!&quot;</span><span class="p">)</span>
+    <span class="p">);</span></code></pre></figure>
+
+<pre>
+13:35:45.5200: Anglerfish, Black, 3,171.37
+13:35:46.0216: Anglerfish, Red, 3,041.97
+13:35:46.5272: Anglerfish, Black, 4,589.28
+13:35:47.0297: Blowfish, Black, 3,128.05
+Ocurrió un problema en el río: Uh, hubo un derrame en el río
+</pre>
+
+<h2 id="el-pescador-o-iobserverfish">El pescador o <code>IObserver&lt;Fish&gt;</code></h2>
+<p>Hasta el momento hemos estado empleando lambdas para reaccionar a los mensajes de un publicador. Pero si recuerdas, en el post pasado hablé de otra interfaz que representaba al observador, recordarás también que esta interfaz especifica tres métodos. Nosotros vamos a crear una clase <code>Fisher</code> que representará al pescador:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">Fisher</span> <span class="p">:</span> <span class="n">IObserver</span><span class="p">&lt;</span><span class="n">Fish</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="kt">string</span> <span class="n">_name</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nf">Fisher</span><span class="p">(</span><span class="kt">string</span> <span class="n">name</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_name</span> <span class="p">=</span> <span class="n">name</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">OnNext</span><span class="p">(</span><span class="n">Fish</span> <span class="k">value</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;{_name}: atrapé un {value.Species} de color {value.Color} a las {DateTime.Now:HH:mm:ss.ffff}&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">OnError</span><span class="p">(</span><span class="n">Exception</span> <span class="n">error</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;{_name}: Oops, algo pasó {error.Message}&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">OnCompleted</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;{_name}: ¡Terminó la pesca!&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Y una vez que tenemos a un pescador (observador) podemos suscribirlo al flujo de peces para que esté al tanto de lo que ocurre:</p>
+
+<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="kt">var</span> <span class="n">erik</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Fisher</span><span class="p">(</span><span class="s">&quot;Erik&quot;</span><span class="p">);</span>
+<span class="n">rioNormal</span><span class="p">.</span><span class="n">Stream</span><span class="p">()</span>
+    <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">erik</span><span class="p">);</span></code></pre></figure>
+
+<pre>
+Erik: atrapé un Anglerfish de color Red a las 13:35:57.6664
+Erik: atrapé un Blowfish de color Yellow a las 13:35:57.6795
+Erik: atrapé un Anglerfish de color Black a las 13:35:57.6923
+Erik: atrapé un Blowfish de color Green a las 13:35:57.7051
+Erik: atrapé un Anglerfish de color Red a las 13:35:57.7172
+Erik: atrapé un Tuna de color Yellow a las 13:35:57.7301
+Erik: atrapé un ClownFish de color Yellow a las 13:35:57.7429
+Erik: atrapé un Blowfish de color Yellow a las 13:35:57.7558
+Erik: atrapé un ClownFish de color Green a las 13:35:57.7686
+Erik: atrapé un Blowfish de color Red a las 13:35:57.7815
+Erik: ¡Terminó la pesca!
+</pre>
+
+<p>Y listo, ese fue todo el ejemplo. Recuerda que el <a href=" https://github.com/ThatCSharpGuy/rx" target="_blank">código está en GitHub</a> para qe lo descargues y juegues con él. En el futuro estaré creando otro par de ejemplos sobre las bondades de la programación reactiva, entre tanto, si tienes preguntas, no dudes en hacérmelas llegar.</p>
+
+    </article>
+    <div class="post-contact">
+        <div class="pure-g">
+    <div class="pure-u-1 pure-u-md-7-24">
+        ¿Dudas? ¿comentarios?
+        <ul class="post-contact-list">
+            <li><a title="feregrino@thatcsharpguy.com" href="mailto:feregrino@thatcsharpguy.com?subject=Programaci%C3%B3n+reactiva+y+Rx%2C+parte+2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 11.815v13.292q0 1.105-.787 1.892-.787.78-1.892.78H3.68q-1.106 0-1.893-.79Q1 26.21 1 25.102v-13.29q.737.82 1.69 1.46 6.06 4.12 8.32 5.78.955.705 1.55 1.1.594.392 1.582.802.987.41 1.84.41h.035q.854 0 1.84-.41.99-.41 1.583-.804.595-.393 1.55-1.096 2.845-2.06 8.336-5.778.954-.652 1.674-1.455zm0-4.922q0 1.322-.82 2.528t-2.043 2.06l-7.835 5.44-.71.51q-.545.4-.905.64t-.87.55q-.51.3-.963.45-.452.15-.837.15h-.034q-.385 0-.837-.15-.452-.15-.962-.45-.51-.302-.87-.544-.36-.243-.905-.637l-.72-.51q-1.525-1.07-4.388-3.055-2.86-1.984-3.43-2.386-1.04-.704-1.96-1.935Q1 8.315 1 7.26q0-1.305.695-2.175.695-.87 1.984-.87h24.64q1.09 0 1.88.786.792.79.792 1.9z"/></svg></a></li>
+            <li><a title="@io_exception" href="https://twitter.com/intent/tweet?text=@io_exception about Programaci%C3%B3n+reactiva+y+Rx%2C+parte+2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 6.7q-1.28 1.88-3.08 3.2.02.26.02.8 0 2.46-.73 4.93-.7 2.46-2.2 4.73-1.46 2.26-3.5 4-2.04 1.75-4.9 2.8-2.88 1.02-6.16 1.02-5.16 0-9.44-2.76.67.08 1.48.08 4.3 0 7.64-2.63-2-.04-3.58-1.23-1.58-1.2-2.17-3.03.63.1 1.16.1.82 0 1.62-.2-2.13-.44-3.53-2.13-1.4-1.68-1.4-3.9v-.1q1.3.74 2.78.8-1.26-.84-2-2.2-.74-1.35-.74-2.93 0-1.67.83-3.1 2.3 2.84 5.6 4.54 3.3 1.7 7.07 1.9-.15-.73-.15-1.4 0-2.57 1.8-4.36 1.8-1.8 4.35-1.8 2.66 0 4.5 1.94 2.07-.4 3.9-1.5-.7 2.2-2.7 3.4 1.76-.2 3.53-.95z"/></svg></a></li>
+            <li><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M31 31H1V1h30v30z"/><path d="M31 2.88v16.87h-5.63v7.68l-4-2.95v2.74l-9.38.02L7.86 31H4.74v-3.7H1V12.36h5.63V2.88H31z" fill="#F6F6F6"/><path d="M19.75 23.27v2.1H12.1L6.62 29v-3.63H2.88V14.13h3.75V16H4.75v7.5H8.5v2.03l2.8-2.03h6.57v-1.62l1.88 1.4z" fill="#424242"/><path d="M17.88 6.63h9.37V16h-5.63v4.09l-3.54-3.55-.55-.55h-7.17V6.62h7.5zM8.5 4.75v13.13h8.26l6.74 5.57v-5.57h5.63V4.74H8.5z" fill="#424242"/><path d="M25.38 10.38H12.24V8.5h13.13v1.88zM21.63 14.13h-9.38v-1.88h9.38v1.88z" fill="#424242"/><path d="M8.5 25.53V23.5" fill="#F6F6F6"/><g fill="#F0EFF1"><path d="M17.88 21.88v1.62H11.3l-2.8 2.03V23.5H4.75V16h1.88v3.75h8.36l2.88 2.13zM17.88 6.63h-7.5V16h7.15l.55.55 3.55 3.54V16h5.62V6.62h-9.38zm3.75 7.5h-9.38v-1.88h9.38v1.88zm3.75-3.76H12.24V8.5h13.13v1.88z"/></g></g></svg> <a id="post-count" href="http://thatcsharpguy.com/post/reactive-extensions-2/#disqus_thread" data-disqus-identifier="/post/reactive-extensions-2/"></a></li>
+        </ul>
+    </div>  
+    <div class="pure-u-1 pure-u-md-10-24">
+        
+            ¿Quieres ver más como esto? revisa la etiqueta  <a class="tag" href="/tag/Rx">#Rx</a>.
+        
+    </div>
+    <div class="pure-u-1 pure-u-md-7-24">
+        Comparte esto
+        <ul class="post-contact-list">
+            <li><a href="mailto:?subject=Programación reactiva y Rx, parte 2&amp;body=http://thatcsharpguy.com/post/reactive-extensions-2/" title="email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 11.815v13.292q0 1.105-.787 1.892-.787.78-1.892.78H3.68q-1.106 0-1.893-.79Q1 26.21 1 25.102v-13.29q.737.82 1.69 1.46 6.06 4.12 8.32 5.78.955.705 1.55 1.1.594.392 1.582.802.987.41 1.84.41h.035q.854 0 1.84-.41.99-.41 1.583-.804.595-.393 1.55-1.096 2.845-2.06 8.336-5.778.954-.652 1.674-1.455zm0-4.922q0 1.322-.82 2.528t-2.043 2.06l-7.835 5.44-.71.51q-.545.4-.905.64t-.87.55q-.51.3-.963.45-.452.15-.837.15h-.034q-.385 0-.837-.15-.452-.15-.962-.45-.51-.302-.87-.544-.36-.243-.905-.637l-.72-.51q-1.525-1.07-4.388-3.055-2.86-1.984-3.43-2.386-1.04-.704-1.96-1.935Q1 8.315 1 7.26q0-1.305.695-2.175.695-.87 1.984-.87h24.64q1.09 0 1.88.786.792.79.792 1.9z"/></svg></a></li>
+            <li><a href="https://twitter.com/intent/tweet?text=Programaci%C3%B3n+reactiva+y+Rx%2C+parte+2 http://thatcsharpguy.com/post/reactive-extensions-2/&hashtags=Rx" title="Tweet"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 6.7q-1.28 1.88-3.08 3.2.02.26.02.8 0 2.46-.73 4.93-.7 2.46-2.2 4.73-1.46 2.26-3.5 4-2.04 1.75-4.9 2.8-2.88 1.02-6.16 1.02-5.16 0-9.44-2.76.67.08 1.48.08 4.3 0 7.64-2.63-2-.04-3.58-1.23-1.58-1.2-2.17-3.03.63.1 1.16.1.82 0 1.62-.2-2.13-.44-3.53-2.13-1.4-1.68-1.4-3.9v-.1q1.3.74 2.78.8-1.26-.84-2-2.2-.74-1.35-.74-2.93 0-1.67.83-3.1 2.3 2.84 5.6 4.54 3.3 1.7 7.07 1.9-.15-.73-.15-1.4 0-2.57 1.8-4.36 1.8-1.8 4.35-1.8 2.66 0 4.5 1.94 2.07-.4 3.9-1.5-.7 2.2-2.7 3.4 1.76-.2 3.53-.95z"/></svg></a></li>
+            
+            <li><a href="javascript:sharePostFacebook();" title="share" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.512 1.488c.325.326.488.716.488 1.172v26.68c0 .456-.163.846-.488 1.172-.326.325-.716.488-1.172.488h-7.637V19.38h3.887l.586-4.532h-4.473v-2.89c0-.73.153-1.277.46-1.642.305-.364.9-.546 1.786-.546l2.382-.02V5.707c-.82-.117-1.98-.176-3.477-.176-1.77 0-3.186.522-4.248 1.564-1.06 1.04-1.59 2.513-1.59 4.414v3.34h-3.908v4.53h3.906V31H2.66c-.456 0-.846-.163-1.172-.488C1.163 30.186 1 29.796 1 29.34V2.66c0-.456.163-.846.488-1.172C1.814 1.163 2.204 1 2.66 1h26.68c.456 0 .846.163 1.172.488z"/></svg></a> </li>
+            <li><a class="kindleWidget" href="#" title="send to kindle"> <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 32 32">
+  <path fill-rule="evenodd" d="M1 3c0-1.1.9-2 2-2h26c1.1 0 2 .9 2 2v26c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3zm8.4-.3V29h3.2v-8.72h.07L19.54 29h3.8l-8.07-10.06 7.34-7.5h-3.7l-6.2 6.36h-.08V2.7H9.4z"/>
+</svg> </a> </li>
+        </ul>
+    </div>
+</div>
+<script>
+    function sharePostFacebook() {
+        FB.ui({
+  method: 'share',
+  href: 'http://thatcsharpguy.com/post/reactive-extensions-2/',
+}, function(response){});
+    }
+</script>
+<script type="text/javascript" src="https://d1xnn692s7u6t6.cloudfront.net/widget.js"></script>
+<script type="text/javascript">(function k(){window.$SendToKindle&&window.$SendToKindle.Widget?$SendToKindle.Widget.init({}):setTimeout(k,500);})();</script>
+    </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script id="dsq-count-scr" src="//thatcharpguy.disqus.com/count.js" async></script>
+<script>
+    var noCommentsText = "deja un comentario";
+    var commentText = " comentario";
+    
+//var disqus_developer = 1; // this would set it to developer mode
+
+    var disqus_config = function () {
+        this.page.url = "http://thatcsharpguy.com/post/reactive-extensions-2/"; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "/post/reactive-extensions-2/"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.title ="Programación reactiva y Rx, parte 2";
+    };
+</script>
+<script src="/js/comments.js"></script>
+
+      </div>
+    </div>
+
+    <footer class="site-footer ui">
+  <div class="wrapper pure-g">
+      <div class="pure-u-1 pure-u-md-8-24">
+          <div class="footer-content">
+              <ul class="icon-list">
+    <li id="em">
+        <a href="mailto:feregrino@thatcsharpguy.com" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 11.815v13.292q0 1.105-.787 1.892-.787.78-1.892.78H3.68q-1.106 0-1.893-.79Q1 26.21 1 25.102v-13.29q.737.82 1.69 1.46 6.06 4.12 8.32 5.78.955.705 1.55 1.1.594.392 1.582.802.987.41 1.84.41h.035q.854 0 1.84-.41.99-.41 1.583-.804.595-.393 1.55-1.096 2.845-2.06 8.336-5.778.954-.652 1.674-1.455zm0-4.922q0 1.322-.82 2.528t-2.043 2.06l-7.835 5.44-.71.51q-.545.4-.905.64t-.87.55q-.51.3-.963.45-.452.15-.837.15h-.034q-.385 0-.837-.15-.452-.15-.962-.45-.51-.302-.87-.544-.36-.243-.905-.637l-.72-.51q-1.525-1.07-4.388-3.055-2.86-1.984-3.43-2.386-1.04-.704-1.96-1.935Q1 8.315 1 7.26q0-1.305.695-2.175.695-.87 1.984-.87h24.64q1.09 0 1.88.786.792.79.792 1.9z"/></svg>
+        </a>
+    </li>
+    <li id="gh">
+        <a href="https://github.com/ThatCSharpGuy" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 16.37q0 4.9-2.86 8.8-2.86 3.93-7.4 5.43-.52.1-.77-.13-.24-.24-.24-.6v-4.1q0-1.9-1.02-2.78 1.2-.2 2.1-.4.9-.3 1.87-.8.95-.5 1.58-1.3.65-.8 1.05-2.1.4-1.27.4-2.93 0-2.38-1.54-4.04.7-1.78-.16-3.98-.57-.2-1.6.2t-1.8.85l-.75.47q-1.83-.5-3.76-.5t-3.76.5l-.8-.54Q11 8.16 9.9 7.7q-1.13-.4-1.7-.23-.86 2.2-.14 3.97-1.54 1.68-1.54 4.05 0 1.6.4 2.9.4 1.23 1.02 2.02.63.8 1.58 1.3.94.53 1.83.77.9.25 2 .37-.77.7-.94 2-.4.2-.82.3-.47.1-1.1.1-.66 0-1.3-.44-.63-.4-1.08-1.2-.38-.63-.95-1-.52-.4-.9-.5l-.4-.03q-.4 0-.57.1-.15.1-.1.24.06.13.18.26t.26.2l.15.1q.44.2.86.73t.63 1l.2.43q.23.75.84 1.2.6.47 1.3.6.7.13 1.34.14.65 0 1.08-.04l.46-.08v2.74q0 .35-.26.6-.25.22-.8.12-4.5-1.5-7.37-5.42-3-3.74-3-8.64 0-4.1 2-7.54 2-3.44 5.45-5.46 3.45-2 7.53-2t7.6 2q3.4 2 5.4 5.46 2 3.44 2 7.53z"/></svg>
+        </a>
+    </li>
+    <li id="yt">
+        <a href="https://www.youtube.com/c/thatcsharpguy" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M22.43 15.714c0-.413-.17-.714-.504-.904l-8.57-5.357c-.347-.223-.71-.234-1.09-.033-.368.2-.552.513-.552.937V21.07c0 .426.184.738.553.94.178.088.35.133.52.133.222 0 .412-.056.568-.168l8.57-5.357c.336-.19.504-.49.504-.904zm8.57 0c0 1.072-.006 1.91-.017 2.51-.01.604-.058 1.366-.142 2.287-.083.92-.208 1.744-.376 2.47-.178.815-.563 1.5-1.155 2.06-.592.557-1.284.88-2.077.97-2.477.28-6.222.42-11.233.42-5.01 0-8.756-.14-11.233-.42-.793-.09-1.487-.413-2.085-.97-.597-.56-.984-1.245-1.163-2.06-.157-.726-.277-1.55-.36-2.47-.085-.92-.132-1.682-.143-2.285-.01-.602-.017-1.44-.017-2.51 0-1.072.006-1.91.017-2.512.01-.603.058-1.364.142-2.285.083-.92.208-1.744.376-2.47.178-.814.563-1.5 1.155-2.058.592-.56 1.284-.882 2.077-.97C7.244 5.14 10.99 5 16 5c5.01 0 8.756.14 11.233.42.793.088 1.487.41 2.085.97.597.558.984 1.244 1.163 2.06.157.724.277 1.547.36 2.468.085.92.132 1.682.143 2.285.01.603.017 1.44.017 2.51z"/></svg>
+        </a>
+    </li>
+    <li id="tw">
+        <a href="https://twitter.com/io_exception" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 6.7q-1.28 1.88-3.08 3.2.02.26.02.8 0 2.46-.73 4.93-.7 2.46-2.2 4.73-1.46 2.26-3.5 4-2.04 1.75-4.9 2.8-2.88 1.02-6.16 1.02-5.16 0-9.44-2.76.67.08 1.48.08 4.3 0 7.64-2.63-2-.04-3.58-1.23-1.58-1.2-2.17-3.03.63.1 1.16.1.82 0 1.62-.2-2.13-.44-3.53-2.13-1.4-1.68-1.4-3.9v-.1q1.3.74 2.78.8-1.26-.84-2-2.2-.74-1.35-.74-2.93 0-1.67.83-3.1 2.3 2.84 5.6 4.54 3.3 1.7 7.07 1.9-.15-.73-.15-1.4 0-2.57 1.8-4.36 1.8-1.8 4.35-1.8 2.66 0 4.5 1.94 2.07-.4 3.9-1.5-.7 2.2-2.7 3.4 1.76-.2 3.53-.95z"/></svg>
+        </a>
+    </li>    
+    <li id="fb">
+        <a href="https://www.facebook.com/thatcsharpguy" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.512 1.488c.325.326.488.716.488 1.172v26.68c0 .456-.163.846-.488 1.172-.326.325-.716.488-1.172.488h-7.637V19.38h3.887l.586-4.532h-4.473v-2.89c0-.73.153-1.277.46-1.642.305-.364.9-.546 1.786-.546l2.382-.02V5.707c-.82-.117-1.98-.176-3.477-.176-1.77 0-3.186.522-4.248 1.564-1.06 1.04-1.59 2.513-1.59 4.414v3.34h-3.908v4.53h3.906V31H2.66c-.456 0-.846-.163-1.172-.488C1.163 30.186 1 29.796 1 29.34V2.66c0-.456.163-.846.488-1.172C1.814 1.163 2.204 1 2.66 1h26.68c.456 0 .846.163 1.172.488z"/></svg>
+        </a>
+    </li>
+    <li id="gp">
+        <a href="https://www.google.com/+Thatcsharpguy" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.9 14.25h-2.7v-2.72h-2.73v2.72h-2.7v2.72h2.7v2.7h2.72v-2.7h2.7v-2.72M10.5 17.5h5.4c-.22 1.4-1.64 4.12-5.4 4.12-3.25 0-5.9-2.7-5.9-6 0-3.33 2.65-6.02 5.9-6.02 1.85 0 3.08.78 3.8 1.46l2.58-2.48c-1.66-1.55-3.8-2.5-6.38-2.5C5.26 6.1 1 10.35 1 15.62s4.26 9.52 9.52 9.52c5.5 0 9.14-3.86 9.14-9.3 0-.62-.07-1.1-.15-1.57h-8.96"/></svg>
+        </a>
+    </li>
+</ul>
+<ul class="icon-list">
+    <li>
+        <a href="/acerca-de">
+            <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M7 18.89v-5.88H1.15v-6H7V1.1h6v5.91h6V1.1h6v5.91h5.85v6H25v5.88h5.85v6H25v5.912h-6v-5.91h-6v5.91H7v-5.91H1.15v-6H7zm6 0v-5.88h6v5.88h-6z" fill="#3C8A3F" fill-rule="evenodd"/></svg>
+        </a>
+    </li>
+</ul>
+          </div>
+      </div>
+      <div class="pure-u-1 pure-u-md-6-24">
+      </div>
+      <div class="pure-u-1 pure-u-md-10-24">
+          <div class="footer-content">
+              <div class="panel active" id="footer-signup">
+    <div class="panel-title">
+        <span class="title">Suscríbete</span>
+    </div>
+    <div class="panel-content">
+    Recibe semanalmente lo nuevo en That C# guy
+    <form class="pure-form-stacked" action="//thatcsharpguy.us11.list-manage.com/subscribe/post?u=ebfe25f4824d7335380cf1ffd&amp;id=eca72e1174" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    
+                <div class="response" id="mce-error-response" style="display:none"></div>
+                <div class="response" id="mce-success-response" style="display:none"></div>
+                
+                <input type="email" value="" placeholder="dirección de email" name="EMAIL" class="required email" id="mce-EMAIL">
+                
+                <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="button">
+                    <span style="text-decoration:underline;">E</span>nviar
+                </button>
+                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                    <input type="text" name="b_ebfe25f4824d7335380cf1ffd_eca72e1174" tabindex="-1" value="">
+                </div>
+    </form>
+    </div>
+</div>
+          </div>
+      </div>
+  </div>
+</footer>
+   
+  </body>
+
+</html>

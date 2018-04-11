@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/Blog">
+<head>
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href='http://thatcsharpguy.com/assets/site/favicon.png'>
+  <title>Revisando mis repos en GitHub - That C# guy</title>
+  <meta name="description" content="Un post un poco diferente, en este no hablaré sobre alguna característica de C# o un paquete de NuGet, sino de proyectos, pruebas y aplicaciones en los que l...">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.2/pure-min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://thatcsharpguy.com/post/revisando-github/">
+  <link rel="alternate" type="application/rss+xml" title="That C# guy" href="http://thatcsharpguy.com/feed.xml" />
+  <!-- Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-94016385-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+
+  <!-- Twitter cards  -->
+	 
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="http://thatcsharpguy.com/postimages//mis-repos-github/featured.png">
+	
+	<meta name="twitter:site" content="@io_exception" />
+	<meta name="twitter:title" content="Revisando mis repos en GitHub" />
+	<meta name="twitter:description" content="Un post un poco diferente, en este no hablaré sobre alguna característica de C# o un paquete de NuGet, sino de proyectos, pruebas y aplicaciones en los que l..." />
+
+
+    <!-- Facebook open graph tags -->  
+    
+    <meta property="og:image" content="http://thatcsharpguy.com/postimages//mis-repos-github/featured.png" />
+    
+    
+    <meta property="og:title" content="Revisando mis repos en GitHub" />
+    <meta property="og:site_name" content="That C# guy"/>
+    <meta property="og:url" content="http://thatcsharpguy.com/post/revisando-github/">
+    <meta property="og:description" content="Un post un poco diferente, en este no hablaré sobre alguna característica de C# o un paquete de NuGet, sino de proyectos, pruebas y aplicaciones en los que l..." />
+    <meta property="article:author" content="https://www.facebook.com/antonio.feregrino" />
+    <meta property="article:publisher" content="https://www.facebook.com/antonio.feregrino" />
+    <meta property="fb:app_id" content="942345702508916" />
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>
+
+</head>
+  <body>
+
+    <header class="site-header ui">
+  <div class="wrapper menu">
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+      <div class="trigger">
+        
+        <a class="link page-link" href="/">Inicio</a>
+        
+        <a class="link page-link" href="/tv">TV</a>
+        
+        <a class="link page-link" href="/acerca-de">Acerca de</a>
+        
+        <a class="link page-link" href="/tag">Tags</a>
+        
+        <a class="link page-link" href="/busqueda">Buscar</a>
+        
+        <a class="link page-link" href="/suscribete">Suscríbete</a>
+        
+        <a class="link page-link" href="/herramientas">Herramientas</a>
+        
+        <a class="link page-link" href="/libros">Libros</a>
+        
+      </div>
+    </nav>
+  </div>
+  <div class="wrapper title">
+    <div class="pure-g">
+      <div class="pure-u-1-24 title-number"><span>1</span></div>
+      <div class="pure-u-13-24 content-window">
+        <a class="site-title" href="/">That C# guy</a>
+      </div>
+      <div class="pure-u-10-24 header-menu">
+        <ul>
+          <li class="youtube"><a href="https://www.youtube.com/c/thatcsharpguy">YouTube</a></li>
+          <li class="csharp"><a href="http://thatcsharpguy.com/tag/AprendeCSharp/">Aprende C#</a></li>
+          <li class="xamarin"><a href="http://thatcsharpguy.com/tag/Xamarin/">Xamarin</a></li>
+        </ul>
+      </div>
+    </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div id="post-meta">
+    <a href="/acerca-de/#citando" rel="author">Antonio Feregrino</a> | 29/08/2016
+ 
+
+| <strong><a href="https://github.com/ThatCSharpGuy/aprende-c-sharp/tree/master/events" target="_blank"><i class="sp sp-git"></i> Ver código de este post en GitHub</a></strong>
+
+</div>
+<h1 class="post-title">Revisando mis repos en GitHub</h1>
+<div class="post-content">
+
+    <article>
+        <p>Este fin de semana fue de limpieza, y también le tocó a algunos de mis repositorios en GitHub. Desde que descubrí esta herramienta de colaboración (basada en un sistema de <a href="../../tv/">control-versiones</a>) en Junio de 2012, la he usado tanto para tareas, mi proyecto de titulación y proyectos personales. He llegado a subir de todo un poco, y pensé que en este post sería buena idea compartir algunas de las cosas que he ido subiendo con el tiempo.</p>
+
+<h2 id="aprende-c-sharp">aprende-c-sharp</h2>
+<div class="pure-g project">
+<div class="pure-u-1 pure-u-md-1-5">
+<figure><img src="/postimages//mis-repos-github/aprende-c-sharp.png" alt="&quot;Aprende C#&quot; images_set" /></figure>
+</div>
+<div class="pure-u-1 pure-u-md-4-5">
+No hay mucho qué decir sobre este repo, en él se encuentra tódo el código de los posts con la etiqueta <a href="../../tag/AprendeCSharp">#AprendeCSharp</a>, en los cuales trato de explicar un poco más a detalle algunas de las características de este magnífico lenguaje. Muchos de los ejemplos son un simple archivo, pero decidí incluirlos en proyectos de Visual Studio para que pudieras ejecutarlos en un entorno conocido. 
+<div class="links">
+<a href="https://github.com/ThatCSharpGuy/aprende-c-sharp">GitHub</a> | <a href="../../tag/AprendeCSharp">Post en TC#G</a>
+</div>
+</div>  
+</div>
+<p><br /></p>
+
+<h2 id="xocr">xocr</h2>
+<div class="pure-g project">
+<div class="pure-u-1 pure-u-md-1-5">
+<figure><img src="/postimages//mis-repos-github/xocr.jpg" alt="&quot;Xocr&quot; images_set" /></figure>
+</div>
+<div class="pure-u-1 pure-u-md-4-5">
+El repo <i>xocr</i> es el hogar de una de una prueba de concepto sobre cómo usar <a href="https://github.com/tesseract-ocr" target="_blank">Tesseract OCR</a>, una herramienta de reconocimiento de caracteres, con Xamarin.Forms. Originalmente realicé esta prueba como parte del desarrollo de una app en la cuál era necesario "leer" unos dígitos en un documento impreso. Funcionó de maravilla... aunque eso sí, la app quedó un poco pesada.
+<div class="links">
+<a href="https://github.com/ThatCSharpGuy/xocr">GitHub</a> | <a href="../tesseract-ocr-xamarin">Post en TC#G</a>
+</div>
+</div>  
+</div>
+<p><br /></p>
+
+<h2 id="whobrokeit">WhoBrokeIt</h2>
+<div class="pure-g project">
+<div class="pure-u-1 pure-u-md-1-5">
+<figure><img src="/postimages//mis-repos-github/whobrokeit.png" alt="&quot;WhoBrokeIt&quot; images_set" /></figure>
+</div>
+<div class="pure-u-1 pure-u-md-4-5">
+<i>WhoBrokeIt</i> es una app nacida del ocio, pero que a la vez puede resultar útil. Resulta que en el trabajo comenzamos a experimentar con la <i>Integración Continua</i> usando <i>Visual Studio Team Services</i>, entonces, para estar al tanto del estatus de las compilaciones desarrollé esta simple app con <a href="../../xamarin-forms">Xamarin.Forms</a>, desde la cual tienes acceso a toda la lista de tus proyectos y sus compilaciones, así puedes saber cuándo y quién subió el cambio que rompió la compilación.
+<div class="links">
+<a href="https://github.com/fferegrino/WhoBrokeIt">GitHub</a>
+</div>  
+</div>
+</div>
+<p><br /></p>
+
+<h2 id="questacion">questacion</h2>
+<div class="pure-g project">
+<div class="pure-u-1 pure-u-md-1-5">
+<figure><img src="/postimages//mis-repos-github/questacion.png" alt="&quot;questacion&quot; images_set" /></figure>
+</div>
+<div class="pure-u-1 pure-u-md-4-5">
+Resulta que soy muy fan de Pokémon GO, pero solo lo uso en el transporte público, pero a veces, voy tan entrado en visitar todas las Pokeparadas que ni me doy cuenta en qué estación voy (y a veces no me bajo en la adecuada), entonces me decidí a programar esta pequeña app que me envía una notificación cada vez que estoy cerca de una estación de metrobús, así me entero de en donde estoy sin levantar la vista de la pantalla. Una peculiaridad de esta app es que... ¡está hecha en Java!
+<br />
+<br />
+Dado que usé <a href="http://www.gaia-gis.it/gaia-sins/" target="_blank">SpatiaLite</a>, una extensión a SQLite para consultas geoespaciales, no me fue posible hacerla tan rápido con C# y Xamarin, es por eso que usé Java. 
+<div class="links">
+<a href="https://github.com/fferegrino/questacion">GitHub</a>
+</div>  
+</div>
+</div>
+<p><br /></p>
+
+<h2 id="appod">appod</h2>
+<div class="pure-g project">
+<div class="pure-u-1 pure-u-md-1-5">
+<figure><img src="/postimages//mis-repos-github/appod.png" alt="&quot;appod&quot; images_set" /></figure>
+</div>
+<div class="pure-u-1 pure-u-md-4-5">
+Creo que hacer una app de la <i>Astronomy Picture Of the Day</i> es como el hola mundo de la programación de aplicaciones, ¿así que por qué no iba a hacer una yo? para esta fue necesario el acceso a las <a href="https://api.nasa.gov" target="_blank">APIs de la NASA</a>, además de Xamarin.iOS y Xamarin.Android. Con la app de Android no tuve mayor problema, pero con la de iOS tuve que aprender un poco de AutoLayout y aún así no quedó como yo deseaba.
+<div class="links">
+<a href="https://github.com/fferegrino/appod">GitHub</a>
+</div>  
+</div>
+</div>
+<p><br /></p>
+
+<h2 id="mrkviewer">MrkViewer</h2>
+<div class="pure-g project">
+<div class="pure-u-1 pure-u-md-1-5">
+<figure><img src="/postimages//mis-repos-github/MrkViewer.png" alt="&quot;Xocr&quot; images_set" /></figure>
+</div>
+<div class="pure-u-1 pure-u-md-4-5">
+La mayoría de las apps que hago y que subo a GitHub tienen que ver con ideas que se me ocurren de pronto. Y esta es una de esas: quería un lector de Markdown para mi vieja Surface RT y ninguna me satisfacía, así que me puse manos a la obra. Para esta hice un control personalizado, derivado de un <code>WebView</code> y usando <a href="https://github.com/Knagis/CommonMark.NET" target="_blank">CommonMark.NET</a> para realizar la conversión de <i>md</i> a algo atractivo al usuario.
+<div class="links">
+<a href="https://github.com/ThatCSharpGuy/MrkViewer">GitHub</a> | <a href="../markdownview-xamarin-forms-control">Post en TC#G</a>
+</div>  
+</div>
+</div>
+<p><br /></p>
+
+<h2 id="charphat">CharpHat</h2>
+<div class="pure-g project">
+<div class="pure-u-1 pure-u-md-1-5">
+<figure><img src="/postimages//mis-repos-github/CharpHat.png" alt="&quot;Xocr&quot; images_set" /></figure>
+</div>
+<div class="pure-u-1 pure-u-md-4-5">
+CharpHat fue una de las primeras cosas que intenté hacer con Xamarin.Forms, consistía en un gran reto, porque es necesario acceder a la cámara del dispositivo independientemente de la plataforma. La app en funcionalidad es sencilla: tomas una foto y te puedes poner encima un birrete de C#, como para demostrar lo mucho que te gusta el lenguaje. Lo único malo es que a pesar de estar hecha con forms, únicamente la pude hacer funcionar para Android.
+<div class="links">
+<a href="https://github.com/fferegrino/CharpHat">GitHub</a> | <a href="../charphat-android">Post en TC#G</a>
+</div>  
+</div>
+</div>
+<p><br /></p>
+
+<h2 id="xamarinwindowview">Xamarin.WindowView</h2>
+<div class="pure-g project">
+<div class="pure-u-1 pure-u-md-1-5">
+<figure><img src="/postimages//mis-repos-github/windowView.gif" alt="&quot;WindowView&quot; images_set" /></figure>
+</div>
+<div class="pure-u-1 pure-u-md-4-5">
+Xamarin.WindowView no es una app sino una herramienta para hacerlas: es una librería que contiene un control para Android. WindowView no es más que la versión en C# de <a href="https://github.com/justasm/WindowView" target="_blank">WindowView de Justas Medeisis</a>. Básicamente este control es un ImageView que te permite mover la imagen que contiene con los sensores de movimiento de tu celular, justo como en la imagen de al lado.
+<br />
+<a href="https://github.com/messier16/Xamarin.WindowView">GitHub</a>
+</div>  
+</div>
+<p>&lt;/div&gt;
+<br /></p>
+
+<h2 id="formscontrols">Forms.Controls</h2>
+<div class="pure-g project">
+<div class="pure-u-1 pure-u-md-1-5">
+<figure><img src="/postimages//mis-repos-github/m16.png" alt="&quot;Xocr&quot; images_set" /></figure>
+</div>
+<div class="pure-u-1 pure-u-md-4-5">
+Hay algunos controles que no tenemos disponibles cuando usamos Xamarin.Forms, es por eso que decidí hacer una librería con controles que ocupé para algunas apps. Básicamente las implementaciones para iOS están completas y 100% funcionales, las otras plataformas han sido dejadas del lado. Esto motivado a que el desarrollo de dichas apps está centrado (por el momento) solo en apps para dispositivos de Apple. Espero en el futuro poder dedicarle tiempo al resto de los sistemas operativos. 
+<div class="links">
+<a href="https://github.com/messier16/Forms.Controls">GitHub</a>
+</div>  
+</div>
+</div>
+<p><br /></p>
+
+<p>Estos son solo una especie de vista previa, y mientras que algunos tienen ya su respectivo post en el blog, otros no. Con el tiempo espero poder hablar más sobre ellos y explicar parte del código, pero si estás interesado en alguno, no dudes en decirme y darle prioridad o contarte directamente cómo es que funciona.</p>
+
+    </article>
+    <div class="post-contact">
+        <div class="pure-g">
+    <div class="pure-u-1 pure-u-md-7-24">
+        ¿Dudas? ¿comentarios?
+        <ul class="post-contact-list">
+            <li><a title="feregrino@thatcsharpguy.com" href="mailto:feregrino@thatcsharpguy.com?subject=Revisando+mis+repos+en+GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 11.815v13.292q0 1.105-.787 1.892-.787.78-1.892.78H3.68q-1.106 0-1.893-.79Q1 26.21 1 25.102v-13.29q.737.82 1.69 1.46 6.06 4.12 8.32 5.78.955.705 1.55 1.1.594.392 1.582.802.987.41 1.84.41h.035q.854 0 1.84-.41.99-.41 1.583-.804.595-.393 1.55-1.096 2.845-2.06 8.336-5.778.954-.652 1.674-1.455zm0-4.922q0 1.322-.82 2.528t-2.043 2.06l-7.835 5.44-.71.51q-.545.4-.905.64t-.87.55q-.51.3-.963.45-.452.15-.837.15h-.034q-.385 0-.837-.15-.452-.15-.962-.45-.51-.302-.87-.544-.36-.243-.905-.637l-.72-.51q-1.525-1.07-4.388-3.055-2.86-1.984-3.43-2.386-1.04-.704-1.96-1.935Q1 8.315 1 7.26q0-1.305.695-2.175.695-.87 1.984-.87h24.64q1.09 0 1.88.786.792.79.792 1.9z"/></svg></a></li>
+            <li><a title="@io_exception" href="https://twitter.com/intent/tweet?text=@io_exception about Revisando+mis+repos+en+GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 6.7q-1.28 1.88-3.08 3.2.02.26.02.8 0 2.46-.73 4.93-.7 2.46-2.2 4.73-1.46 2.26-3.5 4-2.04 1.75-4.9 2.8-2.88 1.02-6.16 1.02-5.16 0-9.44-2.76.67.08 1.48.08 4.3 0 7.64-2.63-2-.04-3.58-1.23-1.58-1.2-2.17-3.03.63.1 1.16.1.82 0 1.62-.2-2.13-.44-3.53-2.13-1.4-1.68-1.4-3.9v-.1q1.3.74 2.78.8-1.26-.84-2-2.2-.74-1.35-.74-2.93 0-1.67.83-3.1 2.3 2.84 5.6 4.54 3.3 1.7 7.07 1.9-.15-.73-.15-1.4 0-2.57 1.8-4.36 1.8-1.8 4.35-1.8 2.66 0 4.5 1.94 2.07-.4 3.9-1.5-.7 2.2-2.7 3.4 1.76-.2 3.53-.95z"/></svg></a></li>
+            <li><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M31 31H1V1h30v30z"/><path d="M31 2.88v16.87h-5.63v7.68l-4-2.95v2.74l-9.38.02L7.86 31H4.74v-3.7H1V12.36h5.63V2.88H31z" fill="#F6F6F6"/><path d="M19.75 23.27v2.1H12.1L6.62 29v-3.63H2.88V14.13h3.75V16H4.75v7.5H8.5v2.03l2.8-2.03h6.57v-1.62l1.88 1.4z" fill="#424242"/><path d="M17.88 6.63h9.37V16h-5.63v4.09l-3.54-3.55-.55-.55h-7.17V6.62h7.5zM8.5 4.75v13.13h8.26l6.74 5.57v-5.57h5.63V4.74H8.5z" fill="#424242"/><path d="M25.38 10.38H12.24V8.5h13.13v1.88zM21.63 14.13h-9.38v-1.88h9.38v1.88z" fill="#424242"/><path d="M8.5 25.53V23.5" fill="#F6F6F6"/><g fill="#F0EFF1"><path d="M17.88 21.88v1.62H11.3l-2.8 2.03V23.5H4.75V16h1.88v3.75h8.36l2.88 2.13zM17.88 6.63h-7.5V16h7.15l.55.55 3.55 3.54V16h5.62V6.62h-9.38zm3.75 7.5h-9.38v-1.88h9.38v1.88zm3.75-3.76H12.24V8.5h13.13v1.88z"/></g></g></svg> <a id="post-count" href="http://thatcsharpguy.com/post/revisando-github/#disqus_thread" data-disqus-identifier="/post/revisando-github/"></a></li>
+        </ul>
+    </div>  
+    <div class="pure-u-1 pure-u-md-10-24">
+        
+            ¿Quieres ver más como esto? revisa la etiqueta  <a class="tag" href="/tag/AprendeCSharp">#AprendeCSharp</a>.
+        
+    </div>
+    <div class="pure-u-1 pure-u-md-7-24">
+        Comparte esto
+        <ul class="post-contact-list">
+            <li><a href="mailto:?subject=Revisando mis repos en GitHub&amp;body=http://thatcsharpguy.com/post/revisando-github/" title="email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 11.815v13.292q0 1.105-.787 1.892-.787.78-1.892.78H3.68q-1.106 0-1.893-.79Q1 26.21 1 25.102v-13.29q.737.82 1.69 1.46 6.06 4.12 8.32 5.78.955.705 1.55 1.1.594.392 1.582.802.987.41 1.84.41h.035q.854 0 1.84-.41.99-.41 1.583-.804.595-.393 1.55-1.096 2.845-2.06 8.336-5.778.954-.652 1.674-1.455zm0-4.922q0 1.322-.82 2.528t-2.043 2.06l-7.835 5.44-.71.51q-.545.4-.905.64t-.87.55q-.51.3-.963.45-.452.15-.837.15h-.034q-.385 0-.837-.15-.452-.15-.962-.45-.51-.302-.87-.544-.36-.243-.905-.637l-.72-.51q-1.525-1.07-4.388-3.055-2.86-1.984-3.43-2.386-1.04-.704-1.96-1.935Q1 8.315 1 7.26q0-1.305.695-2.175.695-.87 1.984-.87h24.64q1.09 0 1.88.786.792.79.792 1.9z"/></svg></a></li>
+            <li><a href="https://twitter.com/intent/tweet?text=Revisando+mis+repos+en+GitHub http://thatcsharpguy.com/post/revisando-github/&hashtags=AprendeCSharp" title="Tweet"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 6.7q-1.28 1.88-3.08 3.2.02.26.02.8 0 2.46-.73 4.93-.7 2.46-2.2 4.73-1.46 2.26-3.5 4-2.04 1.75-4.9 2.8-2.88 1.02-6.16 1.02-5.16 0-9.44-2.76.67.08 1.48.08 4.3 0 7.64-2.63-2-.04-3.58-1.23-1.58-1.2-2.17-3.03.63.1 1.16.1.82 0 1.62-.2-2.13-.44-3.53-2.13-1.4-1.68-1.4-3.9v-.1q1.3.74 2.78.8-1.26-.84-2-2.2-.74-1.35-.74-2.93 0-1.67.83-3.1 2.3 2.84 5.6 4.54 3.3 1.7 7.07 1.9-.15-.73-.15-1.4 0-2.57 1.8-4.36 1.8-1.8 4.35-1.8 2.66 0 4.5 1.94 2.07-.4 3.9-1.5-.7 2.2-2.7 3.4 1.76-.2 3.53-.95z"/></svg></a></li>
+            
+            <li><a href="javascript:sharePostFacebook();" title="share" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.512 1.488c.325.326.488.716.488 1.172v26.68c0 .456-.163.846-.488 1.172-.326.325-.716.488-1.172.488h-7.637V19.38h3.887l.586-4.532h-4.473v-2.89c0-.73.153-1.277.46-1.642.305-.364.9-.546 1.786-.546l2.382-.02V5.707c-.82-.117-1.98-.176-3.477-.176-1.77 0-3.186.522-4.248 1.564-1.06 1.04-1.59 2.513-1.59 4.414v3.34h-3.908v4.53h3.906V31H2.66c-.456 0-.846-.163-1.172-.488C1.163 30.186 1 29.796 1 29.34V2.66c0-.456.163-.846.488-1.172C1.814 1.163 2.204 1 2.66 1h26.68c.456 0 .846.163 1.172.488z"/></svg></a> </li>
+            <li><a class="kindleWidget" href="#" title="send to kindle"> <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 32 32">
+  <path fill-rule="evenodd" d="M1 3c0-1.1.9-2 2-2h26c1.1 0 2 .9 2 2v26c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3zm8.4-.3V29h3.2v-8.72h.07L19.54 29h3.8l-8.07-10.06 7.34-7.5h-3.7l-6.2 6.36h-.08V2.7H9.4z"/>
+</svg> </a> </li>
+        </ul>
+    </div>
+</div>
+<script>
+    function sharePostFacebook() {
+        FB.ui({
+  method: 'share',
+  href: 'http://thatcsharpguy.com/post/revisando-github/',
+}, function(response){});
+    }
+</script>
+<script type="text/javascript" src="https://d1xnn692s7u6t6.cloudfront.net/widget.js"></script>
+<script type="text/javascript">(function k(){window.$SendToKindle&&window.$SendToKindle.Widget?$SendToKindle.Widget.init({}):setTimeout(k,500);})();</script>
+    </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script id="dsq-count-scr" src="//thatcharpguy.disqus.com/count.js" async></script>
+<script>
+    var noCommentsText = "deja un comentario";
+    var commentText = " comentario";
+    
+//var disqus_developer = 1; // this would set it to developer mode
+
+    var disqus_config = function () {
+        this.page.url = "http://thatcsharpguy.com/post/revisando-github/"; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "/post/revisando-github/"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.title ="Revisando mis repos en GitHub";
+    };
+</script>
+<script src="/js/comments.js"></script>
+
+      </div>
+    </div>
+
+    <footer class="site-footer ui">
+  <div class="wrapper pure-g">
+      <div class="pure-u-1 pure-u-md-8-24">
+          <div class="footer-content">
+              <ul class="icon-list">
+    <li id="em">
+        <a href="mailto:feregrino@thatcsharpguy.com" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 11.815v13.292q0 1.105-.787 1.892-.787.78-1.892.78H3.68q-1.106 0-1.893-.79Q1 26.21 1 25.102v-13.29q.737.82 1.69 1.46 6.06 4.12 8.32 5.78.955.705 1.55 1.1.594.392 1.582.802.987.41 1.84.41h.035q.854 0 1.84-.41.99-.41 1.583-.804.595-.393 1.55-1.096 2.845-2.06 8.336-5.778.954-.652 1.674-1.455zm0-4.922q0 1.322-.82 2.528t-2.043 2.06l-7.835 5.44-.71.51q-.545.4-.905.64t-.87.55q-.51.3-.963.45-.452.15-.837.15h-.034q-.385 0-.837-.15-.452-.15-.962-.45-.51-.302-.87-.544-.36-.243-.905-.637l-.72-.51q-1.525-1.07-4.388-3.055-2.86-1.984-3.43-2.386-1.04-.704-1.96-1.935Q1 8.315 1 7.26q0-1.305.695-2.175.695-.87 1.984-.87h24.64q1.09 0 1.88.786.792.79.792 1.9z"/></svg>
+        </a>
+    </li>
+    <li id="gh">
+        <a href="https://github.com/ThatCSharpGuy" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 16.37q0 4.9-2.86 8.8-2.86 3.93-7.4 5.43-.52.1-.77-.13-.24-.24-.24-.6v-4.1q0-1.9-1.02-2.78 1.2-.2 2.1-.4.9-.3 1.87-.8.95-.5 1.58-1.3.65-.8 1.05-2.1.4-1.27.4-2.93 0-2.38-1.54-4.04.7-1.78-.16-3.98-.57-.2-1.6.2t-1.8.85l-.75.47q-1.83-.5-3.76-.5t-3.76.5l-.8-.54Q11 8.16 9.9 7.7q-1.13-.4-1.7-.23-.86 2.2-.14 3.97-1.54 1.68-1.54 4.05 0 1.6.4 2.9.4 1.23 1.02 2.02.63.8 1.58 1.3.94.53 1.83.77.9.25 2 .37-.77.7-.94 2-.4.2-.82.3-.47.1-1.1.1-.66 0-1.3-.44-.63-.4-1.08-1.2-.38-.63-.95-1-.52-.4-.9-.5l-.4-.03q-.4 0-.57.1-.15.1-.1.24.06.13.18.26t.26.2l.15.1q.44.2.86.73t.63 1l.2.43q.23.75.84 1.2.6.47 1.3.6.7.13 1.34.14.65 0 1.08-.04l.46-.08v2.74q0 .35-.26.6-.25.22-.8.12-4.5-1.5-7.37-5.42-3-3.74-3-8.64 0-4.1 2-7.54 2-3.44 5.45-5.46 3.45-2 7.53-2t7.6 2q3.4 2 5.4 5.46 2 3.44 2 7.53z"/></svg>
+        </a>
+    </li>
+    <li id="yt">
+        <a href="https://www.youtube.com/c/thatcsharpguy" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M22.43 15.714c0-.413-.17-.714-.504-.904l-8.57-5.357c-.347-.223-.71-.234-1.09-.033-.368.2-.552.513-.552.937V21.07c0 .426.184.738.553.94.178.088.35.133.52.133.222 0 .412-.056.568-.168l8.57-5.357c.336-.19.504-.49.504-.904zm8.57 0c0 1.072-.006 1.91-.017 2.51-.01.604-.058 1.366-.142 2.287-.083.92-.208 1.744-.376 2.47-.178.815-.563 1.5-1.155 2.06-.592.557-1.284.88-2.077.97-2.477.28-6.222.42-11.233.42-5.01 0-8.756-.14-11.233-.42-.793-.09-1.487-.413-2.085-.97-.597-.56-.984-1.245-1.163-2.06-.157-.726-.277-1.55-.36-2.47-.085-.92-.132-1.682-.143-2.285-.01-.602-.017-1.44-.017-2.51 0-1.072.006-1.91.017-2.512.01-.603.058-1.364.142-2.285.083-.92.208-1.744.376-2.47.178-.814.563-1.5 1.155-2.058.592-.56 1.284-.882 2.077-.97C7.244 5.14 10.99 5 16 5c5.01 0 8.756.14 11.233.42.793.088 1.487.41 2.085.97.597.558.984 1.244 1.163 2.06.157.724.277 1.547.36 2.468.085.92.132 1.682.143 2.285.01.603.017 1.44.017 2.51z"/></svg>
+        </a>
+    </li>
+    <li id="tw">
+        <a href="https://twitter.com/io_exception" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M31 6.7q-1.28 1.88-3.08 3.2.02.26.02.8 0 2.46-.73 4.93-.7 2.46-2.2 4.73-1.46 2.26-3.5 4-2.04 1.75-4.9 2.8-2.88 1.02-6.16 1.02-5.16 0-9.44-2.76.67.08 1.48.08 4.3 0 7.64-2.63-2-.04-3.58-1.23-1.58-1.2-2.17-3.03.63.1 1.16.1.82 0 1.62-.2-2.13-.44-3.53-2.13-1.4-1.68-1.4-3.9v-.1q1.3.74 2.78.8-1.26-.84-2-2.2-.74-1.35-.74-2.93 0-1.67.83-3.1 2.3 2.84 5.6 4.54 3.3 1.7 7.07 1.9-.15-.73-.15-1.4 0-2.57 1.8-4.36 1.8-1.8 4.35-1.8 2.66 0 4.5 1.94 2.07-.4 3.9-1.5-.7 2.2-2.7 3.4 1.76-.2 3.53-.95z"/></svg>
+        </a>
+    </li>    
+    <li id="fb">
+        <a href="https://www.facebook.com/thatcsharpguy" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.512 1.488c.325.326.488.716.488 1.172v26.68c0 .456-.163.846-.488 1.172-.326.325-.716.488-1.172.488h-7.637V19.38h3.887l.586-4.532h-4.473v-2.89c0-.73.153-1.277.46-1.642.305-.364.9-.546 1.786-.546l2.382-.02V5.707c-.82-.117-1.98-.176-3.477-.176-1.77 0-3.186.522-4.248 1.564-1.06 1.04-1.59 2.513-1.59 4.414v3.34h-3.908v4.53h3.906V31H2.66c-.456 0-.846-.163-1.172-.488C1.163 30.186 1 29.796 1 29.34V2.66c0-.456.163-.846.488-1.172C1.814 1.163 2.204 1 2.66 1h26.68c.456 0 .846.163 1.172.488z"/></svg>
+        </a>
+    </li>
+    <li id="gp">
+        <a href="https://www.google.com/+Thatcsharpguy" class="contact">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.9 14.25h-2.7v-2.72h-2.73v2.72h-2.7v2.72h2.7v2.7h2.72v-2.7h2.7v-2.72M10.5 17.5h5.4c-.22 1.4-1.64 4.12-5.4 4.12-3.25 0-5.9-2.7-5.9-6 0-3.33 2.65-6.02 5.9-6.02 1.85 0 3.08.78 3.8 1.46l2.58-2.48c-1.66-1.55-3.8-2.5-6.38-2.5C5.26 6.1 1 10.35 1 15.62s4.26 9.52 9.52 9.52c5.5 0 9.14-3.86 9.14-9.3 0-.62-.07-1.1-.15-1.57h-8.96"/></svg>
+        </a>
+    </li>
+</ul>
+<ul class="icon-list">
+    <li>
+        <a href="/acerca-de">
+            <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M7 18.89v-5.88H1.15v-6H7V1.1h6v5.91h6V1.1h6v5.91h5.85v6H25v5.88h5.85v6H25v5.912h-6v-5.91h-6v5.91H7v-5.91H1.15v-6H7zm6 0v-5.88h6v5.88h-6z" fill="#3C8A3F" fill-rule="evenodd"/></svg>
+        </a>
+    </li>
+</ul>
+          </div>
+      </div>
+      <div class="pure-u-1 pure-u-md-6-24">
+      </div>
+      <div class="pure-u-1 pure-u-md-10-24">
+          <div class="footer-content">
+              <div class="panel active" id="footer-signup">
+    <div class="panel-title">
+        <span class="title">Suscríbete</span>
+    </div>
+    <div class="panel-content">
+    Recibe semanalmente lo nuevo en That C# guy
+    <form class="pure-form-stacked" action="//thatcsharpguy.us11.list-manage.com/subscribe/post?u=ebfe25f4824d7335380cf1ffd&amp;id=eca72e1174" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    
+                <div class="response" id="mce-error-response" style="display:none"></div>
+                <div class="response" id="mce-success-response" style="display:none"></div>
+                
+                <input type="email" value="" placeholder="dirección de email" name="EMAIL" class="required email" id="mce-EMAIL">
+                
+                <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="button">
+                    <span style="text-decoration:underline;">E</span>nviar
+                </button>
+                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                    <input type="text" name="b_ebfe25f4824d7335380cf1ffd_eca72e1174" tabindex="-1" value="">
+                </div>
+    </form>
+    </div>
+</div>
+          </div>
+      </div>
+  </div>
+</footer>
+   
+  </body>
+
+</html>

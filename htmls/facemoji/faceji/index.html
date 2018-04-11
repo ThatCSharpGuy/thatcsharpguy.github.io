@@ -1,0 +1,107 @@
+<p>This example shows how to post an image to the Project Oxford Emotion API using a binary file</p>
+<input type="file" id="filename" name="filename">
+<br />
+<div id="image-container" style="position: relative;">
+    <img id="picture" />
+</div>
+<p id="response"></p>
+
+<script type="text/javascript">
+    //apiKey: Replace this with your own Project Oxford Emotion API key, please do not use my key. I include it here so you can get up and running quickly but you can get your own key for free at https://www.projectoxford.ai/emotion 
+    var apiKey = "1dd1f4e23a5743139399788aa30a7153";
+
+    //apiUrl: The base URL for the API. Find out what this is for other APIs via the API documentation
+    var apiUrl = "https://api.projectoxford.ai/emotion/v1.0/recognize";
+    
+    $('#filename').change(function(evt) {
+        var tgt = evt.target || window.event.srcElement,
+        files = tgt.files;
+
+        // FileReader support
+        if (FileReader && files && files.length) {
+            var fr = new FileReader();
+            fr.onload = function () {
+                var image = new Image();
+                image.src = fr.result;
+                image.onload = function() {
+                    $('#image-container').css({
+                        "backgroundImage" : "url(" + image.src + ")",
+                        "width" : image.width + "px",
+                        "height" : image.height + "px"
+                    });
+                    
+                    var file = document.getElementById('filename').files[0];
+                    CallAPI(file, apiUrl, apiKey);
+                };
+            }
+            fr.readAsDataURL(files[0]);
+        }
+        // Not supported
+        else {
+        // fallback -- perhaps submit the input to an iframe and temporarily store
+        // them on the server until the user's session ends.
+        }
+    });
+
+    function CallAPI(file, apiUrl, apiKey)
+    {
+        $.ajax({
+            url: apiUrl,
+            beforeSend: function (xhrObj) {
+                xhrObj.setRequestHeader("Content-Type", "application/octet-stream");
+                xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", apiKey);
+            },
+            type: "POST",
+            data: file,
+            processData: false
+        })
+        .done(function (response) {
+            ProcessResult(response);
+        })
+        .fail(function (error) {
+            $("#response").text(error.getAllResponseHeaders());
+        });
+    }
+
+    function ProcessResult(response)
+    {
+        var container =  document.getElementById('image-container');
+        $('#image-container').empty();
+        response.forEach(function (face, index) {
+            var div = document.createElement('div');
+            $(div).css({
+                "position": "absolute",
+                "top": face.faceRectangle.top + "px",
+                "left": face.faceRectangle.left + "px",
+                "height": face.faceRectangle.height + "px",
+                "width": face.faceRectangle.width + "px",
+                "fontSize": (face.faceRectangle.height + 10) + "px",
+                "backgroundColor": "rgba(0,0,0,0.5)"
+            });
+            $(div).html(findEmotion(face.scores));
+            container.appendChild(div);
+            //console.log();
+        });
+        
+    }
+
+    var emotions = ["anger", "contempt", "disgust", "fear", "happiness","neutral","sadness","surprise"];
+    var emojis = ["&#128548;", "&#128522;", "&#128534;", "&#128561;", "&#128513;","&#128528;","&#128546;","&#128559;"];
+
+    function findEmotion(scores)
+    {
+        var emoji ="";
+        var maxEmotion =  Number.MIN_VALUE;
+        for(var i = 0; i < emotions.length; i++)
+        {
+            var score = parseFloat(scores[emotions[i]]);
+            if(maxEmotion < score)
+            {
+                emoji = emojis[i];
+                maxEmotion = score;
+            }
+        }
+        return emoji;
+    }
+    
+</script>
