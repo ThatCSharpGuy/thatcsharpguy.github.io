@@ -6,9 +6,173 @@
 </description>
     <link>http://thatcsharpguy.com/</link>
     <atom:link href="http://thatcsharpguy.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 11 Apr 2018 09:12:13 +0100</pubDate>
-    <lastBuildDate>Wed, 11 Apr 2018 09:12:13 +0100</lastBuildDate>
+    <pubDate>Wed, 11 Apr 2018 13:01:08 +0100</pubDate>
+    <lastBuildDate>Wed, 11 Apr 2018 13:01:08 +0100</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>Data Fundamentals</title>
+        <description>&lt;p&gt;This is the first video of a series I’ll be uploading in the coming weeks about the courses that I took as part of my masters’ degree here at the University of Glasgow.&lt;/p&gt;
+
+&lt;p&gt;The first course I want to talk to you about is Data Fundamentals. Basically, this course was a refresher of some of the things that you learned if you did an engineering degree, not to mention if you did a computer science degree. In my opinion, this was also the perfect introduction to Data Science, with basic but very interesting stuff that prepared us for the challenges.&lt;/p&gt;
+
+&lt;p&gt;I think it is worth mentioning that this was by far my favourite course, not only because of the topics we reviewed but also because of the lecturer, John Williamson, the way he explained things to us was simply amazing. But anyways, here in the university, the courses are divided in lectures. Usually, there is one topic per lecture, and it is precisely in that way that I’ll be describing them to you.&lt;/p&gt;
+
+&lt;p&gt;Starting with lecture 1:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Lecture 1&lt;/strong&gt;: We saw how to work with NumPy, a practical library to deal with numerical data in the form of arrays (vectors, matrices and tensors) using Python, how to transform them by performing flipping, slicing, transposing, and many more operations on them. And we also took a brief look at the concept of vectorized computing, which allows performing a single operation to multiple data elements to improve the performance of our code by taking the maximum advantage of our computers.&lt;/p&gt;
+
+&lt;p&gt;For the &lt;strong&gt;Lecture 2&lt;/strong&gt;: we learned how arrays are efficiently stored in a computer, we also saw how floats are stored in IEEE 754 notation, and this enabled us to know what are the most common errors that could happen when working with them. Finally, we were introduced to the concept of higher rank tensors, and how can we work efficiently with them using vectorized computing.&lt;/p&gt;
+
+&lt;p&gt;In &lt;strong&gt;Lecture 3&lt;/strong&gt;: we were shown some basics of scientific visualisation using &lt;code&gt;matplotlib&lt;/code&gt; a Python library to plot data, and learned the “language” of graphics, what is a stat, a scale, a guide, a geom, layer and a facet. As well as which plots make more sense when dealing with different types of data, this also involved which colours we can use to correctly communicate our findings when working with data.&lt;/p&gt;
+
+&lt;p&gt;The &lt;strong&gt;Fourth lecture&lt;/strong&gt; was about an introduction to linear algebra, its concepts and how can we perform them using Python and NumPy. This is somewhat an extension of what we saw in the first lecture, but now with linear algebra in mind. In here we reviewed the basic operations that can be performed on vectors, the concept of norm and more complex vector operations. By the end of this lecture we reviewed matrices and the operations that are defined for them as well as some useful properties that we can use to make our computations simpler.&lt;/p&gt;
+
+&lt;p&gt;The &lt;strong&gt;Fifth lecture&lt;/strong&gt; started with a refresher of how graphs can be represented using matrices whether they are directed, undirected and weighted or unweighted. After that, we went back directly to linear algebra, where concepts like eigenvalues and eigenvectors appeared, and how they are related to Principal Component Analysis. Talking about decomposition of matrices, we also reviewed the concept of Singular Value Decomposition, a way to decompose a matrix into simpler forms to enable efficient computation on them.&lt;/p&gt;
+
+&lt;p&gt;In &lt;strong&gt;Lecture 6&lt;/strong&gt;, we started with the core concept in which machine learning relies on optimization. Optimization is the task of finding the optimal settings for a process in order to improve it. We saw the main parts of an optimization problem:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Parameters&lt;/li&gt;
+  &lt;li&gt;Objective function&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For this, we also saw how can constraints be implemented into our parameter selection to make our optimization search more realistic. We focused mainly on iterative optimization, guided by heuristics that try to improve the performance of the algorithms behind them.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Lecture 7&lt;/strong&gt; was also about optimization concepts, including the basics of how a neural network works, and how derivatives can help us in finding the optimal parameters using the gradient descent algorithm. We saw what differentiable programming is and how we can use it to perform optimization.&lt;/p&gt;
+
+&lt;p&gt;In &lt;strong&gt;Lecture 8&lt;/strong&gt; the topic was probability, starting from the basics, including the concept of probability mass functions and probability density functions. We also reviewed what the joint, marginal and conditional probability, the basis for the Bayes’ Rule, a very important concept as well. And how can we deal with probabilities without running into numerical issues.&lt;/p&gt;
+
+&lt;p&gt;In the &lt;strong&gt;lab number eight&lt;/strong&gt;, corresponding to this lecture, we learned what a stochastic process was, and practised using a specific version of this kind of processes: the Markov process.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Lecture 9&lt;/strong&gt; was also about probability; we saw the concept of expectation, then some statistics and finally what Bayesian inference is and the Monte Carlo approaches are useful when dealing with Bayesian inference.&lt;/p&gt;
+
+&lt;p&gt;To conclude with the course in the &lt;strong&gt;lecture number 10&lt;/strong&gt;, in we saw a bit of Digital Signals  processing and time series. What sampling is and its relationship with the Nyquist limit, and how aliasing can appear if we don’t respect this limit. The last section of this lecture was about convolution and the Fourier transform.&lt;/p&gt;
+
+&lt;p&gt;Of course, we reviewed a lot more topics and we went more in-depth for almost all of them, trying to summarize hours of lectures and labs in a short video is not that easy, so if you want to know more about something that I mentioned where, please leave it on the comments.&lt;/p&gt;
+
+&lt;p&gt;So, that’s it for me, at least for now, I hope you liked this video, and if you did, please give it a Like. There are more videos coming about the remaining courses that I’m creating as I review the lecture notes in preparation for the exam, I think the next one is going to be about machine learning.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 05 Apr 2018 19:00:00 +0100</pubDate>
+        <link>http://thatcsharpguy.com/tv/data-fundamentals/</link>
+        <guid isPermaLink="true">http://thatcsharpguy.com/tv/data-fundamentals/</guid>
+        
+        <category>Meta</category>
+        
+        <category>Tv</category>
+        
+        
+        <category>tv</category>
+        
+      </item>
+    
+      <item>
+        <title>¿Programar en inglés?</title>
+        <description>&lt;p&gt;Los algoritmos voraces o &lt;em&gt;greedy&lt;/em&gt; son algoritmos que implementan una heuristica(técnica) que tiene como objetivo optimizar la búsqueda de una solución óptima para un problema.&lt;/p&gt;
+
+&lt;p&gt;La idea detrás de los algoritmos voraces (o greedy) consiste en siempre tomar la mejor decisión de todas las que puede tomar en ese momento, con la esperanza de que al juntar todas estas pequeñas mejores decisiones, se obtendrá la mejor solución al problema en general.&lt;/p&gt;
+
+&lt;p&gt;Seguramente verán esto explicado como que el algoritmo toma decisiones localmente óptimas con la esperanza de que esto lo llevará a la solución solución globalmente óptima.&lt;/p&gt;
+
+&lt;p&gt;Toma por ejemplo este problema, supón que existen estas ciudades, y tu tarea es gastar lo menos posible en llegar de Pueblo Paleta a X, a Y, como puedes ver, hay muchas rutas. Un algoritmo voraz haría algo como esto:&lt;/p&gt;
+
+&lt;p&gt;A cada paso, comprar el boleto más barato hasta llegar al pueblo Y.&lt;/p&gt;
+
+&lt;h3 id=&quot;no-siempre-es-lo-mejor&quot;&gt;No siempre es lo mejor&lt;/h3&gt;
+
+&lt;p&gt;Como lo dije, el algoritmo tiene la esperanza de que al hacer esto va a obtener el mejor resultado al final, pero esto no necesariamente es así.&lt;/p&gt;
+
+&lt;p&gt;Imagina un escenario como el anterior, pero con los precios un poco diferentes. Siguiendo la heurística voraz, un algoritmo haría algo como esto:&lt;/p&gt;
+
+&lt;p&gt;Tomando nuevamente el boleto más barato, aunque al final, estas decisiones localmente óptimas lo llevaron a gastar más dinero.&lt;/p&gt;
+
+&lt;h3 id=&quot;por-qué-existen&quot;&gt;¿Por qué existen?&lt;/h3&gt;
+&lt;p&gt;Pero bueno, si al final puede que no obtenga el mejor resultado, ¿por qué existe esta técnica?&lt;/p&gt;
+
+&lt;p&gt;Pues hay problemas para los calcular la solución globalmente óptima es algo inimaginable, o increíblemente difícil como es el caso del problema del agente viajero (del cuál les hablé en un video anterior). Y tu como desarrollador tienes que tomar la decisión entre sacrificar un poco la optimalidad de tu algoritmo por el tiempo de procesamiento.&lt;/p&gt;
+
+&lt;p&gt;También existen porque en general son sencillos de entender y también sencillos de programar.&lt;/p&gt;
+
+&lt;p&gt;Recuerda que no existe un martillo dorado que sea la solución a todos los problemas que te encuentres, y que este esta es una de esas herramientas que puedes usar.&lt;/p&gt;
+
+&lt;h3 id=&quot;los-componentes&quot;&gt;Los componentes&lt;/h3&gt;
+&lt;p&gt;Ahora, no todos los problemas son susceptibles de afrontarse con este tipo de algoritmos, para que un problema pueda ser resuelto usándoles un algoritmo con esta característica debe tener:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;El problema debe poder ser descompuesto en subproblemas sequenciales, y cada que uno de estos problemas se resuelve, (es decir, a cada decisión que se toma contribuye al resultado final, reduciendo el tamaño del problema.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;ejemplos&quot;&gt;Ejemplos&lt;/h3&gt;
+&lt;p&gt;Entre los ejemplos que encontrarán sobre problemas que se pueden afrontar con estos algoritmos están:&lt;/p&gt;
+
+&lt;p&gt;Problema del agente viajero, los de Minimumm Spanning Tree de Prim y Kruskal, la codificación de Huffman y el problema de la mochila Knapsack.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 20 Mar 2018 18:00:00 +0000</pubDate>
+        <link>http://thatcsharpguy.com/tv/programar-ingles/</link>
+        <guid isPermaLink="true">http://thatcsharpguy.com/tv/programar-ingles/</guid>
+        
+        <category>Meta</category>
+        
+        <category>Tv</category>
+        
+        
+        <category>tv</category>
+        
+      </item>
+    
+      <item>
+        <title>Los algoritmos voraces</title>
+        <description>&lt;p&gt;Los algoritmos voraces o &lt;em&gt;greedy&lt;/em&gt; son algoritmos que implementan una heuristica(técnica) que tiene como objetivo optimizar la búsqueda de una solución óptima para un problema.&lt;/p&gt;
+
+&lt;p&gt;La idea detrás de los algoritmos voraces (o greedy) consiste en siempre tomar la mejor decisión de todas las que puede tomar en ese momento, con la esperanza de que al juntar todas estas pequeñas mejores decisiones, se obtendrá la mejor solución al problema en general.&lt;/p&gt;
+
+&lt;p&gt;Seguramente verán esto explicado como que el algoritmo toma decisiones localmente óptimas con la esperanza de que esto lo llevará a la solución solución globalmente óptima.&lt;/p&gt;
+
+&lt;p&gt;Toma por ejemplo este problema, supón que existen estas ciudades, y tu tarea es gastar lo menos posible en llegar de Pueblo Paleta a X, a Y, como puedes ver, hay muchas rutas. Un algoritmo voraz haría algo como esto:&lt;/p&gt;
+
+&lt;p&gt;A cada paso, comprar el boleto más barato hasta llegar al pueblo Y.&lt;/p&gt;
+
+&lt;h3 id=&quot;no-siempre-es-lo-mejor&quot;&gt;No siempre es lo mejor&lt;/h3&gt;
+
+&lt;p&gt;Como lo dije, el algoritmo tiene la esperanza de que al hacer esto va a obtener el mejor resultado al final, pero esto no necesariamente es así.&lt;/p&gt;
+
+&lt;p&gt;Imagina un escenario como el anterior, pero con los precios un poco diferentes. Siguiendo la heurística voraz, un algoritmo haría algo como esto:&lt;/p&gt;
+
+&lt;p&gt;Tomando nuevamente el boleto más barato, aunque al final, estas decisiones localmente óptimas lo llevaron a gastar más dinero.&lt;/p&gt;
+
+&lt;h3 id=&quot;por-qué-existen&quot;&gt;¿Por qué existen?&lt;/h3&gt;
+&lt;p&gt;Pero bueno, si al final puede que no obtenga el mejor resultado, ¿por qué existe esta técnica?&lt;/p&gt;
+
+&lt;p&gt;Pues hay problemas para los calcular la solución globalmente óptima es algo inimaginable, o increíblemente difícil como es el caso del problema del agente viajero (del cuál les hablé en un video anterior). Y tu como desarrollador tienes que tomar la decisión entre sacrificar un poco la optimalidad de tu algoritmo por el tiempo de procesamiento.&lt;/p&gt;
+
+&lt;p&gt;También existen porque en general son sencillos de entender y también sencillos de programar.&lt;/p&gt;
+
+&lt;p&gt;Recuerda que no existe un martillo dorado que sea la solución a todos los problemas que te encuentres, y que este esta es una de esas herramientas que puedes usar.&lt;/p&gt;
+
+&lt;h3 id=&quot;los-componentes&quot;&gt;Los componentes&lt;/h3&gt;
+&lt;p&gt;Ahora, no todos los problemas son susceptibles de afrontarse con este tipo de algoritmos, para que un problema pueda ser resuelto usándoles un algoritmo con esta característica debe tener:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;El problema debe poder ser descompuesto en subproblemas sequenciales, y cada que uno de estos problemas se resuelve, (es decir, a cada decisión que se toma contribuye al resultado final, reduciendo el tamaño del problema.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;ejemplos&quot;&gt;Ejemplos&lt;/h3&gt;
+&lt;p&gt;Entre los ejemplos que encontrarán sobre problemas que se pueden afrontar con estos algoritmos están:&lt;/p&gt;
+
+&lt;p&gt;Problema del agente viajero, los de Minimumm Spanning Tree de Prim y Kruskal, la codificación de Huffman y el problema de la mochila Knapsack.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 11 Mar 2018 18:00:00 +0000</pubDate>
+        <link>http://thatcsharpguy.com/tv/algoritmos-voraces/</link>
+        <guid isPermaLink="true">http://thatcsharpguy.com/tv/algoritmos-voraces/</guid>
+        
+        <category>Meta</category>
+        
+        <category>Tv</category>
+        
+        
+        <category>tv</category>
+        
+      </item>
     
       <item>
         <title>¿Qué es MapReduce?</title>
@@ -486,93 +650,6 @@ foreach(var num in fibonaccis)
         <pubDate>Mon, 18 Dec 2017 18:00:00 +0000</pubDate>
         <link>http://thatcsharpguy.com/tv/expresiones-lambda/</link>
         <guid isPermaLink="true">http://thatcsharpguy.com/tv/expresiones-lambda/</guid>
-        
-        <category>Meta</category>
-        
-        <category>Tv</category>
-        
-        
-        <category>tv</category>
-        
-      </item>
-    
-      <item>
-        <title>Los Jupyter Notebooks</title>
-        <description>&lt;p&gt;Los Notebooks de Jupyter son unas hojas de código interactivas…&lt;/p&gt;
-
-&lt;p&gt;El código ya es interactivo por si mismo, puedes modificarlo, ejecutarlo a tu antojo… pero el tipo de interactividad que ofrecen los Jupyter Notebooks es algo distinto, pero vamos a ver algo de historia…&lt;/p&gt;
-
-&lt;p&gt;La idea detrás de estos Notebooks proviene de IPython que es un proyecto orientado a ofrecer una consola interactiva para trabajar con el lenguaje de programación Python (este proyecto fue iniciado por Fernando Pérez, un físico desarrollador de software colombiano), el proyecto, que ya era de por si interesante, tuvo una adición importantísima en 2011 con la aparición de los IPython Notebooks (ahora llamados Jupyter Notebooks) para convertirse en un entorno con el cual podemos interactuar a través de un navegador. Básicamente la idea era ofrecer un entorno para facilitar la tarea de la programación orientada al ámbito científico, sin embargo, también tiene un uso genérico con gran potencial. Espero veas por qué con esta rápida introducción.&lt;/p&gt;
-
-&lt;p&gt;Permite trabajar con gráficas, ecuaciones, videos, imágenes, simuladores y desde luego, código. Todo… combinado. Imagina: combinar las características de un entorno simple de programación (como el &lt;em&gt;syntax highlighting&lt;/em&gt; y auto-completado) con la habilidad de poder escribir texto enriquecido junto al código. La idea es que sirva para documentar lo más posible alguna tarea que estamos realizando, tan solo para después tomar solo el código y llevarlo a una aplicación productiva. Además ofrece posibilidades para que cada uno de estos Notebooks sea evaluado automáticamente, lo cual también los hace ideales para hacer prácticas escolares, y de hecho, en la universidad ya he tenido ya varias prácticas así.&lt;/p&gt;
-
-&lt;p&gt;Los Notebooks se crean con la Notebook App, que es una aplicación que está compuesta por dos componentes en una arquitectura cliente-servidor.&lt;/p&gt;
-
-&lt;p&gt;La parte del cliente es el editor de código con el cual creamos y modificamos los Notebooks; este editor basado en HTML, CSS y JavaScript es el que usamos a través de un navegador web, aquí es donde escribimos el código y vemos los resultados de ejecutarlo.&lt;/p&gt;
-
-&lt;p&gt;Mientras que el servidor se encarga de ejecutar el código que nosotros introducimos en los Notebooks y devolver los resultados al cliente. Este servidor es una especie de servidor web que a cada una de estas hojas interactivas les asigna un hilo de ejecución dentro de la computadora en la que está corriendo, y es en realidad dentro de este hilo de ejecución en donde se ejecuta nuestro código. El cliente y el servidor se comunican a través de peticiones HTTP y WebSockets.&lt;/p&gt;
-
-&lt;p&gt;Al ser de código abierto (y al tener una gran comunidad detrás) tiene muchas posibilidades de ser expandido mediante Widgets que   los dotan de mayor funcionalidad. Entre estos Widgets están algunos que permiten trabajar con información geoespacial, video y audio, crear  tablas paginadas o crear una “interfaz amigable” para modificar el código. Y es también gracias a la comunidad que soporta diversos lenguajes de programación aparte de los con que fue creado en mente: Julia, Python y R. Inclusive se puede utilizar junto con C#… aunque el soporte todavía no es muy bueno.&lt;/p&gt;
-
-&lt;p&gt;Si eres fan de C#, existe algo muy parecido pero lamentablemente no tiene tanta flexibilidad como los Notebooks de Jupyter, se llaman los Xamarin Workbooks, escribí un post sobre ellos, dejo el enlace en la descripción.&lt;/p&gt;
-
-&lt;p&gt;Pero bueno, si quieres comenzar a usar los Notebooks pero eres un novato como yo, mi recomendación es que instales &lt;a href=&quot;http://jupyter.readthedocs.io/en/latest/install.html#id3&quot;&gt;Anaconda&lt;/a&gt;, que es otra gran herramienta, pero de la cual por el momento solo nos interesa usar los Notebooks. En la siguiente parte de este video les mostraré en un Notebook en acción.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 11 Dec 2017 18:00:00 +0000</pubDate>
-        <link>http://thatcsharpguy.com/tv/jupyter-notebooks/</link>
-        <guid isPermaLink="true">http://thatcsharpguy.com/tv/jupyter-notebooks/</guid>
-        
-        <category>Meta</category>
-        
-        <category>Tv</category>
-        
-        
-        <category>tv</category>
-        
-      </item>
-    
-      <item>
-        <title>Memoización</title>
-        <description>&lt;p&gt;Sí, memoización, no, no memorización.&lt;/p&gt;
-
-&lt;p&gt;La memorización es una técnica de optimización  usada en la programación que consiste en almacenar los resultados de funciones previamente calculadas para evitar ejecutarlas de nuevo cuando las necesitemos, en otras palabras, es básicamente “cachear” los resultados.&lt;/p&gt;
-
-&lt;p&gt;Toma por ejemplo el cálculo de la sucesión de fibonacci, que como vimos, en un video anterior. Esto definido así:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Fib(0) = Fib(1) = 1
-Fib(n) = Fib(n-1) + Fib(n-2)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Como puedes ver, para el fibonacci de 5, llega un momento en el que empezamos a calcular valores que ya tenemos, y visto de esta manera estamos únicamente calculando 5 valores diferentes de las 13 operaciones que en “realidad” tendríamos que hacer.&lt;/p&gt;
-
-&lt;p&gt;Así que, ¿que pasa si después de calcularlo la primera vez, lo almacenamos en una tabla o en un arreglo? Así, la siguiente vez que el valor sea requerido, podemos buscar si ya existe, y si sí, devolvemos el valor ya calculado. De otro modo vamos a tener que ejecutar la función y todas las que esta llame, nuevamente.&lt;/p&gt;
-
-&lt;p&gt;Esto funciona bastante bien cuando el costo de ejecutar una función es muy alto, y se desperdiciarían recursos calculando valores que ya hemos calculado previamente. La memorización reduce el tiempo de ejecución a costa del espacio de almacenamiento, ya que, como vimos, para evitar calcular almacena los valores. Y es benéfica cuando de atacar problemas cuyas subsoluciones se deben resolver repetidamente, con la gran ventaja de solo calcular algunas cosas unas cuantas veces.&lt;/p&gt;
-
-&lt;p&gt;Existen lenguajes que soportan y proveen una forma sencilla de implementar esta técnica, como a través de un decorador o una palabra clave… sin embargo existen otros en los que esta se tiene que implementar manualmente mediante el uso de alguna estructura de datos como un arreglo o un árbol binario.&lt;/p&gt;
-
-&lt;p&gt;Además, la memorización juega un rol importante en la técnica de programación conocida como programación dinámica, de la cual muy pronto haré un video.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 27 Nov 2017 18:00:00 +0000</pubDate>
-        <link>http://thatcsharpguy.com/tv/memoizacion/</link>
-        <guid isPermaLink="true">http://thatcsharpguy.com/tv/memoizacion/</guid>
-        
-        <category>Meta</category>
-        
-        <category>Tv</category>
-        
-        
-        <category>tv</category>
-        
-      </item>
-    
-      <item>
-        <title>La escuela | #meta</title>
-        <description>
-</description>
-        <pubDate>Wed, 06 Sep 2017 19:00:00 +0100</pubDate>
-        <link>http://thatcsharpguy.com/tv/escuela/</link>
-        <guid isPermaLink="true">http://thatcsharpguy.com/tv/escuela/</guid>
         
         <category>Meta</category>
         

@@ -1,5 +1,35 @@
 [   
     { 
+        "id" : "/tv/data-fundamentals/",
+        "tv" : true,
+        "title": "Data Fundamentals", 
+        "date": "2018-04-05 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages",
+        "summary": "The first video in the series \"what was I doing the last six months?\""
+    },
+    { 
+        "id" : "/tv/programar-ingles/",
+        "tv" : true,
+        "title": "¿Programar en inglés?", 
+        "date": "2018-03-20 18:00:00 +0000",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages",
+        "summary": "Tu, ¿programas en inglés?"
+    },
+    { 
+        "id" : "/tv/algoritmos-voraces/",
+        "tv" : true,
+        "title": "Los algoritmos voraces", 
+        "date": "2018-03-11 18:00:00 +0000",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages",
+        "summary": "La idea detrás de los algoritmos voraces (o greedy) consiste en siempre tomar la mejor decisión de todas las que puede tomar inmediatamante con la esperanza de que al juntar todas estas pequeñas \"mejores\" decisiones, se obtendrá la mejor solución al problema en general."
+    },
+    { 
         "id" : "/tv/mapreduce/",
         "tv" : true,
         "title": "¿Qué es MapReduce?", 
