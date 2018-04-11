@@ -6,9 +6,399 @@
 </description>
     <link>http://thatcsharpguy.com/</link>
     <atom:link href="http://thatcsharpguy.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 11 Apr 2018 04:44:17 +0100</pubDate>
-    <lastBuildDate>Wed, 11 Apr 2018 04:44:17 +0100</lastBuildDate>
+    <pubDate>Wed, 11 Apr 2018 09:12:13 +0100</pubDate>
+    <lastBuildDate>Wed, 11 Apr 2018 09:12:13 +0100</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>¿Qué es MapReduce?</title>
+        <description>&lt;p&gt;Es un modelo de programación fuertemente orientado a la ejecución paralela y distribuida entre múltiples computadoras, que se utiliza para trabajar con grandes colecciones de datos, digamos, de unos cuantos terabytes (o petabytes). La idea de MapReduce es ofrecer una forma simple, rápida, escalable y resistente a fallos para manipular enormes cantidades de datos. En la terminología de MapReduce a estas manipulaciones se les conoce como trabajos, y así me referiré a ellos de ahora en adelante.&lt;/p&gt;
+
+&lt;p&gt;MapReduce surgió de Google y fue presentado en 2004 por dos investigadores de Google, quienes lo publicaron en un paper y fue a partir de ahí que se comenzó a desarrollar en el mundo del open source a partir de ahí se generó una propuesta open source que funciona dentro de Hadoop (que por cierto es otra maravilla del Open Source originada en Google, de la cual si quieren les hablo en otro video). La realidad es que la explicación que voy a dar aquí es muy, muy básica, y los invito a leer el paper y a buscar más información y desde luego, a dejar sus preguntas en los comentarios, no es que yo pueda responderlas, pero seguro yo se las puedo preguntar a alguien más.&lt;/p&gt;
+
+&lt;h2 id=&quot;composición&quot;&gt;Composición&lt;/h2&gt;
+&lt;p&gt;Su nombre proviene de dos viejos conocidos de la programación funcional: las funciones Map y Reduce. Como su nombre lo indica,  se compone de dos etapas (en realidad hay tres, pero la tercera es transparente para el desarrollador): la etapa de Map o Mapeo y la etapa de Reduce o Reducción, un poco más adelante les hablaré a detalle de estas etapas.&lt;/p&gt;
+
+&lt;p&gt;Como lo mencioné antes, MapReduce fue creado para ejecutarse en múltiples computadoras a la vez, distribuyendo así la carga del trabajo en ellas, cabe destacar que estas computadoras no tienen que ser supercomputadoras carísimas, sino que pueden ser computadoras simples y relativamente baratas, es por eso que cuando se habla de MapReduce, se habla de clusters de computadoras.&lt;/p&gt;
+
+&lt;p&gt;Todas las computadoras que participan en un trabajo de MapReduce   contienen un agente que coordina sus recursos, conocido como el NodeManager, este NodeManager a su vez se comunica con el encargado de orquestar todo el trabajo, que es nada más y nada menos que otra computadora dentro del cluster, que contiene un programa llamado ResourceManager, encargado de orquestar toda la operación de un trabajo de MapReduce (este asigna los trabajos, se mantiene al tanto de el estado de cada uno de los NodeManagers y resigna un trabajo no completado si es que alguno de los nodos deja de responder).&lt;/p&gt;
+
+&lt;h2 id=&quot;entradas-y-salidas&quot;&gt;Entradas y salidas.&lt;/h2&gt;
+&lt;p&gt;Como igual mencioné brevemente al inicio del video, un trabajo de MapReduce tiene como objetivo el tomar una cantidad de datos (de un archivo, de una base de datos o cualquier otra fuente de datos), manipularla de alguna manera y entregar un resultado al final. Pese a lo que indica su nombre “reduce”, el archivo generado no necesariamente tiene que ser una versión reducida de la entrada, puede llegar a ser más grande.&lt;/p&gt;
+
+&lt;p&gt;Su funcionamiento es más o menos el siguiente:&lt;/p&gt;
+
+&lt;h3 id=&quot;mapping&quot;&gt;Mapping&lt;/h3&gt;
+&lt;p&gt;De tu entrada de datos tomas un conjunto de información que tiene la forma de pares llave-valor, dentro de la fase del mapper realizas alguna especie de procesamiento sobre ellos, como podría ser separar una cadena por espacios en blanco, encontrar todos los links que contiene un documento web. La idea es que del mapper generes un nuevo conjunto de datos, de nuevo en la forma de llave-valor, aquí cabe señalar que no es necesario que las llaves ni los valores sean los mismos que en los archivos de entrada, pueden ser totalmente diferentes.&lt;/p&gt;
+
+&lt;h3 id=&quot;shuffling&quot;&gt;Shuffling&lt;/h3&gt;
+&lt;p&gt;A la salida de los mappers se ejecuta otra etapa, conocida como shuffling, que se encarga de ordenar los datos generados de acuerdo a la llave que tu les asignaste en el mapper. Una vez que se ejecutó la fase de shuffling, los datos están listos para ser consumidos por los reducers.&lt;/p&gt;
+
+&lt;h3 id=&quot;reducing&quot;&gt;Reducing&lt;/h3&gt;
+&lt;p&gt;La tarea de los reducers comienza al ir a recuperar la información de los mappers, cada reducer tendrá la tarea de procesar todos los datos asignados a una sola llave a la vez. En el Reducer tenemos la oportunidad de realizar otro procesamiento sobre los valores, pero ahora con la certeza de que toda la información que tenemos está identificada con una sola llave.&lt;/p&gt;
+
+&lt;p&gt;El reducer, al igual que el mapper, tiene la tarea de generar un nuevo conjunto de información en la forma llave-valor, la cual es depositada nuevamente en un archivo.&lt;/p&gt;
+
+&lt;h2 id=&quot;claves&quot;&gt;Claves&lt;/h2&gt;
+
+&lt;p&gt;Sí, sé que ese asunto de las llaves-valor puede sonar complicado al inicio, pero después de haber implementado una versión muy básica del primer PageRank de Google en MapReduce (dejo el link al post en la descripción) puedo identificar algunas claves:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Pensar en forma paralela, y tratar de olvidar temporalmente todos los otros paradigmas que tengas en mente.&lt;/li&gt;
+  &lt;li&gt;Que al momento de trabajar en los mappers no vas a tener toda la información que necesitas en un solo lugar, ve a los mappers como una etapa de preparación de la información.&lt;/li&gt;
+  &lt;li&gt;Que si quieres que algo se ejecute en un solo lugar, eso sería del lado de los reducers, y para que esto suceda todos los elementos que quieres en un lugar deben tener la misma llave.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;el-hola-mundo&quot;&gt;El Hola Mundo&lt;/h2&gt;
+&lt;p&gt;El hola mundo del MapReduce es un ejemplo de conteo de palabras que te voy a tratar de explicar ahora mismo. Imagina que tienes el siguiente texto:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Cuando cuentes cuentos
+Cuenta cuantos cuentos cuentas
+Por que si no cuentas cuantos cuentos cuentas 
+Nunca sabrás cuantos cuentos cuentas
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Una forma de contar las palabras usando MapReduce es la siguiente:&lt;/p&gt;
+
+&lt;p&gt;Los mappers reciben fragmentos del texto, separados por lineas, la información es recibida de la siguiente manera, cada linea es un valor, y la llave de ese valor es el número de línea dentro del archivo. Dentro del mapper, tomamos cada línea y la separamos por espacios, tomamos cada una de esas palabras como llaves y les asociamos como valor un uno y los escribimos a la salida.&lt;/p&gt;
+
+&lt;p&gt;La tarea del shuffler será ordenar esta información por la llave , algo así:&lt;/p&gt;
+
+&lt;p&gt;Después, esta información es obtenida por los reducers, recuerda que los reducers tomarán todos los elementos asociados con una sola llave y los procesarán dentro de ellos.&lt;/p&gt;
+
+&lt;p&gt;En el reducer, se ejecuta un proceso que toma todos los números asociados a una palabra y los suma, tan solo para al final escribir a la salida otro par llave valor, en donde la llave es la palabra y el valor es el número de veces que aparece dicha palabra en el archivo.&lt;/p&gt;
+
+&lt;h2 id=&quot;usos-y-limitaciones&quot;&gt;Usos y limitaciones&lt;/h2&gt;
+&lt;p&gt;Por regla general se usa MapReduce cuando queremos afrontar problemas relacionados con grandes, enormes cantidades de datos. Y es por eso que se considera que debe correr en un sistema de archivos distribuidos, como es el caso de HDFS (Hadoop Distributed File System).&lt;/p&gt;
+
+&lt;p&gt;Si bien MapReduce es una propuesta para paralizar y distribuir el cómputo sobre grandes cantidades de datos, tenemos que tener en cuenta que no todos los problemas son susceptibles de afrontarse usándolo, y tampoco es una solución buena para trabajos que requieren de respuesta en tiempo real, MapReduce es más bien para procesamiento offline de información.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 19 Feb 2018 18:00:00 +0000</pubDate>
+        <link>http://thatcsharpguy.com/tv/mapreduce/</link>
+        <guid isPermaLink="true">http://thatcsharpguy.com/tv/mapreduce/</guid>
+        
+        <category>Meta</category>
+        
+        <category>Tv</category>
+        
+        
+        <category>tv</category>
+        
+      </item>
+    
+      <item>
+        <title>Python</title>
+        <description>&lt;h1 id=&quot;python&quot;&gt;Python.&lt;/h1&gt;
+
+&lt;p&gt;Como muchos de ustedes ya sabrán, Python es un lenguaje de programación, que como muy pocos seguramente saben, tomó su nombre no de una serpiente, si no de un programa de comedia británico, pero en fin. Python fue publicado en 1991 por Guido van Rossum, inicialmente fue pensado como un simple lenguaje de scripting pero en la actualidad se ha infiltrado en el desarrollo web, la ciencia de datos, machine learning y ramas afines.&lt;/p&gt;
+
+&lt;h2 id=&quot;filosofía&quot;&gt;Filosofía.&lt;/h2&gt;
+
+&lt;p&gt;La filosofía detrás de Python podría estar resumida en un documento que fue creado en 1999, ocho años después de su creación. Pueden consultar el documento en este enlace: pero les voy a decir algunos de estos principios que sí, suenan muy filosóficos:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Beautiful is better than ugly&lt;/li&gt;
+  &lt;li&gt;Explicit is better than implicit&lt;/li&gt;
+  &lt;li&gt;Simple is better than complex&lt;/li&gt;
+  &lt;li&gt;Readability counts&lt;/li&gt;
+  &lt;li&gt;There should be one—and preferably only one—obvious way to do it.&lt;/li&gt;
+  &lt;li&gt;If the implementation is hard to explain, it’s a bad idea.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Lo cierto es que mientras que estos principios suenan bonitos, el escribir software todavía recae en los humanos, así que estos principios no se aplican muchas veces. Y, por ejemplo, puedes encontrar que en Python es normal que encuentres más de una manera de hacer las cosas.&lt;/p&gt;
+
+&lt;h2 id=&quot;características&quot;&gt;Características&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Es dinámicamente tipado&lt;/strong&gt;: Porque podemos hacer algo como esto:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;a = 1
+b = 'C'
+c = [0.1, 0.5]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Es decir, no es necesario especificar el tipo de dato de una variable antes de declararla. Y no existe un compilador, ni el intérprete, que esté comprobando esto antes de que el programa se esté ejecutando.&lt;/p&gt;
+
+&lt;p&gt;También permite algo como esto:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;a = 1
+a = 'C'
+a = [0.1, 0.5]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Es decir, cambiar por completo el tipo de dato de una variable sin que nadie diga nada. Y créanme, esto puede ser motivo de muchas confusiones, pero una vez que te acostumbras, puede llegar a ser una herramienta muy útil.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;sin embargo, también es considerado un lenguaje &lt;strong&gt;fuertemente tipado&lt;/strong&gt; (cabe recalcar que puede existir esta combinación: dinámico y fuertemente tipado a la vez). Es considerado fuertemente tipado porque el lenguaje define un conjunto de reglas (de comportamientos) bajo las cuales los tipos de dato se pueden mezclar entre ellos, y romper esas reglas generará una excepción. Toma por ejemplo el siguiente código:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;a3 = &quot;a&quot; + 3 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;por increíble que parezca, esto nos generaría un error puesto que los tipos de dato int y string no definen una forma de mezclarse, si quieres concatenar las cadenas tendrías que primero convertir el entero a cadena.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;No existen los corchetes (o llaves)&lt;/strong&gt;: sino que los bloques de código se definen usando indentaciones, es decir un bloque &lt;code&gt;if&lt;/code&gt; se define de la siguiente manera:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;if b == 'C':
+	print(&quot;b es C&quot;)
+elif b == 'A':
+	print(&quot;b es A&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;O un código un poco más complejo se vería así:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def del_none(d):
+    for key, value in list(d.items()):
+        if value is None:
+            del d[key]
+        elif isinstance(value, str):
+            d[key] = d[key].strip()
+        elif isinstance(value, dict):
+            del_none(value)
+    return d
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ah, seguramente lo notaste, pero Python tampoco requiere que uses un &lt;code&gt;;&lt;/code&gt; para terminar cada instrucción, la idea es que exista una instrucción por cada línea.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;como tal vez pudiste ver, es también un &lt;strong&gt;lenguaje de alto nivel&lt;/strong&gt;: La idea es abstraer (esconder) la mayor cantidad de detalles de implementación. Es un lenguaje de alto nivel y en ocasiones es muy sencillo leer programas escritos en este lenguaje, y a mi parecer, en muchos casos como si estuvieras leyendo un libro escrito en inglés.&lt;/li&gt;
+  &lt;li&gt;Python es también &lt;strong&gt;multiparadigma&lt;/strong&gt;, puedes organizar tu código en clases, o utilizarlo como un lenguaje funcional, o puedes simplemente crear un programa que se ejecute proceduralmente… o una combinación de todo esto.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Altamente extensible&lt;/strong&gt;: tiene soporte para descargar módulos o bibliotecas de repositorios de paquetes que permiten que añadirle funcionalidad a tus programas, así que es normal que cuando descargues un proyecto tengas que descargar los paquetes asociados con instrucciones como las siguientes:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;pip install package-name
+easy_install package-name
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;desventajas&quot;&gt;Desventajas&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Considerado &lt;strong&gt;lento&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;A pesar de ser muy usado, hay áreas en las que no tiene mucho impacto, como el desarrollo para móviles.&lt;/li&gt;
+  &lt;li&gt;Consume mucha memoria.&lt;/li&gt;
+  &lt;li&gt;Puede hacer que otros lenguajes sean difíciles de trabajar, uno se acostumbra muy rápido a las bondades de Python, a mi de pronto ya se me olvida poner puntos y coma en C#&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 05 Feb 2018 18:00:00 +0000</pubDate>
+        <link>http://thatcsharpguy.com/tv/python/</link>
+        <guid isPermaLink="true">http://thatcsharpguy.com/tv/python/</guid>
+        
+        <category>Meta</category>
+        
+        <category>Tv</category>
+        
+        
+        <category>tv</category>
+        
+      </item>
+    
+      <item>
+        <title>¿Dormir o programar?</title>
+        <description>&lt;p&gt;Este es un video más como de opinión, y quisiera comenzar diciendo esto: no dormir no es una medalla de honor, y el hecho de no dormir lo suficiente por estar trabajando o haciendo tarea no debe presumirse como un logro. Esto podría sonar raro, pero me parece que es algo muy común en el el ambiente de la programación de aplicaciones, aunque también lo he escuchado en otras profesiones, como entre los médicos.&lt;/p&gt;
+
+&lt;p&gt;Claro, hay veces en que puede ser necesario: te encontraste con algo que es realmente complicado, tal vez tuviste que ayudar a alguien más o cuidar de tus hijos… También hay ocasiones en las que quedarse despierto puede ser divertido, como es el caso de algunos hackatones, conferencias o, las ya viejas, LAN parties. Sea cual sea la razón, a veces es necesario o divertido quedarse despierto, pero en mi opinión, no debes dejar que se convierta en un modo de vida.&lt;/p&gt;
+
+&lt;p&gt;Hubo una etapa en mi vida en la que pensaba que dormir era una pérdida de tiempo: siempre tenía que “estar haciendo algo productivo”; pero eso ha cambiado, pues resulta que me di cuenta de que dormir el tiempo correcto es hacer algo productivo, dormir el tiempo necesario es no es un gasto, sino una inversión, y una muy buena. Seguramente ya te has desvelado antes, y sabes lo terrible que se siente al día siguiente:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Estás de mal humor,&lt;/li&gt;
+  &lt;li&gt;te duele la cabeza,&lt;/li&gt;
+  &lt;li&gt;no te dan muchas ganas de hablar con nadie,&lt;/li&gt;
+  &lt;li&gt;te sientes desanimado y sin creatividad,&lt;/li&gt;
+  &lt;li&gt;y te resulta imposible concentrarte…&lt;/li&gt;
+  &lt;li&gt;¡además de que te andas quedando dormido en todos lados!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Pero bueno, piénsalo… si algo se te complicó y empezaste a trabajar por la tarde y la noche se aproxima, cuando menos de das cuenta comienzas a tener sueño y a bostezar, ¿qué haces? ¿te vas a dormir? O, si ya trabajas, ¿qué pasa si por alguna razón el desarrollo de un módulo se retrasó y el cliente ya lo espera para la mañana siguiente? Cualquier escenario que te lleve al extremo ¿o vas por una lata de RedBull o una taza de café para seguir trabajando? ¿Qué haces normalmente, cuéntanos en los comentarios? ¿Te ha pasado algo similar o sueles desvelarte, cuéntanos?&lt;/p&gt;
+
+&lt;p&gt;En mi opinión, muchas veces el tener que quedarse despierto para terminar algo es algo que puede atacarse de manera productiva, y si te toca desvelarte muy seguido por esta razón, deberías tratar de encontrar las causas que te llevan a no dormir para tratar de eliminarlas.&lt;/p&gt;
+
+&lt;p&gt;También es cierto, y volviendo a lo que comenté al inicio del video, muchas compañías hacen de el no dormir una especie de medalla invisible, y digo invisible porque la verdad es que dudo mucho que alguien se atreva a poner un cuadro del tipo “empleado del mes” pero que diga “el que menos duerme”. Este tipo de medallas es algo que a veces nos presumimos entre nosotros, no se imaginan la cantidad de veces que oí, y yo mismo dije: “Me quedé despierto hasta las tres haciendo esto” o “Wey, llevo dos días sin dormir por terminar X o Y”, al principio puede sonar divertido y ser un motivo de orgullo, pero con el tiempo esto no va a hacer nada más que afectar tu desempeño y salud.&lt;/p&gt;
+
+&lt;p&gt;Aunque a veces también pasa que te sientes taaaan inspirado que prefieres terminar lo que estás haciendo antes de ir a dormir, mi consejo es: No lo hagas, no vale la pena sacrificar una parte de (o todo) el día siguiente por trabajar dos o tres horas más durante la noche. Mi recomendación es que te tomes 5 minutos para escribir tu idea en la parte del código en la que estás trabajando, o de plano agarres una hoja de papel y la escribas ahí, y una vez hecho esto, te vayas a dormir sin remordimientos. Si la idea que tenías en mente antes de dormir era tan buena, cuando te despiertes por la mañana va a seguir ahí.&lt;/p&gt;
+
+&lt;p&gt;Si dormir el tiempo necesario para descansar es un lujo que tu te puedes dar, créeme, dátelo. Duerme lo necesario, tu teclado (y el problema que estás enfrentando) seguirá ahí a la siguiente mañana.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 27 Jan 2018 18:00:00 +0000</pubDate>
+        <link>http://thatcsharpguy.com/tv/dormir-programar/</link>
+        <guid isPermaLink="true">http://thatcsharpguy.com/tv/dormir-programar/</guid>
+        
+        <category>Meta</category>
+        
+        <category>Tv</category>
+        
+        
+        <category>tv</category>
+        
+      </item>
+    
+      <item>
+        <title>YouTube</title>
+        <description>&lt;p&gt;Como algunos de ustedes sabrán si es que siguen a otros canales, recientemente YouTube cambió las políticas para pertenecer a su programa de asociados, este programa de asociados incluye entre otras cosas, la habilidad de poner anuncios en los videos y la habilidad de poner links hacia sitios externos como este que es mi blog.&lt;/p&gt;
+
+&lt;p&gt;En fin, a pesar de que YouTube dice que la visibilidad de los videos en el sitio no se verá afectada por si perteneces o no a este programa, la verdad es que yo no confío mucho en eso y no quisiera dejar de pertenecer a este programa. Los requisitos nuevos son tener más de 1,000 suscriptores los cuales, requisito que ya está cumplido gracias a ustedes, y 4000 horas de visualizaciones en los 12 meses anteriores, y es aquí en donde este canal se queda corto.&lt;/p&gt;
+
+&lt;p&gt;Es por eso que ahora quisiera pedirles un favor, a los nuevos suscriptores, les pido que se den una vuelta por los videos más viejos y los vean, sé que si encontraron útiles los videos más recientes, los anteriores también les van a servir. Y a todos los demás en general, les pido que si conocen a alguien a quién le podría interesar de lo que hablo aquí, le cuenten de este canal, en una de esas les resulta de interés y se suscriben.&lt;/p&gt;
+
+&lt;p&gt;Por estas dos cosas que les estoy pidiendo, muchas gracias.&lt;/p&gt;
+
+&lt;p&gt;Fue hace como dos años que decidí comenzar a subir videos a YouTube, la idea era tratar de explicar cosas que en su momento me costaron un poco de trabajo entender y tratar de explicarlas de un modo en el que a mi me hubiera gustado que me las explicaran. En ese entonces ya sabía de sobremanera que YouTube no es un negocio rentable por si solo para el 99% de la gente que sube sus videos, es por eso que desde el inicio, la motivación de estar aquí no fue el dinero, sino las ganas de compartir mis conocimientos y aprender de la gente que deja sus comentarios en cada uno de los videos que hago. Yo seguiré haciendo videos de lo que sé y de lo que ustedes me digan que les podría resultar de utilidad. En fin, gracias por ver este video, ya pronto subiré otro con algo que si sea de utilidad, pero hasta entonces, nos vemos la próxima.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 19 Jan 2018 18:00:00 +0000</pubDate>
+        <link>http://thatcsharpguy.com/tv/sobre-youtube/</link>
+        <guid isPermaLink="true">http://thatcsharpguy.com/tv/sobre-youtube/</guid>
+        
+        <category>Meta</category>
+        
+        <category>Tv</category>
+        
+        
+        <category>tv</category>
+        
+      </item>
+    
+      <item>
+        <title>La evaluación perezosa</title>
+        <description>&lt;p&gt;En programación la evaluación perezosa, o llamada por necesidad, o por su nombre en inglés: lazy evaluation. Es una técnica de evaluación, sí porque hay varias técnicas, que consiste en retrasar el cálculo (o ejecución) de una instrucción hasta que en realidad es necesaria.&lt;/p&gt;
+
+&lt;p&gt;Pero bueno, antes de entrar en detalles vamos a ver rápidamente otra estrategia, que podríamos definir como lo opuesto a la perezosa y esta es la evaluación temprana.&lt;/p&gt;
+
+&lt;p&gt;Este tipo de evaluación es la que normalmente usa tu lenguaje de programación, y por tanto creo que sin quererlo estás muy familiarizado con ella, ocurre cuando asignas una variable como un entero o una cadena:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var a = &quot;Evaluación temprana&quot;; // C#
+a = &quot;Evaluación temprana&quot; # Python
+String a = &quot;Evaluación temprana&quot;; // Java
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pero esto es demasiado simple, mejor vamos a ver algo más complejo. Imagina que vamos a trabajar con números del 0 al 10,000. Esta sería una forma de obtenerlos:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var numeros = Enumerable.Range(0, 10000).ToArray(); // C#
+numeros = list(range(0, 10000)) # Python
+int[] numeros = IntStream.range(0, 10000).toArray(); // Java 8
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Es decir, el valor asociado con la variable es inmediatamente calculado (o evaluado) en el momento en el que se realiza la asignación, independientemente del momento en el que va a ser usado, si es que va a ser usado del todo. La sintaxis para crear estos arreglos es un poco rara, y es que los estamos forzando a ser evaluados tempranamente.&lt;/p&gt;
+
+&lt;p&gt;Por el contrario, y volviendo al tema principal de este video, en la evaluación perezosa los valores no son creados o calculados hasta que no se hace referencia a ellos después de declararlos.&lt;/p&gt;
+
+&lt;p&gt;Un excelente ejemplo de la evaluación perezosa viene cuando estamos trabajando con colecciones de valores, imagina que quieres obtener una colección de valores… como por ejemplo, volviendo a los 0 al 10,000, esta es la forma de obtenerlos sin tener que calcularlos todos en el momento en el que lo definimos, es decir, utilizando la evaluación perezosa:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var numeros = Enumerable.Range(0, 10000); // C#
+numeros = range(0, 10000) # Python
+int[] numeros = IntStream.range(0, 10000); // Java 8
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Esto tiene varias ventajas como:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Incremento en el desempeño de la aplicación ya que se evita el hacer cálculos que no necesita&lt;/li&gt;
+  &lt;li&gt;Posibilidad de escribir código “infinito” o sin límites de espacio puesto que los valores son generados “uno a la vez”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Pero bueno, hasta ahora todo bien, pero cómo es que podemos crear nosotros código que se evalúe perezosamente. En concreto yo les voy a hablar de Python y C#, que básicamente utilizan la misma palabra reservada y esta es &lt;code&gt;yield&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Con la palabra reservada &lt;code&gt;yield&lt;/code&gt; se utiliza como la palabra &lt;code&gt;return&lt;/code&gt; (y de hecho en C# se usan en conjunto) salvo que, a diferencia de usar return, &lt;code&gt;yield&lt;/code&gt; se usa para indicar que nuestra función ha producido un resultado, pero… que no ha terminado de ejecutarse y que puede producir otro valor.&lt;/p&gt;
+
+&lt;p&gt;Toma por ejemplo este código (escrito en Python) que se usa para generar, teoricamente, una cantidad infinita de números de Fibonacci:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# https://stackoverflow.com/a/32930351/605482
+# https://ideone.com/LE9Xsa
+
+def getFibonacci():
+    yield 0
+    a, b = 0, 1
+    while True:
+        yield b
+        b = a + b
+        a = b - a
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;// https://stackoverflow.com/a/32930351/605482
+// https://ideone.com/fBSdLy
+IEnumerable&amp;lt;int&amp;gt; GetFibonacci()
+{
+    yield return 0;
+    int a = 0, b = 1;
+    while(true)
+    {
+        yield return b;
+		    b = a + b;
+		    a = b - a;
+	    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A pesar de que tiene un ciclo infinito ahí al momento de calcular el siguiente número, no significa que esté calculando todos desde un inicio, sino que los va calculando conforme nuestro código los va necesitando.&lt;/p&gt;
+
+&lt;p&gt;El tipo de retorno del método &lt;code&gt;getFibonacci&lt;/code&gt; es un &lt;code&gt;generator&lt;/code&gt; en lugar de una lista o un arreglo. Este &lt;code&gt;generator&lt;/code&gt; es quien facilita la evaluación perezosa.&lt;/p&gt;
+
+&lt;p&gt;El código en C# es muy, muy similar, con las modificaciones apropiadas, y cambiando la palabra &lt;code&gt;yield&lt;/code&gt; por &lt;code&gt;yield return&lt;/code&gt; nuestro código realiza la misma tarea. Eso sí, a diferencia de Python, acá se regresa un tipo de dato llamado &lt;code&gt;IEnumerable&lt;/code&gt;. Ambos, tanto &lt;code&gt;generator&lt;/code&gt; como &lt;code&gt;IEnumerable&lt;/code&gt; se comportan igual.&lt;/p&gt;
+
+&lt;p&gt;Una vez obtenido un &lt;code&gt;generator&lt;/code&gt; o uno &lt;code&gt;IEnumerable&lt;/code&gt; basta con usarlos dentro de un ciclo &lt;em&gt;foreach&lt;/em&gt; o ir extrayendo elementos con la función &lt;code&gt;next&lt;/code&gt; y el método &lt;code&gt;First&lt;/code&gt;, respectivamente:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# https://ideone.com/LE9Xsa
+fibonaccis = getFibonacci()
+print(&quot;Primer número&quot;, next(fibonaccis))
+
+for num in fibonaccis:
+    if num &amp;gt; 30000:
+        break
+    print(&quot;Siguiente número&quot;, num)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;// https://ideone.com/fBSdLy
+var fibonaccis = GetFibonacci();
+Console.WriteLine(&quot;Primer número &quot; + fibonaccis.First());
+
+foreach(var num in fibonaccis)
+{
+    if(num &amp;gt; 30000)
+        break;
+    Console.WriteLine(&quot;Siguiente número &quot; + num);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Escribí un post sobre &lt;code&gt;yield&lt;/code&gt; en C# por si es que les interesa conocer más a detalle. Así mismo, dejo enlaces a todo el código en la descripción. Ah, y por cierto, hay otro tipo de evaluación  llamada evaluación corto-circuitada… tiene un nombre peculiar pero no es nada complicada, escribí también un post sobre eso, dejo el link en la descripción.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 14 Jan 2018 18:00:00 +0000</pubDate>
+        <link>http://thatcsharpguy.com/tv/lazy-evaluation/</link>
+        <guid isPermaLink="true">http://thatcsharpguy.com/tv/lazy-evaluation/</guid>
+        
+        <category>Meta</category>
+        
+        <category>Tv</category>
+        
+        
+        <category>tv</category>
+        
+      </item>
+    
+      <item>
+        <title>La escuela, otra vez</title>
+        <description>&lt;ul&gt;
+  &lt;li&gt;Mi opinión de la escuela, después de haber pasado más 15 años de estudiar voluntariamente, debe servir para tres cosas y las voy a decir en orden de importancia:
+    &lt;ul&gt;
+      &lt;li&gt;enseñar los temas de los que se trata es decir, que si el curso es de matemáticas, aprendas matemáticas.&lt;/li&gt;
+      &lt;li&gt;enseñar a aprender el tema del que se trata, volviendo al ejemplo de las matemáticas, que aprendas a aprender matemáticas, que te enseñen como estudiar&lt;/li&gt;
+      &lt;li&gt;Inspirar a aprender el tema, muy pocos cursos y profesores llegan a este nivel. Si un profesor (o su curso) te inspiran a aprender la materia de la que se trata, me parece que es el mayor logro&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 22 Dec 2017 18:00:00 +0000</pubDate>
+        <link>http://thatcsharpguy.com/tv/escuela-otra-vez/</link>
+        <guid isPermaLink="true">http://thatcsharpguy.com/tv/escuela-otra-vez/</guid>
+        
+        <category>Meta</category>
+        
+        <category>Tv</category>
+        
+        
+        <category>tv</category>
+        
+      </item>
     
       <item>
         <title>Las expresiones lambda</title>
@@ -183,689 +573,6 @@ Fib(n) = Fib(n-1) + Fib(n-2)
         <pubDate>Wed, 06 Sep 2017 19:00:00 +0100</pubDate>
         <link>http://thatcsharpguy.com/tv/escuela/</link>
         <guid isPermaLink="true">http://thatcsharpguy.com/tv/escuela/</guid>
-        
-        <category>Meta</category>
-        
-        <category>Tv</category>
-        
-        
-        <category>tv</category>
-        
-      </item>
-    
-      <item>
-        <title>La programación funcional</title>
-        <description>&lt;p&gt;La programación funcional es otro paradigma de programación, sí, justo como la programación reactiva o la orientada a objetos. Esta tiene sus raices fuertemente cimentadas en el cálculo lambda, introducido en 1930 por Alonzo Church, pero fue hasta 1958, con la especificación de Lisp que surgió el primer lenguaje con una norción funcional. Este paradigma de programación estuvo generalmente relegado a la academia, sin embargo, en la actualidad, está comenzando a abarcar más terreno en otras áreas.&lt;/p&gt;
-
-&lt;p&gt;Como su nombre lo indica, está centrada en funciones, las cuales son tratadas como ciudadanos de primera clase. En este esquema, la función siempre representará la relación entre una entrada y una salida, tal como en matemáticas, en las que tienes que si a una función introduces un valor X, obtendrás como resultado un valor Y.&lt;/p&gt;
-
-&lt;figure&gt;&lt;img src=&quot;/postimages//tv/functional/function.png&quot; alt=&quot;&amp;quot;Function&amp;quot; images_set&quot; /&gt;&lt;/figure&gt;
-
-&lt;p&gt;Y es aquí cuando aparece otro concepto conocido como las funciones de orden superior, que son aquellas funciones que pueden tomar otras funciones como argumentos o retornar otras funciones como resultado de su ejecución.&lt;/p&gt;
-
-&lt;p&gt;Como ejemplo toma estas tres funciones que son de las más populares en la programación funcional:&lt;/p&gt;
-
-&lt;figure&gt;&lt;img src=&quot;/postimages//tv/functional/mapreducefilter.png&quot; alt=&quot;&amp;quot;Map reduce filter&amp;quot; images_set&quot; /&gt;&lt;/figure&gt;
-
-&lt;p&gt;Que son funciones que toman como argumento otra función. En el caso de &lt;code&gt;map&lt;/code&gt; que recibe una función que especifica la transformación de un valor a otro. El caso de &lt;code&gt;reduce&lt;/code&gt; que nos sirve para aplicar una función de acumulación a una coleccion de elementos, y &lt;code&gt;filter&lt;/code&gt; que toma una función que especifica los criterios de elegibilidad de los elementos de una colección. En el blog tengo un post al respecto de estas funciones, &lt;a href=&quot;..\..\post\map-filter-reduce-c-sharp&quot; target=&quot;_blank&quot;&gt;uno en C#&lt;/a&gt; y &lt;a href=&quot;..\..\post\map-filter-reduce-f-sharp&quot; target=&quot;_blank&quot;&gt;uno en F#&lt;/a&gt;, por si quieren echarle un ojo a código.&lt;/p&gt;
-
-&lt;p&gt;En el más estricto sentido, los lenguajes de programación puramente funcionales tienen algunas características que los hacen tan únicos:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;No hay ciclos.&lt;/strong&gt; La programación funcional hace uso de la recursividad, que como ya vimos, es una herramienta muy poderosa cuando de expresar problemas se trata.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;No hay variables ni asignaciones… o bueno, mejor dicho: inmutabilidad.&lt;/strong&gt; Una vez que un valor ha sido establecido y almacenado este no puede ser cambiado a lo largo de la ejecución del programa del bloque del programa en el que fue definido.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;No tienen estados, evita los efectos colaterales.&lt;/strong&gt; En la programación funcional, el llamar a una función multiples veces con las mismas entrdas siempre devolverá los mismos resultados, estos no se verán influenciados por condiciones externas o estados almacenados previamente.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;A esto último también se le llega a conocer como &lt;em&gt;transparencia referencial&lt;/em&gt;, que básicamente significa que podemos reemplazar cualquier referencia a una función por el valor que regresa sin que se altere el resultado o el comportamiento del programa.&lt;/p&gt;
-
-&lt;p&gt;La realidad es que muchos de los lenguajes que seguramente conoces, o conoceras, no son puramente funcionales. Muchos de ellos retienen nociones de otros paradigmas, como los ciclos, y las variables y a mi modo de ver las cosas, me parece algo bastante bueno, al menos para facilitar la trancisión y el aprendizaje para los desarrolladores que estamos acostumbrados a  la forma de programar con lenguajes como C# que son más orientados a objetos.&lt;/p&gt;
-
-&lt;p&gt;Las grandes ventajas de usar la programación funcional son:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;El poder ejecutar nuestros programas en entornos que favorecen la ejecución paralela, por aquello de que no existe la posibilidad de que el resultado de una función se vea afectada por elementos externos a ella.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Y en general un código más reducido, puesto que se le especifica al programa qué es lo que tiene que hacer y no cómo hacerlo.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Compara estos dos bloques, ambos en C#, an ambos estamos buscando valores dentro de una colección. Mientras que del modo tradicional le estamos diciendo al lenguaje que tiene que recorrer el arreglo y buscar el valor, del otro solamente le estamos diciendo que tiene que buscarlo.&lt;/p&gt;
-
-&lt;figure&gt;&lt;img src=&quot;/postimages//tv/functional/codecompare.png&quot; alt=&quot;&amp;quot;Code compare&amp;quot; images_set&quot; /&gt;&lt;/figure&gt;
-
-&lt;p&gt;Esto, como puedes ver es otro de esos traslapes de paradigmas de programación en lenguajes, así como hay lenguajes orientados a funciones que retienen conceptos de otros paradigmas, también hay lenguajes orientados a objetos que ya adoptan nociones de la programación funcional.&lt;/p&gt;
-
-&lt;figure&gt;&lt;img src=&quot;/postimages//tv/functional/overlay.png&quot; alt=&quot;&amp;quot;Languages&amp;quot; images_set&quot; /&gt;&lt;/figure&gt;
-
-&lt;p&gt;Si quieres ver un poco más sobre cómo podemos usar LINQ para llevar la programación funcional a C#, visita &lt;a href=&quot;..\..\tag\LINQ&quot; target=&quot;_blank&quot;&gt;estos posts&lt;/a&gt;.&lt;/p&gt;
-</description>
-        <pubDate>Tue, 29 Aug 2017 19:00:00 +0100</pubDate>
-        <link>http://thatcsharpguy.com/tv/funcional/</link>
-        <guid isPermaLink="true">http://thatcsharpguy.com/tv/funcional/</guid>
-        
-        <category>Meta</category>
-        
-        <category>Tv</category>
-        
-        
-        <category>tv</category>
-        
-      </item>
-    
-      <item>
-        <title>La programación reactiva</title>
-        <description>&lt;p&gt;La programación reactiva es un paradigma de programación del que ya habrán escuchado, y seguramente comenzarán a escuchar mucho más en el futuro, acá hay que decir que el hecho de que sea un paradigma por si mismo, no significa que sus implementaciones no se traslapen con otros como la programación funcional o la orientada a objetos. En fin, este paradigma, el reactivo, tiene dos objetivos principales:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Propagar los cambios en un sistema requriendo la menor cantidad de esfuerzo.&lt;/li&gt;
-  &lt;li&gt;Hacer más sencillo el trabajar con flujos asíncronos de datos.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Pero bueno, vamos a ver ejemplos de esto:&lt;/p&gt;
-
-&lt;p&gt;Para el caso de la propagación de los cambios imagina una hoja de cálculo, en la que tomas una celda y le colocas una fórmula que, digamos, depende de los valores de otras dos celdas. Luego cuando colocas valores estas celdas referenciadas, el valor de la primera automáticamente cambia, reaccionando a los cambios. Efectivamente, los cambios se propagaron en nuestro sistema.&lt;/p&gt;
-
-&lt;p&gt;Para el segundo caso, el de flujos asíncronos de datos, imagínate una hoja el un procesador de texto. Cada vez que presionas una tecla, estás enviando un dato, entonces el procesador de textos reacciona de acuerdo a como fue programado para hacerlo, en este caso, colocar la letra en donde corresponde. Este flujo es asíncrono porque… el programa no sabe cuándo vamos a escribir la siguiente letra.&lt;/p&gt;
-
-&lt;p&gt;En ambos casos la programación reactiva es una gran candidata para afrontar los problemas de diseño e implementación de aplicaciones con requerimientos similares.&lt;/p&gt;
-
-&lt;p&gt;Es más, podríamos reducir la programación reactiva a simplemente una herramienta destinada a trabajar con flujos de datos asíncronos, en el caso de la hoja de cálculo consideramos que cada valor nuevo en una celda es solo otro dato al cual se debe reaccionar.&lt;/p&gt;
-
-&lt;p&gt;Pero, para ver un poco de código en este video, considera el siguiente:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;int a = 2;
-int b = 5;
-int c = a + b;
-a = 5;
-Console.Write(c);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;¿Cuál será el valor de &lt;code&gt;c&lt;/code&gt; al final?&lt;/p&gt;
-
-&lt;p&gt;Si definimos este escenario bajo la programación reactiva el valor de &lt;code&gt;c&lt;/code&gt; sería &lt;code&gt;10&lt;/code&gt;, puesto que &lt;code&gt;c&lt;/code&gt; define la relación entre &lt;code&gt;a&lt;/code&gt; y &lt;code&gt;b&lt;/code&gt;, y cualquier cambio que ocurra tanto en &lt;code&gt;a&lt;/code&gt; y en &lt;code&gt;b&lt;/code&gt; se verá inmediatamente reflejado en &lt;code&gt;c&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Si estás familiarlizado con los patrones de diseño, te darás cuenta de que la programación reactiva es una forma de implementar el patrón del observador. Acá tengo un video que hice sobre los patrones por si quieren saber más.&lt;/p&gt;
-
-&lt;h3 id=&quot;frp&quot;&gt;FRP&lt;/h3&gt;
-&lt;p&gt;Hasta ahora hemos estado hablando de la programación reactiva, sin embargo, actualmente es muy común que se encuentren una mezcla muy poderosa de la programación reactiva y la programación funcional, de nuevo, un traslape de paradigmas. Algo conocido como programación reactiva-funcional o FRP, la programación funcional merece su propio video, sin embargo, para el contexto de la programación reactiva basta con decir que la programación funcional nos ofrece la posibilidad de filtrar, convertir y resumir* los flujos de datos en otros que sirvan mejor a los propósitos de nuestra aplicación.&lt;/p&gt;
-
-&lt;p&gt;Piensa nuevamente en el procesador de textos, supón que este está conectado directamente al flujo de datos proveniente del teclado, cuando el usuario presiona una tecla que no sea una letra o un número, el procesador de texto debe filtrar este flujo, de tal modo que no considere teclas que no sean letras o números.&lt;/p&gt;
-
-&lt;p&gt;Si buscan programación reactiva en internet, se van a encontrar con diagramas de este tipo:&lt;/p&gt;
-
-&lt;figure&gt;&lt;img src=&quot;/postimages//tv/rx/throttleWithTimeout.png&quot; alt=&quot;&amp;quot;Marble Diagram&amp;quot; images_set&quot; /&gt;&lt;/figure&gt;
-
-&lt;p&gt;En donde el flujo, o flujos, de datos originales se observa en la parte superior, seguidos de la operación que se le aplica, y al final el flujo resultante, en este par de sitios pueden ver e interactuar con estos diagramas: &lt;a href=&quot;http://rxmarbles.com/&quot; target=&quot;_blank&quot;&gt;rxmarbles&lt;/a&gt; y &lt;a href=&quot;https://rxviz.com/&quot; target=&quot;_blank&quot;&gt;Rx Visualizer&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;rx&quot;&gt;Rx&lt;/h3&gt;
-&lt;p&gt;Mientras que cada lenguaje de programación tiene su propia manera (y hasta tu podrías crear la tuya) de implementar la programación reactiva, podrías tomar ventaja de las cosas que la comunidad ha desarrollado. Y esto lo puedes hacer a través de una API multiplataforma llamada &lt;a href=&quot;http://reacivex.io&quot; target=&quot;_blank&quot;&gt;Reactive Extensions&lt;/a&gt; o &lt;em&gt;Rx&lt;/em&gt;, que permite crear y consumir flujos de datos. En el contexto de &lt;em&gt;Rx&lt;/em&gt;  los flujos de datos se conocen como &lt;em&gt;Observables&lt;/em&gt; y quienes estan atentos de ellos son los &lt;em&gt;Observadores&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;En &lt;em&gt;Rx&lt;/em&gt; los observables (es decir, los flujos de datos) tienen una operación básica: la de aceptar las suscripciones que reciben.&lt;/p&gt;
-
-&lt;p&gt;Mientras que los observadores tienen tres operaciones básicas:
-ma&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Reaccionar al siguiente valor provisto por el flujo&lt;/li&gt;
-  &lt;li&gt;Reaccionar cuando el flujo le informe que se ha completado&lt;/li&gt;
-  &lt;li&gt;Reaccionar a un error ocurrido dentro del flujo&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Esto u  sando las extensiones reactivas para .NET se ve así: pero si quieres ver un ejemplo completo puedes &lt;a href=&quot;http://thatcsharpguy.com/post/reactive-extensions-1/&quot; target=&quot;_blank&quot;&gt;visitar este post&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Sin embargo, como dije, las extensiones reactivas son multiplataforma y están disponibles para Java, Scala, Clojure, Swift, Go, Ruby y demás.&lt;/p&gt;
-
-&lt;h2 id=&quot;usos&quot;&gt;Usos&lt;/h2&gt;
-&lt;p&gt;Es también bueno mencionar que no porque tengamos al alcance esto de la programación reactiva tenemos que aplicarlo a todo lo que nos encontramos, no, siempre hay que buscar la mejor herramienta para el trabajo, y eso es justamente &lt;em&gt;Rx&lt;/em&gt; una herramienta. Habiendo dicho esto, hay algunos escenarios que son altamente susceptibles de afrontar usándola, entre ellos tenemos:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Aplicaciones con interfaz gráfica en la que el usuario intereactúe con la aplicación&lt;/strong&gt;: hace rato hablamos del teclado, pero podrías aplicar la misma idea de flujo a los clicks que hace el usuario o a los botones de un control de consola.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Cuando estés trabajando con información en tiempo real&lt;/strong&gt; como por ejemplo las lecturas provistas por un termómetro, un sismógrafo o, en el caso de los automóviles autónomos, la inmensa cantidad de información que reciben a través de sus sensores.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Estés trabajando con flujos interminables de datos&lt;/strong&gt; como la inmensa cantidad de tweets que existen, o las transferencias bancarias que ocurren en un banco al día.&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Tue, 22 Aug 2017 19:00:00 +0100</pubDate>
-        <link>http://thatcsharpguy.com/tv/reactiva/</link>
-        <guid isPermaLink="true">http://thatcsharpguy.com/tv/reactiva/</guid>
-        
-        <category>Meta</category>
-        
-        <category>Tv</category>
-        
-        
-        <category>tv</category>
-        
-      </item>
-    
-      <item>
-        <title>Programación reactiva y Rx, parte 2</title>
-        <description>&lt;p&gt;&lt;a href=&quot;..\reactive-extensions-1&quot; target=&quot;_blank&quot;&gt;En el post pasado&lt;/a&gt; les comencé a hablar de las &lt;em&gt;Reactive Extensions&lt;/em&gt; y cómo es que introducían un paradigma de programación distinto. Ahí mostré un ejemplo muy sencillo de la programación reactiva… pero sé que no siempre todo el código que escribiremos será así de sencillo, así que en este post crearé y mostraré un caso más complejo en el que podemos utilizar &lt;em&gt;Rx&lt;/em&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;el-río&quot;&gt;El río&lt;/h2&gt;
-&lt;p&gt;Piensa en un río en el cual hay un conjunto de peces que viajan a través de él, es por eso que los pescadores se acercan al río para tratar de conseguir un poco de alimento. El río produce una cantidad &lt;code&gt;x&lt;/code&gt; de peces que pasan por él uno a uno cada &lt;code&gt;y&lt;/code&gt; milisegundos, además de que hay ocasiones en que el agua del río hace muy peligroso pescar en él.&lt;/p&gt;
-
-&lt;h3 id=&quot;river&quot;&gt;&lt;code&gt;River&lt;/code&gt;&lt;/h3&gt;
-
-&lt;p&gt;Para recrear las condiciones anteriores, crea una clase llamada &lt;code&gt;River&lt;/code&gt; que reciba y almacene las especificaciones de la cantidad de peces, el tiempo entre ellos y si es o no peligroso:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-csharp&quot; data-lang=&quot;csharp&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;River&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_fishAmount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_waitTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_dangerousRiver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;River&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fishAmount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;waitTime&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dangerousRiver&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;_fishAmount&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fishAmount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;_waitTime&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;waitTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;_dangerousRiver&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dangerousRiver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;fish&quot;&gt;&lt;code&gt;Fish&lt;/code&gt;&lt;/h3&gt;
-
-&lt;p&gt;Pero aguarda, no te olvides de los peces: estos tendrán una especie (&lt;code&gt;FishSpecies&lt;/code&gt;), un color (&lt;code&gt;Color&lt;/code&gt;) y un peso (&lt;code&gt;Weight&lt;/code&gt;), todo representado dentro de una clase:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-csharp&quot; data-lang=&quot;csharp&quot;&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Fish&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Weight&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Color&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Color&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FishSpecies&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Species&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;cp&quot;&gt;#region Random fish&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Random&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MinWeight&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Gramos&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MaxWeight&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Gramos&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Fish&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;RandomFish&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fish&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Fish&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;Weight&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NextDouble&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MaxWeight&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MinWeight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MinWeight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;Species&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FishSpecies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// There are four species&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;Color&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// There are four colors&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fish&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;cp&quot;&gt;#endregion&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Oh, además en esta clase introduje un método para crear peces aleatoriamente.&lt;/p&gt;
-
-&lt;h3 id=&quot;river-cont&quot;&gt;&lt;code&gt;River&lt;/code&gt; (cont)&lt;/h3&gt;
-
-&lt;p&gt;Bueno, volviendo al diseño del río. Ahora toca escribir la forma en que representaremos el paso de los peces a través de él. ¿Estás de acuerdo en que es un &lt;strong&gt;flujo&lt;/strong&gt;? sí, un flujo de peces.  Y al ser un flujo es el un buen candidato para convertirse en un &lt;code&gt;IObservable&lt;/code&gt;de &lt;code&gt;Fish&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Para acceder al flujo de peces usaremos un método que retorne un &lt;code&gt;IOBservable&amp;lt;Fish&amp;gt;&lt;/code&gt;. Acá es una buena oportunidad para decir que no es recomendable que tu mismo implementes la interfaz, lo mejor en muchos casos es hacer uso de las &lt;em&gt;Reactive Extensions&lt;/em&gt; para crear un objeto de ese tipo:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-csharp&quot; data-lang=&quot;csharp&quot;&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IObservable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Fish&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Fish&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;observer&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_fishAmount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;++)&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fish&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Fish&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RandomFish&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;observer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;OnNext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fish&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_waitTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_dangerousRiver&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_fishAmount&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-                    &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Exception&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Uh, hubo un derrame en el río&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;observer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;OnCompleted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Vamos a revisar qué es lo que está ocurriendo en ese método:&lt;/p&gt;
-
-&lt;dl&gt;
-   &lt;dt&gt;1.&lt;/dt&gt;
-    &lt;dd&gt;Lo primero que nos damos cuenta es el tipo de retorno: &lt;code&gt;IObservable&amp;lt;Fish&amp;gt;&lt;/code&gt;&lt;/dd&gt;
-   &lt;dt&gt;2.&lt;/dt&gt;
-    &lt;dd&gt;Inmediatamente después tenemos la creación de nuestro observable mediante el método estático &lt;code&gt;Observable.Create&lt;/code&gt;, este método recibe un `Func&amp;lt;IObserver&amp;lt;Fish&amp;gt;, Action&amp;gt;`. El parámetro de entrada (&lt;code&gt;IObserver&amp;lt;Fish&amp;gt;&lt;/code&gt;) es una referencia al suscriptor que está al tanto de lo que publiquemos. El valor de retorno (&lt;code&gt;Action&lt;/code&gt;) es un delegado que en teoría deberíamos usar para limpiar los recursos que usamos en el flujo. &lt;/dd&gt;
-   &lt;dt&gt;3.&lt;/dt&gt;
-    &lt;dd&gt;Vamos a generar tantos peces como sean necesarios, en este caso creándolos de forma aleatoria, después, publicaremos cada uno de los peces a nuestro &lt;code&gt;Observer&lt;/code&gt; mediante su método &lt;code&gt;OnNext&lt;/code&gt;.  
-    Esperarémos después el tiempo indicado entre cada pez.
-    Antes de repetir el ciclo comprobaremos que el río es seguro, y si no lo es, lanzaremos una excepción. &lt;/dd&gt;
-   &lt;dt&gt;4.&lt;/dt&gt;
-    &lt;dd&gt;Apenas terminar el ciclo enviaremos el mensaje &lt;code&gt;OnCompleted&lt;/code&gt; al &lt;code&gt;observer&lt;/code&gt;&lt;/dd&gt;
-   &lt;dt&gt;5.&lt;/dt&gt;
-    &lt;dd&gt;Regresaremos una &lt;code&gt;Action&lt;/code&gt; vacía, recuerda que deberíamos usar este para liberar los recursos que usó nuestro flujo de datos. En este caso, no debemos liberar nada.&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;p&gt;Usar el método &lt;code&gt;Observable.Create&amp;lt;T&amp;gt;&lt;/code&gt; es solo una de las muchas maneras en las que podemos crear un flujo, &lt;a href=&quot;https://weblogs.asp.net/sweinstein/16-ways-to-create-iobservables-without-implementing-iobservable&quot; target=&quot;_blank&quot;&gt;en este sitio web&lt;/a&gt; puedes ver 16 formas de crearlos sin necesidad de heredar tú mismo de &lt;code&gt;IObservable&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;usando-el-río&quot;&gt;Usando el río&lt;/h2&gt;
-&lt;p&gt;Vamos a crear un par de ríos para después poder suscribirnos a ellos:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-csharp&quot; data-lang=&quot;csharp&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rioNormal&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;River&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rioRapido&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;River&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;waitTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dangerousRiver&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;River&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fishAmount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dangerousRiver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Entonces ahora podemos suscribirnos y estar al tanto de qué peces pasan por el río:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-csharp&quot; data-lang=&quot;csharp&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rioNormal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;onNext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fish&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{DateTime.Now:HH:mm:ss.ffff}: {fish}&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;onCompleted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;¡Terminé de pescar!&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;pre&gt;
-13:35:40.3923: Anglerfish, Green, 3,787.68
-13:35:40.9770: Anglerfish, Green, 1,462.02
-13:35:41.4831: ClownFish, Black, 1,469.41
-13:35:41.9871: Blowfish, Red, 1,539.82
-13:35:42.4926: Tuna, Black, 2,540.65
-13:35:42.9931: Blowfish, Green, 2,905.58
-13:35:43.4939: Blowfish, Red, 3,611.61
-13:35:43.9994: Tuna, Black, 2,029.88
-13:35:44.5048: Tuna, Yellow, 1,672.38
-13:35:45.0102: Anglerfish, Black, 4,194.68
-¡Terminé de pescar!
-&lt;/pre&gt;
-
-&lt;p&gt;Como vimos anteriormente, también podemos filtrar los elementos:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-csharp&quot; data-lang=&quot;csharp&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rioNormal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fish&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fish&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Color&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Green&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fish&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Weight&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Filtramos los elementos&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;onNext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fish&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{DateTime.Now:HH:mm:ss.ffff}: {fish}&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;onCompleted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;¡Terminé de pescar!&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;pre&gt;
-13:35:48.5546: Blowfish, Green, 3,420.28
-13:35:50.0690: Anglerfish, Green, 3,974.44
-¡Terminé de pescar!
-&lt;/pre&gt;
-
-&lt;p&gt;Podemos agrupar los elementos con el método &lt;code&gt;Buffer&lt;/code&gt;, que permitirá agrupar los elementos del flujo. Por ejemplo, imagina que el pescador está usando una red para 3 peces:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-csharp&quot; data-lang=&quot;csharp&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rioNormal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Agrupamos 3 elementos&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;onNext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fishCollection&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;, &amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fishCollection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Select&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fi&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Species&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Atrapé {fishCollection.Count} peces ({f})&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;onCompleted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;¡Terminé de pescar usando una red para 3 peces!&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;pre&gt;
-Atrapé 3 peces (Tuna, Blowfish, Tuna)
-Atrapé 3 peces (Tuna, Tuna, Blowfish)
-Atrapé 3 peces (Tuna, Blowfish, Blowfish)
-Atrapé 1 peces (Anglerfish)
-¡Terminé de pescar usando una red para 3 peces!
-&lt;/pre&gt;
-
-&lt;p&gt;Y no olvides que podemos especificarle al código que hacer en caso de que ocurra un error en el flujo, esto mediante el método (o lambda en este caso) &lt;code&gt;OnError&lt;/code&gt;:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-csharp&quot; data-lang=&quot;csharp&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dangerousRiver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;onNext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fish&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{DateTime.Now:HH:mm:ss.ffff}: {fish}&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;onError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Ocurrió un problema en el río: {ex.Message}&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;onCompleted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;¡Terminé de pescar en el río peligroso!&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;pre&gt;
-13:35:45.5200: Anglerfish, Black, 3,171.37
-13:35:46.0216: Anglerfish, Red, 3,041.97
-13:35:46.5272: Anglerfish, Black, 4,589.28
-13:35:47.0297: Blowfish, Black, 3,128.05
-Ocurrió un problema en el río: Uh, hubo un derrame en el río
-&lt;/pre&gt;
-
-&lt;h2 id=&quot;el-pescador-o-iobserverfish&quot;&gt;El pescador o &lt;code&gt;IObserver&amp;lt;Fish&amp;gt;&lt;/code&gt;&lt;/h2&gt;
-&lt;p&gt;Hasta el momento hemos estado empleando lambdas para reaccionar a los mensajes de un publicador. Pero si recuerdas, en el post pasado hablé de otra interfaz que representaba al observador, recordarás también que esta interfaz especifica tres métodos. Nosotros vamos a crear una clase &lt;code&gt;Fisher&lt;/code&gt; que representará al pescador:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-csharp&quot; data-lang=&quot;csharp&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Fisher&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IObserver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Fish&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Fisher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;_name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;OnNext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Fish&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{_name}: atrapé un {value.Species} de color {value.Color} a las {DateTime.Now:HH:mm:ss.ffff}&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;OnError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{_name}: Oops, algo pasó {error.Message}&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;OnCompleted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{_name}: ¡Terminó la pesca!&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Y una vez que tenemos a un pescador (observador) podemos suscribirlo al flujo de peces para que esté al tanto de lo que ocurre:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-csharp&quot; data-lang=&quot;csharp&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;erik&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Fisher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Erik&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;rioNormal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;erik&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;pre&gt;
-Erik: atrapé un Anglerfish de color Red a las 13:35:57.6664
-Erik: atrapé un Blowfish de color Yellow a las 13:35:57.6795
-Erik: atrapé un Anglerfish de color Black a las 13:35:57.6923
-Erik: atrapé un Blowfish de color Green a las 13:35:57.7051
-Erik: atrapé un Anglerfish de color Red a las 13:35:57.7172
-Erik: atrapé un Tuna de color Yellow a las 13:35:57.7301
-Erik: atrapé un ClownFish de color Yellow a las 13:35:57.7429
-Erik: atrapé un Blowfish de color Yellow a las 13:35:57.7558
-Erik: atrapé un ClownFish de color Green a las 13:35:57.7686
-Erik: atrapé un Blowfish de color Red a las 13:35:57.7815
-Erik: ¡Terminó la pesca!
-&lt;/pre&gt;
-
-&lt;p&gt;Y listo, ese fue todo el ejemplo. Recuerda que el &lt;a href=&quot; https://github.com/ThatCSharpGuy/rx&quot; target=&quot;_blank&quot;&gt;código está en GitHub&lt;/a&gt; para qe lo descargues y juegues con él. En el futuro estaré creando otro par de ejemplos sobre las bondades de la programación reactiva, entre tanto, si tienes preguntas, no dudes en hacérmelas llegar.&lt;/p&gt;
-</description>
-        <pubDate>Tue, 15 Aug 2017 20:00:01 +0100</pubDate>
-        <link>http://thatcsharpguy.com/post/reactive-extensions-2/</link>
-        <guid isPermaLink="true">http://thatcsharpguy.com/post/reactive-extensions-2/</guid>
-        
-        <category>Rx</category>
-        
-        <category>ReactiveExtensions</category>
-        
-        
-        <category>es</category>
-        
-      </item>
-    
-      <item>
-        <title>Programación reactiva y Rx, parte 1</title>
-        <description>&lt;p&gt;La programación reactiva es un paradigma de programación que está ganando mucha popularidad últimamente, esto se le puede atribuir a la funcionalidad que nos ofrece y a la simpleza con la que se puede llegar a leer el código.&lt;/p&gt;
-
-&lt;p&gt;Es una de las maneras de implementar el &lt;a href=&quot;https://youtu.be/NmuRwZ2CYvA&quot; target=&quot;_blank&quot;&gt;&lt;i&gt;patrón del observador&lt;/i&gt;&lt;/a&gt; descrito por &lt;em&gt;The Gang of Four&lt;/em&gt; en su famoso libro. Este patrón nos ayuda para establecer un medio de comunicación unilateral entre dos objetos en la que uno, conocido como el publicador, es el que envía mensajes y otro, conocido como el suscriptor, los recibe. A este conjunto de mensajes enviados en una sola dirección lo conoceremos de ahora en adelante como  &lt;em&gt;flujo de datos&lt;/em&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;en-net&quot;&gt;En .NET&lt;/h3&gt;
-&lt;p&gt;En .NET te encontrarás con dos interfaces que hacen las veces de este par de actores de los que habla el patrón del observador: El publicador es del tipo &lt;code&gt;IObservable&amp;lt;T&amp;gt;&lt;/code&gt; mientras que el observador es &lt;code&gt;IObserver&amp;lt;T&amp;gt;&lt;/code&gt; en donde &lt;code&gt;T&lt;/code&gt; es el mensaje que se enviará entre ellos.&lt;/p&gt;
-
-&lt;h3 id=&quot;iobservablet-el-publicador&quot;&gt;&lt;code&gt;IObservable&amp;lt;T&amp;gt;&lt;/code&gt; (el publicador)&lt;/h3&gt;
-&lt;p&gt;Esta interfaz únicamente especifica un método &lt;code&gt;Suscribe&lt;/code&gt; para añadir suscriptores a sus flujos de datos&lt;/p&gt;
-
-&lt;h3 id=&quot;iobservert-el-suscriptor&quot;&gt;&lt;code&gt;IObserver&amp;lt;T&amp;gt;&lt;/code&gt; (el suscriptor)&lt;/h3&gt;
-&lt;p&gt;A diferencia del publicador, el suscriptor debe implementar más métodos para reaccionar de acuerdo a lo que el publicador envíe a través del canal de comunicación. La interfaz especifica tres métodos:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;code&gt;OnNext&lt;/code&gt;&lt;/strong&gt;, que será llamado cada vez que el publicador envíe un nuevo mensaje.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;code&gt;OnCompleted&lt;/code&gt;&lt;/strong&gt;, que será llamado una vez que el suscriptor de por terminada la comunicación.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;code&gt;OnError&lt;/code&gt;&lt;/strong&gt;, que será llamado si es que dentro del publicador ocurre &lt;a href=&quot;..\excepciones-c-sharp&quot; target=&quot;_blank&quot;&gt;un error&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;reactive-extensions-rx&quot;&gt;Reactive Extensions (Rx)&lt;/h3&gt;
-&lt;p&gt;Las interfaces mencionadas anteriormente están disponibles en el &lt;em&gt;framework&lt;/em&gt; desde la versión 4, sin embargo, para sacarle todo el jugo a la programación reactiva (sin tener que reinventar la rueda nosotros mismos), también es necesario instalar una biblioteca desde NuGet, así que instala el paquete:&lt;/p&gt;
-
-&lt;figure class=&quot;console&quot;&gt;&lt;pre&gt;&lt;code&gt;PM&amp;gt; Install-Package System.Reactive&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;En todos los lugares en los que vayas a hacer uso de este paradigma de programación. Por cierto, &lt;code&gt;System.Reactive&lt;/code&gt; antes era &lt;code&gt;Rx-Main&lt;/code&gt; por si llegaran a encontrar algún tutorial que hace referencia a este paquete, no se rompan la cabeza tratando de encontrarlo.&lt;/p&gt;
-
-&lt;h2 id=&quot;algo-no-reactivo&quot;&gt;Algo no reactivo&lt;/h2&gt;
-&lt;p&gt;Para comenzar vamos a ver un ejemplo de algo que no es reactivo. Comencemos por un arreglo de datos enteros:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-csharp&quot; data-lang=&quot;csharp&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datos&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;13&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;13&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Y luego una forma de &lt;strong&gt;tomarlos&lt;/strong&gt; uno a uno e imprimirlos a consola:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-csharp&quot; data-lang=&quot;csharp&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;foreach&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dato&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{dato}, &amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;\nTerminé de leer los datos&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Al ejecutarlo obtendremos algo como esto:&lt;/p&gt;
-
-&lt;pre&gt;
-3, 4, 6, 8, 11, 13, 15, 15, 13, 10, 6, 4, 
-Terminé de leer los datos
-&lt;/pre&gt;
-
-&lt;p&gt;Nada raro: tenemos un arreglo y &lt;strong&gt;sacamos&lt;/strong&gt; los valores de él para imprimirlos a consola. Ahora vamos a ver cómo haríamos esto con programación reactiva:&lt;/p&gt;
-
-&lt;h2 id=&quot;algo-reactivo&quot;&gt;Algo reactivo&lt;/h2&gt;
-&lt;p&gt;Comenzaremos por convertir nuestros &lt;code&gt;datos&lt;/code&gt; a un flujo de datos, para esto nos ayudaremos &lt;a href=&quot;..\extension-methods-es&quot; target=&quot;_blank&quot;&gt;método de extensión&lt;/a&gt; &lt;code&gt;ToObservable&lt;/code&gt; que tomará un &lt;code&gt;IEnumerable&lt;/code&gt; y lo convierte en un observable (o publicador):&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-csharp&quot; data-lang=&quot;csharp&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IObservable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flujoDatos&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ToObservable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Como puedes ver, nuestro objeto &lt;code&gt;flujoDatos&lt;/code&gt; es ahora un &lt;code&gt;IObservable&amp;lt;int&amp;gt;&lt;/code&gt; y para recibir información de él, ahora también sabes que debemos suscribirnos a él mediante un &lt;code&gt;IObserver&amp;lt;int&amp;gt;&lt;/code&gt;, ¿cierto?&lt;/p&gt;
-
-&lt;p&gt;Pues verás, otra de las ventajas de usar las &lt;strong&gt;Reactive Extensions&lt;/strong&gt; es que podemos suscribirnos usando &lt;code&gt;Suscribe&lt;/code&gt; especificando únicamente las acciones que vamos a realizar cada vez que se llame a &lt;code&gt;OnNext&lt;/code&gt;, &lt;code&gt;OnCompleted&lt;/code&gt; y &lt;code&gt;OnError&lt;/code&gt;. Esto mediante el uso de &lt;a href=&quot;..\delegados&quot; target=&quot;_blank&quot;&gt;expresiones lambda&lt;/a&gt;:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-csharp&quot; data-lang=&quot;csharp&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flujoDatos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;onNext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dato&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{dato}, &amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;onCompleted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;\nTerminé de recibir los datos&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Al ejecutar el código obtendremos algo así en pantalla:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-csharp&quot; data-lang=&quot;csharp&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;13&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;13&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-&lt;span class=&quot;n&quot;&gt;Terminé&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;de&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;recibir&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;los&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datos&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Pareciera que nada cambió, sin embargo, la diferencia está en la forma en la que los números llegaron al método &lt;code&gt;Console.Write&lt;/code&gt;:&lt;/p&gt;
-
-&lt;h2 id=&quot;la-diferencia&quot;&gt;La diferencia&lt;/h2&gt;
-&lt;p&gt;La diferencia radica en que usando la primera forma (la no reactiva), en el código le estamos dando dos órdenes al programa:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Sacar los datos del arreglo&lt;/li&gt;
-  &lt;li&gt;Una vez que tenga el dato, imprimirlo en pantalla&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Este modo de programación se le conoce como &lt;strong&gt;programación imperativa&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;Mientras que del segundo modo, nosotros únicamente le estamos asignando una sola tarea al programa:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Una vez que tenga el dato, imprimirlo a pantalla&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;En este caso no es necesario que le ordenemos sacar los datos del flujo de datos, estos llegarán solos al &lt;em&gt;observador&lt;/em&gt;, lo único que tenemos que hacer es decirle cómo reaccionar cuando recibe información. Este modo de programación se conoce como &lt;strong&gt;programación declarativa&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;pull-vs-push&quot;&gt;Pull vs. Push&lt;/h3&gt;
-&lt;p&gt;Una forma de visualizar esta diferencia puede ser con las notificaciones que recibes en tu teléfono móvil: cada vez que alguien te menciona en un tweet o te llega un correo electrónico, tu teléfono recibe una notificación &lt;em&gt;push&lt;/em&gt; del servidor, a la cual debe reaccionar de determinada manera. Mientras que si tu entras a la app del correo o a la app de Twitter y refrescas la aplicación eres tú mismo quien está solicitando (mediante un &lt;em&gt;pull&lt;/em&gt;) la información.&lt;/p&gt;
-
-&lt;p&gt;Pero bueno, ese fue un ejemplo muy, muy básico de las &lt;em&gt;Reactive Extensions&lt;/em&gt;, ¿vemos otro un poco más elaborado?&lt;/p&gt;
-
-&lt;h2 id=&quot;no-solo-enteros&quot;&gt;No solo enteros&lt;/h2&gt;
-&lt;p&gt;En este caso estamos utilizando un flujo de &lt;code&gt;int&lt;/code&gt;s, pero la programación reactiva tiene muchos usos: imagina una aplicación para escritorio. Podrías visualizar a los clicks que el usuario hace en ella como un flujo, un flujo de clicks. Y hacer que la app &lt;strong&gt;reaccione&lt;/strong&gt; a ellos mediante este modo de programación.&lt;/p&gt;
-
-&lt;h2 id=&quot;linq-y-rx&quot;&gt;LINQ y Rx&lt;/h2&gt;
-&lt;p&gt;Empaquetadas junto con las &lt;em&gt;Reactive Extensions&lt;/em&gt;, vienen otros métodos de extensión que permiten aplicar muchos de las operaciones de Linq sobre los &lt;code&gt;IObservables&lt;/code&gt; como si de secuencias tradicionales se tratara, entonces podemos filtrar con &lt;code&gt;Where&lt;/code&gt;:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-csharp&quot; data-lang=&quot;csharp&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flujoDatos&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dato&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dato&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;onNext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dato&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{dato}, &amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;onCompleted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;\nTerminé de recibir los múltiplos de 3&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;pre&gt;
-3, 6, 15, 15, 6, 
-Terminé de recibir los múltiplos de 3
-&lt;/pre&gt;
-
-&lt;p&gt;Saltarnos algunos valores con &lt;code&gt;Take&lt;/code&gt; y &lt;code&gt;Skip&lt;/code&gt;:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-csharp&quot; data-lang=&quot;csharp&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;flujoDatos&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Skip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Take&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;onNext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dato&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{dato}, &amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;onCompleted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;\nTerminé de recibir los tres elementos a partir del 2do&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;pre&gt;
-6, 8, 11, 
-Terminé de recibir los tres elementos a partir del 2do
-&lt;/pre&gt;
-
-&lt;p&gt;Y usar funciones de agregación como &lt;code&gt;Min&lt;/code&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-csharp&quot; data-lang=&quot;csharp&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;flujoDatos&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Min&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;onNext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dato&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{dato}, &amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;onCompleted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;\nTerminé de recibir los datos y presenté el menor&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;pre&gt;
-3, 
-Terminé de recibir los datos y presenté el menor
-&lt;/pre&gt;
-
-&lt;h2 id=&quot;concurrencia-y-rx&quot;&gt;Concurrencia y Rx&lt;/h2&gt;
-&lt;p&gt;Otra de las ventajas que nos ofrece la programación reactiva es la asincronía bajo la que está diseñado para operar. Al ser reactiva permite que las acciones del programa no tengan que seguir una secuencia y los mensajes se envíen/reciban en cualquier momento. También, usando otros métodos de extensión como &lt;code&gt;SuscribeOn&lt;/code&gt; y &lt;code&gt;ObserveOn&lt;/code&gt; se puede delegar la ejecución de los &lt;code&gt;IObservers&lt;/code&gt; a otros hilos distintos de los que fue llamado.&lt;/p&gt;
-
-&lt;h2 id=&quot;hagamos-todo-reactivo-o-no&quot;&gt;Hagamos todo reactivo… ¿o no?&lt;/h2&gt;
-&lt;p&gt;Espero haberte dado un pequeño empujón hacia la programación reactiva, pero ahora para completar el trabajo es importante que te diga que no significa que vayas por el código de tus apps convirtiendo todos los &lt;code&gt;IEnumerable&lt;/code&gt; a flujos de dato o que busques la manera de convertir todos tus eventos a &lt;code&gt;IObservables&lt;/code&gt;, no. Considera usar este paradigma para los casos en los que:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Tengas que lidiar con eventos de interfaz gráfica como un usuario dando clicks o moviendo &lt;em&gt;sliders&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;Estés trabajando con información en tiempo real&lt;/li&gt;
-  &lt;li&gt;Estés trabajando con flujos de datos&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Es totalmente entendible si te quedas con dudas, recuerda que me puedes mandar un tweet o un correo electrónico, además puedes  ver el &lt;a href=&quot; https://github.com/ThatCSharpGuy/rx&quot; target=&quot;_blank&quot;&gt;código de este post en GitHub&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Definitivamente Rx es un tema que da para más y sin duda &lt;a href=&quot;..\reactive-extensions-2&quot; target=&quot;_blank&quot;&gt;estaré escribiendo sobre él&lt;/a&gt; en el futuro.&lt;/p&gt;
-</description>
-        <pubDate>Tue, 15 Aug 2017 20:00:01 +0100</pubDate>
-        <link>http://thatcsharpguy.com/post/reactive-extensions-1/</link>
-        <guid isPermaLink="true">http://thatcsharpguy.com/post/reactive-extensions-1/</guid>
-        
-        <category>Rx</category>
-        
-        <category>ReactiveExtensions</category>
-        
-        
-        <category>es</category>
-        
-      </item>
-    
-      <item>
-        <title>Mis libros (meta)</title>
-        <description>&lt;p&gt;¡Hey! el canal llegó a 5̶0̶0̶ 534 suscriptores y decidí hacer este video en el que no hablo de nada sobre el desarrollo. La programación habitual regresa la siguiente semana.&lt;/p&gt;
-
-&lt;p&gt;¿Te interesa conseguir los libros? dejo algunos enlaces de afiliado acá abajo:&lt;/p&gt;
-
-&lt;p&gt;1:18 C# in a Nutshell (5 http://amzn.to/2vwSHqx) (6 http://amzn.to/2hY3PYP)&lt;br /&gt;
-1:55 Cracking the Coding Interview http://amzn.to/2vU3oEG&lt;br /&gt;
-2:36 A Tour of C++ http://amzn.to/2wX4D2K&lt;br /&gt;
-3:01 Soft Skills http://amzn.to/2wXeQwb&lt;br /&gt;
-3:42 Compiladores http://bit.ly/2wXfKc7&lt;br /&gt;
-4:02 Ingeniería de Software: http://bit.ly/2w67oSm&lt;br /&gt;
-4:28 Clean Code http://amzn.to/2fEO3kF&lt;br /&gt;
-4:52 Thinking LINQ http://amzn.to/2fEIClV&lt;br /&gt;
-5:15 Level Up! http://amzn.to/2vUPfqC&lt;br /&gt;
-5:43 Estructuras de Datos http://bit.ly/2wX6KUe&lt;br /&gt;
-6:07 ASP.NET Web API 2 http://amzn.to/2vUCZGP&lt;br /&gt;
-6:07 ASP.NET Web API 2 Recipes http://amzn.to/2hYkwDp&lt;br /&gt;
-6:39 The Algorithm Design Manual http://amzn.to/2uCAtFo&lt;br /&gt;
-6:59 Matemáticas para la computación http://bit.ly/2vUTT8c&lt;br /&gt;
-7:38 Designing Web Usability http://bit.ly/2vwH96A&lt;br /&gt;
-8:23 Teoria De Automatas Lenguajes Y Computacion http://bit.ly/2uGFJUc&lt;br /&gt;
-8:50 Machine Learning Projects for .NET developers http://amzn.to/2uBSmEa&lt;br /&gt;
-9:33 Resto de los libros https://youtu.be/jXvOifaUr1o?t=9m33s&lt;/p&gt;
-</description>
-        <pubDate>Tue, 15 Aug 2017 19:00:00 +0100</pubDate>
-        <link>http://thatcsharpguy.com/tv/mis-libros/</link>
-        <guid isPermaLink="true">http://thatcsharpguy.com/tv/mis-libros/</guid>
-        
-        <category>Meta</category>
-        
-        <category>Tv</category>
-        
-        
-        <category>tv</category>
-        
-      </item>
-    
-      <item>
-        <title>Ciencia de datos</title>
-        <description>&lt;p&gt;La ciencia de datos, bueno, de entrada, es una de esas “palabras rimbombantes” que en la actualidad todos están usando para describir un montón de cosas.&lt;/p&gt;
-
-&lt;p&gt;Primero hay que hablar de tres conceptos:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Datos&lt;/strong&gt;. Son hechos desorganizados, cosas que están ahí y que de inicio no proveen más información que lo que se ve a simple vista. Por ejemplo: una lista de las temperaturas del planeta durante los 200 años anteriores. Eso solo son datos.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Información&lt;/strong&gt;: Son datos organizados, estructurados y presentados en un contexto, de tal modo que al verlos resulten algo útil para el que los observa. Como ejemplo podríamos tomar los mismos datos sobre las temperaturas, acomodarlos de manera cronológica y presentarlos, tan solo para darnos cuenta de que la temperatura del planeta está aumentando. Esto último ya es información.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Conocimiento&lt;/strong&gt;: El conocimiento implica dos cosas, tener información y entenderla. El conocimiento se forma internamente a partir de la información que recibimos.&lt;/p&gt;
-
-&lt;p&gt;Una vez sacado eso del medio, podría decirse que la ciencia de datos se encarga de transformar los datos en información, y hace lo posible por que esta información se transofrme en conocimiento.&lt;/p&gt;
-
-&lt;p&gt;Para lograrlo, la ciencia de datos se apoya en tres pilares:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;El matemático&lt;/strong&gt;: estadística, cálculo, álgebra&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;El computacional&lt;/strong&gt;: programación, bases de datos, etcétera.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;El comodín (conocimiento específico)&lt;/strong&gt;: Del área del cual provienen los datos y para el cual se quiere usar la ciencia de datos.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Hay un diagrama de Venn muy famoso que ilustra esto:&lt;/p&gt;
-
-&lt;figure&gt;&lt;img src=&quot;/postimages//tv/ciencia-datos/venn-diagram.png&quot; alt=&quot;&amp;quot;Diagrama de Venn&amp;quot; images_set&quot; /&gt;&lt;/figure&gt;
-
-&lt;p&gt;(&lt;a href=&quot;http://www.prooffreader.com/2016/09/battle-of-data-science-venn-diagrams.html&quot; target=&quot;_blank&quot;&gt;En realidad hay un montón de diagramas de Venn que tratan de explicar lo que es la ciencia de datos&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;Yo me lo imagino dos islas que tenían un cierto nivel de comunicación entre ellas, hasta que de pronto se estableció un puente entre ellos, el puente del “negocio”, este puente puede ser cualquier cosa que recaude datos y esté buscando extraer información de ellos. Entonces ya existió una comunicación entre ellas.&lt;/p&gt;
-
-&lt;figure&gt;&lt;img src=&quot;/postimages//tv/ciencia-datos/ic.png&quot; alt=&quot;&amp;quot;Diagrama de Venn&amp;quot; images_set&quot; /&gt;&lt;/figure&gt;
-
-&lt;figure&gt;&lt;img src=&quot;/postimages//tv/ciencia-datos/i.png&quot; alt=&quot;&amp;quot;Diagrama de Venn&amp;quot; images_set&quot; /&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;por-qué&quot;&gt;¿Por qué?&lt;/h2&gt;
-
-&lt;p&gt;¿En qué nos ayuda la ciencia de datos?&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Análisis de riesgo&lt;/strong&gt;: ya sea para que una aseguradora determine el costo de sus seguros para determinada área de un país o para que los gobiernos decidan en qué zonas es conveniente dar permisos para construcción.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Detección de fraudes&lt;/strong&gt;: Los sistemas bancarios sin duda generan una cantidad de información tremenda, que a su vez se usa para detectar transacciones sospechosas. Tal vez la ciencia de datos te ayude por si alguien llegara a clonar tu tarjeta.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Sistemas de recomendación&lt;/strong&gt;: ¿alguna vez te has preguntado por qué Netflix es tan adictivo? ¿o cómo es que hace para saber en qué series invertir o qué derechos comprar?&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Planeación de rutas&lt;/strong&gt;: Empresas como UPS, FedEx y DHL usan los datos que recaudan para determinar las mejores rutas de entrega de paquetes, de tal modo que ahorren tiempo y energía al entregar sus paquetes&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Ahora vamos a hablar de algunas confusiones que existen alrededor de la ciencia de datos:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;No solo se trata de Big Data, la ciencia de datos no solo se puede aplicar a millones de registros en una tabla, casi cualquier cantidad de información es susceptible a ser analizada.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;No es inteligencia artificial, no es aprendizaje máquina… la ciencia de datos se ayuda de estas, pero persiguen distintos fines.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;No es una especie de conjuro mágico ni es la solución a los problemas de la compañía, el éxito de la aplicación de la ciencia de datos dependerá de tres factores:&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Los datos con los que se cuente&lt;/li&gt;
-  &lt;li&gt;El modelo con el que se trabajen&lt;/li&gt;
-  &lt;li&gt;El contexto que se le de&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;A pesar de que el nombre le puede dar fama de ser algo para lo que requieras estudiar un doctorado, no es necesario, al ser una disciplina… interdisciplinaria puedes acercarte a la ciencia de datos desde distintos enfoques, esta es una disciplina donde tener conocimiento sobre el contexto de los datos es tan valioso como saber cómo analizarlos o saber establecer el modelo correcto. ¿Estás interesado en comenzar? tal vez debas comenzar por aprender lenguajes de programación como R o Python, aprendas lo básico de estadística y consigas una fuente de datos. Dejo enlaces que tal vez te ayuden con alguna de estas tareas: &lt;a href=&quot;http://tryr.codeschool.com/&quot; target=&quot;_blank&quot;&gt;Try R&lt;/a&gt;, &lt;a href=&quot;https://www.learnpython.org/es/&quot; target=&quot;_blank&quot;&gt;Learn Python&lt;/a&gt;. Comunidades de ciencia de datos: &lt;a href=&quot;https://www.kaggle.com/&quot; target=&quot;_blank&quot;&gt;kaggle&lt;/a&gt; y &lt;a href=&quot;http://www.kdnuggets.com/&quot; target=&quot;_blank&quot;&gt;kdnuggets&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Tue, 08 Aug 2017 19:00:00 +0100</pubDate>
-        <link>http://thatcsharpguy.com/tv/ciencia-datos/</link>
-        <guid isPermaLink="true">http://thatcsharpguy.com/tv/ciencia-datos/</guid>
         
         <category>Meta</category>
         

@@ -1,5 +1,65 @@
 [   
     { 
+        "id" : "/tv/mapreduce/",
+        "tv" : true,
+        "title": "¿Qué es MapReduce?", 
+        "date": "2018-02-19 18:00:00 +0000",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages",
+        "summary": "La idea de MapReduce es ofrecer una forma simple, rápida, escalable y resistente a fallos para manipular enormes cantidades de datos."
+    },
+    { 
+        "id" : "/tv/python/",
+        "tv" : true,
+        "title": "Python", 
+        "date": "2018-02-05 18:00:00 +0000",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages",
+        "summary": "Python es un lenguaje de programación inicialmente fue pensado como un simple lenguaje de scripting pero en la actualidad se ha infiltrado en el desarrollo web, la ciencia de datos, machine learning y ramas afines."
+    },
+    { 
+        "id" : "/tv/dormir-programar/",
+        "tv" : true,
+        "title": "¿Dormir o programar?", 
+        "date": "2018-01-27 18:00:00 +0000",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages",
+        "summary": "No dormir no es una medalla de honor, y el hecho de no dormir lo suficiente por estar trabajando o haciendo tarea no debe presumirse como un logro."
+    },
+    { 
+        "id" : "/tv/sobre-youtube/",
+        "tv" : true,
+        "title": "YouTube", 
+        "date": "2018-01-19 18:00:00 +0000",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages",
+        "summary": "Ahora quisiera pedirles un favor."
+    },
+    { 
+        "id" : "/tv/lazy-evaluation/",
+        "tv" : true,
+        "title": "La evaluación perezosa", 
+        "date": "2018-01-14 18:00:00 +0000",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimagesfeatured.png",
+        "summary": "En programación la evaluación perezosa, es una técnica de evaluación que consiste en retrasar el cálculo (o ejecución) de una instrucción hasta que en realidad es necesaria."
+    },
+    { 
+        "id" : "/tv/escuela-otra-vez/",
+        "tv" : true,
+        "title": "La escuela, otra vez", 
+        "date": "2017-12-22 18:00:00 +0000",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/jupyter/featured.png",
+        "summary": "Mi opinión sobre la escuela."
+    },
+    { 
         "id" : "/tv/expresiones-lambda/",
         "tv" : true,
         "title": "Las expresiones lambda", 
