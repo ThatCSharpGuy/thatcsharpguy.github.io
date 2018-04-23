@@ -6,8 +6,8 @@
 </description>
     <link>http://thatcsharpguy.com/</link>
     <atom:link href="http://thatcsharpguy.com/xamarin-feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 11 Apr 2018 04:44:17 +0100</pubDate>
-    <lastBuildDate>Wed, 11 Apr 2018 04:44:17 +0100</lastBuildDate>
+    <pubDate>Mon, 23 Apr 2018 20:28:39 +0100</pubDate>
+    <lastBuildDate>Mon, 23 Apr 2018 20:28:39 +0100</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
     
@@ -1071,7 +1071,7 @@ This implementation isn’t as clean as it is in iOS. Mainly because Android put
       <item>
         
         <title>Formatted number entry</title>
-        <description><![CDATA[&lt;p&gt;While developing an app using Xamarin.Forms I faced with the necessity of having a “formatted textbox” where the user could enter a given integer number and have it formatted instantly to a comma separated number, for example: &lt;code&gt;1234567&lt;/code&gt; → &lt;code&gt;1,234,567&lt;/code&gt;, because our users often found themselves counting the number of zeros they had entered into the small textbox.&lt;/p&gt;
+        <description><![CDATA[&lt;p&gt;While developing an app using Xamarin.Forms I faced the necessity of having a “formatted textbox” where the user could enter a given integer number and have it formatted instantly to a comma separated number, for example: &lt;code&gt;1234567&lt;/code&gt; → &lt;code&gt;1,234,567&lt;/code&gt;, because our users often found themselves counting the number of zeros they had entered into the small textbox.&lt;/p&gt;
 
 &lt;p&gt;This doesn’t sound too complicated (and it isn’t). Using an &lt;code&gt;Entry&lt;/code&gt; we can easily hook up to the &lt;code&gt;TextChanged&lt;/code&gt; event and perform the following tasks:&lt;/p&gt;
 

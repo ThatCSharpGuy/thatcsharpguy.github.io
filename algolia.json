@@ -1007,7 +1007,7 @@
         "featured_tag": "XamarinForms",
         "tags": ["XamarinForms","Xamarin"],
         "featured_image": "http://thatcsharpguy.com/postimages//xamarin-forms/formattednumberentry/featured.png",
-        "summary": "I faced with the necessity of having a &quot;formatted textbox&quot; where the user could enter a given integer number and have it formatted instantly to a comma separated number."
+        "summary": "I faced the necessity of having a &quot;formatted textbox&quot; where the user could enter a given integer number and have it formatted instantly to a comma separated number."
     },
     { 
         "id" : "/post/map-filter-reduce-f-sharp/",
