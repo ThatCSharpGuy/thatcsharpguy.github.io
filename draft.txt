@@ -1,0 +1,9 @@
+Que un objeto implemente la clase IEnumerable significa que las instancias de esta tienen contenido sobre el que se puede iterar o recorrer. Este recorrido es siempre hacia "adelante". 
+
+Dicho "en código", la interfaz `IEnumerable` (genérica o no) nos indica que podemos usar un bloque `foreach` para recorrer el objeto que la implemente. Por ejemplo, la clase `List<T>`, `ObservableCollection<T>` y los arreglos implementan esta clase.
+
+Es importante mencionar esto, ya que el tema que se verá a continuación está totalmente ligado a esta interfaz.
+
+Para que dentro de un método se pueda usar la palabra `yield`, este debe tener como tipo de retorno una de las dos variantes de `IEnumerable`.
+
+Por otro lado, si en algun momento queremos terminar la ejecución de este método podemos usar la combinación de palabras `yield break` para hacerlo.

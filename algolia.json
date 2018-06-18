@@ -1,5 +1,35 @@
 [   
     { 
+        "id" : "/tv/spark/",
+        "tv" : true,
+        "title": "Apache Spark", 
+        "date": "2018-06-12 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["DataScience","Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages",
+        "summary": "Spark funciona al rededor de un concepto muy importante es el de los Resilient Distributed Datasets. Estos RDDs son colecciones de datos de solo lectura, es decir, una vez creados ya no son modificables, y cada vez que uno es \"modificado\" en realidad se está creando uno nuevo."
+    },
+    { 
+        "id" : "/tv/big-data/",
+        "tv" : true,
+        "title": "Big Data", 
+        "date": "2018-06-12 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["DataScience","Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages",
+        "summary": "Video de presentación de este nuevo canal de YouTube en donde, a pesar del nombre, no solamente hablaré de C#, si no de varias muchas otras cosas relacionadas con la programación."
+    },
+    { 
+        "id" : "/tv/information-retrieval/",
+        "tv" : true,
+        "title": "Information Retrieval", 
+        "date": "2018-06-05 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/hola-mundo/featured.png",
+        "summary": "Information retrieval is a field concerned with the structure, analysis, organisation, storage, searching and retrieval of information."
+    },
+    { 
         "id" : "/tv/data-fundamentals/",
         "tv" : true,
         "title": "Data Fundamentals", 

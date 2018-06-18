@@ -1,14 +1,276 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>That C# guy</title>
+    <title>That CS guy</title>
     <description>Escribo sobre ciencias computacionales, principalmente enfocado a la programación de aplicaciones, pero con énfasis en C#, mi lenguaje favorito. A veces me da por escribir sobre tecnología también. 
 </description>
     <link>http://thatcsharpguy.com/</link>
     <atom:link href="http://thatcsharpguy.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 23 Apr 2018 20:28:39 +0100</pubDate>
-    <lastBuildDate>Mon, 23 Apr 2018 20:28:39 +0100</lastBuildDate>
-    <generator>Jekyll v3.6.2</generator>
+    <pubDate>Mon, 18 Jun 2018 07:34:49 +0100</pubDate>
+    <lastBuildDate>Mon, 18 Jun 2018 07:34:49 +0100</lastBuildDate>
+    <generator>Jekyll v3.8.2</generator>
+    
+      <item>
+        <title>Apache Spark</title>
+        <description>&lt;h1 id=&quot;spark&quot;&gt;Spark.&lt;/h1&gt;
+&lt;p&gt;Hace ya unos meses les platiqué de MapReduce, que es un framework para procesamiento de grandes sets de datos, en ese video también les hablé de las limitantes de este modelo como el trabajar con algoritmos iterativos o el procesar datos en “tiempo-real”.&lt;/p&gt;
+
+&lt;p&gt;Hoy les voy a hablar de otra forma de trabajar con grandes de cantidades de datos que es un poco distinta, esta vez utilizando Apache Spark. Spark es un framework de computación desarrollado inicialmente en la Universidad de California Berkeley, pero ahora es parte de los proyectos de la Apache Software Foundation.&lt;/p&gt;
+
+&lt;p&gt;Spark funciona al rededor de un concepto muy importante es el de los &lt;strong&gt;Resilient Distributed Datasets&lt;/strong&gt; o &lt;strong&gt;RDDs&lt;/strong&gt;, algo que podría ser traducido a datasets distribuidos y recuperables (?). Estos RDDs son colecciones de datos de solo lectura, es decir, una vez creados ya no son modificables, y cada vez que uno es “modificado” en realidad se está creando uno nuevo.&lt;/p&gt;
+
+&lt;p&gt;Estos RDDs no son creados de manera inmediata, sino que su creación se retrasa hasta que son &lt;em&gt;materializados&lt;/em&gt;: es decir almacenados en memoria o en disco, o en algunos casos para realizar alguna operación con ellos. En un concepto muy muy parecido a la evaluación perezosa.&lt;/p&gt;
+
+&lt;p&gt;Su característica más importante es que en lugar de llevar un registro de la información que un RDD contiene, se lleva un registro de las operaciones que lo crearon, de este modo se puede ordenar la creación de un RDD nuevamente en caso de fallos.&lt;/p&gt;
+
+&lt;p&gt;A medida que se van creando RDDs, también se va creando un grafo dirigido y aciciclico, o en terminología de Spark: &lt;strong&gt;DAG&lt;/strong&gt;, este grafo es una manera de representar las operaciones sobre los RDDs que les acabo de mencionar. Cuando un RDD es materializado el sistema se encarga de decidir cuál es la manera más óptima de crearlo a partir de las operaciones con las que se especificaron sobre él y sus derivados.&lt;/p&gt;
+
+&lt;h2 id=&quot;distribuido&quot;&gt;Distribuido&lt;/h2&gt;
+&lt;p&gt;Cabe señalar que al igual que MapReduce, Spark también es ejecutado en un cluster de servidores y que existe toda una pesadilla de orquestación para que este funcione correctamente, para tu buena suerte esta tarea ya está resuelta y tu solamente te puedes enfocar en resolver tu problema (la mayoría de las veces).&lt;/p&gt;
+
+&lt;p&gt;Es justamente el DAG el que va a definir cómo es que los datos se van a mover entre nodos, reduciendo en lo mayor posible el movimiento de información entre servidores.&lt;/p&gt;
+
+&lt;h2 id=&quot;ejemplo&quot;&gt;Ejemplo&lt;/h2&gt;
+&lt;p&gt;Otra de sus ventajas es que al contrario de MapReduce con Spark no necesitas diseñar por separado las partes del sistema, puedes tratar to código como si estuvieras desarrollando un sistema monolítico y sin alguna consideración extra, cierto es que para lograr un buen desempeño es necesario que lidies con asuntos de distribución de cargas y repartición de trabajo, pero para empezar a programar no necesitas saber esto, además de que el código es mucho más sencillo de leer y de escribir.&lt;/p&gt;
+
+&lt;p&gt;Este es el ejemplo de el conteo de palabras en Spark usando los tres lenguajes que Spark soporta por default:&lt;/p&gt;
+
+&lt;h3 id=&quot;scala&quot;&gt;Scala&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;val textFile = sc.textFile(&quot;hdfs://...&quot;)
+val counts = textFile.flatMap(line =&amp;gt; line.split(&quot; &quot;))
+                 .map(word =&amp;gt; (word, 1))
+                 .reduceByKey(_ + _)
+counts.saveAsTextFile(&quot;hdfs://...&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;python&quot;&gt;Python&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;text_file = sc.textFile(&quot;hdfs://...&quot;)
+counts = text_file.flatMap(lambda line: line.split(&quot; &quot;)) \
+             .map(lambda word: (word, 1)) \
+             .reduceByKey(lambda a, b: a + b)
+counts.saveAsTextFile(&quot;hdfs://...&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;java&quot;&gt;Java&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;JavaRDD&amp;lt;String&amp;gt; textFile = sc.textFile(&quot;hdfs://...&quot;);
+JavaPairRDD&amp;lt;String, Integer&amp;gt; counts = textFile
+    .flatMap(s -&amp;gt; Arrays.asList(s.split(&quot; &quot;)).iterator())
+    .mapToPair(word -&amp;gt; new Tuple2&amp;lt;&amp;gt;(word, 1))
+    .reduceByKey((a, b) -&amp;gt; a + b);
+counts.saveAsTextFile(&quot;hdfs://...&quot;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Como puedes ver no es necesario dividir tu código en mapper y reducer como tendrías que haberlo hecho con  MapReduce&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  public static class TokenizerMapper
+       extends Mapper&amp;lt;Object, Text, Text, IntWritable&amp;gt;{
+
+    private final static IntWritable one = new IntWritable(1);
+    private Text word = new Text();
+
+    public void map(Object key, Text value, Context context
+                    ) throws IOException, InterruptedException {
+      StringTokenizer itr = new StringTokenizer(value.toString());
+      while (itr.hasMoreTokens()) {
+        word.set(itr.nextToken());
+        context.write(word, one);
+      }
+    }
+  }
+
+  public static class IntSumReducer
+       extends Reducer&amp;lt;Text,IntWritable,Text,IntWritable&amp;gt; {
+    private IntWritable result = new IntWritable();
+
+    public void reduce(Text key, Iterable&amp;lt;IntWritable&amp;gt; values,
+                       Context context
+                       ) throws IOException, InterruptedException {
+      int sum = 0;
+      for (IntWritable val : values) {
+        sum += val.get();
+      }
+      result.set(sum);
+      context.write(key, result);
+    }
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;spark-vs-mapreduce&quot;&gt;Spark vs. MapReduce&lt;/h2&gt;
+&lt;p&gt;Pero bueno, por todo lo que he dicho pareciera que debemos todos dejar de usar MapReduce (y en la mayoría de los casos esto parece ser un buen consejo) pero en general debes saber que Spark usa muchísima memoria RAM para cumplir su cometido eficientemente mientras que MapReduce utiliza memoria de disco que es aún un poco más barata, además de que si no necesitas velocidad en el procesamiento de la información considerar Spark podría ser una exageración.&lt;/p&gt;
+
+&lt;h2 id=&quot;key-value-pairs&quot;&gt;key-value pairs&lt;/h2&gt;
+&lt;p&gt;Se podría decir que Spark es compatible con MapReduce gracias a los tipos de dato llave-valor, así como el hecho de que podemos usar los mismos conectores de lectura de archivos. Por lo que algunas de las cosas que se hacen con MapReduce son directamente portables a Spark. Pero en fin, sigamos hablando de los beneficios de Spark…&lt;/p&gt;
+
+&lt;h2 id=&quot;extensiones&quot;&gt;Extensiones&lt;/h2&gt;
+&lt;p&gt;Spark ofrece algunas extensiones que lo habilitan para trabajos relacionados con SQL y DataFrames, Machine Learning, Streaming de datos y grafos.&lt;/p&gt;
+
+&lt;h2 id=&quot;streaming&quot;&gt;Streaming&lt;/h2&gt;
+&lt;p&gt;En el video de MapReduce me dejaron esta pregunta y respondí que Spark era una alternativa, y es que como mencioné esta herramienta permite trabajar con flujos de datos en &lt;em&gt;tiempo real&lt;/em&gt;… pero de esto podemos hablar en otro video, a lo mejor y hasta con un screencast.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 12 Jun 2018 19:00:00 +0100</pubDate>
+        <link>http://thatcsharpguy.com/tv/spark/</link>
+        <guid isPermaLink="true">http://thatcsharpguy.com/tv/spark/</guid>
+        
+        <category>DataScience</category>
+        
+        <category>Meta</category>
+        
+        <category>Tv</category>
+        
+        
+        <category>tv</category>
+        
+        <category>big-data</category>
+        
+      </item>
+    
+      <item>
+        <title>Big Data</title>
+        <description>&lt;h1 id=&quot;big-data&quot;&gt;Big Data&lt;/h1&gt;
+&lt;p&gt;We took a look at some of the foundations of big data systems (some of them are even outdated now), from a more academic point of view.&lt;/p&gt;
+
+&lt;p&gt;This is going to be a short video since what we mostly did was trying to understand the motivation and design decisions behind all these systems. I’ll put the links to all the papers we reviewed so you can take a look at them.&lt;/p&gt;
+
+&lt;p&gt;Starting with…&lt;/p&gt;
+
+&lt;h2 id=&quot;google-file-system&quot;&gt;Google File System&lt;/h2&gt;
+&lt;p&gt;This was the first distributed file system Google created to store all the information they manage; it has since then been replaced by Colossus. However, the foundations remain.&lt;/p&gt;
+
+&lt;p&gt;From there we jumped to …&lt;/p&gt;
+
+&lt;h2 id=&quot;hdfs-or-hadoop-file-system&quot;&gt;(HDFS) or Hadoop File System&lt;/h2&gt;
+&lt;p&gt;Which is again, a distributed file system, in this case, inspired by GFS. As I mentioned earlier, we start with the foundations, that is Version 1 version of HDFS only to see the differences with the second version (and now there is a third version out, yey!).&lt;/p&gt;
+
+&lt;p&gt;Once we learned a bit about HDFS, we learned about his companion, the programming model called…&lt;/p&gt;
+
+&lt;h2 id=&quot;mapreduce&quot;&gt;MapReduce&lt;/h2&gt;
+&lt;p&gt;Which is a useful technique to process vast amounts of information in a distributed way, taking advantage of having lots of relatively cheap computers. I made a whole video dedicated to MapReduce; you can check the link in the description.&lt;/p&gt;
+
+&lt;p&gt;However, MapReduce is somewhat outdated too, and it has some limitations. We reviewed other more modern approaches to work with Big Data problems using…&lt;/p&gt;
+
+&lt;h2 id=&quot;spark&quot;&gt;Spark&lt;/h2&gt;
+&lt;p&gt;Which is a framework for distributed computing that allows us to specify transformations over a dataset without actually doing them right away but in a lazy manner. Spark has its foundation on the concept of Resilient Distributed Datasets: read-only collections of data distributed over nodes in a cluster. I’ll probably make a video about Spark in the future.&lt;/p&gt;
+
+&lt;p&gt;Both MapReduce and Spark run on top of a distributed filesystem, benefitting themselves from the characteristics of such systems.&lt;/p&gt;
+
+&lt;p&gt;After learning about these two processing approaches, we went on to learn about more different ways of storing information using distributed NoSQL Data Stores like…&lt;/p&gt;
+
+&lt;h2 id=&quot;bigtable&quot;&gt;Bigtable&lt;/h2&gt;
+&lt;p&gt;Another one of those Google creations, in the first line of the paper it says what Bigtable actually is: Bigtable is a distributed storage system for managing structured data that is designed to scale to a huge size. And that’s about it, I mean, is way more complex that I’m making it sound here, but I won’t go into details.&lt;/p&gt;
+
+&lt;p&gt;Again we briefly saw an open source version of Bigtable called &lt;strong&gt;HBase&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;cassandra&quot;&gt;Cassandra&lt;/h2&gt;
+&lt;p&gt;Finally, we reviewed Cassandra, another highly distributed data store, and its approach to decentralise the knowledge that the other approaches had centralised in a master node, another interesting thing is its ease to work across data centres.&lt;/p&gt;
+
+&lt;p&gt;As for the practical side of things we did a couple of exercises: one using MapReduce and the other one using Spark on a school provided cluster. Both exercises involved calculating PageRank scores of some Wikipedia articles.&lt;/p&gt;
+
+&lt;p&gt;As you can probably guess all of these systems involve a coordination hell as all of them are distributed and hold redundant copies of data some of them not only on a single cluster but across the entire world.&lt;/p&gt;
+
+&lt;p&gt;And that was it, as I said for all of those systems we reviewed their main components such as Master nodes or DataNodes or whatever they were called on each of the implementations and the basic techniques that powered their reliability like writing to logs or creating checkpoints, along with some of the tools that helped these tools achieve great performance like LSMTrees, SSTables and Bloom filters.&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 12 Jun 2018 19:00:00 +0100</pubDate>
+        <link>http://thatcsharpguy.com/tv/big-data/</link>
+        <guid isPermaLink="true">http://thatcsharpguy.com/tv/big-data/</guid>
+        
+        <category>DataScience</category>
+        
+        <category>Meta</category>
+        
+        <category>Tv</category>
+        
+        
+        <category>tv</category>
+        
+        <category>big-data</category>
+        
+      </item>
+    
+      <item>
+        <title>Information Retrieval</title>
+        <description>&lt;h1 id=&quot;information-retrieval&quot;&gt;Information retrieval&lt;/h1&gt;
+&lt;p&gt;Well, the title is self-explanatory but a good definition is the following: information retrieval is a field concerned with the structure, analysis, organisation, storage, searching and retrieval of information. In this case, we focused on textual information.&lt;/p&gt;
+
+&lt;p&gt;We started by looking at the…&lt;/p&gt;
+
+&lt;h2 id=&quot;architecture-of-ir-systems&quot;&gt;Architecture of IR systems&lt;/h2&gt;
+&lt;p&gt;And its three components: Query terms, a collection of documents and the retrieval system. Then we continued with the critical parts of its operation:&lt;/p&gt;
+
+&lt;h3 id=&quot;document-processing&quot;&gt;Document processing&lt;/h3&gt;
+&lt;p&gt;We need to prepare the documents to be retrieved, and this is done through a series of steps: the first one is &lt;strong&gt;tokenisation&lt;/strong&gt; that is: converting sentences into words, &lt;strong&gt;stopword removal&lt;/strong&gt;: getting rid of highly frequent words and finally, &lt;strong&gt;conflation/stemming&lt;/strong&gt; taking similar words and transform them into a single unique symbol.&lt;/p&gt;
+
+&lt;p&gt;All of this to create a structure called the &lt;strong&gt;Inverted index&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;inverted-index&quot;&gt;Inverted index&lt;/h3&gt;
+&lt;p&gt;The inverted index is a structure that maps words to the documents where they appear. I won’t go into much detail about inverted indexes in this video but if you want to know more, just let me know in the comments.&lt;/p&gt;
+
+&lt;h3 id=&quot;retrieving&quot;&gt;Retrieving&lt;/h3&gt;
+&lt;p&gt;Finally, we took a look at one of the basic algorithms for document retrieval given a query: the &lt;em&gt;best-match&lt;/em&gt; algorithm that only considers whether a document contains or not a word of the query we are evaluating. However, most of the time this approach is not a good idea, and we then reviewed &lt;strong&gt;term weighting&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;term-weighting&quot;&gt;Term Weighting&lt;/h2&gt;
+&lt;p&gt;The idea behind term weighting is to give each word a value that represents its importance for a document. To understand a bit more this idea we first studied the &lt;strong&gt;Zipf’s law&lt;/strong&gt; and how it applies to vast collections of texts.&lt;/p&gt;
+
+&lt;p&gt;After that, we learned about the heuristic of using something known as &lt;strong&gt;Inverse Document Frequency&lt;/strong&gt; to take into consideration the assumption that if a term appears many times in different documents in the collection, it is less representative of a single document.&lt;/p&gt;
+
+&lt;h2 id=&quot;vector-space-model&quot;&gt;Vector Space Model&lt;/h2&gt;
+&lt;p&gt;We also saw another way to represent documents: as high dimensional vectors, where each one of these dimensions represents the words in our whole vocabulary. Operating in a vector space allows us to compute similarities between other documents and queries.&lt;/p&gt;
+
+&lt;p&gt;However, what’s the idea behind building a retrieval system if there is no way to evaluate it?&lt;/p&gt;
+
+&lt;h2 id=&quot;evaluation&quot;&gt;Evaluation&lt;/h2&gt;
+&lt;p&gt;With this in mind, we took a look at how are retrieval systems evaluated. Starting from the creation of &lt;strong&gt;test collections&lt;/strong&gt;, that are extensive collections of documents accompanied by queries and relevance assessments, provided by humans.&lt;/p&gt;
+
+&lt;p&gt;Metrics such as Precision @ rank R, Precision at standard recall levels, and Average precision and their averaged values, like Mean Average Precision and Mean Reciprocal Rank or the Discounted Cumulative Gain.&lt;/p&gt;
+
+&lt;h2 id=&quot;relevance-feedback&quot;&gt;Relevance Feedback&lt;/h2&gt;
+&lt;p&gt;Then we saw how to improve, or at least try to improve, the results our system outputs by using feedback from the user, something called &lt;strong&gt;relevance feedback&lt;/strong&gt;. Specifically, three different kinds of feedback: &lt;strong&gt;Explicit feedback&lt;/strong&gt;, &lt;strong&gt;implicit feedback&lt;/strong&gt; and &lt;em&gt;pseudo-relevant feedback&lt;/em&gt; and their relationship to &lt;strong&gt;query expansion&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Following the trend of involving the user in the retrieval process we looked into &lt;strong&gt;Interactive IR&lt;/strong&gt;, and some other ways to involve the user in the process of information retrieval, mainly through the user interface of the results output. After this, we went back to other, in this case, &lt;em&gt;advanced retrieval models&lt;/em&gt;…&lt;/p&gt;
+
+&lt;h2 id=&quot;advanced-retrieval-models&quot;&gt;Advanced Retrieval Models&lt;/h2&gt;
+&lt;p&gt;All the retrieval models we had seen so far were… simple.&lt;/p&gt;
+
+&lt;p&gt;In this section, we started taking into account probability and considering the relevance estimation as a classification problem. Using retrieval models like BM25 or Language models, or even some more advanced ones like PL2, part of the Divergence From Randomness framework. This, also considering proximity between terms in an attempt to improve search results.&lt;/p&gt;
+
+&lt;h2 id=&quot;learning-to-rank&quot;&gt;Learning to Rank&lt;/h2&gt;
+&lt;p&gt;Moreover, we can use machine learning to refine the final ranking shown to the user. We reviewed the &lt;em&gt;cascade-like&lt;/em&gt; pipeline to filter documents to prepare our machine learning models what kind of features we can use and the three kinds of learning tasks: Pointwise, Pairwise and Listwise.&lt;/p&gt;
+
+&lt;p&gt;For a while, we focused on &lt;strong&gt;web search&lt;/strong&gt; and its challenges. Like personalising the results for each user, or considering the context the user is in to resolve ambiguities. Keeping on with web search, we studied a way to get documents through &lt;strong&gt;web crawling&lt;/strong&gt; which is not an easy task. You need to consider issues like respecting the servers you’re querying or withstand traps in the web or malformed htmls, not to mention the fact that we need to keep track of the documents we’ve downloaded,  and that we can’t do it at high scale with a single computer.&lt;/p&gt;
+
+&lt;p&gt;Then we went back to evaluation…&lt;/p&gt;
+
+&lt;h2 id=&quot;online-evaluation&quot;&gt;Online evaluation&lt;/h2&gt;
+&lt;p&gt;The evaluation that we studied earlier in the course is known as offline evaluation, but a more exciting and challenging task is to evaluate our system while real users are using it. We reviewed two techniques: A/B testing and Interleaving.&lt;/p&gt;
+
+&lt;h2 id=&quot;ir-infrastructures-and-efficiency&quot;&gt;IR infrastructures and efficiency&lt;/h2&gt;
+&lt;p&gt;After all we saw, we had to review how to make them efficient by reviewing compression techniques for the index such as &lt;strong&gt;pruning&lt;/strong&gt; or &lt;strong&gt;unary or gamma coding&lt;/strong&gt;, as well as caching techniques for queries, terms or documents. We saw some of the infrastructures and how they affect the performance and evaluation of the queries that are issued to the system.&lt;/p&gt;
+
+&lt;h2 id=&quot;real-time-ir&quot;&gt;Real-time IR&lt;/h2&gt;
+&lt;p&gt;We saw the necessity and challenges of performing some of the tasks we previously saw but using streams of data, such as tweets or facebook status updates.&lt;/p&gt;
+
+&lt;h2 id=&quot;applications-beyond-search&quot;&gt;Applications Beyond Search&lt;/h2&gt;
+&lt;p&gt;To finalise the course, we were introduced to other applications such as Text summarisation, real-time event detection, Recommendations and Question Answering.&lt;/p&gt;
+
+&lt;p&gt;So that was about it, on the practical side of things we worked with Terrier, with is a retrieval system developed here at the University of Glasgow.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 05 Jun 2018 19:00:00 +0100</pubDate>
+        <link>http://thatcsharpguy.com/tv/information-retrieval/</link>
+        <guid isPermaLink="true">http://thatcsharpguy.com/tv/information-retrieval/</guid>
+        
+        <category>Meta</category>
+        
+        <category>Tv</category>
+        
+        
+        <category>tv</category>
+        
+        <category>c-sharp</category>
+        
+      </item>
     
       <item>
         <title>Data Fundamentals</title>
@@ -413,243 +675,6 @@ easy_install package-name
         <pubDate>Fri, 19 Jan 2018 18:00:00 +0000</pubDate>
         <link>http://thatcsharpguy.com/tv/sobre-youtube/</link>
         <guid isPermaLink="true">http://thatcsharpguy.com/tv/sobre-youtube/</guid>
-        
-        <category>Meta</category>
-        
-        <category>Tv</category>
-        
-        
-        <category>tv</category>
-        
-      </item>
-    
-      <item>
-        <title>La evaluación perezosa</title>
-        <description>&lt;p&gt;En programación la evaluación perezosa, o llamada por necesidad, o por su nombre en inglés: lazy evaluation. Es una técnica de evaluación, sí porque hay varias técnicas, que consiste en retrasar el cálculo (o ejecución) de una instrucción hasta que en realidad es necesaria.&lt;/p&gt;
-
-&lt;p&gt;Pero bueno, antes de entrar en detalles vamos a ver rápidamente otra estrategia, que podríamos definir como lo opuesto a la perezosa y esta es la evaluación temprana.&lt;/p&gt;
-
-&lt;p&gt;Este tipo de evaluación es la que normalmente usa tu lenguaje de programación, y por tanto creo que sin quererlo estás muy familiarizado con ella, ocurre cuando asignas una variable como un entero o una cadena:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var a = &quot;Evaluación temprana&quot;; // C#
-a = &quot;Evaluación temprana&quot; # Python
-String a = &quot;Evaluación temprana&quot;; // Java
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Pero esto es demasiado simple, mejor vamos a ver algo más complejo. Imagina que vamos a trabajar con números del 0 al 10,000. Esta sería una forma de obtenerlos:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var numeros = Enumerable.Range(0, 10000).ToArray(); // C#
-numeros = list(range(0, 10000)) # Python
-int[] numeros = IntStream.range(0, 10000).toArray(); // Java 8
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Es decir, el valor asociado con la variable es inmediatamente calculado (o evaluado) en el momento en el que se realiza la asignación, independientemente del momento en el que va a ser usado, si es que va a ser usado del todo. La sintaxis para crear estos arreglos es un poco rara, y es que los estamos forzando a ser evaluados tempranamente.&lt;/p&gt;
-
-&lt;p&gt;Por el contrario, y volviendo al tema principal de este video, en la evaluación perezosa los valores no son creados o calculados hasta que no se hace referencia a ellos después de declararlos.&lt;/p&gt;
-
-&lt;p&gt;Un excelente ejemplo de la evaluación perezosa viene cuando estamos trabajando con colecciones de valores, imagina que quieres obtener una colección de valores… como por ejemplo, volviendo a los 0 al 10,000, esta es la forma de obtenerlos sin tener que calcularlos todos en el momento en el que lo definimos, es decir, utilizando la evaluación perezosa:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var numeros = Enumerable.Range(0, 10000); // C#
-numeros = range(0, 10000) # Python
-int[] numeros = IntStream.range(0, 10000); // Java 8
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Esto tiene varias ventajas como:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Incremento en el desempeño de la aplicación ya que se evita el hacer cálculos que no necesita&lt;/li&gt;
-  &lt;li&gt;Posibilidad de escribir código “infinito” o sin límites de espacio puesto que los valores son generados “uno a la vez”&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Pero bueno, hasta ahora todo bien, pero cómo es que podemos crear nosotros código que se evalúe perezosamente. En concreto yo les voy a hablar de Python y C#, que básicamente utilizan la misma palabra reservada y esta es &lt;code&gt;yield&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Con la palabra reservada &lt;code&gt;yield&lt;/code&gt; se utiliza como la palabra &lt;code&gt;return&lt;/code&gt; (y de hecho en C# se usan en conjunto) salvo que, a diferencia de usar return, &lt;code&gt;yield&lt;/code&gt; se usa para indicar que nuestra función ha producido un resultado, pero… que no ha terminado de ejecutarse y que puede producir otro valor.&lt;/p&gt;
-
-&lt;p&gt;Toma por ejemplo este código (escrito en Python) que se usa para generar, teoricamente, una cantidad infinita de números de Fibonacci:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# https://stackoverflow.com/a/32930351/605482
-# https://ideone.com/LE9Xsa
-
-def getFibonacci():
-    yield 0
-    a, b = 0, 1
-    while True:
-        yield b
-        b = a + b
-        a = b - a
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;// https://stackoverflow.com/a/32930351/605482
-// https://ideone.com/fBSdLy
-IEnumerable&amp;lt;int&amp;gt; GetFibonacci()
-{
-    yield return 0;
-    int a = 0, b = 1;
-    while(true)
-    {
-        yield return b;
-		    b = a + b;
-		    a = b - a;
-	    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;A pesar de que tiene un ciclo infinito ahí al momento de calcular el siguiente número, no significa que esté calculando todos desde un inicio, sino que los va calculando conforme nuestro código los va necesitando.&lt;/p&gt;
-
-&lt;p&gt;El tipo de retorno del método &lt;code&gt;getFibonacci&lt;/code&gt; es un &lt;code&gt;generator&lt;/code&gt; en lugar de una lista o un arreglo. Este &lt;code&gt;generator&lt;/code&gt; es quien facilita la evaluación perezosa.&lt;/p&gt;
-
-&lt;p&gt;El código en C# es muy, muy similar, con las modificaciones apropiadas, y cambiando la palabra &lt;code&gt;yield&lt;/code&gt; por &lt;code&gt;yield return&lt;/code&gt; nuestro código realiza la misma tarea. Eso sí, a diferencia de Python, acá se regresa un tipo de dato llamado &lt;code&gt;IEnumerable&lt;/code&gt;. Ambos, tanto &lt;code&gt;generator&lt;/code&gt; como &lt;code&gt;IEnumerable&lt;/code&gt; se comportan igual.&lt;/p&gt;
-
-&lt;p&gt;Una vez obtenido un &lt;code&gt;generator&lt;/code&gt; o uno &lt;code&gt;IEnumerable&lt;/code&gt; basta con usarlos dentro de un ciclo &lt;em&gt;foreach&lt;/em&gt; o ir extrayendo elementos con la función &lt;code&gt;next&lt;/code&gt; y el método &lt;code&gt;First&lt;/code&gt;, respectivamente:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# https://ideone.com/LE9Xsa
-fibonaccis = getFibonacci()
-print(&quot;Primer número&quot;, next(fibonaccis))
-
-for num in fibonaccis:
-    if num &amp;gt; 30000:
-        break
-    print(&quot;Siguiente número&quot;, num)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;// https://ideone.com/fBSdLy
-var fibonaccis = GetFibonacci();
-Console.WriteLine(&quot;Primer número &quot; + fibonaccis.First());
-
-foreach(var num in fibonaccis)
-{
-    if(num &amp;gt; 30000)
-        break;
-    Console.WriteLine(&quot;Siguiente número &quot; + num);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Escribí un post sobre &lt;code&gt;yield&lt;/code&gt; en C# por si es que les interesa conocer más a detalle. Así mismo, dejo enlaces a todo el código en la descripción. Ah, y por cierto, hay otro tipo de evaluación  llamada evaluación corto-circuitada… tiene un nombre peculiar pero no es nada complicada, escribí también un post sobre eso, dejo el link en la descripción.&lt;/p&gt;
-</description>
-        <pubDate>Sun, 14 Jan 2018 18:00:00 +0000</pubDate>
-        <link>http://thatcsharpguy.com/tv/lazy-evaluation/</link>
-        <guid isPermaLink="true">http://thatcsharpguy.com/tv/lazy-evaluation/</guid>
-        
-        <category>Meta</category>
-        
-        <category>Tv</category>
-        
-        
-        <category>tv</category>
-        
-      </item>
-    
-      <item>
-        <title>La escuela, otra vez</title>
-        <description>&lt;ul&gt;
-  &lt;li&gt;Mi opinión de la escuela, después de haber pasado más 15 años de estudiar voluntariamente, debe servir para tres cosas y las voy a decir en orden de importancia:
-    &lt;ul&gt;
-      &lt;li&gt;enseñar los temas de los que se trata es decir, que si el curso es de matemáticas, aprendas matemáticas.&lt;/li&gt;
-      &lt;li&gt;enseñar a aprender el tema del que se trata, volviendo al ejemplo de las matemáticas, que aprendas a aprender matemáticas, que te enseñen como estudiar&lt;/li&gt;
-      &lt;li&gt;Inspirar a aprender el tema, muy pocos cursos y profesores llegan a este nivel. Si un profesor (o su curso) te inspiran a aprender la materia de la que se trata, me parece que es el mayor logro&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Fri, 22 Dec 2017 18:00:00 +0000</pubDate>
-        <link>http://thatcsharpguy.com/tv/escuela-otra-vez/</link>
-        <guid isPermaLink="true">http://thatcsharpguy.com/tv/escuela-otra-vez/</guid>
-        
-        <category>Meta</category>
-        
-        <category>Tv</category>
-        
-        
-        <category>tv</category>
-        
-      </item>
-    
-      <item>
-        <title>Las expresiones lambda</title>
-        <description>&lt;p&gt;Las expresiones lambda o funciones lambda, o, por su nombre correcto: las funciones anónimas son bloques de código que NO están asociados con un identificador… es decir, en tiempo de ejecución no tienen un nombre asociado. Como por ejemplo estas que son funciones (o métodos) pero si tienen un nombre:&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;ejemplos&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Como puedes ver, todos estos ejemplos las funciones están asociados fuertemente con un nombre. Mientras que en el caso de las expresiones lambda esto no es necesario. Estos son ejemplos de expresiones lambda que definen lo mismo que los métodos anteriores.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;ejemplos&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;sintaxis&quot;&gt;Sintaxis&lt;/h2&gt;
-
-&lt;p&gt;Para definirlas la sintaxis varía de lenguaje a lenguaje, sin embargo generalmente la sintaxis es algo como esto:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Argumentos - Operador - (Contenido)Expresión
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;c&quot;&gt;C&lt;/h3&gt;
-&lt;p&gt;En C# se define de la siguiente manera:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;(int x) =&amp;gt; { return x*x; };
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;(int x) =&amp;gt; 
-{ 
-	var x_squared = x*x;
-	return x_squared; 
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;En C# podemos no usar los paréntesis siempre y cuando se trate de una expresión lambda de 1 solo argumento… ah, y podemos quitar los corchetes, y la palabra &lt;code&gt;return&lt;/code&gt; siempre y cuando el contenido de la lambda sea una sola expresión.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;x =&amp;gt; x*x;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;python&quot;&gt;Python&lt;/h3&gt;
-
-&lt;p&gt;Usando Python la cosa cambia un poco, pero verás que la estructura sigue siendo la misma, tenemos algo así:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;lambda x: x*x;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;En Python no hay nada más que hacer, no hay que usar paréntesis para especificar multiples argumentos, basta con separarlos con una coma. Sin embargo existe una desventaja: las lambdas en este lenguaje solamente deben contener una expresión.&lt;/p&gt;
-
-&lt;h3 id=&quot;javascript&quot;&gt;JavaScript&lt;/h3&gt;
-
-&lt;p&gt;JavaScript es muy similar a C#:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;exp1 = (x) =&amp;gt; { return x*x; };
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;exp4 = x =&amp;gt; 
-{ 
-	x_squared = x*x;
-	return x_squared; 
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;En el sentido de que se puede reducir la expresión lambda siempre y cuando el cuerpo de la expresión lambda sea… una sola expresión.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;exp3 = x =&amp;gt; x*x;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Existen también en Java (aunque ahí son un poco raras), en Go, Haskell, C++, PHP… y en muchos más.&lt;/p&gt;
-
-&lt;h2 id=&quot;razón-de-ser&quot;&gt;Razón de ser&lt;/h2&gt;
-
-&lt;p&gt;Pero, ¿para qué querríamos escribir este tipo de expresiones?  Las expresiones lambda nos ayudan a&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Evitarnos el escribir código innecesario, y a la vez evitarnos llenar nuestro código de lógica que solamente vamos a usar una sola vez o en una sola parte del código. Si, por ejemplo, necesitas ejecutar una operación sobre un conjunto de elementos, tal vez sea mejor usar una expresión lambda que crear un método o una función que nadie más va a usar.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Reducir la complejidad de nuestro código al evitarnos tener que navegar entre lineas para llegar a la definición de una función. La lectura del código se hace más sencilla, puesto que la definición del método está más a la vista de quien la está usando y no tiene que andar navegando entre todo el laberinto de código.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Nos ayudan a crear funcionalidad que luego puede ser pasada como argumentos a otras funciones, llamadas funciones de orden superior. Esto no es una cosa exclusiva de este tipo de expresiones, pero sin duda lo hace más sencillo.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Como podrás imaginarte, las funciones anónimas están relacionadas muy fuertemente con la programación funcional, de la cual ya les hablé en el pasado, sin embargo no es el único paradigma de programación en el que se le puede encontrar.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 18 Dec 2017 18:00:00 +0000</pubDate>
-        <link>http://thatcsharpguy.com/tv/expresiones-lambda/</link>
-        <guid isPermaLink="true">http://thatcsharpguy.com/tv/expresiones-lambda/</guid>
         
         <category>Meta</category>
         
