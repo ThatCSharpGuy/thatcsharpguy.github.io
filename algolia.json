@@ -1,5 +1,15 @@
 [   
     { 
+        "id" : "/tv/text-as-data/",
+        "tv" : true,
+        "title": "Text as Data", 
+        "date": "2018-06-19 19:00:00 +0100",
+        "featured_tag": "Tv",
+        "tags": ["DataScience","Meta","Tv"],
+        "featured_image": "http://thatcsharpguy.com/postimages//tv/hola-mundo/featured.png",
+        "summary": "The idea behind this course was to teach us the basics of three things taking into consideration that in the real world, information is in significant part contained in text documents."
+    },
+    { 
         "id" : "/tv/spark/",
         "tv" : true,
         "title": "Apache Spark", 
