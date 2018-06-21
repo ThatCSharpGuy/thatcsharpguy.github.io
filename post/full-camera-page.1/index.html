@@ -108,7 +108,7 @@
     <a href="/acerca-de/#citando" rel="author">Antonio Feregrino</a> | 08/11/2016
  
 
-| <strong><a href="https://github.com/ThatCSharpGuy/Forms-FullCameraPage" target="_blank"><i class="sp sp-git"></i> Ver código de este post en GitHub</a></strong>
+| <strong><a href="https://github.com/messier16/FullCameraPage" target="_blank"><i class="sp sp-git"></i> Ver código de este post en GitHub</a></strong>
 
 </div>
 <h1 class="post-title">Full page camera in Xamarin.Forms</h1>
@@ -117,10 +117,10 @@
     <article>
         <p>It has been a while since I coded <a href="..\Aharphat-Android" target="_blank">CharpHat</a>, which is an app that lets you snap a picture of anything and then put a nice C# graduation cap on it. That app was far from perfect, but it helped me to practice the usage of custom page renderers.</p>
 
-<p>Today I decided to retake that project, but this time trying to isolate the code needed to build the interface and funcionality of the page, so that anyone looking forward to implement a full camera page in their apps could reuse the code for their own projects. So be sure to <strong><a href="https://github.com/ThatCSharpGuy/Forms-FullCameraPage" target="_blank">grab the source code</a></strong> for this post.</p>
+<p>Today I decided to retake that project, but this time trying to isolate the code needed to build the interface and funcionality of the page, so that anyone looking forward to implement a full camera page in their apps could reuse the code for their own projects. So be sure to <strong><a href="https://github.com/messier16/FullCameraPage" target="_blank">grab the source code</a></strong> for this post.</p>
 
 <h2 id="forms-abstractions">Forms abstractions</h2>
-<p><small><a href="https://github.com/ThatCSharpGuy/Forms-FullCameraPage/blob/master/CameraPage.cs" target="_blank">Here is the source code for this section.</a></small></p>
+<p><small><a href="https://github.com/messier16/FullCameraPage/blob/master/FullCameraApp/CameraPage.cs" target="_blank">Here is the source code for this section.</a></small></p>
 
 <p>Let’s start by creating the Xamarin.Forms page that will serve as our point of interaction with the custom code:</p>
 
@@ -151,7 +151,7 @@
 <p>Now, time to move on to the platform specifics.</p>
 
 <h2 id="in-xamarinios">In Xamarin.iOS</h2>
-<p><small><a href="https://github.com/ThatCSharpGuy/Forms-FullCameraPage/blob/master/iOS/CameraPageRenderer.cs" target="_blank">Here is the source code for this section.</a></small></p>
+<p><small><a href="https://github.com/messier16/FullCameraPage/blob/master/FullCameraApp.iOS/CameraPageRenderer.cs" target="_blank">Here is the source code for this section.</a></small></p>
 
 <p>To be honest, this implementation is the easiest by far. Start off by creating a class that inherits from <code>PageRenderer</code>, and to add the <code>ExportRenderer</code> attribute:</p>
 
@@ -272,7 +272,7 @@
 <span class="p">}</span></code></pre></figure>
 
 <h2 id="in-xamarinandroid">In Xamarin.Android</h2>
-<p><small><a href="https://github.com/ThatCSharpGuy/Forms-FullCameraPage/blob/master/Droid/CameraPageRenderer.cs" target="_blank">Here is the source code for this section.</a></small>  <br />
+<p><small><a href="https://github.com/messier16/FullCameraPage/blob/master/FullCameraApp.Android/CameraPageRenderer.cs" target="_blank">Here is the source code for this section.</a></small>  <br />
 This implementation isn’t as clean as it is in iOS. Mainly because Android puts a lot of ephasis in the use of listeners, rather than in event handlers. However, that is not a problem for us.</p>
 
 <p>As with the iOS implementation, start by creating a new class and make it derive from <code>PageRenderer</code> and also make it implement the <code>TextureView.ISurfaceTextureListener</code> interface. Don’t forget the <code>ExportRender</code> attribute:</p>
@@ -435,7 +435,7 @@ This implementation isn’t as clean as it is in iOS. Mainly because Android put
         <span class="k">return</span><span class="p">;</span>
     <span class="n">Image</span><span class="p">.</span><span class="n">Source</span> <span class="p">=</span> <span class="n">ImageSource</span><span class="p">.</span><span class="n">FromStream</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="n">MemoryStream</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">Image</span><span class="p">));</span></code></pre></figure>
 
-<p>If you <strong><a href="https://github.com/ThatCSharpGuy/Forms-FullCameraPage" target="_blank">download the source code</a></strong> and run it, you will see something like this:</p>
+<p>If you <strong><a href="https://github.com/messier16/FullCameraPage" target="_blank">download the source code</a></strong> and run it, you will see something like this:</p>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/DgFEK9tPKs0" frameborder="0" allowfullscreen=""></iframe>
 

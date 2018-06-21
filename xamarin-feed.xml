@@ -6,8 +6,8 @@
 </description>
     <link>http://thatcsharpguy.com/</link>
     <atom:link href="http://thatcsharpguy.com/xamarin-feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 18 Jun 2018 08:01:20 +0100</pubDate>
-    <lastBuildDate>Mon, 18 Jun 2018 08:01:20 +0100</lastBuildDate>
+    <pubDate>Thu, 21 Jun 2018 07:55:15 +0100</pubDate>
+    <lastBuildDate>Thu, 21 Jun 2018 07:55:15 +0100</lastBuildDate>
     <generator>Jekyll v3.8.2</generator>
     
     
@@ -732,10 +732,10 @@ canvas.drawPath(sharpSymbolPath, paint);    →   canvas.DrawPath(sharpSymbolPat
         <title>Full page camera in Xamarin.Forms</title>
         <description><![CDATA[&lt;p&gt;It has been a while since I coded &lt;a href=&quot;..\Aharphat-Android&quot; target=&quot;_blank&quot;&gt;CharpHat&lt;/a&gt;, which is an app that lets you snap a picture of anything and then put a nice C# graduation cap on it. That app was far from perfect, but it helped me to practice the usage of custom page renderers.&lt;/p&gt;
 
-&lt;p&gt;Today I decided to retake that project, but this time trying to isolate the code needed to build the interface and funcionality of the page, so that anyone looking forward to implement a full camera page in their apps could reuse the code for their own projects. So be sure to &lt;strong&gt;&lt;a href=&quot;https://github.com/ThatCSharpGuy/Forms-FullCameraPage&quot; target=&quot;_blank&quot;&gt;grab the source code&lt;/a&gt;&lt;/strong&gt; for this post.&lt;/p&gt;
+&lt;p&gt;Today I decided to retake that project, but this time trying to isolate the code needed to build the interface and funcionality of the page, so that anyone looking forward to implement a full camera page in their apps could reuse the code for their own projects. So be sure to &lt;strong&gt;&lt;a href=&quot;https://github.com/messier16/FullCameraPage&quot; target=&quot;_blank&quot;&gt;grab the source code&lt;/a&gt;&lt;/strong&gt; for this post.&lt;/p&gt;
 
 &lt;h2 id=&quot;forms-abstractions&quot;&gt;Forms abstractions&lt;/h2&gt;
-&lt;p&gt;&lt;small&gt;&lt;a href=&quot;https://github.com/ThatCSharpGuy/Forms-FullCameraPage/blob/master/CameraPage.cs&quot; target=&quot;_blank&quot;&gt;Here is the source code for this section.&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;&lt;a href=&quot;https://github.com/messier16/FullCameraPage/blob/master/FullCameraApp/CameraPage.cs&quot; target=&quot;_blank&quot;&gt;Here is the source code for this section.&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
 
 &lt;p&gt;Let’s start by creating the Xamarin.Forms page that will serve as our point of interaction with the custom code:&lt;/p&gt;
 
@@ -766,7 +766,7 @@ canvas.drawPath(sharpSymbolPath, paint);    →   canvas.DrawPath(sharpSymbolPat
 &lt;p&gt;Now, time to move on to the platform specifics.&lt;/p&gt;
 
 &lt;h2 id=&quot;in-xamarinios&quot;&gt;In Xamarin.iOS&lt;/h2&gt;
-&lt;p&gt;&lt;small&gt;&lt;a href=&quot;https://github.com/ThatCSharpGuy/Forms-FullCameraPage/blob/master/iOS/CameraPageRenderer.cs&quot; target=&quot;_blank&quot;&gt;Here is the source code for this section.&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;&lt;a href=&quot;https://github.com/messier16/FullCameraPage/blob/master/FullCameraApp.iOS/CameraPageRenderer.cs&quot; target=&quot;_blank&quot;&gt;Here is the source code for this section.&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
 
 &lt;p&gt;To be honest, this implementation is the easiest by far. Start off by creating a class that inherits from &lt;code&gt;PageRenderer&lt;/code&gt;, and to add the &lt;code&gt;ExportRenderer&lt;/code&gt; attribute:&lt;/p&gt;
 
@@ -887,7 +887,7 @@ canvas.drawPath(sharpSymbolPath, paint);    →   canvas.DrawPath(sharpSymbolPat
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h2 id=&quot;in-xamarinandroid&quot;&gt;In Xamarin.Android&lt;/h2&gt;
-&lt;p&gt;&lt;small&gt;&lt;a href=&quot;https://github.com/ThatCSharpGuy/Forms-FullCameraPage/blob/master/Droid/CameraPageRenderer.cs&quot; target=&quot;_blank&quot;&gt;Here is the source code for this section.&lt;/a&gt;&lt;/small&gt;  &lt;br /&gt;
+&lt;p&gt;&lt;small&gt;&lt;a href=&quot;https://github.com/messier16/FullCameraPage/blob/master/FullCameraApp.Android/CameraPageRenderer.cs&quot; target=&quot;_blank&quot;&gt;Here is the source code for this section.&lt;/a&gt;&lt;/small&gt;  &lt;br /&gt;
 This implementation isn’t as clean as it is in iOS. Mainly because Android puts a lot of ephasis in the use of listeners, rather than in event handlers. However, that is not a problem for us.&lt;/p&gt;
 
 &lt;p&gt;As with the iOS implementation, start by creating a new class and make it derive from &lt;code&gt;PageRenderer&lt;/code&gt; and also make it implement the &lt;code&gt;TextureView.ISurfaceTextureListener&lt;/code&gt; interface. Don’t forget the &lt;code&gt;ExportRender&lt;/code&gt; attribute:&lt;/p&gt;
@@ -1050,7 +1050,7 @@ This implementation isn’t as clean as it is in iOS. Mainly because Android put
         &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;Image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Source&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ImageSource&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FromStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MemoryStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;If you &lt;strong&gt;&lt;a href=&quot;https://github.com/ThatCSharpGuy/Forms-FullCameraPage&quot; target=&quot;_blank&quot;&gt;download the source code&lt;/a&gt;&lt;/strong&gt; and run it, you will see something like this:&lt;/p&gt;
+&lt;p&gt;If you &lt;strong&gt;&lt;a href=&quot;https://github.com/messier16/FullCameraPage&quot; target=&quot;_blank&quot;&gt;download the source code&lt;/a&gt;&lt;/strong&gt; and run it, you will see something like this:&lt;/p&gt;
 
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/DgFEK9tPKs0&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
